@@ -1,25 +1,28 @@
+import { Link } from 'react-router-dom';
 import client from './client.jsx';
+import {useForm} from "react-hook-form"
 
 function Login() {
+    const {register, handleSubmit, reset} = useForm()
 
-    
+    async function signIn(data){
+        console.log(data.email);
+        console.log(data.pass);
+    } 
 
     return(
         <>
             <div className="container">
                 <h1 className="mb-4">Hello, Welcome Back</h1>
-                <form>
+                <form onSubmit={handleSubmit(signIn)}>
                     <label>Email </label><br />
-                    <input type="text" name="email" placeholder="Email" className="mb-3"/> <br />
-
+                    <input type="text" placeholder="Email" {...register("email")} className="mb-3"/> <br />
                     <label>Password </label><br />
-                    <input type="text" name="pass" placeholder="Password" className="mb-3"/> <br />
-
-                    <p>Lupa Password? <br />
-                    Belum punya akun? Daftar Sini</p>
-                    
-                    <button>Masuk</button>
+                    <input type="text" placeholder="Password" {...register("pass")} className="mb-3"/> <br />
+                    <button type='submit'>Masuk</button>                    
                 </form>
+                <div>Lupa Password?</div>
+                <div>Belum punya akun?  <Link to={"/register"}>Daftar Sini</Link> </div>
             </div>
             
         </>
