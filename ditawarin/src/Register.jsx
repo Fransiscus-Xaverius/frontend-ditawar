@@ -2,11 +2,12 @@ import { useForm } from 'react-hook-form'
 import flag from './assets/flag.svg'
 import { Link } from 'react-router-dom'
 import client from './client.jsx'
-import { redirect } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 function Register() {
 
     const {register, handleSubmit, reset} = useForm()
+    const navigate = useNavigate();
 
     async function signUp(data){
         const url = '/register?username='+data.username+'&name='+data.namalengkap+'&phone='+data.nohp+'&password='+data.pass+'&email='+data.email+'&city='+data.kota
@@ -14,7 +15,7 @@ function Register() {
         if(response.status === 200){
             alert("Berhasil mendaftar!")
             //todo: buat redirect ke login
-            return redirect('/login')
+            navigate('/login');
         }
         else if(response.status == 409){
             alert("username tersebut sudah terdaftar!")

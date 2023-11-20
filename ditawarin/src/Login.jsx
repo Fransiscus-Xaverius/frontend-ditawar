@@ -1,13 +1,19 @@
 import { Link } from 'react-router-dom';
 import client from './client.jsx';
 import {useForm} from "react-hook-form"
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
     const {register, handleSubmit, reset} = useForm()
+    const navigate = useNavigate();
 
     async function signIn(data){
-        console.log(data.email);
-        console.log(data.pass);
+        const url = '/login?username='+data.username+'&password='+data.pass
+        const response = await client.post(url);
+        if(response.status === 200){
+            alert("Welcome back, "+data.username+"!")
+            navigate('/');
+        }
     } 
 
     return(
