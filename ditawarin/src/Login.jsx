@@ -10,6 +10,18 @@ function Login() {
     async function signIn(data){
         const url = '/login?username='+data.username+'&password='+data.pass
         const response = await client.post(url);
+        if (response.msg === "Invalid credentials") {
+            alert("User not found");
+            return;
+        }
+        if (response.msg === "Please enter all fields") {
+            alert("All field required");
+            return;
+        }
+        if (response.status === 500) {
+            alert("Internal server error");
+            return;
+        }
         if(response.status === 200){
             alert("Welcome back, "+data.username+"!")
             navigate('/');
