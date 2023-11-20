@@ -2,12 +2,13 @@
 // import Login from './Login.jsx'
 import Register from './Register'
 import './App.css'
+import Home from './Home'
 
 function App() {
 
   return (
     <>
-      <Register/>
+      <Home />
     </>
   )
 }

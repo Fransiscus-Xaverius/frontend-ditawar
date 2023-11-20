@@ -10,18 +10,7 @@ function Home(){
     return (
         <>
             {/* NAVBAR */}
-            <nav style={{borderBottom: "1px solid gray"}}>
-                <div className="container-fluid">
-                    <div className="d-flex justify-content-between align-items-center">
-                        <img src={Logo} alt="" style={{width: "10%", height: "10%"}}/>
-                        <input type="text" placeholder='Cari Produk'/>
-                        <div className="d-flex">
-                        <button type="button" className="btn btn-outline-primary me-3">Masuk</button>
-                            <button type="button" className="btn btn-primary">Daftar</button>
-                        </div>
-                    </div>
-                </div>
-            </nav>
+            
         
             <div className="container">
                 {/* JUMBO */}
@@ -56,8 +45,6 @@ function Home(){
 
             </div>
         </>
-        
-        
     )
 }
 
