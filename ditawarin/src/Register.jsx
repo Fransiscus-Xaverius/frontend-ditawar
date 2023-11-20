@@ -10,6 +10,10 @@ function Register() {
     const navigate = useNavigate();
 
     async function signUp(data){
+        if (data.pass != data.confpass) {
+            alert("password dan confirm password tidak sama")
+            return
+        }
         const url = '/register?username='+data.username+'&name='+data.namalengkap+'&phone='+data.nohp+'&password='+data.pass+'&email='+data.email+'&city='+data.kota
         const response = await client.post(url);
         if(response.status === 200){
