@@ -11,11 +11,11 @@ function Login() {
         const url = '/login?username='+data.username+'&password='+data.pass
         const response = await client.post(url);
         if (response.msg === "Invalid credentials") {
-            alert("User not found");
+            alert("User tidak ditemukan");
             return;
         }
         if (response.msg === "Please enter all fields") {
-            alert("All field required");
+            alert("Semua input wajib diisi");
             return;
         }
         if (response.status === 500) {
@@ -23,7 +23,7 @@ function Login() {
             return;
         }
         if(response.status === 200){
-            alert("Welcome back, "+data.username+"!")
+            alert("Selamat Datang, "+data.username+"!")
             navigate('/');
         }
     } 
