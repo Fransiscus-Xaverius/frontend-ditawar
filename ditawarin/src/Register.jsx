@@ -16,9 +16,18 @@ function Register() {
             alert("Berhasil mendaftar!")
             //todo: buat redirect ke login
             navigate('/login');
+            return
         }
-        else if(response.status == 409){
+        if(response.status === 500){
+            alert("Internal server error")
+            return
+        }
+        if (response.msg === "Please enter all fields") {
+            alert("Semua input wajib diisi")
+        }
+        if(response.msg === "User already exists"){
             alert("username tersebut sudah terdaftar!")
+            return;
         }
     }
 
