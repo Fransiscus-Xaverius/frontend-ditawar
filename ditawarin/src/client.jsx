@@ -1,8 +1,7 @@
 import axios from 'axios';
-require('dotenv').config();
 
 const client = axios.create({
-    baseURL: process.env.API_URL,
+    baseURL: import.meta.env.VITE_API_URL,
 });
 
 export default client;

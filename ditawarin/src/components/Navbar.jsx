@@ -17,7 +17,7 @@ export default function Navbar(){
                         {!userToken && 
                             <>
                                 <NavLink type="button" className="btn btn-primary" to="/login">Masuk</NavLink>
-                                <button type="button" className="btn btn-primary">Daftar</button>
+                                <NavLink type="button" className="btn btn-primary" to="/register">Daftar</NavLink>
                             </>
                         }
                     </div>

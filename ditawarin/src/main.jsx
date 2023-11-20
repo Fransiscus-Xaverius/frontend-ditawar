@@ -1,11 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, Router, RouterProvider } from 'react-router-dom'
-import App from './App.jsx'
 import './index.css'
 import Home from './Home.jsx'
 import Login from './Login.jsx'
 import Navbar from './components/Navbar.jsx'
+import Register from './Register.jsx'
 
 const router = createBrowserRouter([
   {
@@ -20,6 +20,10 @@ const router = createBrowserRouter([
         path: '/login',
         element: <Login />
       },
+      {
+        path: '/register',
+        element: <Register />
+      }
       
     ]
   }

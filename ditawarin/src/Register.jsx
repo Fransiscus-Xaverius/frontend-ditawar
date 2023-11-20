@@ -1,13 +1,24 @@
 import { useForm } from 'react-hook-form'
 import flag from './assets/flag.svg'
 import { Link } from 'react-router-dom'
+import client from './client.jsx'
+import { redirect } from 'react-router-dom'
 
 function Register() {
 
     const {register, handleSubmit, reset} = useForm()
 
     async function signUp(data){
-        
+        const url = '/register?username='+data.username+'&name='+data.namalengkap+'&phone='+data.nohp+'&password='+data.pass+'&email='+data.email+'&city='+data.kota
+        const response = await client.post(url);
+        if(response.status === 200){
+            alert("Berhasil mendaftar!")
+            //todo: buat redirect ke login
+            return redirect('/login')
+        }
+        else if(response.status == 409){
+            alert("username tersebut sudah terdaftar!")
+        }
     }
 
     return(
@@ -17,6 +28,9 @@ function Register() {
                 <form onSubmit={handleSubmit(signUp)}>
                     <div className="row">
                         <div className="col-6">
+                            <label>Username </label><br />
+                            <input type="text" {...register("username")} placeholder="Nama Lengkap" className="mb-3"/> <br />
+
                             <label>Nama Lengkap </label><br />
                             <input type="text" {...register("namalengkap")} placeholder="Nama Lengkap" className="mb-3"/> <br />
 
