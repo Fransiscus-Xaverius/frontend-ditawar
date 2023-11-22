@@ -5,9 +5,9 @@ import client from "../client";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
+import Footer from "./Footer";
 
 export default function Navbar(){
-    // const [rerenderkontol, setRerenderkontol] = useState(0);
     let userToken = localStorage.getItem("token");
 
     const location = useLocation()
@@ -15,17 +15,6 @@ export default function Navbar(){
     useEffect(() => {
         userToken = localStorage.getItem("token");
     }, [location]);
-
-    // const handleClick = () => {
-    //     localStorage.removeItem("token");
-    //     localStorage.removeItem("user");
-    //     setRerenderkontol(rerenderkontol+1);
-    // }
-    
-    // useEffect(() => {
-    //     userToken = localStorage.getItem("token");
-    // }
-    // , [rerenderkontol]);
 
     return (
         <>
@@ -43,6 +32,7 @@ export default function Navbar(){
                         }
                         {userToken &&
                             <>
+                                <NavLink type="button" className="btn btn-primary" to="/sell">Jual</NavLink>
                                 <NavLink type="button" className="btn btn-primary" to="/profile">Profile</NavLink>
                                 <NavLink type="button" className="btn btn-primary" to="/logout" onClick={()=>handleClick()}>Logout</NavLink>
                             </>
@@ -52,6 +42,7 @@ export default function Navbar(){
                 </div>
             </nav>
             <Outlet/>
+            <Footer/>
         </>
     )
 }
