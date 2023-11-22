@@ -6,6 +6,7 @@ import Home from "./Home.jsx";
 import Login from "./Login.jsx";
 import Navbar from "./components/Navbar.jsx";
 import Register from "./Register.jsx";
+import Logout from "./Logout.jsx";
 
 const router = createBrowserRouter([
 	{
@@ -24,8 +25,13 @@ const router = createBrowserRouter([
 				path: "/register",
 				element: <Register />,
 			},
+			{
+				path: "/logout",
+				element: <Logout />,
+			}
 		],
 	},
+	
 	// {
 	// 	path: "/admin",
 	// 	element: <NavbarAdmin />,
