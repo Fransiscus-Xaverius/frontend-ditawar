@@ -26,32 +26,32 @@ const router = createBrowserRouter([
 			},
 		],
 	},
-	{
-		path: "/admin",
-		element: <NavbarAdmin />,
-		children: [
-			{
-				path: "users",
-				element: <Users />,
-			},
-			{
-				path: "auction",
-				element: <Auctions />,
-			},
-			{
-				path: "payment",
-				element: <Payment />,
-			},
-			{
-				path: "security",
-				element: <Security />,
-			},
-			{
-				path: "support",
-				element: <Support />,
-			},
-		],
-	},
+	// {
+	// 	path: "/admin",
+	// 	element: <NavbarAdmin />,
+	// 	children: [
+	// 		{
+	// 			path: "users",
+	// 			element: <Users />,
+	// 		},
+	// 		{
+	// 			path: "auction",
+	// 			element: <Auctions />,
+	// 		},
+	// 		{
+	// 			path: "payment",
+	// 			element: <Payment />,
+	// 		},
+	// 		{
+	// 			path: "security",
+	// 			element: <Security />,
+	// 		},
+	// 		{
+	// 			path: "support",
+	// 			element: <Support />,
+	// 		},
+	// 	],
+	// },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

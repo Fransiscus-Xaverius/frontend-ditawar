@@ -31,16 +31,23 @@ function Login() {
     return(
         <>
             <div className="container">
-                <h1 className="mb-4">Hello, Welcome Back</h1>
-                <form onSubmit={handleSubmit(signIn)}>
-                    <label>Email </label><br />
-                    <input type="text" placeholder="Email" {...register("email")} className="mb-3"/> <br />
-                    <label>Password </label><br />
-                    <input type="text" placeholder="Password" {...register("pass")} className="mb-3"/> <br />
-                    <button type='submit'>Masuk</button>                    
-                </form>
-                <div>Lupa Password?</div>
-                <div>Belum punya akun?  <Link to={"/register"}>Daftar Sini</Link> </div>
+                    <h1 className="mb-4 text-center">Hello, Welcome Back</h1>
+                    <form onSubmit={handleSubmit(signIn)}>
+                        <div className="row justify-content-center">
+                            <div className="col-6 p-0">
+                                <label><b>Email </b></label><br />
+                                <input type="text" {...register("email")} placeholder="Email" className="mt-3 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "100%", height: "3rem"}}/> <br />
+
+                                <label><b>Password </b></label><br />
+                                <input type="text" {...register("pass")} placeholder="Password" className="mt-3 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "100%", height: "3rem"}}/> <br />
+
+                                <button className="btn btn-primary mt-3 mb-3" type="submit" style={{width: '100%'}}><b>MASUK</b></button>
+                                
+                                <div>Lupa Password?</div>
+                                <div>Belum punya akun?  <Link to={"/register"}>Daftar Sini</Link> </div>
+                            </div>
+                        </div>            
+                    </form>
             </div>
             
         </>
