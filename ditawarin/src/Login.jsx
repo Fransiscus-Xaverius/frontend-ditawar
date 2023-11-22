@@ -30,10 +30,10 @@ function Login() {
     return(
         <>
             <div className="container">
-                    <h1 className="mb-4 text-center">Hello, Welcome Back</h1>
                     <form onSubmit={handleSubmit(signIn)}>
                         <div className="row justify-content-center">
                             <div className="col-6 p-0">
+                                <h1 className="mb-4 mt-4" style={{color: "#1551C5"}}>Hello,<br /> Welcome Back</h1>
                                 <label><b>Email </b></label><br />
                                 <input type="text" {...register("email", {required:{value:true, message:"Email wajib diisi!"}})} placeholder="Email" className="mt-3 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "100%", height: "3rem"}}/> <br />
                                 {errors.email && <p style={{color: "red"}}>{errors.email.message}</p>}

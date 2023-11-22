@@ -22,11 +22,11 @@ export default function Navbar(){
                 <div className="container-fluid">
                     <div className="d-flex justify-content-between align-items-center">
                         <Link to="/"><img src={Logo} alt="" style={{width: "10%", height: "10%"}}/></Link>
-                        <input type="text" placeholder='Cari Produk'/>
+                        <input type="text" placeholder='Cari Produk'  className="border border-secondary-subtle ps-3 me-3" style={{borderRadius: "8px", width: "40%", height: "2rem"}}/>
                         <div className="d-flex">
                         {!userToken && 
                             <>
-                                <NavLink type="button" className="btn btn-primary" to="/login">Masuk</NavLink>
+                                <NavLink type="button" className="btn btn-outline-primary me-3" to="/login">Masuk</NavLink>
                                 <NavLink type="button" className="btn btn-primary" to="/register">Daftar</NavLink>
                             </>
                         }

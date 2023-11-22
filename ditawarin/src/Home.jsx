@@ -43,6 +43,18 @@ function Home(){
                     </div>
                 </div>
 
+                {/* DEALS */}
+                <div className="card" style={{width: "30rem", backgroundColor: "#06083D", padding: "4rem 2rem", marginTop: "50px"}}>
+                    <div className="card-body">
+                        <h1 className="card-subtitle mb-2 text-light" style={{letterSpacing: "8px", lineHeight: "150%"}}>
+                            DEALS <br />
+                            FOR <br />
+                            YOU
+                        </h1>
+                        <button type="button" className="btn btn-outline-light mt-3" style={{width: "50%"}}>LIHAT</button>
+                    </div>
+                </div>
+
             </div>
         </>
     )
