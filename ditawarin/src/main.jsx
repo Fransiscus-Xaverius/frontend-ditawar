@@ -15,6 +15,12 @@ import Auctions from "./admin/Auctions.jsx"
 import Payment from "./admin/Payment.jsx"
 import Security from "./admin/Security.jsx"
 import Support from "./admin/Support.jsx"
+import ItemListing from "./ItemListing.jsx"
+import AuctionPage from "./AuctionPage.jsx";
+
+import DataHandler from "./data/DataHandler.jsx";
+
+const {getItem} = DataHandler;
 
 const router = createBrowserRouter([
 	{
@@ -44,6 +50,17 @@ const router = createBrowserRouter([
 			{
 				path: "/sell",
 				element: <JualPage />,
+			},
+			{
+				path: "/listing",
+				element: <ItemListing />,
+				children: [
+					{
+						path: ":id",
+						loader: getItem,
+						element: <AuctionPage />,
+					},
+				]
 			}
 
 		],

@@ -23,7 +23,7 @@ function Login() {
             }
         } catch (error) {
             console.log(error);
-            alert('kontol');
+            alert('Username atau password salah!');
         }
     } 
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form'
-import { Link } from 'react-router-dom'
+import { Link, redirect } from 'react-router-dom'
 import client from './client.jsx'
 import { useNavigate } from 'react-router-dom'
 
@@ -34,16 +34,23 @@ export default function JualPage() {
             alert("Gagal upload file");
             return
         }
-        const url2 = '/addItem?token='+localStorage.getItem('token')+'&nama='+data.namabarang+'&description='+data.deskripsi+'&images='+image;
+        const url2 = '/addItem?token='+localStorage.getItem('token')+'&nama='+data.namabarang+'&deskripsi='+data.deskripsi+'&images='+image;
         let item_id;
         try {
-            const res2 = await client.post(url2);
+            const body_data = {
+                tanggal_selesai: data.tanggal_selesai,
+                jam_selesai: data.jam_selesai,
+            }
+            const res2 = await client.post(url2, body_data);
+            console.log(res2);
             if(res2.status==201){
                 alert("berhasil menambahkan item")
                 item_id = res2.data.result.insertedId
             }
+            navigate('/listing/'+item_id);
         } catch (error) {
             alert("Gagal menambahkan item");
+            console.log(error);
             return
         }
 
@@ -81,7 +88,8 @@ export default function JualPage() {
                 </label>
                 <br />
                 <label className='mt-1'>
-                    Ending Date: <input type="date" name="" id="" /> <input type="time" name="" id="" />
+                    Ending Date: <input {...register('tanggal_selesai', {required:"Wajib memberikan tanggal auction selesai"})} type="date" name="tanggal_selesai" id="tanggal_selesai" /> <input {...register('jam_selesai', {required:"wajib memberikan jam auction selesai"})} type="time" name="jam_selesai" id="jam_selesai" />
+                    {errors.tanggal_selesai && <p style={{color: "red"}}>{errors.tanggal_selesai.message}</p>} {errors.jam_selesai && <p style={{color: "red"}}>{errors.jam_selesai.message}</p>}
                 </label>
                 <br />
                 <button type="submit">Add Item</button>
