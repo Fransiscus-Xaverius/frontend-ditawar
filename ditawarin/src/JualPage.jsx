@@ -37,17 +37,29 @@ export default function JualPage() {
         const url2 = '/addItem?token='+localStorage.getItem('token')+'&nama='+data.namabarang+'&deskripsi='+data.deskripsi+'&images='+image;
         let item_id;
         try {
-            const body_data = {
-                tanggal_selesai: data.tanggal_selesai,
-                jam_selesai: data.jam_selesai,
-            }
-            const res2 = await client.post(url2, body_data);
+            const res2 = await client.post(url2);
             console.log(res2);
-            if(res2.status==201){
-                alert("berhasil menambahkan item")
-                item_id = res2.data.result.insertedId
+            item_id = res2.data.result.insertedId;
+            try {
+                const url3 = '/auction';
+                const body_data2 = {
+                    token: localStorage.getItem('token'),
+                    id_barang: item_id,
+                    starting_price: data.starting_price,
+                    asking_price: data.asking_price,
+                    tanggal_selesai: data.tanggal_selesai,
+                    jam_selesai: data.jam_selesai
+                }
+                const res3 = await client.post(url3, body_data2);
+                console.log("respond 3");
+                console.log(res3);
+                let auction_id = res3.data.result.insertedId;
+                console.log(auction_id)
+                navigate('/listing/'+auction_id);
+            } catch (error) {
+                alert('Gagal menambahkan auction');
+                console.log(error);
             }
-            navigate('/listing/'+item_id);
         } catch (error) {
             alert("Gagal menambahkan item");
             console.log(error);
