@@ -5,8 +5,30 @@ import Auction from "../assets/auction.png";
 import Payment from "../assets/payment.png";
 import Security from "../assets/security.png";
 import Support from "../assets/support.png";
+import { useEffect, useState } from "react";
 
 function NavbarAdmin() {
+	const [hours, setHours] = useState(0);
+	const [minutes, setMinutes] = useState(0);
+	const [seconds, setSeconds] = useState(0);
+
+	const getTime = () => {
+		setSeconds((time) => time + 1);
+		if (seconds == 60) {
+			setSeconds(0);
+			setMinutes((time) => time + 1);
+		}
+		if (minutes == 60) {
+			setMinutes(0);
+			setHours((time) => time + 1);
+		}
+	};
+
+	useEffect(() => {
+		const interval = setInterval(() => getTime(), 1000);
+		return () => clearInterval(interval);
+	}, [seconds]);
+
 	return (
 		<nav>
 			<div className="container-fluid" style={{ backgroundColor: "darkblue" }}>
@@ -17,7 +39,12 @@ function NavbarAdmin() {
 					>
 						Lelang
 					</NavLink>
-					<h3 className="float-end ms-auto me-3 text-white">00:00:00</h3>
+					<h3 className="float-end ms-auto me-3 text-white">
+						{hours < 10 && 0}
+						{hours}:{minutes < 10 && 0}
+						{minutes}:{seconds < 10 && 0}
+						{seconds}
+					</h3>
 					<button
 						className="rounded-0"
 						style={{ width: "100px", height: "40px" }}
@@ -32,7 +59,7 @@ function NavbarAdmin() {
 				</div>
 			</div>
 			<div className="row">
-				<div className="col-3 p-5" style={{ backgroundColor: "darkblue" }}>
+				<div className="col-3 p-5" style={{ backgroundColor: "darkblue",height : "500px" }}>
 					<NavLink to="users" className="text-decoration-none text-white">
 						<img src={Users} style={{ width: "35px" }} className="py-2" />
 						<b className="px-3">USERS</b>
