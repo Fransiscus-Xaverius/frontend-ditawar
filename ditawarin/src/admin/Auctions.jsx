@@ -4,34 +4,23 @@ import Check from "../assets/check.png";
 
 function Auctions() {
 	return (
-		<table className="table table-bordered">
-			<thead>
-				<tr>
-					<th scope="col">No.</th>
-					<th scope="col">Nama User</th>
-					<th scope="col">Role</th>
-					<th scope="col" style={{width:"175px"}}>Pilih Aksi</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<th scope="row">1</th>
-					<td>Mark</td>
-					<td>Otto</td>
-					<td>
-						<button className="bg-transparent border-0">
-							<img src={Ban} alt="" />
-						</button>
-						<button className="bg-transparent border-0">
-							<img src={Edit} alt="" />
-						</button>
-						<button className="bg-transparent border-0">
-							<img src={Check} alt="" />
-						</button>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+		<>
+			<p className="fw-bold">AUCTION</p>
+			<p>More than 10+ new auctions</p>
+			<table className="table">
+				<thead>
+					<tr className="table-success">
+						<th scope="col">PRODUCT</th>
+						<th scope="col">PRICE</th>
+						<th scope="col">STATUS</th>
+						<th scope="col">ACTION</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr></tr>
+				</tbody>
+			</table>
+		</>
 	);
 }
 
