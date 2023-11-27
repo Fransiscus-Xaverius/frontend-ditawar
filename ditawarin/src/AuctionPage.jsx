@@ -8,6 +8,7 @@ export default function AuctionPage(){
     console.log(data);
     let item = data.itemdata;
     let auction = data.auctiondata;
+    console.log(data.auctiondata.tanggal_selesai);
     let berakhir = new Date(data.auctiondata.tanggal_selesai);
     console.log(berakhir)
     let url =import.meta.env.VITE_API_URL+'/static/'+item.images;

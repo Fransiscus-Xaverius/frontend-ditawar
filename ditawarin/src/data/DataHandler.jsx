@@ -18,10 +18,17 @@ const getAuction = async (data) => {
     return auction;
 }
 
+const getAllAuction = async () => {
+    const token = localStorage.getItem('token');
+    const result = await client.get("/allAuction");
+    console.log(result)
+    return(result)
+}
+
 const getItem = async (item_id) => {
     const result = await client.get(`/item?id=${item_id}`);
     console.log(result);
     return result;
 }
 
-export default {getAuction, getItem};
+export default {getAuction, getItem, getAllAuction};

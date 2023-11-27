@@ -7,6 +7,9 @@ import Pabrik from './assets/pabrik.png'
 import Mobil from './assets/mobil.png'
 
 function Home(){
+
+    
+
     return (
         <>
             {/* NAVBAR */}
@@ -19,7 +22,7 @@ function Home(){
                 </div>
 
                 {/* KATEGORI */}
-                <h3 className='mt-3 mb-3'>KATEGORI PILIHAN</h3>
+                <h1 className='mt-3 mb-3'>KATEGORI PILIHAN</h1>
                 <div className="d-flex justify-content-center">
                     <div className="kategori_1 text-center pe-5 ps-5 pt-3 pb-3 me-5 align-items-center" style={{border: "1px solid gray", borderRadius: "12px"}}>
                         <img src={Tanah} alt="" style={{width: "5rem", height: "5rem"}}/> <br />
@@ -44,17 +47,19 @@ function Home(){
                 </div>
 
                 {/* DEALS */}
-                <div className="card" style={{width: "30rem", backgroundColor: "#06083D", padding: "4rem 2rem", marginTop: "50px"}}>
-                    <div className="card-body">
-                        <h1 className="card-subtitle mb-2 text-light" style={{letterSpacing: "8px", lineHeight: "150%"}}>
+                <div className='row'>
+                    <div className="rounded-5 col-2" style={{width: "30rem", backgroundColor: "#06083D", padding: "4rem 2rem", marginTop: "50px"}}>
+                        <h1 className="mb-2 text-light" style={{letterSpacing: "8px", lineHeight: "150%"}}>
                             DEALS <br />
                             FOR <br />
                             YOU
                         </h1>
-                        <button type="button" className="btn btn-outline-light mt-3" style={{width: "50%"}}>LIHAT</button>
+                        <button type="button" className="btn btn-outline-light mt-3 " style={{width: "35%"}}>LIHAT</button>
+                    </div>
+                    <div className='col-10'>
+                        
                     </div>
                 </div>
-
             </div>
         </>
     )
