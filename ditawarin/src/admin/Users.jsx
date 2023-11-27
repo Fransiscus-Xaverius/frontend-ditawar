@@ -1,6 +1,6 @@
 import Ban from "../assets/ban.png";
 import Edit from "../assets/edit.png";
-import Check from "../assets/check.png";
+import Eye from "../assets/eye.png";
 
 function Users() {
 	return (
@@ -18,7 +18,20 @@ function Users() {
 				</thead>
 				<tbody>
 					<tr>
-						
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>
+							<button className="bg-primary opacity-75 border-0 rounded-2 mx-2">
+								<img src={Eye} style={{ width: "35px" }} />
+							</button>
+							<button className="bg-primary opacity-75 border-0 rounded-2 mx-2">
+								<img src={Edit} style={{ width: "35px" }} />
+							</button>
+							<button className="bg-primary opacity-75 border-0 rounded-2">
+								<img src={Ban} style={{ width: "35px" }} />
+							</button>
+						</td>
 					</tr>
 				</tbody>
 			</table>
