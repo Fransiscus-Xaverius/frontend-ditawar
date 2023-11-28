@@ -8,11 +8,16 @@ export default function AuctionPage(){
     console.log(data);
     let item = data.itemdata;
     let auction = data.auctiondata;
-    console.log(data.auctiondata.tanggal_selesai);
-    let berakhir = new Date(data.auctiondata.tanggal_selesai);
-    console.log(berakhir)
     let url =import.meta.env.VITE_API_URL+'/static/'+item.images;
-    console.log(url);
+    let berakhir = new Date(data.auctiondata.tanggal_selesai);
+    
+    // console.log(data.auctiondata.tanggal_selesai);
+    
+    // console.log(berakhir)
+    // console.log(url);
+
+    console.log(item);
+    console.log(auction);
 
     const [timer, setTimer] = useState("00:00:00");
 
@@ -23,9 +28,12 @@ export default function AuctionPage(){
         const minutes = Math.floor(
             (total / 1000 / 60) % 60
         );
+        const days = Math.floor(
+            total / (1000 * 60 * 60 * 24)
+        );
         const hours = Math.floor(
             (total / 1000 / 60 / 60) % 24
-        );
+        ) + (days * 24); // Add remaining days in hours
         return {
             total,
             hours,
@@ -73,7 +81,14 @@ export default function AuctionPage(){
                                 <h4>Waktu Berakhir: {timer}</h4>
                             </div>
                             <div className="container-fluid d-flex">
-                                <h4>Starting Price: {auction.starting_price}</h4> 
+                                <h4>Harga Penawaran: {auction.starting_price}</h4> 
+                            </div>
+                            <div className="container-fluid d-flex">
+                                <h4>Beli Sekarang: {auction.asking_price}</h4>
+                            </div>
+                            <div className="container-fluid d-flex">
+                                <button className="btn btn-primary rounded">Tawar</button>
+                                <button className="btn btn-primary rounded">Beli Sekarang</button>
                             </div>
                         </div>
                     </div>

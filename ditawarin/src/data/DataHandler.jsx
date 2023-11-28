@@ -14,7 +14,6 @@ const getAuction = async (data) => {
         auctiondata: result.data.result,
         itemdata: result2.data.result
     }
-    console.log(auction);
     return auction;
 }
 
