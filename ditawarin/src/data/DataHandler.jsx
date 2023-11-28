@@ -30,4 +30,21 @@ const getItem = async (item_id) => {
     return result;
 }
 
-export default {getAuction, getItem, getAllAuction};
+const getUserData = async () => {
+    try {
+        const token = localStorage.getItem('token');
+        const userData = await client.get('/getDataFromToken?token='+token);
+        if(userData.status == 401){
+            alert("Invalid Token")
+            return null;
+        }
+        return userData.data.payload.user;
+    } catch (error) {
+        console.log(error);
+        alert("Gagal Mendapatkan data user");
+        return null;
+    }
+
+}
+
+export default {getAuction, getItem, getAllAuction, getUserData};
