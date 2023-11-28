@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form'
 import { Link, redirect } from 'react-router-dom'
+import simbolPlus from './assets/plus.png'
 import client from './client.jsx'
 import { useNavigate } from 'react-router-dom'
 
@@ -8,6 +9,10 @@ export default function JualPage() {
 
     const {register, handleSubmit, reset, formState:{errors}} = useForm();
     const navigate = useNavigate();
+    const [gambar, setGambar] = useState(0);
+    const [files, setFiles] = useState("");
+    const [filevalue, setFilevalue] = useState(null)
+    const [preview, setPreview] = useState()
 
     async function addItem(data){
         if(data.starting_price > data.asking_price){
@@ -16,9 +21,9 @@ export default function JualPage() {
         }
         const url = 'http://localhost:3000/uploadFile';
         const formData = new FormData();
-        console.log(data.files[0])
+        console.log(files)
         console.log(data);
-        formData.append('image', data.files[0]);
+        formData.append('image', files);
         let image;
         try {
             const res = await fetch(url, {
@@ -67,45 +72,72 @@ export default function JualPage() {
         }
 
     }
+
+    function handleClick(){
+        const element = document.getElementById('files');
+        element.click()
+    }
+    function handleChange(e){
+        setFilevalue(e.target.value)
+        setFiles(e.target.files[0]);
+        setGambar(1)
+    }
+
+    useEffect(() => {
+        if (!files) {
+            setPreview(undefined)
+            return
+        }
+
+        const objectUrl = URL.createObjectURL(files)
+        setPreview(objectUrl)
+
+        // free memory when ever this component is unmounted
+        return () => URL.revokeObjectURL(objectUrl)
+    }, [files])
     return (
         <>
-            <form onSubmit={handleSubmit(addItem)}>
-                <label className='mt-1'>
-                    Nama Barang:
-                    <input type="text" {...register("namabarang", {required:{value:true, message:"Nama Barang wajib diisi"}})} placeholder="Nama Barang" className="mt-1 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "90%", height: "3rem"}}/>
-                    {errors.namabarang && <p style={{color: "red"}}>{errors.namabarang.message}</p>}
-                </label>
-                <br />
-                <label className='mt-1'>
-                    Deskripsi:
-                    <input type="text" {...register("deskripsi", {required:{value:true, message:"Deskripsi Barang wajib diisi"}})} placeholder="Deskripsi Barang" className="mt-1 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "90%", height: "3rem"}}/>
-                    {errors.namabarang && <p style={{color: "red"}}>{errors.namabarang.message}</p>}
-                </label>
-                <br />
-                <label className='mt-1'>
-                    Harga Awal:
-                    <input type="text" {...register("starting_price", {required:{value:true, message:"Starting Price wajib diisi"}})} placeholder="Starting Price" className="mt-1 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "90%", height: "3rem"}}/>
-                    {errors.starting_price && <p style={{color: "red"}}>{errors.starting_price.message}</p>}
-                </label>
-                <br />
-                <label className='mt-1'>
-                    Harga Acuan:
-                    <input type="text" {...register("asking_price", {required:{value:true, message:"Asking Price wajib diisi"}})} placeholder="Asking Price" className="mt-1 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "90%", height: "3rem"}}/>
-                    {errors.asking_price && <p style={{color: "red"}}>{errors.asking_price.message}</p>}
-                </label>
-                <br />
-                <label className='mt-1'>
-                    <input type="file" {...register("files", {required: "Wajib memberikan gambar barang"})}  name="files" id="files" />
-                    {errors.files && <p style={{color: "red"}}>{errors.image.message}</p>}
-                </label>
-                <br />
-                <label className='mt-1'>
-                    Ending Date: <input {...register('tanggal_selesai', {required:"Wajib memberikan tanggal auction selesai"})} type="date" name="tanggal_selesai" id="tanggal_selesai" /> <input {...register('jam_selesai', {required:"wajib memberikan jam auction selesai"})} type="time" name="jam_selesai" id="jam_selesai" />
-                    {errors.tanggal_selesai && <p style={{color: "red"}}>{errors.tanggal_selesai.message}</p>} {errors.jam_selesai && <p style={{color: "red"}}>{errors.jam_selesai.message}</p>}
-                </label>
-                <br />
-                <button type="submit">Add Item</button>
-            </form>
+            <div className='container'>
+                <h1 className='mt-4'>Upload Produk</h1>
+                <hr />
+                <form className='row' onSubmit={handleSubmit(addItem)}>
+                    <div className='col-md-6'>
+                        <input type="text" {...register("namabarang", {required:{value:true, message:"Nama Barang wajib diisi"}})} placeholder="Nama Produk*" className="mt-1 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "90%", height: "3rem"}}/>
+                        {errors.namabarang && <p style={{color: "red"}}>{errors.namabarang.message}</p>}
+                        <br />
+                        <input type="text" {...register("starting_price", {required:{value:true, message:"Starting Price wajib diisi"}})} placeholder="Starting Price*" className="mt-1 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "90%", height: "3rem"}}/>
+                        {errors.starting_price && <p style={{color: "red"}}>{errors.starting_price.message}</p>}
+                        <br />
+                        <input type="text" {...register("asking_price", {required:{value:true, message:"Asking Price wajib diisi"}})} placeholder="Asking Price*" className="mt-1 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "90%", height: "3rem"}}/>
+                        {errors.asking_price && <p style={{color: "red"}}>{errors.asking_price.message}</p>}
+                        <br />
+                        <textarea {...register("deskripsi", {required:{value:true, message:"Deskripsi Barang wajib diisi"}})} placeholder="Deskripsi Barang*" className="mt-1 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "90%", height: "10rem"}}></textarea>
+                        {errors.namabarang && <p style={{color: "red"}}>{errors.namabarang.message}</p>}
+                        <br />
+                        Ending Date <br /> <input {...register('tanggal_selesai', {required:"Wajib memberikan tanggal auction selesai"})} className='p-2 me-3' style={{width:"35%"}} type="date" name="tanggal_selesai" id="tanggal_selesai" /> <input {...register('jam_selesai', {required:"wajib memberikan jam auction selesai"})} className='p-2' style={{width:"35%"}} type="time" name="jam_selesai" id="jam_selesai" />
+                        {errors.tanggal_selesai && <p style={{color: "red"}}>{errors.tanggal_selesai.message}</p>} {errors.jam_selesai && <p style={{color: "red"}}>{errors.jam_selesai.message}</p>}
+                    </div>
+                    <div className='col-md-6 text-center'>
+                        {
+                            gambar == 0 ?
+                            <>
+                                <div className='mx-auto border text-center pt-5 pb-5 rounded-4' style={{width:"65%"}} onClick={handleClick}>
+                                    <img src={simbolPlus} alt="" style={{width:"30%"}}/>
+                                </div>
+                            </>
+                            :
+                            <div>
+                                <div className='mx-auto border text-center pt-5 pb-5 rounded-4' style={{width:"65%"}}>
+                                    <img src={preview} alt="" style={{width:"50%"}}/>
+                                </div>
+                            </div>
+                        }
+                        <input type="file" {...register("files", {required: "Wajib memberikan gambar barang"})} style={{display:"none"}} onChange={handleChange} name="files" id="files" />                                    
+                        {errors.files && <p style={{color: "red"}}>{errors.files.message}</p>}
+                        <button type="submit" className='btn bg-dark text-white mx-auto w-25 pt-3 pb-3 mt-4'>Add Item</button>
+                    </div>
+                </form>
+            </div>
         </>
     );
 }

@@ -18,6 +18,7 @@ export default function Navbar(){
 
     return (
         <>
+            
             <nav style={{borderBottom: "1px solid gray"}}>
                 <div className="container-fluid">
                     <div className="d-flex justify-content-between align-items-center">
