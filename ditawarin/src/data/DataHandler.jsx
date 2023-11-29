@@ -17,6 +17,18 @@ const getAuction = async (data) => {
     return auction;
 }
 
+const getAuctionData = async (data) => {
+    const auction = await getAuction(data);
+    const user = await getUserData();
+
+    const result = {
+        auctiondata: auction.auctiondata,
+        itemdata: auction.itemdata,
+        userdata: user
+    }
+    return result;
+}
+
 const getAllAuction = async () => {
     const token = localStorage.getItem('token');
     const result = await client.get("/allAuction");
@@ -44,7 +56,6 @@ const getUserData = async () => {
         alert("Gagal Mendapatkan data user");
         return null;
     }
-
 }
 
-export default {getAuction, getItem, getAllAuction, getUserData};
+export default {getAuction, getItem, getAllAuction, getUserData, getAuctionData};

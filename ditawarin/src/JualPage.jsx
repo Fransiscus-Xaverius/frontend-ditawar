@@ -11,7 +11,6 @@ export default function JualPage() {
     const navigate = useNavigate();
     const [gambar, setGambar] = useState(0);
     const [files, setFiles] = useState("");
-    const [filevalue, setFilevalue] = useState(null)
     const [preview, setPreview] = useState()
 
     async function addItem(data){
@@ -21,6 +20,7 @@ export default function JualPage() {
         }
         const url = 'http://localhost:3000/uploadFile';
         const formData = new FormData();
+        let kategori = ""; //simpan kategori format = <namakategori>,<namakategori>,<namakategori>
         console.log(files)
         console.log(data);
         formData.append('image', files);
@@ -53,7 +53,8 @@ export default function JualPage() {
                     starting_price: data.starting_price,
                     asking_price: data.asking_price,
                     tanggal_selesai: data.tanggal_selesai,
-                    jam_selesai: data.jam_selesai
+                    jam_selesai: data.jam_selesai,
+                    kategori: kategori.toLowerCase()
                 }
                 const res3 = await client.post(url3, body_data2);
                 console.log("respond 3");
@@ -78,9 +79,13 @@ export default function JualPage() {
         element.click()
     }
     function handleChange(e){
-        setFilevalue(e.target.value)
-        setFiles(e.target.files[0]);
-        setGambar(1)
+        if (e.target.files[0] == undefined) {
+            setFiles("")
+            setGambar(0)
+        }else{
+            setFiles(e.target.files[0]);
+            setGambar(1)
+        }
     }
 
     useEffect(() => {
@@ -127,7 +132,7 @@ export default function JualPage() {
                             </>
                             :
                             <div>
-                                <div className='mx-auto border text-center pt-5 pb-5 rounded-4' style={{width:"65%"}}>
+                                <div className='mx-auto border text-center pt-5 pb-5 rounded-4' style={{width:"65%"}} onClick={handleClick}>
                                     <img src={preview} alt="" style={{width:"50%"}}/>
                                 </div>
                             </div>
