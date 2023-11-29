@@ -64,42 +64,54 @@ export default function AuctionPage(){
         return () => clearInterval(interval);
     }, []);
 
+    let Rupiah = new Intl.NumberFormat("id-ID", {
+        style: "currency",
+        currency: "IDR"
+    });
+    const date = new Date(auction.tanggal_mulai)
+
     return (
         <>
-            <div className="container-fluid p-5">
-                <div className="row">
-                    <h1>{item.nama}</h1>
-                </div>
-                <div className="row">
-                    <div className="col">
-                        <div className="row">
-                            <div className="container-fluid d-flex">
-                                <h4>{item.deskripsi}</h4>
-                            </div>
-                            <img src={url} alt="Item Image" style={{maxHeight:"300px", maxWidth:"300px"}}/>
-                            <br />
-                            <div className="container-fluid d-flex">
-                                <h4>Penjual: {user.nama}</h4>
-                            </div>
-                            <div className="container-fluid d-flex">
-                                <h4>Dilist pada: {auction.tanggal_mulai}</h4> 
-                            </div>
-                            <div className="container-fluid d-flex">
-                                <h4>Waktu Berakhir: {timer}</h4>
-                            </div>
-                            <div className="container-fluid d-flex">
-                                <h4>Harga Penawaran: {auction.starting_price}</h4> 
-                            </div>
-                            <div className="container-fluid d-flex">
-                                <h4>Beli Sekarang: {auction.asking_price}</h4>
-                            </div>
-                            <div className="container-fluid d-flex">
-                                <button className="btn btn-primary rounded">Tawar</button>
-                                <button className="btn btn-primary rounded">Beli Sekarang</button>
+            <div className="container-fluid">
+                <div className="row mt-4 mx-auto" style={{height:"470px", width:"85%"}}>
+                    <div className="col-md-4 text-center" style={{marginTop:"auto", marginBottom:"auto"}}>
+                        <img src={url} alt="Item Image" style={{maxHeight:"300px", maxWidth:"300px"}}/>
+                    </div>
+                    <div className="col-md-5" style={{marginTop:"auto", marginBottom:"auto"}}>
+                        <div className="display-5 ms-4">{item.nama}</div>
+                        <div className="container-fluid d-flex ms-4 mt-3 mb-5">
+                            <h2>{Rupiah.format(auction.asking_price)}</h2>
+                        </div>
+                        <hr />
+                        <div className="h3 ms-4">Detail</div><br />
+                        <div className="ms-4">{item.deskripsi}</div>
+                    </div>
+                    <div className="col-md-3" style={{marginTop:"auto", marginBottom:"auto"}}>
+                        <div className="border rounded-4 text-center mx-auto">
+                            <div className="bg-primary text-white rounded-top-4 p-3">Waktu Server</div>
+                            <div className="mb-4 mt-4">
+                                <b> DIBUKA PADA </b><br />
+                                {date.toLocaleString('default', { month: 'long' }) + ", " + date.getDate() + " " + date.getFullYear() + " " + ("" + date.getHours()).padStart(2, "0") + ":" + ("" + date.getMinutes()).padStart(2, "0") + ":" + ("" + date.getSeconds()).padStart(2, "0")} <br />
+                                <br />
+                                <b> WAKTU BERAKHIR </b><br />
+                                {timer}
                             </div>
                         </div>
                     </div>
                 </div>
+                {
+                    auction.nama_penjual == user.nama ?
+                    <div className="row mx-auto" style={{width:"50%"}}>
+                        <div className="col-6 text-center"><button className="btn bg-primary rounded-pill text-white pt-3 pb-3" style={{width:"200px"}}>Ubah</button></div>
+                        <div className="col-6 text-center"><button className="btn bg-primary rounded-pill text-white pt-3 pb-3" style={{width:"200px"}}>Lelang Produk</button></div>
+                    </div>
+                    :
+                    <div className="row mx-auto" style={{width:"50%"}}>
+                        <div className="col-4 text-center"><button className="btn bg-primary rounded-pill text-white pt-3 pb-3" style={{width:"200px"}}>Laporkan</button></div>
+                        <div className="col-4 text-center"><button className="btn bg-primary rounded-pill text-white pt-3 pb-3" style={{width:"200px"}}>Masukkan Harga</button></div>
+                        <div className="col-4 text-center"><button className="btn bg-primary rounded-pill text-white pt-3 pb-3" style={{width:"200px"}}>Keranjang</button></div>
+                    </div>
+                }
             </div>
         </>
     )

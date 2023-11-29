@@ -11,7 +11,6 @@ export default function JualPage() {
     const navigate = useNavigate();
     const [gambar, setGambar] = useState(0);
     const [files, setFiles] = useState("");
-    const [filevalue, setFilevalue] = useState(null)
     const [preview, setPreview] = useState()
 
     async function addItem(data){
@@ -80,9 +79,13 @@ export default function JualPage() {
         element.click()
     }
     function handleChange(e){
-        setFilevalue(e.target.value)
-        setFiles(e.target.files[0]);
-        setGambar(1)
+        if (e.target.files[0] == undefined) {
+            setFiles("")
+            setGambar(0)
+        }else{
+            setFiles(e.target.files[0]);
+            setGambar(1)
+        }
     }
 
     useEffect(() => {
