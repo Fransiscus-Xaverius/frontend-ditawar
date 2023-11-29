@@ -72,19 +72,21 @@ export default function AuctionPage(){
 
     return (
         <>
+            {console.log(auction)}
             <div className="container-fluid">
                 <div className="row mt-4 mx-auto" style={{height:"470px", width:"85%"}}>
                     <div className="col-md-4 text-center" style={{marginTop:"auto", marginBottom:"auto"}}>
-                        <img src={url} alt="Item Image" style={{maxHeight:"300px", maxWidth:"300px"}}/>
+                        <img src={url} alt="Item Image" className="border border-5 rounded-5" style={{maxHeight:"300px", maxWidth:"300px"}}/>
                     </div>
                     <div className="col-md-5" style={{marginTop:"auto", marginBottom:"auto"}}>
-                        <div className="display-5 ms-4">{item.nama}</div>
+                        <div className="h3 ms-4" >{item.nama}</div>
+                        <div className="h5 ms-4">{auction.kategori_barang}</div>
                         <div className="container-fluid d-flex ms-4 mt-3 mb-5">
                             <h2>{Rupiah.format(auction.asking_price)}</h2>
                         </div>
                         <hr />
                         <div className="h3 ms-4">Detail</div><br />
-                        <div className="ms-4">{item.deskripsi}</div>
+                        <div className="ms-4 w-100">{item.deskripsi}</div>
                     </div>
                     <div className="col-md-3" style={{marginTop:"auto", marginBottom:"auto"}}>
                         <div className="border rounded-4 text-center mx-auto">
