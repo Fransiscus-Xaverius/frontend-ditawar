@@ -21,7 +21,7 @@ import AuctionPage from "./AuctionPage.jsx";
 import DataHandler from "./data/DataHandler.jsx";
 import Rating from "./Rating.jsx";
 
-const {getAuction, getAllAuction, getUserData, getAuctionData} = DataHandler;
+const {getAuction, getAllAuction, getUserData, getAuctionData, getAllAuctionDetail} = DataHandler;
 
 const router = createBrowserRouter([
 	{
@@ -82,7 +82,7 @@ const router = createBrowserRouter([
 				element: <Users />,
 			},
 			{
-				loader : getAllAuction,
+				loader : getAllAuctionDetail,
 				path: "auction",
 				element: <Auctions />,
 			},

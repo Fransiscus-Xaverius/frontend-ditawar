@@ -52,6 +52,7 @@ export default function JualPage() {
         try {
             const res2 = await client.post(url2);
             console.log(res2);
+            console.log(data.tanggal_selesai)
             item_id = res2.data.result.insertedId;
             try {
                 const url3 = '/auction';

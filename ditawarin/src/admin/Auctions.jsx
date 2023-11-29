@@ -4,7 +4,8 @@ import Check from "../assets/check.png";
 import { Form, useLoaderData } from "react-router-dom";
 
 function Auctions() {
-	const Auction = useLoaderData().data.result;
+	const Auction = useLoaderData();
+	console.log(Auction);
 	return (
 		<>
 			<p className="fw-bold">AUCTION</p>
@@ -20,11 +21,12 @@ function Auctions() {
 				</thead>
 				<tbody>
 					{Auction.map((act) => {
+						let url =import.meta.env.VITE_API_URL+'/static/'+act.item.images;
 						const date = new Date(act.tanggal_selesai);
 						return (
 							<tr>
 								<td>
-									<img src={`${act.item.images}`} />
+									<img src={`${url}`} />
 									{act.item.nama}
 								</td>
 								<td>{act.asking_price}</td>

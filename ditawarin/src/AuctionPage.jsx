@@ -37,6 +37,7 @@ export default function AuctionPage(){
         const hours = Math.floor(
             (total / 1000 / 60 / 60) % 24
         ) + (days * 24); // Add remaining days in hours
+        // console.log(hours, minutes, seconds)
         return {
             total,
             hours,
@@ -46,6 +47,7 @@ export default function AuctionPage(){
     };
 
     const startTimer = () => {
+        // console.log(timer)
         let { total, hours, minutes, seconds } =
             getTimeRemaining();
         if (total >= 0) {
@@ -65,6 +67,8 @@ export default function AuctionPage(){
         const interval = setInterval(startTimer, 1000);
         return () => clearInterval(interval);
     }, []);
+
+    
 
     function bidauction(){
 
@@ -120,22 +124,22 @@ export default function AuctionPage(){
                         <div className="col-4 text-center"><button className="btn bg-primary rounded-pill text-white pt-3 pb-3" style={{width:"200px"}}>Keranjang</button></div>
                     </div>
                 }
-                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div className="modal-dialog modal-dialog-centered">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title" id="staticBackdropLabel">Modal title</h5>
+                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <form onSubmit={handleSubmit(bidauction)}>
-                                <div class="modal-body row">
+                                <div className="modal-body row">
                                     <div className="text-center h2">{item.nama}</div>      
                                     <div className="text-center mb-5">
                                         <img src={url} alt="Item Image" className="border border-5 rounded-5" style={{maxHeight:"300px", maxWidth:"300px"}}/> <br />
                                         <h5>{Rupiah.format(auction.asking_price)}</h5>
                                     </div>               
                                     <input type="text" {...register("nominal_bid")} className="p-2 col-md-8 mx-auto" placeholder="Masukkan Harga"/>
-                                    <button type="submit" class="btn bg-primary text-white col-md-3 mx-auto">Ajukan</button>
+                                    <button type="submit" className="btn bg-primary text-white col-md-3 mx-auto">Ajukan</button>
                                 </div>
                             </form>
                         </div>
