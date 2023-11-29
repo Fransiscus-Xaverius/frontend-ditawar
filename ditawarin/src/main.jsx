@@ -72,10 +72,12 @@ const router = createBrowserRouter([
 		element: <NavbarAdmin />,
 		children: [
 			{
+				loader : getUserData,
 				path: "users",
 				element: <Users />,
 			},
 			{
+				loader : getAllAuction,
 				path: "auction",
 				element: <Auctions />,
 			},
