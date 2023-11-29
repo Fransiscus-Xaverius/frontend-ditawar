@@ -19,6 +19,7 @@ import ItemListing from "./ItemListing.jsx"
 import AuctionPage from "./AuctionPage.jsx";
 
 import DataHandler from "./data/DataHandler.jsx";
+import Rating from "./Rating.jsx";
 
 const {getAuction, getAllAuction, getUserData, getAuctionData} = DataHandler;
 
@@ -63,6 +64,10 @@ const router = createBrowserRouter([
 						element: <AuctionPage />,
 					},
 				]
+			},
+			{
+				path : "/rating",
+				element : <Rating/>
 			}
 
 		],
