@@ -5,9 +5,10 @@ import {React, useEffect, useState} from "react";
 export default function AuctionPage(){
 
     const data = useLoaderData();
-    console.log(data);
+    // console.log(data);
     let item = data.itemdata;
     let auction = data.auctiondata;
+    let user = data.userdata;
     let url =import.meta.env.VITE_API_URL+'/static/'+item.images;
     let berakhir = new Date(data.auctiondata.tanggal_selesai);
     
@@ -16,8 +17,8 @@ export default function AuctionPage(){
     // console.log(berakhir)
     // console.log(url);
 
-    console.log(item);
-    console.log(auction);
+    // console.log(item);
+    // console.log(auction);
 
     const [timer, setTimer] = useState("00:00:00");
 
@@ -77,6 +78,12 @@ export default function AuctionPage(){
                             </div>
                             <img src={url} alt="Item Image" style={{maxHeight:"300px", maxWidth:"300px"}}/>
                             <br />
+                            <div className="container-fluid d-flex">
+                                <h4>Penjual: {user.nama}</h4>
+                            </div>
+                            <div className="container-fluid d-flex">
+                                <h4>Dilist pada: {auction.tanggal_mulai}</h4> 
+                            </div>
                             <div className="container-fluid d-flex">
                                 <h4>Waktu Berakhir: {timer}</h4>
                             </div>

@@ -15,30 +15,31 @@ export default function ProfilePage(){
     }
 
     const data = useLoaderData();
-    console.log(data);
+    console.log(data.passwordlength);
+    
 
     return (
         <>
             {!editing && 
                 <div className="container-fluid">
                     <label className="mt-1">
-                        Nama : <input type="text" disabled name="" value={"a"} id="" />
+                        Nama : <input type="text" disabled name="" value={data.nama} id="" />
                     </label>
                     <br />
                     <label className="mt-1">
-                        Email :
+                        Email : <input type="text" disabled name="" value={data.email} id="" />
                     </label>
                     <br />
                     <label className="mt-1">
-                        No. Handphone :
+                        No. Handphone : <input type="text" disabled name="" value={data.phone} id="" />
                     </label>
                     <br />
                     <label className="mt-1">
-                        Kota :
+                        Kota : <input type="text" disabled name="" value={data.city} id="" />
                     </label>
                     <br />
                     <label className="mt-1">
-                        Password
+                        Password : <input type="password" disabled name="" id="" />
                     </label>
                     <br />
                     <button className="btn btn-success rounded" onClick={()=>{editClick()}}>Edit</button>

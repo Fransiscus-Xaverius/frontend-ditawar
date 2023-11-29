@@ -20,7 +20,7 @@ import AuctionPage from "./AuctionPage.jsx";
 
 import DataHandler from "./data/DataHandler.jsx";
 
-const {getAuction, getAllAuction, getUserData} = DataHandler;
+const {getAuction, getAllAuction, getUserData, getAuctionData} = DataHandler;
 
 const router = createBrowserRouter([
 	{
@@ -59,7 +59,7 @@ const router = createBrowserRouter([
 				children: [
 					{
 						path: ":id",
-						loader: getAuction,
+						loader: getAuctionData,
 						element: <AuctionPage />,
 					},
 				]
