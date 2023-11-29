@@ -22,7 +22,7 @@ export default function JualPage() {
                 kate = kate + data.kategori[i] + ", "
             }
         }
-        if(data.starting_price > data.asking_price){
+        if(parseInt(data.starting_price) > parseInt(data.asking_price)){
             alert("Starting price tidak boleh lebih besar dari asking price")
             return
         }
@@ -119,10 +119,10 @@ export default function JualPage() {
                         <input type="text" {...register("namabarang", {required:{value:true, message:"Nama Barang wajib diisi"}})} placeholder="Nama Produk*" className="mt-1 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "90%", height: "3rem"}}/>
                         {errors.namabarang && <p style={{color: "red"}}>{errors.namabarang.message}</p>}
                         <br />
-                        <input type="text" {...register("starting_price", {required:{value:true, message:"Starting Price wajib diisi"}})} placeholder="Starting Price*" className="mt-1 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "90%", height: "3rem"}}/>
+                        <input type="number" {...register("starting_price", {required:{value:true, message:"Starting Price wajib diisi"}})} placeholder="Starting Price*" className="mt-1 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "90%", height: "3rem"}}/>
                         {errors.starting_price && <p style={{color: "red"}}>{errors.starting_price.message}</p>}
                         <br />
-                        <input type="text" {...register("asking_price", {required:{value:true, message:"Asking Price wajib diisi"}})} placeholder="Asking Price*" className="mt-1 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "90%", height: "3rem"}}/>
+                        <input type="number" {...register("asking_price", {required:{value:true, message:"Asking Price wajib diisi"}})} placeholder="Asking Price*" className="mt-1 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "90%", height: "3rem"}}/>
                         {errors.asking_price && <p style={{color: "red"}}>{errors.asking_price.message}</p>}
                         <br />
                         <textarea {...register("deskripsi", {required:{value:true, message:"Deskripsi Barang wajib diisi"}})} placeholder="Deskripsi Barang*" className="mt-1 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "90%", height: "10rem"}}></textarea>

@@ -6,10 +6,19 @@ import Ruko from './assets/ruko.png'
 import Pabrik from './assets/pabrik.png'
 import Mobil from './assets/mobil.png'
 import CardAuction from "./CardAuction";
+import { useLoaderData } from 'react-router-dom'
 
 function Home(){
 
-    
+    const data = useLoaderData();
+    console.log(data);
+
+    const chunk = (arr, size) => Array.from({ length: Math.ceil(arr.length / size) }, (v, i) =>
+        arr.slice(i * size, i * size + size)
+    );
+
+    const chunked = chunk(data, 3);
+    console.log(chunked);
 
     return (
         <>
@@ -57,8 +66,16 @@ function Home(){
                         </h1>
                         <button type="button" className="btn btn-outline-light mt-3 " style={{width: "35%"}}>LIHAT</button>
                     </div>
-                    <div className='col-10'>
-                        
+                    <div className='container-fluid col-10 d-flex flex-column'>
+                        {chunked.map((chunk) => (
+                            <div className="row">
+                                {chunk.map((auction) => (
+                                    <div className="col-4">
+                                        <CardAuction {...auction} />
+                                    </div>
+                                ))}
+                            </div>
+                        ))}
                     </div>
                 </div>
 

@@ -30,10 +30,26 @@ const getAuctionData = async (data) => {
 }
 
 const getAllAuction = async () => {
-    const token = localStorage.getItem('token');
     const result = await client.get("/allAuction");
     // console.log(result)
     return(result)
+}
+
+const getSampleAuction = async () => {
+    const temp = await client.get("/sampleAuction");
+    const allAuctions = temp.data.result;
+    for (let i = 0; i < allAuctions.length; i++) {
+
+        try {
+            const item_id = allAuctions[i].id_barang;
+            const result = await getItem(item_id);
+            allAuctions[i].item = result.data.result;
+        } catch (error) {
+            console.log(error);
+        }
+        
+    }
+    return allAuctions;
 }
 
 const getAllAuctionDetail = async () => {
@@ -76,4 +92,4 @@ const getUserData = async () => {
     }
 }
 
-export default {getAuction, getItem, getAllAuction, getUserData, getAuctionData, getAllAuctionDetail};
+export default {getAuction, getItem, getAllAuction, getUserData, getAuctionData, getAllAuctionDetail, getSampleAuction};
