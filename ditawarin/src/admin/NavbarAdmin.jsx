@@ -31,8 +31,8 @@ function NavbarAdmin() {
 
 	return (
 		<nav>
-			<div className="container-fluid" style={{ backgroundColor: "darkblue" }}>
-				<div className="d-flex justify-content-between align-items-center px-3">
+			<div className="container-fluid p-0">
+				<div className="d-flex justify-content-between align-items-center px-3" style={{ backgroundColor: "darkblue" }}>
 					<NavLink
 						to="/admin"
 						className="fs-1 fw-bold text-decoration-none text-white"
@@ -57,37 +57,63 @@ function NavbarAdmin() {
 						</Link>
 					</button>
 				</div>
-			</div>
-			<div className="row">
-				<div className="col-3 p-5" style={{ backgroundColor: "darkblue",height : "500px" }}>
-					<NavLink to="users" className="text-decoration-none text-white">
-						<img src={Users} style={{ width: "35px" }} className="py-2" />
-						<b className="px-3">USERS</b>
-					</NavLink>
-					<br />
-					<NavLink to="auction" className="text-decoration-none text-white">
-						<img src={Auction} style={{ width: "35px" }} className="py-2" />
-						<b className="px-3">AUCTIONS</b>
-					</NavLink>
-					<br />
-					<NavLink to="payment" className="text-decoration-none text-white">
-						<img src={Payment} style={{ width: "35px" }} className="py-2" />
-						<b className="px-3">PAYMENT</b>
-					</NavLink>
-					<br />
-					<NavLink to="security" className="text-decoration-none text-white">
-						<img src={Security} style={{ width: "35px" }} className="py-2" />
-						<b className="px-3">SECURITY</b>
-					</NavLink>
-					<br />
-					<NavLink to="support" className="text-decoration-none text-white">
-						<img src={Support} style={{ width: "35px" }} className="py-2" />
-						<b className="px-3">SUPPORT</b>
-					</NavLink>
-					<br />
-				</div>
-				<div className="col-9 p-5">
-					<Outlet />
+				<div className="row" >
+					<div className="col-3 p-5 align-items-center" style={{ backgroundColor: "darkblue",height: "650px"}}>
+						<NavLink to="users" className="text-decoration-none text-white">
+							<img src={Users} style={{ width: "35px" }} className="py-2" />
+							<b className="px-3">USERS</b>
+						</NavLink>
+						<br />
+						<NavLink to="auction" className="text-decoration-none text-white">
+							<img src={Auction} style={{ width: "35px" }} className="py-2" />
+							<b className="px-3">AUCTIONS</b>
+						</NavLink>
+						<br />
+						<NavLink to="payment" className="text-decoration-none text-white">
+							<img src={Payment} style={{ width: "35px" }} className="py-2" />
+							<b className="px-3">PAYMENT</b>
+						</NavLink>
+						<br />
+						<NavLink to="security" className="text-decoration-none text-white">
+							<img src={Security} style={{ width: "35px" }} className="py-2" />
+							<b className="px-3">SECURITY</b>
+						</NavLink>
+						<br />
+						<NavLink to="support" className="text-decoration-none text-white">
+							<img src={Support} style={{ width: "35px" }} className="py-2" />
+							<b className="px-3">SUPPORT</b>
+						</NavLink>
+						<br />
+					</div>
+
+					<div className="col-9 p-5">
+						<div className="d-flex justify-content-between text">
+							<div className="card mb-3 p-3 opacity-50" style={{width: "300px", height: "150px", backgroundColor: "#0976C4"}}>
+								<div className="card-body text-success align-items-center text-light">
+									<h5 className="card-title text-center">Success card title</h5>
+								</div>
+								<div className="footer text-light">TRANSACTION</div>
+							</div>
+							<div className="card mb-3 p-3 opacity-50" style={{width: "300px", height: "150px", backgroundColor: "#50C409"}}>
+								<div className="card-body text-success align-items-center text-light">
+									<h5 className="card-title text-center">Success card title</h5>
+								</div>
+								<div className="footer text-light">USER AKTIF</div>
+							</div>
+							<div className="card mb-3 p-3 opacity-50" style={{width: "300px", height: "150px", backgroundColor: "#C40909"}}>
+								<div className="card-body text-success align-items-center text-light">
+									<h5 className="card-title text-center">Success card title</h5>
+								</div>
+								<div className="footer text-light">USER NONAKTIF</div>
+							</div>
+						</div>
+
+						<p className="mt-4">PENJUALAN TERTINGGI</p>
+
+
+
+						<Outlet />
+					</div>
 				</div>
 			</div>
 		</nav>
