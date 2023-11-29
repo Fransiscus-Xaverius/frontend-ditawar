@@ -18,8 +18,7 @@ export default function Navbar(){
 
     return (
         <>
-            
-            <nav style={{borderBottom: "1px solid gray"}}>
+            <nav className="p-0" style={{borderBottom: "1px solid gray"}}>
                 <div className="container-fluid">
                     <div className="d-flex justify-content-between align-items-center">
                         <Link to="/"><img src={Logo} alt="" style={{width: "10%", height: "10%"}}/></Link>

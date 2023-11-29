@@ -62,8 +62,7 @@ function Home(){
                     </div>
                 </div>
 
-                {/* OTHER AUCTION */}
-                <CardAuction/>
+                
             </div>
         </>
     )
