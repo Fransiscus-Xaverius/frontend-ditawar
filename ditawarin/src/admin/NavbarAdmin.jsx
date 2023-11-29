@@ -32,7 +32,7 @@ function NavbarAdmin() {
 	return (
 		<nav>
 			<div className="container-fluid p-0">
-				<div className="d-flex justify-content-between align-items-center px-3" style={{ backgroundColor: "darkblue" }}>
+				<div className="d-flex justify-content-between align-items-center px-3" style={{ backgroundColor: "#06083D" }}>
 					<NavLink
 						to="/admin"
 						className="fs-1 fw-bold text-decoration-none text-white"
@@ -58,7 +58,7 @@ function NavbarAdmin() {
 					</button>
 				</div>
 				<div className="row" >
-					<div className="col-3 p-5 align-items-center" style={{ backgroundColor: "darkblue",height: "650px"}}>
+					<div className="col-3 p-5 align-items-center" style={{ backgroundColor: "#06083D",height: "650px"}}>
 						<NavLink to="users" className="text-decoration-none text-white">
 							<img src={Users} style={{ width: "35px" }} className="py-2" />
 							<b className="px-3">USERS</b>
