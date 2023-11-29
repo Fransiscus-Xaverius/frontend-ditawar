@@ -4,7 +4,7 @@ import {useForm} from "react-hook-form"
 import { useNavigate } from 'react-router-dom';
 
 function Login() {
-    const {register, handleSubmit, reset, formState:{errors}} = useForm()
+    const {register, handleSubmit, formState:{errors}} = useForm()
     const navigate = useNavigate();
 
     async function signIn(data){
