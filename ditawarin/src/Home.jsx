@@ -5,6 +5,7 @@ import Rumah from './assets/rumah.png'
 import Ruko from './assets/ruko.png'
 import Pabrik from './assets/pabrik.png'
 import Mobil from './assets/mobil.png'
+import CardAuction from "./CardAuction";
 
 function Home(){
 
@@ -60,6 +61,9 @@ function Home(){
                         
                     </div>
                 </div>
+
+                {/* OTHER AUCTION */}
+                <CardAuction/>
             </div>
         </>
     )
