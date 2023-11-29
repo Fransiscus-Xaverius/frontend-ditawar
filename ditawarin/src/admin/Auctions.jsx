@@ -10,7 +10,7 @@ function Auctions() {
 		<>
 			<p className="fw-bold">AUCTION</p>
 			<p>More than 10+ new auctions</p>
-			<table className="table">
+			<table className="table" style={{overflowY:"scroll", overflowX:"hidden", height:"55vh", display:"block"}} >
 				<thead>
 					<tr className="table-success">
 						<th scope="col">PRODUCT</th>
