@@ -127,7 +127,7 @@ export default function JualPage() {
                             </>
                             :
                             <div>
-                                <div className='mx-auto border text-center pt-5 pb-5 rounded-4' style={{width:"65%"}}>
+                                <div className='mx-auto border text-center pt-5 pb-5 rounded-4' style={{width:"65%"}} onClick={handleClick}>
                                     <img src={preview} alt="" style={{width:"50%"}}/>
                                 </div>
                             </div>
