@@ -21,6 +21,7 @@ export default function JualPage() {
         }
         const url = 'http://localhost:3000/uploadFile';
         const formData = new FormData();
+        let kategori = ""; //simpan kategori format = <namakategori>,<namakategori>,<namakategori>
         console.log(files)
         console.log(data);
         formData.append('image', files);
@@ -53,7 +54,8 @@ export default function JualPage() {
                     starting_price: data.starting_price,
                     asking_price: data.asking_price,
                     tanggal_selesai: data.tanggal_selesai,
-                    jam_selesai: data.jam_selesai
+                    jam_selesai: data.jam_selesai,
+                    kategori: kategori.toLowerCase()
                 }
                 const res3 = await client.post(url3, body_data2);
                 console.log("respond 3");
