@@ -1,10 +1,12 @@
 import { useLoaderData } from "react-router-dom";
 import client from "./client"
 import {React, useEffect, useState} from "react";
+import { useForm } from "react-hook-form";
 
 export default function AuctionPage(){
 
     const data = useLoaderData();
+    const {register, handleSubmit, reset} = useForm()
     // console.log(data);
     let item = data.itemdata;
     let auction = data.auctiondata;
@@ -64,6 +66,10 @@ export default function AuctionPage(){
         return () => clearInterval(interval);
     }, []);
 
+    function bidauction(){
+
+    }
+
     let Rupiah = new Intl.NumberFormat("id-ID", {
         style: "currency",
         currency: "IDR"
@@ -110,10 +116,31 @@ export default function AuctionPage(){
                     :
                     <div className="row mx-auto" style={{width:"50%"}}>
                         <div className="col-4 text-center"><button className="btn bg-primary rounded-pill text-white pt-3 pb-3" style={{width:"200px"}}>Laporkan</button></div>
-                        <div className="col-4 text-center"><button className="btn bg-primary rounded-pill text-white pt-3 pb-3" style={{width:"200px"}}>Masukkan Harga</button></div>
+                        <div className="col-4 text-center"><button data-bs-toggle="modal" data-bs-target="#staticBackdrop" className="btn bg-primary rounded-pill text-white pt-3 pb-3" style={{width:"200px"}}>Masukkan Harga</button></div>
                         <div className="col-4 text-center"><button className="btn bg-primary rounded-pill text-white pt-3 pb-3" style={{width:"200px"}}>Keranjang</button></div>
                     </div>
                 }
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form onSubmit={handleSubmit(bidauction)}>
+                                <div class="modal-body row">
+                                    <div className="text-center h2">{item.nama}</div>      
+                                    <div className="text-center mb-5">
+                                        <img src={url} alt="Item Image" className="border border-5 rounded-5" style={{maxHeight:"300px", maxWidth:"300px"}}/> <br />
+                                        <h5>{Rupiah.format(auction.asking_price)}</h5>
+                                    </div>               
+                                    <input type="text" {...register("nominal_bid")} className="p-2 col-md-8 mx-auto" placeholder="Masukkan Harga"/>
+                                    <button type="submit" class="btn bg-primary text-white col-md-3 mx-auto">Ajukan</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </>
     )
