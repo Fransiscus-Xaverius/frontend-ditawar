@@ -5,6 +5,7 @@ const getAuction = async (data) => {
     const {id} = params;
     const token = localStorage.getItem('token');
     const result = await client.get(`/auction?id=${id}`);
+    console.log(result.data);
     const item_id = result.data.result.id_barang;
     console.log(item_id);
     const result2 = await getItem(item_id);
@@ -31,6 +32,14 @@ const getAuctionData = async (data) => {
 
 const getAllAuction = async () => {
     const result = await client.get("/allAuction");
+    // console.log(result)
+    return(result)
+}
+
+const getAuctionByQuery = async (data) => {
+    const {params} = data;
+    const {query} = params;
+    const result = await client.get(`/search?query=${query}`);
     // console.log(result)
     return(result)
 }

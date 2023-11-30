@@ -16,13 +16,19 @@ export default function Navbar(){
         userToken = localStorage.getItem("token");
     }, [location]);
 
+    function handleKeyPress(e) {
+        if (e.key === 'Enter') {
+            
+        }
+    }
+
     return (
         <>
             <nav className="p-0" style={{borderBottom: "1px solid gray"}}>
                 <div className="container-fluid">
                     <div className="d-flex justify-content-between align-items-center">
                         <Link to="/"><img src={Logo} alt="" style={{width: "10%", height: "10%"}}/></Link>
-                        <input type="text" placeholder='Cari Produk'  className="border border-secondary-subtle ps-3 me-3" style={{borderRadius: "8px", width: "40%", height: "2rem"}}/>
+                        <input type="text" placeholder='Cari Produk' onKeyUp={handleKeyPress.bind(this)} className="border border-secondary-subtle ps-3 me-3" style={{borderRadius: "8px", width: "40%", height: "2rem"}}/>
                         <div className="d-flex">
                         {!userToken && 
                             <>

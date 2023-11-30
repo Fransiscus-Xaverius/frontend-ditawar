@@ -17,11 +17,11 @@ import Security from "./admin/Security.jsx"
 import Support from "./admin/Support.jsx"
 import ItemListing from "./ItemListing.jsx"
 import AuctionPage from "./AuctionPage.jsx";
-
+import SearchPage from "./SearchPage.jsx";
 import DataHandler from "./data/DataHandler.jsx";
 import Rating from "./Rating.jsx";
 
-const {getAuction, getAllAuction, getUserData, getAuctionData, getAllAuctionDetail, getSampleAuction} = DataHandler;
+const {getAuction, getAllAuction, getUserData, getAuctionData, getAllAuctionDetail, getSampleAuction, getAuctionByQuery} = DataHandler;
 
 const router = createBrowserRouter([
 	{
@@ -32,6 +32,16 @@ const router = createBrowserRouter([
 				index: true,
 				loader: getSampleAuction,
 				element: <Home />,
+			},
+			{
+				path: "/search",
+				children: [
+					{
+						path: ":query",
+						loader: getAuctionByQuery,
+						element: <SearchPage />,
+					}
+				]
 			},
 			{
 				path: "/login",
