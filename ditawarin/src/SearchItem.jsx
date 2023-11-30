@@ -4,10 +4,10 @@ export default function SearchItem(props){
     return (
         <>
         <div className="container">
-            <div className="card mb-3 mt-4" style={{height: "80vh", width: "70vw"}}>
+            <div className="card mb-3 mt-4" style={{height: "45vh", width: "70vw"}}>
                 <div className="row g-0">
                     <div className="col-md-4 text-center">
-                        <img src={plus} className="img-fluid rounded-start" style={{height: "80vh"}}/>
+                        <img src={plus} className="img-fluid rounded-start" style={{height: "45vh"}}/>
                     </div>
                     <div className="col-md-8">
                     <div className="card-body">

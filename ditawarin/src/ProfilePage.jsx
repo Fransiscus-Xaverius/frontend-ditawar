@@ -31,9 +31,9 @@ export default function ProfilePage(){
                     <div className="row">
                         <div className="col-sm-4 mt-3 mb-3 mb-sm-0">
                             <div className="card p-4" style={{height: "350px"}}>
-                                <div className="card-body p-0 text-center">
-                                        <img src={plus} alt="" style={{width: "50px", height: "50px"}}/> <br />
-                                        <h3 style={{color: "gray"}}>Upload Foto</h3>
+                                <div className="card-body text-center rounded-4" style={{paddingTop: "100px", paddingBottom: "100px"}}>
+                                    <img src={plus} alt="" style={{width: "50px", height: "50px"}}/> <br />
+                                    <h3 className='mt-3' style={{color: "gray"}}>Upload Foto</h3>
                                 </div>
                             </div>
                         </div>

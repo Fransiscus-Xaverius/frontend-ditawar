@@ -29,7 +29,7 @@ function Home(){
             <div className="container">
                 {/* JUMBO */}
                 <div className="jumbotron text-center mt-5">
-                    <img src={Jumbotron} alt="jumbo" style={{width: "100%", height: "30rem"}}/>
+                    <img src={Jumbotron} alt="jumbo" style={{width: "90%", height: "30rem"}}/>
                 </div>
 
                 {/* KATEGORI */}
