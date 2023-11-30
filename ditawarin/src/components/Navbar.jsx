@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom"
+import { Outlet, useNavigate } from "react-router-dom"
 import Logo from '../assets/logo.png'
 import { Link, NavLink } from "react-router-dom";
 import client from "../client";
@@ -11,6 +11,7 @@ export default function Navbar(){
     let userToken = localStorage.getItem("token");
 
     const location = useLocation()
+    const navigate = useNavigate()
 
     useEffect(() => {
         userToken = localStorage.getItem("token");
@@ -18,7 +19,7 @@ export default function Navbar(){
 
     function handleKeyPress(e) {
         if (e.key === 'Enter') {
-            
+            navigate('/search/'+e.target.value);
         }
     }
 

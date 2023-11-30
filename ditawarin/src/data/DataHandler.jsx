@@ -40,7 +40,7 @@ const getAuctionByQuery = async (data) => {
     const {params} = data;
     const {query} = params;
     const result = await client.get(`/search?query=${query}`);
-    // console.log(result)
+    console.log(result)
     return(result)
 }
 
@@ -101,4 +101,4 @@ const getUserData = async () => {
     }
 }
 
-export default {getAuction, getItem, getAllAuction, getUserData, getAuctionData, getAllAuctionDetail, getSampleAuction};
+export default {getAuction, getItem, getAllAuction, getUserData, getAuctionData, getAllAuctionDetail, getSampleAuction, getAuctionByQuery};
