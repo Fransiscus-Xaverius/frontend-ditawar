@@ -6,6 +6,7 @@ import Ruko from './assets/ruko.png'
 import Pabrik from './assets/pabrik.png'
 import Mobil from './assets/mobil.png'
 import CardAuction from "./CardAuction";
+import SearchItem from './SearchItem'
 import { useLoaderData } from 'react-router-dom'
 
 function Home(){
@@ -77,6 +78,7 @@ function Home(){
                             </div>
                         ))}
                     </div>
+                    <SearchItem/>
                 </div>
 
                 
