@@ -26,7 +26,7 @@ export default function JualPage() {
             alert("Starting price tidak boleh lebih besar dari asking price")
             return
         }
-        const url = 'http://localhost:3000/uploadFile';
+        const url = 'http://localhost:3000/uploadFile'; //needs to be seen before hosting
         const formData = new FormData();
         let kategori = kate; //simpan kategori format = <namakategori>,<namakategori>,<namakategori>
         console.log(files)
