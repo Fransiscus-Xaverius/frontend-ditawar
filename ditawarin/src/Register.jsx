@@ -15,7 +15,7 @@ function Register() {
             errors.confirm.message = "password dan konfirmasi password harus sama";
             return
         }
-        const url = '/register?name='+data.namalengkap+'&phone='+data.nohp+'&password='+data.pass+'&email='+data.email+'&city='+data.kota
+        const url = '/register?name='+data.namalengkap+'&phone='+data.nohp+'&password='+data.pass+'&email='+data.email+'&city='+data.kota+'&province='+data.provinsi+'&address='+data.alamat;
         try {
             const response = await client.post(url);
             if(response.status === 200){
@@ -51,6 +51,9 @@ function Register() {
                                 <label><b>Nama Lengkap </b></label><br />
                                 <input type="text" {...register("namalengkap", {required:{value:true, message:"Nama Lengkap wajib diisi"}})} placeholder="Nama Lengkap" className="mt-3 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "90%", height: "3rem"}}/> <br />
                                 {errors.namalengkap && <p style={{color: "red"}}>{errors.namalengkap.message}</p>}
+                                <label><b>Email </b></label><br />
+                                <input type="text" {...register("email", {required:{value:true, message:"Email wajib diisi"}})} placeholder="Email" className="mt-3 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "90%", height: "3rem"}}/> <br />
+                                {errors.email && <p style={{color: "red"}}>{errors.email.message}</p>}
                                 <label><b>No. Handphone </b></label><br />
                                 <div className="d-flex align-items-center">
                                     <input type="image" src={flag} alt="" style={{width: "10%", height: "10%"}} className='me-2'/>
@@ -63,12 +66,15 @@ function Register() {
                                 {errors.pass && <p style={{color: "red"}}>{errors.pass.message}</p>}
                             </div>
                             <div className="col-4">
-                                <label><b>Email </b></label><br />
-                                <input type="text" {...register("email", {required:{value:true, message:"Email wajib diisi"}})} placeholder="Email" className="mt-3 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "90%", height: "3rem"}}/> <br />
-                                {errors.email && <p style={{color: "red"}}>{errors.email.message}</p>}
+                                <label><b>Alamat </b></label><br />
+                                <input type="text" {...register("alamat", {required:{value:true, message:"Kota wajib diisi"}})} placeholder="Kota" className="mt-3 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "90%", height: "3rem"}}/> <br />
+                                {errors.alamat && <p style={{color: "red"}}>{errors.alamat.message}</p>}
                                 <label><b>Kota </b></label><br />
                                 <input type="text" {...register("kota", {required:{value:true, message:"Kota wajib diisi"}})} placeholder="Kota" className="mt-3 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "90%", height: "3rem"}}/> <br />
                                 {errors.kota && <p style={{color: "red"}}>{errors.kota.message}</p>}
+                                <label><b>Provinsi </b></label><br />
+                                <input type="text" {...register("provinsi", {required:{value:true, message:"Kota wajib diisi"}})} placeholder="Kota" className="mt-3 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "90%", height: "3rem"}}/> <br />
+                                {errors.provinsi && <p style={{color: "red"}}>{errors.provinsi.message}</p>}
                                 <label><b>Konfirmasi Password </b></label><br />
                                 <input type="password" {...register("confpass", {required:{value:true, message:"Konfirmasi Password wajib diisi"}})} placeholder="Konfirmasi Password" className="mt-3 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "90%", height: "3rem"}}/>
                                 {errors.confpass && <p style={{color: "red"}}>{errors.confpass.message}</p>}
