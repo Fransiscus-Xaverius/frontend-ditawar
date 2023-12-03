@@ -6,9 +6,19 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import Footer from "./Footer";
+import { useLoaderData } from "react-router-dom";
 
 export default function Navbar(){
     let userToken = localStorage.getItem("token");
+
+    let Rupiah = new Intl.NumberFormat("id-ID", {
+        style: "currency",
+        currency: "IDR"
+    });
+
+    const data = useLoaderData();
+
+    console.log(data);
 
     const location = useLocation()
     const navigate = useNavigate()
@@ -39,7 +49,9 @@ export default function Navbar(){
                         }
                         {userToken &&
                             <>
-                                <p className="mb-0">Hi, </p><NavLink to="/profile">{}</NavLink>
+                                
+                                <NavLink className="nav-item" to="/profile"><p className="mb-0">Hi, {data.nama||"User"}</p></NavLink>
+                                <NavLink className="nav-item" to="/wallet"><p className="mb-0">Saldo: {Rupiah.format(parseInt(data.wallet))}</p></NavLink>
                                 <NavLink type="button" className="btn btn-primary ms-3 me-3" to="/sell">Jual</NavLink>
                                 {/* <NavLink type="button" className="btn btn-primary" to="/profile">Profile</NavLink> */}
                                 <NavLink type="button" className="btn btn-primary" to="/logout" onClick={()=>handleClick()}>Logout</NavLink>

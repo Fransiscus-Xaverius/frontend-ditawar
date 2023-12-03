@@ -85,6 +85,50 @@ const getItem = async (item_id) => {
     return result;
 }
 
+const NavBarData = async () => {
+    try {
+        const token = localStorage.getItem('token');
+        const userData = await client.get('/getDataFromToken?token='+token);
+        if(userData.status == 401){
+            alert("Invalid Token")
+            return null;
+        }
+
+        const user = userData.data.payload.user;
+        const wallet = await client.get('/wallet?id='+user._id);
+        const result = {
+            nama: user.nama || "User",
+            wallet: wallet.data.result.saldo
+        }
+        console.log(result);
+        return result;
+    } catch (error) {
+        return null;
+    }
+}
+
+const getWallet = async () => {
+    try {
+        const token = localStorage.getItem('token');
+        const userData = await client.get('/getDataFromToken?token='+token);
+        if(userData.status == 401){
+            alert("Invalid Token")
+            return null;
+        }
+
+        const user = userData.data.payload.user;
+        const wallet = await client.get('/wallet?id='+user._id);
+        const result = {
+            user: user || null,
+            wallet: wallet.data || null
+        }
+        console.log(result);
+        return result;
+    } catch (error) {
+        return null;
+    }
+}
+
 const getUserData = async () => {
     try {
         const token = localStorage.getItem('token');
@@ -101,4 +145,15 @@ const getUserData = async () => {
     }
 }
 
-export default {getAuction, getItem, getAllAuction, getUserData, getAuctionData, getAllAuctionDetail, getSampleAuction, getAuctionByQuery};
+export default {
+    getAuction, 
+    getItem, 
+    getAllAuction, 
+    getUserData, 
+    getAuctionData, 
+    getAllAuctionDetail, 
+    getSampleAuction, 
+    getAuctionByQuery, 
+    NavBarData,
+    getWallet
+};

@@ -20,13 +20,15 @@ import AuctionPage from "./AuctionPage.jsx";
 import SearchPage from "./SearchPage.jsx";
 import DataHandler from "./data/DataHandler.jsx";
 import Rating from "./Rating.jsx";
+import WalletPage from "./WalletPage.jsx";
 
-const {getAuction, getAllAuction, getUserData, getAuctionData, getAllAuctionDetail, getSampleAuction, getAuctionByQuery} = DataHandler;
+const {getAuction, getAllAuction, getUserData, getAuctionData, getAllAuctionDetail, getSampleAuction, getAuctionByQuery, NavBarData, getWallet} = DataHandler;
 
 const router = createBrowserRouter([
 	{
 		path: "/",
 		element: <Navbar />,
+		loader:NavBarData,
 		children: [
 			{
 				index: true,
@@ -59,6 +61,11 @@ const router = createBrowserRouter([
 				path: "/profile",
 				loader:getUserData,
 				element: <ProfilePage />,
+			},
+			{
+				path: "/wallet",
+				loader: getWallet,
+				element: <WalletPage />
 			},
 			{
 				path: "/sell",
