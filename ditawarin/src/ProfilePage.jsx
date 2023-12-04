@@ -17,7 +17,7 @@ export default function ProfilePage(){
 
     const data = useLoaderData();
     
-    
+    console.log(data);
 
     return (
         <>
@@ -43,16 +43,19 @@ export default function ProfilePage(){
                                     <form>
                                         <div className="d-flex align-items-center ">
                                             <label><b>Nama Lengkap </b></label>
-                                            <input type="text" placeholder="Nama Lengkap" className="ps-3 border border-secondary-subtle ms-auto" value={"Gaby"} style={{borderRadius: "10px", height: "3rem", width: "60%"}}/> <br />
+                                            <input type="text" placeholder="Nama Lengkap" className="ps-3 border border-secondary-subtle ms-auto" value={data.nama} style={{borderRadius: "10px", height: "3rem", width: "60%"}} disabled/> <br />
                                         </div>
                                         <div className="d-flex align-items-center mt-4">
                                             <label><b>Email</b></label>
+                                            <input type="email" placeholder="Nama Lengkap" className="ps-3 border border-secondary-subtle ms-auto" value={data.email} style={{borderRadius: "10px", height: "3rem", width: "60%"}} disabled/> <br />
                                         </div>
                                         <div className="d-flex align-items-center mt-4">
                                             <label><b>No. Handphone</b></label>
+                                            <input type="text" placeholder="Nama Lengkap" className="ps-3 border border-secondary-subtle ms-auto" value={data.phone} style={{borderRadius: "10px", height: "3rem", width: "60%"}} disabled/> <br />
                                         </div>
                                         <div className="d-flex align-items-center mt-4">
                                             <label><b>Kota </b></label>
+                                            <input type="text" placeholder="Nama Lengkap" className="ps-3 border border-secondary-subtle ms-auto" value={data.province} style={{borderRadius: "10px", height: "3rem", width: "60%"}} disabled/> <br />
                                         </div>
                                     </form>
                                 </div>
@@ -104,19 +107,19 @@ export default function ProfilePage(){
                                 <form>
                                     <div className="d-flex align-items-center ">
                                         <label><b>Nama Lengkap </b></label>
-                                        <input type="text" placeholder="Nama Lengkap" className="ps-3 border border-secondary-subtle ms-auto" style={{borderRadius: "10px", height: "3rem", width: "60%"}}/> <br />
+                                        <input type="text" placeholder="Nama Lengkap" value={data.nama} className="ps-3 border border-secondary-subtle ms-auto" style={{borderRadius: "10px", height: "3rem", width: "60%"}}/> <br />
                                     </div>
                                     <div className="d-flex align-items-center mt-4">
                                         <label><b>Email</b></label>
-                                        <input type="text" placeholder="Email" className="ps-3 border border-secondary-subtle ms-auto" style={{borderRadius: "10px", height: "3rem", width: "60%"}}/> <br />
+                                        <input type="text" placeholder="Email" value={data.email} className="ps-3 border border-secondary-subtle ms-auto" style={{borderRadius: "10px", height: "3rem", width: "60%"}}/> <br />
                                     </div>
                                     <div className="d-flex align-items-center mt-4">
                                         <label><b>No. Handphone</b></label>
-                                        <input type="text" placeholder="No. Handphone" className="ps-3 border border-secondary-subtle ms-auto" style={{borderRadius: "10px", height: "3rem", width: "60%"}}/> <br />
+                                        <input type="text" placeholder="No. Handphone" value={data.phone} className="ps-3 border border-secondary-subtle ms-auto" style={{borderRadius: "10px", height: "3rem", width: "60%"}}/> <br />
                                     </div>
                                     <div className="d-flex align-items-center mt-4">
                                         <label><b>Kota </b></label>
-                                        <input type="text" placeholder="Kota" className="ps-3 border border-secondary-subtle ms-auto" style={{borderRadius: "10px", height: "3rem", width: "60%"}}/> <br />
+                                        <input type="text" placeholder="Kota" value={data.province}className="ps-3 border border-secondary-subtle ms-auto" style={{borderRadius: "10px", height: "3rem", width: "60%"}}/> <br />
                                     </div>
                                 </form>
                             </div>
