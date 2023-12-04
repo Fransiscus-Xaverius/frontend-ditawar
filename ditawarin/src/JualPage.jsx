@@ -63,6 +63,9 @@ export default function JualPage() {
                     asking_price: data.asking_price,
                     tanggal_selesai: data.tanggal_selesai,
                     jam_selesai: data.jam_selesai,
+                    kecamatan: data.kecamatan,
+                    kota_kabupaten: data.kota_kabupaten,
+                    provinsi: data.provinsi,
                     kategori: kategori.toLowerCase()
                 }
                 const res3 = await client.post(url3, body_data2);
@@ -124,9 +127,16 @@ export default function JualPage() {
                         <br />
                         <input type="number" {...register("asking_price", {required:{value:true, message:"Asking Price wajib diisi"}})} placeholder="Asking Price*" className="mt-1 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "90%", height: "3rem"}}/>
                         {errors.asking_price && <p style={{color: "red"}}>{errors.asking_price.message}</p>}
+
                         <br />
-                        <textarea {...register("deskripsi", {required:{value:true, message:"Deskripsi Barang wajib diisi"}})} placeholder="Deskripsi Barang*" className="mt-1 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "90%", height: "10rem"}}></textarea>
-                        {errors.namabarang && <p style={{color: "red"}}>{errors.namabarang.message}</p>}
+                        <input type="text" {...register("kecamatan", {required:{value:true, message:"Lokasi Kecamatan wajib diisi"}})} placeholder="Kecamatan*" className="mt-1 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "90%", height: "3rem"}}/>
+                        {errors.kecamatan && <p style={{color: "red"}}>{errors.kecamatan.message}</p>}
+                        <br />
+                        <input type="text" {...register("kota_kabupaten", {required:{value:true, message:"Lokasi Kota/Kabupaten wajib diisi"}})} placeholder="Kota/Kabupaten*" className="mt-1 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "90%", height: "3rem"}}/>
+                        {errors.kota_kabupaten && <p style={{color: "red"}}>{errors.kota_kabupaten.message}</p>}
+                        <br />
+                        <input type="text" {...register("provinsi", {required:{value:true, message:"Lokasi Provinsi wajib diisi"}})} placeholder="Pronvinsi*" className="mt-1 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "90%", height: "3rem"}}/>
+                        {errors.provinsi && <p style={{color: "red"}}>{errors.provinsi.message}</p>}
                         <br />
                         Kategori <br />
                         <div className="row">
@@ -166,6 +176,9 @@ export default function JualPage() {
                         }
                         <input type="file" {...register("files", {required: "Wajib memberikan gambar barang"})} style={{display:"none"}} onChange={handleChange} name="files" id="files" />                                    
                         {errors.files && <p style={{color: "red"}}>{errors.files.message}</p>}
+                        <br />
+                        <textarea {...register("deskripsi", {required:{value:true, message:"Deskripsi Barang wajib diisi"}})} placeholder="Deskripsi Barang*" className="mt-1 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "90%", height: "10rem"}}></textarea>
+                        {errors.namabarang && <p style={{color: "red"}}>{errors.namabarang.message}</p>}
                         <button type="submit" className='btn bg-dark text-white mx-auto w-25 pt-3 pb-3 mt-4'>Add Item</button>
                     </div>
                 </form>

@@ -21,10 +21,15 @@ import SearchPage from "./SearchPage.jsx";
 import DataHandler from "./data/DataHandler.jsx";
 import Rating from "./Rating.jsx";
 import WalletPage from "./WalletPage.jsx";
+import WelcomeBack from "./WelcomeBack.jsx";
 
 const {getAuction, getAllAuction, getUserData, getAuctionData, getAllAuctionDetail, getSampleAuction, getAuctionByQuery, NavBarData, getWallet} = DataHandler;
 
 const router = createBrowserRouter([
+	{
+		path: "/login",
+		element: <Login />,
+	},
 	{
 		path: "/",
 		element: <Navbar />,
@@ -44,10 +49,6 @@ const router = createBrowserRouter([
 						element: <SearchPage />,
 					}
 				]
-			},
-			{
-				path: "/login",
-				element: <Login />,
 			},
 			{
 				path: "/register",

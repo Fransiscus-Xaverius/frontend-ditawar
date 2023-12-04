@@ -1,7 +1,9 @@
-import { Link } from 'react-router-dom';
 import client from './client.jsx';
 import {useForm} from "react-hook-form"
 import { useNavigate } from 'react-router-dom';
+import Logo from './assets/logo.png';
+import { Link, NavLink } from "react-router-dom";
+import Footer from './components/Footer.jsx';
 
 function Login() {
     const {register, handleSubmit, formState:{errors}} = useForm()
@@ -29,6 +31,17 @@ function Login() {
 
     return(
         <>
+            <nav className="p-0" style={{borderBottom: "1px solid gray"}}>
+                <div className="container-fluid">
+                    <div className="d-flex justify-content-between align-items-center">
+                        <Link to="/"><img src={Logo} alt="" style={{width: "15%", height: "15%"}}/></Link>
+                        <div className="d-flex align-items-center">
+                        <NavLink type="button" className="btn btn-outline-primary me-3" to="/login">Masuk</NavLink>
+                        <NavLink type="button" className="btn btn-primary" to="/register">Daftar</NavLink>
+                    </div>
+                 </div>
+                </div>
+            </nav>
             <div className="container">
                     <form onSubmit={handleSubmit(signIn)}>
                         <div className="row justify-content-center">
@@ -48,7 +61,7 @@ function Login() {
                         </div>            
                     </form>
             </div>
-            
+            <Footer />
         </>
     )
 }

@@ -7,12 +7,15 @@ import Pabrik from './assets/pabrik.png'
 import Mobil from './assets/mobil.png'
 import CardAuction from "./CardAuction";
 import SearchItem from './SearchItem'
-import { useLoaderData } from 'react-router-dom'
+import { useLoaderData, useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
 
 function Home(){
 
     const data = useLoaderData();
     console.log(data);
+
+    const navigate = useNavigate();
 
     const chunk = (arr, size) => Array.from({ length: Math.ceil(arr.length / size) }, (v, i) =>
         arr.slice(i * size, i * size + size)
@@ -78,7 +81,6 @@ function Home(){
                             </div>
                         ))}
                     </div>
-                    <SearchItem/>
                 </div>
 
                 

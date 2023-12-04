@@ -40,11 +40,12 @@ const getAuctionByQuery = async (data) => {
     const {params} = data;
     const {query} = params;
     const result = await client.get(`/search?query=${query}`);
-    console.log(result)
-    return(result)
+    console.log(result.data.result)
+    return({data:result.data.result, query:query})
 }
 
 const getSampleAuction = async () => {
+    // alert('sample called')
     const temp = await client.get("/sampleAuction");
     const allAuctions = temp.data.result;
     for (let i = 0; i < allAuctions.length; i++) {
@@ -86,22 +87,28 @@ const getItem = async (item_id) => {
 }
 
 const NavBarData = async () => {
+    // alert("loader dipanggil")
     try {
         const token = localStorage.getItem('token');
-        const userData = await client.get('/getDataFromToken?token='+token);
-        if(userData.status == 401){
-            alert("Invalid Token")
+        if(token){
+            const userData = await client.get('/getDataFromToken?token='+token);
+            if(userData.status == 401){
+                alert("Invalid Token")
+                return null;
+            }
+
+            const user = userData.data.payload.user;
+            const wallet = await client.get('/wallet?id='+user._id);
+            const result = {
+                nama: user.nama || "User",
+                wallet: wallet.data.result.saldo
+            }
+            console.log(result);
+            return result;
+        }
+        else{
             return null;
         }
-
-        const user = userData.data.payload.user;
-        const wallet = await client.get('/wallet?id='+user._id);
-        const result = {
-            nama: user.nama || "User",
-            wallet: wallet.data.result.saldo
-        }
-        console.log(result);
-        return result;
     } catch (error) {
         return null;
     }
@@ -132,12 +139,19 @@ const getWallet = async () => {
 const getUserData = async () => {
     try {
         const token = localStorage.getItem('token');
-        const userData = await client.get('/getDataFromToken?token='+token);
-        if(userData.status == 401){
-            alert("Invalid Token")
-            return null;
+        if(token){
+            const userData = await client.get('/getDataFromToken?token='+token);
+            if(userData.status == 401){
+                alert("Invalid Token")
+                return null;
+            }
+            return userData.data.payload.user;
         }
-        return userData.data.payload.user;
+        else{
+            return {
+                nama: "Guest"
+            };
+        }
     } catch (error) {
         console.log(error);
         alert("Gagal Mendapatkan data user");

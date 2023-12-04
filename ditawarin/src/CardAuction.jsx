@@ -25,7 +25,7 @@ function CardAuction (props) {
                     <p className="card-title tex"><h4><b>{props.item.nama}</b></h4></p>
                     <p className="card-text text-center"><b>{Rupiah.format(props.starting_price)}</b></p>
                     <p className="footer text-center text-body-secondary">
-                        <img src={location} alt="" style={{width: "20px"}} className="me-2"/> {props.item.lokasi}
+                        <img src={location} alt="" style={{width: "20px"}} className="me-2"/> {props.kecamatan}, {props.kota_kabupaten}, {props.provinsi}, {props.item.negara}   
                     </p>
                 </div>
             </div>
