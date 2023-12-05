@@ -33,7 +33,7 @@ export default function Navbar(){
         }
     }
 
-    const url_pp = import.meta.env.VITE_API_URL+'/static/'+data.profile_picture || "";
+    // const url_pp = import.meta.env.VITE_API_URL+'/static/'+data.profile_picture || "";
 
     return (
         <>
@@ -51,9 +51,9 @@ export default function Navbar(){
                         }
                         {userToken &&
                             <>
-                                <img style={{height:"4vh"}} className="nav-item rounded-circle" alt="avatar_user" src={url_pp} />
+                                {/* <img style={{height:"4vh"}} className="nav-item rounded-circle" alt="avatar_user" src={url_pp} />
                                 <NavLink className="nav-item" to="/profile"><p className="mb-0">Hi, {data.nama||"User"}</p></NavLink>
-                                <NavLink className="nav-item" to="/wallet"><p className="mb-0">Saldo: {Rupiah.format(parseInt(data.wallet))}</p></NavLink>
+                                <NavLink className="nav-item" to="/wallet"><p className="mb-0">Saldo: {Rupiah.format(parseInt(data.wallet))}</p></NavLink> */}
                                 <NavLink type="button" className="btn btn-primary ms-3 me-3" to="/sell">Jual</NavLink>
                                 {/* <NavLink type="button" className="btn btn-primary" to="/profile">Profile</NavLink> */}
                                 <NavLink type="button" className="btn btn-primary" to="/logout" onClick={()=>handleClick()}>Logout</NavLink>
