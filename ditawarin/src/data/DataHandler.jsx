@@ -24,18 +24,25 @@ const getBid = async (id) => {
 };
 
 const getAuctionData = async (data) => {
-  const auction = await getAuction(data);
-  const user = await getUserData();
-  const highest_bid = await getBid(auction.auctiondata._id);
+    const auction = await getAuction(data);
+    const user = await getUserData();
+    let highest_bid = null;
+    if(auction.auctiondata.highest_bid){
+        highest_bid = await getBid(auction.auctiondata.highest_bid);
+    }
 
-  const result = {
-    auctiondata: auction.auctiondata,
-    itemdata: auction.itemdata,
-    userdata: user,
-    highest_bid: highest_bid.data.result,
-  };
-  return result;
-};
+    const result = {
+        auctiondata: auction.auctiondata,
+        itemdata: auction.itemdata,
+        userdata: user,
+    }
+
+    if(highest_bid){
+        result.highest_bid = highest_bid.data.result;
+    }
+
+    return result;
+}
 
 const getAllAuction = async () => {
   const result = await client.get("/allAuction");
