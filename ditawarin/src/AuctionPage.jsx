@@ -2,9 +2,12 @@ import { useLoaderData } from "react-router-dom";
 import client from "./client"
 import {React, useEffect, useState} from "react";
 import { useForm } from "react-hook-form";
+import location from './assets/loc.png';
+import { useNavigate } from "react-router-dom";
 
 export default function AuctionPage(){
 
+    const navigate = useNavigate();
     const data = useLoaderData();
     const {register, handleSubmit, reset} = useForm()
     // console.log(data);
@@ -13,14 +16,6 @@ export default function AuctionPage(){
     let user = data.userdata;
     let url =import.meta.env.VITE_API_URL+'/static/'+item.images;
     let berakhir = new Date(data.auctiondata.tanggal_selesai);
-    
-    // console.log(data.auctiondata.tanggal_selesai);
-    
-    // console.log(berakhir)
-    // console.log(url);
-
-    // console.log(item);
-    // console.log(auction);
 
     const [timer, setTimer] = useState("00:00:00");
 
@@ -68,16 +63,60 @@ export default function AuctionPage(){
         return () => clearInterval(interval);
     }, []);
 
-    
+    function bidauction(formdata){
 
-    function bidauction(){
+        
 
+        const data = {
+            token: localStorage.getItem("token"),
+            idAuction: auction._id,
+            bid: formdata.nominal_bid
+        }
+        const newBid = client.post('/bid', data).then((res)=>{
+            console.log(res)
+            alert("Bid berhasil!")
+            navigate(0);
+        }).catch((err)=>{
+            console.log(err)
+            alert(err)
+            return;
+        })
+
+        // if(data.auction.highest_bid == null || data.auction.highest_bid == undefined){
+            
+            // const update = client.put('/auction', {
+            //     token: localStorage.getItem("token"),
+            //     id_auction: auction._id,
+            //     starting_price: auction.starting_price,
+            //     asking_price: auction.asking_price,
+            //     tanggal_selesai: auction.tanggal_selesai,
+            //     jam_selesai: auction.jam_selesai,
+            //     kategori: auction.kategori_barang,
+            //     kecamatan: auction.kecamatan,
+            //     kota_kabupaten: auction.kota_kabupaten,
+            //     provinsi: auction.provinsi,
+            //     highest_bid: newBid.insertedId,
+            // }).then((res)=>{
+            //     console.log(res)
+            //     alert("Bid berhasil!")
+            //     window.location.reload();
+            // }).catch((err)=>{
+            //     console.log(err)
+            //     alert(err)
+            //     return;
+            // })
+
+        // }
+        // else{
+
+        // }
     }
 
     let Rupiah = new Intl.NumberFormat("id-ID", {
         style: "currency",
         currency: "IDR"
     });
+
     const date = new Date(auction.tanggal_mulai)
 
     return (
@@ -88,11 +127,21 @@ export default function AuctionPage(){
                     <div className="col-md-4 text-center" style={{marginTop:"auto", marginBottom:"auto"}}>
                         <img src={url} alt="Item Image" className="border border-5 rounded-5" style={{maxHeight:"300px", maxWidth:"300px"}}/>
                     </div>
-                    <div className="col-md-5" style={{marginTop:"auto", marginBottom:"auto"}}>
-                        <div className="h3 ms-4" >{item.nama}</div>
-                        <div className="h5 ms-4">{auction.kategori_barang}</div>
-                        <div className="container-fluid d-flex ms-4 mt-3 mb-5">
-                            <h2>{Rupiah.format(auction.asking_price)}</h2>
+                    <div className="col" style={{marginTop:"auto", marginBottom:"auto"}}>
+                        <div className="h3" >{item.nama}</div>
+                        <div className="h5">{auction.kategori_barang}</div>
+                        <div className="container-fluid d-flex">
+                            <p className="text-secondary">Dijual oleh : {auction.nama_penjual}</p>
+                            <p className="ms-auto text-secondary"><img src={location} alt="" />{auction.kecamatan}, {auction.kota_kabupaten}, {auction.provinsi}</p>
+                        </div>
+                        <div className="container-fluid d-flex">
+                            <div className="text-secondary">Mulai dari: {Rupiah.format(auction.starting_price)}</div>
+                        </div>
+                        <div className="container-fluid d-flex">
+                            <h2>Penawaran Tertinggi: </h2>
+                        </div>
+                        <div className="container-fluid d-flex">
+                            <div className="text-secondary">Beli Sekarang: {Rupiah.format(auction.asking_price)}</div>
                         </div>
                         <hr />
                         <div className="h3 ms-4">Detail</div><br />
@@ -115,13 +164,12 @@ export default function AuctionPage(){
                     auction.nama_penjual == user.nama ?
                     <div className="row mx-auto" style={{width:"50%"}}>
                         <div className="col-6 text-center"><button className="btn bg-primary rounded-pill text-white pt-3 pb-3" style={{width:"200px"}}>Ubah</button></div>
-                        <div className="col-6 text-center"><button className="btn bg-primary rounded-pill text-white pt-3 pb-3" style={{width:"200px"}}>Lelang Produk</button></div>
                     </div>
                     :
                     <div className="row mx-auto" style={{width:"50%"}}>
-                        <div className="col-4 text-center"><button className="btn bg-primary rounded-pill text-white pt-3 pb-3" style={{width:"200px"}}>Laporkan</button></div>
+                        <div className="col-4 text-center"><button className="btn bg-danger rounded-pill text-white pt-3 pb-3" style={{width:"200px"}}>Laporkan</button></div>
                         <div className="col-4 text-center"><button data-bs-toggle="modal" data-bs-target="#staticBackdrop" className="btn bg-primary rounded-pill text-white pt-3 pb-3" style={{width:"200px"}}>Masukkan Harga</button></div>
-                        <div className="col-4 text-center"><button className="btn bg-primary rounded-pill text-white pt-3 pb-3" style={{width:"200px"}}>Keranjang</button></div>
+                        <div className="col-4 text-center"><button className="btn bg-success rounded-pill text-white pt-3 pb-3" style={{width:"200px"}}>Beli Sekarang</button></div>
                     </div>
                 }
                 <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
