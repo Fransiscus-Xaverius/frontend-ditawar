@@ -35,6 +35,7 @@ export default function AuctionPage() {
     };
   };
 
+<<<<<<< Updated upstream
   const startTimer = () => {
     // console.log(timer)
     let { total, hours, minutes, seconds } = getTimeRemaining();
@@ -46,6 +47,79 @@ export default function AuctionPage() {
           ":" +
           (seconds > 9 ? seconds : "0" + seconds)
       );
+=======
+    const startTimer = () => {
+        // console.log(timer)
+        let { total, hours, minutes, seconds } =
+            getTimeRemaining();
+        if (total >= 0) {
+            setTimer(
+                (hours > 9 ? hours : "0" + hours) +
+                    ":" +
+                    (minutes > 9
+                        ? minutes
+                        : "0" + minutes) +
+                    ":" +
+                    (seconds > 9 ? seconds : "0" + seconds)
+            );
+        }
+    };
+
+    useEffect(() => {
+        const interval = setInterval(startTimer, 1000);
+        return () => clearInterval(interval);
+    }, []);
+
+    function bidauction(formdata){
+
+        try {
+            const data = {
+                token: localStorage.getItem("token"),
+                idAuction: auction._id,
+                bid: formdata.nominal_bid
+            }
+            const newBid = client.post('/bid', data).then((res)=>{
+                console.log(res)
+                alert("Bid berhasil!")
+                navigate(0);
+            }).catch((err)=>{
+                console.log(err)
+                alert(err)
+                return;
+            })
+        } catch (error) {
+            alert(error)
+        }
+
+        // if(data.auction.highest_bid == null || data.auction.highest_bid == undefined){
+            
+            // const update = client.put('/auction', {
+            //     token: localStorage.getItem("token"),
+            //     id_auction: auction._id,
+            //     starting_price: auction.starting_price,
+            //     asking_price: auction.asking_price,
+            //     tanggal_selesai: auction.tanggal_selesai,
+            //     jam_selesai: auction.jam_selesai,
+            //     kategori: auction.kategori_barang,
+            //     kecamatan: auction.kecamatan,
+            //     kota_kabupaten: auction.kota_kabupaten,
+            //     provinsi: auction.provinsi,
+            //     highest_bid: newBid.insertedId,
+            // }).then((res)=>{
+            //     console.log(res)
+            //     alert("Bid berhasil!")
+            //     window.location.reload();
+            // }).catch((err)=>{
+            //     console.log(err)
+            //     alert(err)
+            //     return;
+            // })
+
+        // }
+        // else{
+
+        // }
+>>>>>>> Stashed changes
     }
   };
 
