@@ -18,14 +18,21 @@ const getAuction = async (data) => {
     return auction;
 }
 
+const getBid = async (id) => {
+    const result = await client.get(`/bid?id=${id}`);
+    return result;
+}
+
 const getAuctionData = async (data) => {
     const auction = await getAuction(data);
     const user = await getUserData();
-
+    const highest_bid = await getBid(auction.auctiondata.highest_bid);
+    
     const result = {
         auctiondata: auction.auctiondata,
         itemdata: auction.itemdata,
-        userdata: user
+        userdata: user,
+        highest_bid: highest_bid.data.result
     }
     return result;
 }
@@ -96,12 +103,13 @@ const NavBarData = async () => {
                 alert("Invalid Token")
                 return null;
             }
-
+        
             const user = userData.data.payload.user;
             const wallet = await client.get('/wallet?id='+user._id);
             const result = {
                 nama: user.nama || "User",
-                wallet: wallet.data.result.saldo
+                wallet: wallet.data.result.saldo,
+                profile_picture: user.profile_picture
             }
             console.log(result);
             return result;
@@ -132,6 +140,16 @@ const getWallet = async () => {
         console.log(result);
         return result;
     } catch (error) {
+        return null;
+    }
+}
+
+const getUserById = async (id) => {
+    try {
+        const user = await client.get('/user?id='+id);
+        return user.data.result;
+    } catch (error) {
+        console.log(error);
         return null;
     }
 }
@@ -169,5 +187,6 @@ export default {
     getSampleAuction, 
     getAuctionByQuery, 
     NavBarData,
-    getWallet
+    getWallet,
+    getBid
 };

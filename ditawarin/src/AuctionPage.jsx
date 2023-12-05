@@ -10,10 +10,12 @@ export default function AuctionPage(){
     const navigate = useNavigate();
     const data = useLoaderData();
     const {register, handleSubmit, reset} = useForm()
-    // console.log(data);
+    console.log(data);
     let item = data.itemdata;
     let auction = data.auctiondata;
     let user = data.userdata;
+    let highest_bid = data.highest_bid;
+
     let url =import.meta.env.VITE_API_URL+'/static/'+item.images;
     let berakhir = new Date(data.auctiondata.tanggal_selesai);
 
@@ -64,8 +66,6 @@ export default function AuctionPage(){
     }, []);
 
     function bidauction(formdata){
-
-        
 
         const data = {
             token: localStorage.getItem("token"),
@@ -138,7 +138,7 @@ export default function AuctionPage(){
                             <div className="text-secondary">Mulai dari: {Rupiah.format(auction.starting_price)}</div>
                         </div>
                         <div className="container-fluid d-flex">
-                            <h2>Penawaran Tertinggi: </h2>
+                            <h2>Penawaran Tertinggi: {Rupiah.format(highest_bid.bid)}</h2>
                         </div>
                         <div className="container-fluid d-flex">
                             <div className="text-secondary">Beli Sekarang: {Rupiah.format(auction.asking_price)}</div>
