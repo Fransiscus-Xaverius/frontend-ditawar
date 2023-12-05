@@ -26,7 +26,7 @@ export default function SearchPage(props) {
         <h1>Search Result for "{query}"</h1>
       </div>
       <div className="row mt-5">
-        <div className="col-12 col-sm-3">
+        <div className="col-sm-2">
           <div className="p-3">
             <h4>Filter</h4>
             <ul className="list-unstyled">
@@ -53,7 +53,7 @@ export default function SearchPage(props) {
             </ul>
           </div>
         </div>
-        <div className="col-12 col-sm-9">
+        <div className="col-4">
           <div className="container-fluid d-flex flex-column">
             <div className="row d-flex flex-column">
               <div className="col-4">
