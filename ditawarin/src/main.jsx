@@ -23,7 +23,7 @@ import Rating from "./Rating.jsx";
 import WalletPage from "./WalletPage.jsx";
 import WelcomeBack from "./WelcomeBack.jsx";
 
-const {getAuction, getAllAuction, getUserData, getAuctionData, getAllAuctionDetail, getSampleAuction, getAuctionByQuery, NavBarData, getWallet} = DataHandler;
+const {getAuction, getAllAuction, getUserData, getAuctionData, getAllAuctionDetail, getSampleAuction, getAuctionByQuery, NavBarData, getWallet, actionUser} = DataHandler;
 
 const router = createBrowserRouter([
 	{
@@ -61,6 +61,7 @@ const router = createBrowserRouter([
 			{
 				path: "/profile",
 				loader:getUserData,
+				action : actionUser,
 				element: <ProfilePage />,
 			},
 			{
