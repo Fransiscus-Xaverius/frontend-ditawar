@@ -107,7 +107,6 @@ const NavBarData = async () => {
         alert("Invalid Token");
         return null;
       }
-
       const user = userData.data.payload.user;
       const wallet = await client.get("/wallet?id=" + user._id);
       const result = {

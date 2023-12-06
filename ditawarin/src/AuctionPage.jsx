@@ -54,24 +54,29 @@ export default function AuctionPage() {
     return () => clearInterval(interval);
   }, []);
 
-  function bidauction(formdata) {
+  async function bidauction(formdata) {
     const data = {
       token: localStorage.getItem("token"),
       idAuction: auction._id,
       bid: formdata.nominal_bid,
     };
-    const newBid = client
-      .post("/bid", data)
-      .then((res) => {
-        console.log(res);
+    try {
+        const newBid = await client.post("/bid", data);
+        console.log(newBid);
         alert("Bid berhasil!");
         navigate(0);
-      })
-      .catch((err) => {
-        console.log(err);
-        alert(err);
+    } catch (err) {
+        if (err.response && (err.response.status === 400 || err.response.status === 500)) {
+            const errorMessage = err.response.data.msg;
+            console.log("----------------")
+            console.log(errorMessage);
+            alert(errorMessage);
+        } else {
+            console.log(err);
+            alert(err.message);
+        }
         return;
-      });
+    }
 
     // if(data.auction.highest_bid == null || data.auction.highest_bid == undefined){
 

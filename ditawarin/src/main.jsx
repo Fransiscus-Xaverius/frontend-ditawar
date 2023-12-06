@@ -22,6 +22,7 @@ import DataHandler from "./data/DataHandler.jsx";
 import Rating from "./Rating.jsx";
 import WalletPage from "./WalletPage.jsx";
 import WelcomeBack from "./WelcomeBack.jsx";
+import PurchasesPage from "./PurchasesPage.jsx";
 
 const {getAuction, getAllAuction, getUserData, getAuctionData, getAllAuctionDetail, getSampleAuction, getAuctionByQuery, NavBarData, getWallet, actionUser} = DataHandler;
 
@@ -68,6 +69,10 @@ const router = createBrowserRouter([
 				path: "/wallet",
 				loader: getWallet,
 				element: <WalletPage />
+			},
+			{
+				path: "/purchases",
+				element: <PurchasesPage />,
 			},
 			{
 				path: "/sell",
