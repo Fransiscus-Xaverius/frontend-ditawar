@@ -24,8 +24,22 @@ import WalletPage from "./WalletPage.jsx";
 import WelcomeBack from "./WelcomeBack.jsx";
 import PurchasesPage from "./PurchasesPage.jsx";
 import ErrorPage from "./ErrorPage.jsx";
+import PurchasePageBuyer from "./PurchasePageBuyer.jsx";
+import PurchasePageSeller from "./PurchasePageSeller.jsx";
 
-const {getAuction, getAllAuction, getUserData, getAuctionData, getAllAuctionDetail, getSampleAuction, getAuctionByQuery, NavBarData, getWallet, actionUser} = DataHandler;
+const {
+	getAuction, 
+	getAllAuction, 
+	getUserData, 
+	getAuctionData, 
+	getAllAuctionDetail, 
+	getSampleAuction, 
+	getAuctionByQuery, 
+	NavBarData, 
+	getWallet, 
+	getAllPurchaseAsBuyer,
+	getAllPurchaseAsSeller
+} = DataHandler;
 
 const router = createBrowserRouter([
 	{
@@ -73,6 +87,18 @@ const router = createBrowserRouter([
 			{
 				path: "/purchases",
 				element: <PurchasesPage />,
+				children: [
+					{
+						path: "buyer",
+						loader: getAllPurchaseAsBuyer,
+						element: <PurchasePageBuyer />,
+					},
+					{
+						path: "seller",
+						loader: getAllPurchaseAsSeller,
+						element: <PurchasePageSeller />,
+					}
+				]
 			},
 			{
 				path: "/sell",
@@ -130,6 +156,8 @@ const router = createBrowserRouter([
 	}
 	
 ]);
+
+console.log(router.routes);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<RouterProvider router={router} />,

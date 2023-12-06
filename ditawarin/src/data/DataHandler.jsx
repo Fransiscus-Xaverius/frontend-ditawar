@@ -45,6 +45,20 @@ const getAuctionData = async (data) => {
     return result;
 }
 
+const getAllPurchaseAsBuyer = async () => {
+    const token = localStorage.getItem("token");
+    const result = await client.get(`/allPurchaseAsBuyer?token=${token}`);
+    console.log(result);
+    return result;
+}
+
+const getAllPurchaseAsSeller = async () => {
+    const token = localStorage.getItem("token");
+    const result = await client.get(`/allPurchaseAsSeller?token=${token}`);
+    console.log(result);
+    return result;
+} 
+
 const getAllAuction = async () => {
   const result = await client.get("/allAuction");
   // console.log(result)
@@ -179,15 +193,17 @@ const getUserData = async () => {
 };
 
 export default {
-  getAuction,
-  getItem,
-  getAllAuction,
-  getUserData,
-  getAuctionData,
-  getAllAuctionDetail,
-  getSampleAuction,
-  getAuctionByQuery,
-  NavBarData,
-  getWallet,
-  getBid,
+    getAuction,
+    getItem,
+    getAllAuction,
+    getUserData,
+    getAuctionData,
+    getAllAuctionDetail,
+    getSampleAuction,
+    getAuctionByQuery,
+    NavBarData,
+    getWallet,
+    getBid,
+    getAllPurchaseAsBuyer,
+    getAllPurchaseAsSeller,
 };
