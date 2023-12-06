@@ -206,8 +206,8 @@ export default function AuctionPage() {
                   </button>
                 </div>
               ) : (
-                <div className="col-sm-6 text-center">
-                  <div className="row mx-auto" style={{ width: "50%" }}>
+                <div className="col-sm-12 mt-5">
+                  <div className="row">
                     <div className="col-4 text-center">
                       <button
                         className="btn bg-danger rounded-pill text-white pt-3 pb-3"
