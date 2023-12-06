@@ -33,6 +33,10 @@ const router = createBrowserRouter([
 		element: <Login />,
 	},
 	{
+		path: "/register",
+		element: <Register />,
+	},
+	{
 		path: "/",
 		element: <Navbar />,
 		loader:NavBarData,
@@ -51,10 +55,6 @@ const router = createBrowserRouter([
 						element: <SearchPage />,
 					}
 				]
-			},
-			{
-				path: "/register",
-				element: <Register />,
 			},
 			{
 				path: "/logout",

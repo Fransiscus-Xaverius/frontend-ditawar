@@ -1,8 +1,10 @@
 import { useForm } from 'react-hook-form'
 import flag from './assets/flag.svg'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import client from './client.jsx'
 import { useNavigate } from 'react-router-dom'
+import Logo from './assets/logo.png'
+import Footer from './components/Footer.jsx'
 
 function Register() {
 
@@ -42,9 +44,20 @@ function Register() {
 
     return(
         <>
+        <nav className="p-0" style={{borderBottom: "1px solid gray"}}>
+                <div className="container-fluid"  style={{ backgroundColor: "#06083D" }}>
+                    <div className="d-flex justify-content-between align-items-center">
+                        <Link to="/"><img src={Logo} alt="" style={{width: "15%", height: "15%"}}/></Link>
+                        <div className="d-flex align-items-center">
+                        <NavLink type="button" className="btn btn-outline-light me-3" to="/login">Masuk</NavLink>
+                        <NavLink type="button" className="btn btn-outline-light" to="/register">Daftar</NavLink>
+                    </div>
+                 </div>
+                </div>
+            </nav>
             <div className="container-sm">
                 <div className="row justify-content-center">
-                    <h1 className="mb-4 text-center" style={{color: "#1551C5"}}>Registration</h1>
+                    <h1 className="mt-4 mb-4 text-center" style={{color: "#06083D"}}><b>Registration</b></h1>
                     <form onSubmit={handleSubmit(signUp)}>
                         <div className="row justify-content-center">
                             <div className="col-4">
@@ -79,12 +92,13 @@ function Register() {
                                 <input type="password" {...register("confpass", {required:{value:true, message:"Konfirmasi Password wajib diisi"}})} placeholder="Konfirmasi Password" className="mt-3 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "90%", height: "3rem"}}/>
                                 {errors.confpass && <p style={{color: "red"}}>{errors.confpass.message}</p>}
                             </div>
-                            <button className="btn btn-primary mt-3" type="submit" style={{width: '65%'}}><b>DAFTAR</b></button>
+                            <button className="btn text-light mt-3" type="submit" style={{width: '65%', backgroundColor: "#06083D"}}><b>DAFTAR</b></button>
                         </div>
                     </form>
                     <div className='text-center'>Sudah punya akun?  <Link to={"/login"}>LOGIN</Link> </div>
                 </div>
             </div>
+            <Footer/>
         </>
     )
 }

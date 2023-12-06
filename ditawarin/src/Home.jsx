@@ -1,5 +1,5 @@
 import Logo from "./assets/logo.png";
-import Jumbotron from "./assets/jumbo.jpeg";
+import Jumbotron from "./assets/jumbo.jpg";
 import Tanah from "./assets/tanah.png";
 import Rumah from "./assets/rumah.png";
 import Ruko from "./assets/ruko.png";
@@ -30,19 +30,23 @@ function Home() {
 
       <div className="container">
         {/* JUMBO */}
-        <div className="jumbotron text-center mt-5">
-          <img
-            src={Jumbotron}
-            alt="jumbo"
-            style={{ width: "90%", height: "30rem" }}
-          />
+        <div className="row justify-content-center">
+          <div className="col-12 mt-5">
+              <div className="card" style={{ width: "100%", height: "35rem",backgroundImage: `url(${Jumbotron})`, backgroundRepeat: "no-repeat", backgroundSize: "cover", filter: `brightness(60%)`}}>
+                <div className="card-img-overlay" style={{padding: "28rem 5rem"}}>
+                  <h1 className="card-title text-light"><b>SELAMAT DATANG,</b></h1>
+                  <p className="card-text text-light"><b>Ditawarin fokus pada lelang berbasis online dimana siapapun bisa mengikuti lelang yang ada.</b></p>
+                </div>
+              </div>
+          </div>
         </div>
+        
 
         {/* KATEGORI */}
-        <h1 className="mt-3 mb-3">KATEGORI PILIHAN</h1>
+        <h1 className="mt-5 mb-3">KATEGORI PILIHAN</h1>
         <div className="d-flex justify-content-between">
           <div
-            className="kategori_1 text-center pe-5 ps-5 pt-3 pb-3 me-5 align-items-center"
+            className="kategori_1 text-center pe-5 ps-5 pt-3 pb-3 me-5 mt-3 align-items-center"
             style={{ border: "1px solid gray", borderRadius: "12px" }}
           >
             <img src={Tanah} alt="" style={{ width: "5rem", height: "5rem" }} />{" "}

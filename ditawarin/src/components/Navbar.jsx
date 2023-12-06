@@ -23,9 +23,9 @@ export default function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    userToken = localStorage.getItem("token");
-  }, [location]);
+//   useEffect(() => {
+//     userToken = localStorage.getItem("token");
+//   }, [location]);
 
   function handleKeyPress(e) {
     if (e.key === "Enter") {
@@ -53,14 +53,14 @@ export default function Navbar() {
                 <>
                   <NavLink
                     type="button"
-                    className="btn btn-outline-primary me-3"
+                    className="btn btn-outline-light me-3"
                     to="/login"
                   >
                     Masuk
                   </NavLink>
                   <NavLink
                     type="button"
-                    className="btn btn-primary"
+                    className="btn btn-outline-light"
                     to="/register"
                   >
                     Daftar

@@ -32,12 +32,12 @@ function Login() {
     return(
         <>
             <nav className="p-0" style={{borderBottom: "1px solid gray"}}>
-                <div className="container-fluid">
+                <div className="container-fluid"  style={{ backgroundColor: "#06083D" }}>
                     <div className="d-flex justify-content-between align-items-center">
                         <Link to="/"><img src={Logo} alt="" style={{width: "15%", height: "15%"}}/></Link>
                         <div className="d-flex align-items-center">
-                        <NavLink type="button" className="btn btn-outline-primary me-3" to="/login">Masuk</NavLink>
-                        <NavLink type="button" className="btn btn-primary" to="/register">Daftar</NavLink>
+                        <NavLink type="button" className="btn btn-outline-light me-3" to="/login">Masuk</NavLink>
+                        <NavLink type="button" className="btn btn-outline-light" to="/register">Daftar</NavLink>
                     </div>
                  </div>
                 </div>
@@ -46,14 +46,14 @@ function Login() {
                     <form onSubmit={handleSubmit(signIn)}>
                         <div className="row justify-content-center">
                             <div className="col-6 p-0">
-                                <h1 className="mb-4 mt-4" style={{color: "#1551C5"}}>Hello,<br /> Welcome Back</h1>
+                                <h1 className="mb-4 mt-4" style={{color: "#06083D"}}><b>Hello,<br /> Welcome Back</b></h1>
                                 <label><b>Email </b></label><br />
                                 <input type="text" {...register("email", {required:{value:true, message:"Email wajib diisi!"}})} placeholder="Email" className="mt-3 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "100%", height: "3rem"}}/> <br />
                                 {errors.email && <p style={{color: "red"}}>{errors.email.message}</p>}
                                 <label><b>Password </b></label><br />
                                 <input type="password" {...register("pass", {required:{value:true, message:"Password wajib diisi!"}})} placeholder="Password" className="mt-3 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "100%", height: "3rem"}}/> <br />
                                 {errors.pass && <p style={{color: "red"}}>{errors.pass.message}</p>}
-                                <button className="btn btn-primary mt-3 mb-3" type="submit" style={{width: '100%'}}><b>MASUK</b></button>
+                                <button className="btn text-light mt-3 mb-3" type="submit" style={{width: '100%', backgroundColor: "#06083D"}}><b>MASUK</b></button>
                                 
                                 <div>Lupa Password?</div>
                                 <div>Belum punya akun?  <Link to={"/register"}>Daftar Sini</Link> </div>
