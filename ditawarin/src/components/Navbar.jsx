@@ -33,9 +33,6 @@ export default function Navbar() {
     }
   }
 
-  const url_pp =
-    import.meta.env.VITE_API_URL + "/static/" + data.profile_picture || "";
-
   return (
     <>
       <nav className="p-0" style={{ borderBottom: "1px solid gray" }}>
@@ -76,7 +73,8 @@ export default function Navbar() {
                     style={{ height: "48px" }}
                     className="nav-item rounded-circle me-2"
                     alt="avatar_user"
-                    src={url_pp}
+                    src={import.meta.env.VITE_API_URL + "/static/" + data.profile_picture || ""
+                }
                   />
                   <div className="me-3">
                     <NavLink
