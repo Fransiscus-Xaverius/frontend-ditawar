@@ -70,15 +70,34 @@ export default function ProfilePage() {
 
 		if (image != undefined) {
 			Data.profile_picture = image;
+		} else {
+			Data.profile_picture = data.profile_picture;
 		}
-        else {
-            Data.profile_picture = data.profile_picture;
-        }
 
-		fetcher.submit(Data, {
-			action: "/profile",
-			method: "PUT",
-		});
+		try {
+			const user = await client.put("/user?id=" + Data._id, {
+				nama: Data.nama,
+				email: Data.email,
+				phone: Data.phone,
+				city: Data.city,
+				profile_picture: Data.profile_picture,
+				password: Data.password,
+			});
+			const url2 = "/reload?id=" + Data._id;
+			const response = await client.post(url2);
+			console.log(response.data);
+			if (response.status === 200) {
+				localStorage.setItem("token", response.data.token);
+				localStorage.setItem("user", response.data.user);
+				alert("berhasil update");
+			}
+		} catch (error) {
+			console.log(error);
+			alert(error);
+		}
+
+		window.location.reload(true)
+
 	}
 	const [gambar, setGambar] = useState(0);
 	const [files, setFiles] = useState("");
@@ -163,7 +182,7 @@ export default function ProfilePage() {
 												type="text"
 												placeholder="Nama Lengkap"
 												className="ps-3 border border-secondary-subtle ms-auto"
-												value={data.nama}
+												{...register("nama")}
 												style={{
 													borderRadius: "10px",
 													height: "3rem",
@@ -181,7 +200,7 @@ export default function ProfilePage() {
 												type="email"
 												placeholder="Nama Lengkap"
 												className="ps-3 border border-secondary-subtle ms-auto"
-												value={data.email}
+												{...register("email")}
 												style={{
 													borderRadius: "10px",
 													height: "3rem",
@@ -199,7 +218,7 @@ export default function ProfilePage() {
 												type="text"
 												placeholder="Nama Lengkap"
 												className="ps-3 border border-secondary-subtle ms-auto"
-												value={data.phone}
+												{...register("phone")}
 												style={{
 													borderRadius: "10px",
 													height: "3rem",
@@ -217,7 +236,7 @@ export default function ProfilePage() {
 												type="text"
 												placeholder="Nama Lengkap"
 												className="ps-3 border border-secondary-subtle ms-auto"
-												value={data.province}
+												{...register("city")}
 												style={{
 													borderRadius: "10px",
 													height: "3rem",

@@ -62,7 +62,6 @@ const router = createBrowserRouter([
 			{
 				path: "/profile",
 				loader:getUserData,
-				action : actionUser,
 				element: <ProfilePage />,
 			},
 			{

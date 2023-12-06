@@ -178,31 +178,6 @@ const getUserData = async () => {
   }
 };
 
-const actionUser = async({request}) => {
-	const formData = await request.formData();
-	const Item = Object.fromEntries(formData);
-    
-    if (request.method == "PUT") {
-        try {
-            const user = await client.put('/user?id='+Item._id,{
-                nama : Item?.nama,
-                email : Item?.email,
-                phone : Item?.phone,
-                city : Item?.city,
-                profile_picture : Item?.profile_picture,
-                password : Item?.password
-            });
-            alert("berhasil update")
-            return redirect("/")
-        } catch (error) {
-            alert("gagal update")
-            console.log(error);
-        }
-
-    }
-
-}
-
 export default {
   getAuction,
   getItem,
@@ -215,5 +190,4 @@ export default {
   NavBarData,
   getWallet,
   getBid,
-  actionUser
 };
