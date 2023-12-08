@@ -9,14 +9,13 @@ function Auctions() {
 	return (
 		<>
 			<p className="fw-bold">AUCTION</p>
-			<p>More than 10+ new auctions</p>
 			<table className="table" style={{overflowY:"scroll", overflowX:"hidden", height:"55vh", display:"block"}} >
 				<thead>
 					<tr className="table-success">
-						<th scope="col">PRODUCT</th>
-						<th scope="col">PRICE</th>
-						<th scope="col">STATUS</th>
-						<th scope="col">ACTION</th>
+						<th scope="col" >PRODUCT</th>
+						<th scope="col" style={{width : "20%"}}>PRICE</th>
+						<th scope="col" >STATUS</th>
+						<th scope="col" style={{width : "100%"}}>ACTION</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -25,11 +24,11 @@ function Auctions() {
 						const date = new Date(act.tanggal_selesai);
 						return (
 							<tr>
-								<td>
-									<img src={`${url}`} />
+								<td style={{width : "25%"}}>
+									<img src={`${url}`} style={{width : "100px"}} />
 									{act.item.nama}
 								</td>
-								<td>{act.asking_price}</td>
+								<td style={{width : "25%"}}>Rp. {act.asking_price}</td>
 								<td className="bg-success text-center">
 									{date.getTime() - Date.now() >= 0 && <div>PROGRESS</div>}
 									{date.getTime() - Date.now() < 0 && <div>DONE</div>}

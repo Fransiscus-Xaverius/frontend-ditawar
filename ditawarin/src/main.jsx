@@ -38,7 +38,8 @@ const {
 	NavBarData, 
 	getWallet, 
 	getAllPurchaseAsBuyer,
-	getAllPurchaseAsSeller
+	getAllPurchaseAsSeller,
+	getAllUser
 } = DataHandler;
 
 const router = createBrowserRouter([
@@ -127,7 +128,7 @@ const router = createBrowserRouter([
 		element: <NavbarAdmin />,
 		children: [
 			{
-				loader : getUserData,
+				loader : getAllUser,
 				path: "users",
 				element: <Users />,
 			},

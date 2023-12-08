@@ -10,22 +10,28 @@ function Login() {
     const navigate = useNavigate();
 
     async function signIn(data){
-        const url = '/login?email='+data.email+'&password='+data.pass
-        try {
-            const response = await client.post(url);
-
-            if(response.status === 200){
-                console.log(response.data);   
-                localStorage.setItem('token', response.data.token);
-                localStorage.setItem('user', response.data.user);
-                alert(`Selamat datang, ${response.data.user.nama}`)
+        if(data.email === "adminditawarin@gmail.com" || data.pass === "adminditawarin"){
+            navigate('/admin');
+        }
+        else{
+            const url = '/login?email='+data.email+'&password='+data.pass
+            try {
+                const response = await client.post(url);
+    
+                if(response.status === 200){
+                    console.log(response.data);   
+                    localStorage.setItem('token', response.data.token);
+                    localStorage.setItem('user', response.data.user);
+                    alert(`Selamat datang, ${response.data.user.nama}`)
+                    
+                    navigate('/');
+                    return
+                }
+            } catch (error) {
                 
-                navigate('/');
-                return
+                console.log(error);
+                alert('Username atau password salah!');
             }
-        } catch (error) {
-            console.log(error);
-            alert('Username atau password salah!');
         }
     } 
 

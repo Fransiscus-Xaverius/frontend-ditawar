@@ -192,6 +192,17 @@ const getUserData = async () => {
   }
 };
 
+const getAllUser = async () => {
+  try {
+    const result = await client.get("/allUser");
+    return result.data.result;
+  } catch (error) {
+    console.log(error);
+    alert("Gagal Mendapatkan data user");
+    return null;
+  }
+}
+
 export default {
     getAuction,
     getItem,
@@ -206,4 +217,5 @@ export default {
     getBid,
     getAllPurchaseAsBuyer,
     getAllPurchaseAsSeller,
+    getAllUser
 };
