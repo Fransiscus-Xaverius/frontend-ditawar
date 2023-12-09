@@ -83,21 +83,27 @@ export default function ProfilePage() {
 				profile_picture: Data.profile_picture,
 				password: Data.password,
 			});
-			const url2 = "/reload?id=" + Data._id;
-			const response = await client.post(url2);
-			console.log(response.data);
-			if (response.status === 200) {
-				localStorage.setItem("token", response.data.token);
-				localStorage.setItem("user", response.data.user);
-				alert("berhasil update");
-			}
 		} catch (error) {
 			console.log(error);
 			alert(error);
 		}
 
-		window.location.reload(true)
-
+		try {
+			const url2 = "/reload?id=" + Data._id;
+			const response = await client.post(url2);
+			console.log(response.data);
+			if (response.status === 200) {
+				console.log(response.data.user);
+				localStorage.setItem("token", response.data.token);
+				localStorage.setItem("user", response.data.user);
+				alert("berhasil update");
+				window.location.reload(true);
+			}
+		}
+		catch (error) {
+			console.log(error);
+			alert(error);
+		}
 	}
 	const [gambar, setGambar] = useState(0);
 	const [files, setFiles] = useState("");
