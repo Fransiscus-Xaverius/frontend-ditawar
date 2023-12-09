@@ -2,6 +2,8 @@ import Ban from "../assets/ban.png";
 import Edit from "../assets/edit.png";
 import Check from "../assets/check.png";
 import Eye from "../assets/eye.png";
+import BarChart from "../components/BarChart";
+
 function Payment() {
 	return (
 		<>
@@ -31,6 +33,7 @@ function Payment() {
 					</tr>
 				</tbody>
 			</table>
+			<BarChart />
 		</>
 	);
 }

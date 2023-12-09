@@ -3,10 +3,10 @@ import Ban from "../assets/ban.png";
 import Edit from "../assets/edit.png";
 import Accept from "../assets/accepted.png";
 import client from "../client";
+import { useEffect, useState } from "react";
 
 function Users() {
 	const User = useLoaderData();
-	console.log(User);
 
 	function ActiveAccount(params) {
 		try {
@@ -58,7 +58,10 @@ function Users() {
 								<td>
 									<img src={`${url}`} style={{ width: "100px" }} />
 								</td>
-								<td>{user.nama}</td>
+								<td>
+									<input type="text" value={user.nama} className="disabled" />
+									{user.nama}
+								</td>
 								<td>{user.email}</td>
 								<td>{user.phone}</td>
 								<td>
@@ -71,13 +74,19 @@ function Users() {
 									{user.role == "banned" && <p className="bg-danger">Banned</p>}
 								</td>
 								<td className="w-100">
-									<button className="mx-1 border-0 bg-primary rounded" onClick={() => ActiveAccount(index)}>
+									<button
+										className="mx-1 border-0 bg-primary rounded"
+										onClick={() => ActiveAccount(index)}
+									>
 										<img src={Accept} style={{ width: "30px" }} />
 									</button>
 									<button className="mx-1 border-0 bg-primary rounded">
 										<img src={Edit} style={{ width: "30px" }} />
 									</button>
-									<button className="mx-1 border-0 bg-primary rounded" onClick={() => BanAccount(index)}>
+									<button
+										className="mx-1 border-0 bg-primary rounded"
+										onClick={() => BanAccount(index)}
+									>
 										<img src={Ban} style={{ width: "30px" }} />
 									</button>
 								</td>
