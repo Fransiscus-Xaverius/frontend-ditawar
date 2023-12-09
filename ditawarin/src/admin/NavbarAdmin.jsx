@@ -1,4 +1,4 @@
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet, useLoaderData } from "react-router-dom";
 
 import Users from "../assets/users.png";
 import Auction from "../assets/auction.png";
@@ -6,6 +6,7 @@ import Payment from "../assets/payment.png";
 import Security from "../assets/security.png";
 import Support from "../assets/support.png";
 import { useEffect, useState } from "react";
+import client from "../client";
 
 function NavbarAdmin() {
 	const [hours, setHours] = useState(0);
@@ -28,6 +29,16 @@ function NavbarAdmin() {
 		const interval = setInterval(() => getTime(), 1000);
 		return () => clearInterval(interval);
 	}, [seconds]);
+
+	useEffect(async() => {
+		const result = (await client.get("/allUser")).data.result;
+		console.log(result);
+		setuseraktif(result.filter((user) => user.role == "verified").length);
+		setusernonaktif(result.filter((user) => user.role == "unverified" || user.role == "banned").length);
+	}, [])
+
+	const [useraktif,setuseraktif] = useState(0)
+	const [usernonaktif,setusernonaktif] = useState(0)
 
 	return (
 		<div className="container-fluid p-0 d-flex" style={{display:"block", minHeight:"100vh"}}>
@@ -102,13 +113,13 @@ function NavbarAdmin() {
 									</div>
 									<div className="card mb-3 p-3 opacity-50" style={{width: "300px", height: "150px", backgroundColor: "#50C409"}}>
 										<div className="card-body text-success align-items-center text-light">
-											<h5 className="card-title text-center">Success card title</h5>
+											<h1 className="card-title text-center">{useraktif}</h1>
 										</div>
 										<div className="footer text-light">USER AKTIF</div>
 									</div>
 									<div className="card mb-3 p-3 opacity-50" style={{width: "300px", height: "150px", backgroundColor: "#C40909"}}>
 										<div className="card-body text-success align-items-center text-light">
-											<h5 className="card-title text-center">Success card title</h5>
+											<h1 className="card-title text-center">{usernonaktif}</h1>
 										</div>
 										<div className="footer text-light">USER NONAKTIF</div>
 									</div>

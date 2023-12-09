@@ -14,7 +14,7 @@ function Users() {
 		} catch (error) {
 			console.log(error);
 		}
-		window.location.reload(true)
+		window.location.reload(true);
 	}
 
 	function BanAccount(params) {
@@ -23,13 +23,22 @@ function Users() {
 		} catch (error) {
 			console.log(error);
 		}
-		window.location.reload(true)
+		window.location.reload(true);
 	}
 
 	return (
 		<>
 			<p className="fw-bold">USERS</p>
-			<table className="table">
+			<table
+				className="table"
+				style={{
+					overflowY: "scroll",
+					overflowX: "hidden",
+					height: "50vh",
+					width: "100%",
+					display: "block",
+				}}
+			>
 				<thead>
 					<tr className="table-success">
 						<th scope="col">PROFILE</th>
@@ -41,7 +50,7 @@ function Users() {
 					</tr>
 				</thead>
 				<tbody>
-					{User.map((user,index) => {
+					{User.map((user, index) => {
 						let url =
 							import.meta.env.VITE_API_URL + "/static/" + user.profile_picture;
 						return (
@@ -53,18 +62,22 @@ function Users() {
 								<td>{user.email}</td>
 								<td>{user.phone}</td>
 								<td>
-									{user.role == "unverified" && <p className="bg-success">Unverified</p> }
-									{user.role == "verified" && <p className="bg-primary">Verified</p> }
-									{user.role == "banned" && <p className="bg-danger">Banned</p> }
+									{user.role == "unverified" && (
+										<p className="bg-success">Unverified</p>
+									)}
+									{user.role == "verified" && (
+										<p className="bg-primary">Verified</p>
+									)}
+									{user.role == "banned" && <p className="bg-danger">Banned</p>}
 								</td>
-								<td>
-									<button onClick={()=> ActiveAccount(index)}>
+								<td className="w-100">
+									<button className="mx-1 border-0 bg-primary rounded" onClick={() => ActiveAccount(index)}>
 										<img src={Accept} style={{ width: "30px" }} />
 									</button>
-									<button>
+									<button className="mx-1 border-0 bg-primary rounded">
 										<img src={Edit} style={{ width: "30px" }} />
 									</button>
-									<button onClick={()=> BanAccount(index)}>
+									<button className="mx-1 border-0 bg-primary rounded" onClick={() => BanAccount(index)}>
 										<img src={Ban} style={{ width: "30px" }} />
 									</button>
 								</td>

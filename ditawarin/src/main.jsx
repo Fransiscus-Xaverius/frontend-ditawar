@@ -124,6 +124,7 @@ const router = createBrowserRouter([
 		],
 	},
 	{
+		loader : getAllUser,
 		path: "/admin",
 		element: <NavbarAdmin />,
 		children: [
