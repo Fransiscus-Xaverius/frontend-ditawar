@@ -4,6 +4,7 @@ import { React, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import location from "./assets/loc.png";
 import { useNavigate } from "react-router-dom";
+import { buyNowHandler } from "./Handler/AuctionRelatedHandler";
 
 export default function AuctionPage() {
   const navigate = useNavigate();
@@ -61,21 +62,24 @@ export default function AuctionPage() {
       bid: formdata.nominal_bid,
     };
     try {
-        const newBid = await client.post("/bid", data);
-        console.log(newBid);
-        alert("Bid berhasil!");
-        navigate(0);
+      const newBid = await client.post("/bid", data);
+      console.log(newBid);
+      alert("Bid berhasil!");
+      navigate(0);
     } catch (err) {
-        if (err.response && (err.response.status === 400 || err.response.status === 500)) {
-            const errorMessage = err.response.data.msg;
-            console.log("----------------")
-            console.log(errorMessage);
-            alert(errorMessage);
-        } else {
-            console.log(err);
-            alert(err.message);
-        }
-        return;
+      if (
+        err.response &&
+        (err.response.status === 400 || err.response.status === 500)
+      ) {
+        const errorMessage = err.response.data.msg;
+        console.log("----------------");
+        console.log(errorMessage);
+        alert(errorMessage);
+      } else {
+        console.log(err);
+        alert(err.message);
+      }
+      return;
     }
 
     // if(data.auction.highest_bid == null || data.auction.highest_bid == undefined){
@@ -115,6 +119,9 @@ export default function AuctionPage() {
 
   const date = new Date(auction.tanggal_mulai);
 
+  const buyNowClick = () => {
+    buyNowHandler(auction._id);
+  };
   return (
     <>
       {console.log(auction)}
@@ -230,6 +237,7 @@ export default function AuctionPage() {
                       <button
                         className="btn bg-success rounded-pill text-white pt-3 pb-3"
                         style={{ width: "200px" }}
+                        onClick={buyNowClick}
                       >
                         Beli Sekarang
                       </button>
