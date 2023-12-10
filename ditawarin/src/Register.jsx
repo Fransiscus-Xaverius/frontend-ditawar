@@ -44,7 +44,7 @@ function Register() {
 
     return(
         <>
-        <nav className="p-0" style={{borderBottom: "1px solid gray"}}>
+            <nav className="p-0" style={{borderBottom: "1px solid gray"}}>
                 <div className="container-fluid"  style={{ backgroundColor: "#06083D" }}>
                     <div className="d-flex justify-content-between align-items-center">
                         <Link to="/"><img src={Logo} alt="" style={{width: "15%", height: "15%"}}/></Link>

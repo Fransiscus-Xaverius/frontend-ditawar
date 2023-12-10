@@ -23,9 +23,9 @@ export default function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
 
-//   useEffect(() => {
-//     userToken = localStorage.getItem("token");
-//   }, [location]);
+  useEffect(() => {
+    userToken = localStorage.getItem("token");
+  }, [location]);
 
   function handleKeyPress(e) {
     if (e.key === "Enter") {
