@@ -3,10 +3,13 @@ import Ban from "../assets/ban.png";
 import Edit from "../assets/edit.png";
 import Accept from "../assets/accepted.png";
 import client from "../client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 
 function Users() {
 	const User = useLoaderData();
+	const [ListUser, setListUser] = useState(null);
+	const [Editing, setEditing] = useState(false);
 
 	function ActiveAccount(params) {
 		try {
@@ -26,75 +29,146 @@ function Users() {
 		window.location.reload(true);
 	}
 
+	function EditAccount(params) {
+		setEditing(true);
+		setListUser(params);
+	}
+
+	const { handleSubmit, register } = useForm({
+		values: {
+			_id: ListUser?._id,
+			nama: ListUser?.nama,
+			email: ListUser?.email,
+			phone: ListUser?.phone,
+			city: ListUser?.city,
+			profile_picture: ListUser?.profile_picture,
+		},
+	});
+
+	async function EditUser(Data) {
+		try {
+			const user = await client.put("/user?id=" + Data._id, {
+				nama: Data.nama,
+				email: Data.email,
+				phone: Data.phone,
+				city: Data.city,
+				profile_picture: Data.profile_picture,
+			});
+		} catch (error) {
+			console.log(error);
+			alert(error);
+		}
+		window.location.reload(true);
+	}
+
 	return (
 		<>
 			<p className="fw-bold">USERS</p>
-			<table
-				className="table"
-				style={{
-					overflowY: "scroll",
-					overflowX: "hidden",
-					height: "50vh",
-					width: "100%",
-					display: "block",
-				}}
-			>
-				<thead>
-					<tr className="table-success">
-						<th scope="col">PROFILE</th>
-						<th scope="col">NAMA</th>
-						<th scope="col">EMAIL</th>
-						<th scope="col">PHONE NUMBER</th>
-						<th scope="col">STATUS</th>
-						<th scope="col">ACTION</th>
-					</tr>
-				</thead>
-				<tbody>
-					{User.map((user, index) => {
-						let url =
-							import.meta.env.VITE_API_URL + "/static/" + user.profile_picture;
-						return (
-							<tr className="table-light">
-								<td>
-									<img src={`${url}`} style={{ width: "100px" }} />
-								</td>
-								<td>
-									<input type="text" value={user.nama} className="disabled" />
-									{user.nama}
-								</td>
-								<td>{user.email}</td>
-								<td>{user.phone}</td>
-								<td>
-									{user.role == "unverified" && (
-										<p className="bg-success">Unverified</p>
-									)}
-									{user.role == "verified" && (
-										<p className="bg-primary">Verified</p>
-									)}
-									{user.role == "banned" && <p className="bg-danger">Banned</p>}
-								</td>
-								<td className="w-100">
-									<button
-										className="mx-1 border-0 bg-primary rounded"
-										onClick={() => ActiveAccount(index)}
-									>
-										<img src={Accept} style={{ width: "30px" }} />
-									</button>
-									<button className="mx-1 border-0 bg-primary rounded">
-										<img src={Edit} style={{ width: "30px" }} />
-									</button>
-									<button
-										className="mx-1 border-0 bg-primary rounded"
-										onClick={() => BanAccount(index)}
-									>
-										<img src={Ban} style={{ width: "30px" }} />
-									</button>
-								</td>
-							</tr>
-						);
-					})}
-				</tbody>
-			</table>
+			{!Editing && (
+				<table
+					className="table"
+					style={{
+						overflowY: "scroll",
+						overflowX: "hidden",
+						height: "50vh",
+						display: "block",
+					}}
+				>
+					<thead>
+						<tr className="table-success">
+							<th scope="col">PROFILE</th>
+							<th scope="col">NAMA</th>
+							<th scope="col">STATUS</th>
+							<th scope="col">ACTION</th>
+						</tr>
+					</thead>
+					<tbody>
+						{User.map((user, index) => {
+							let url =
+								import.meta.env.VITE_API_URL +
+								"/static/" +
+								user.profile_picture;
+
+							return (
+								<tr className="table-light">
+									<td className="w-20">
+										<img src={`${url}`} style={{ width: "100px" }} />
+									</td>
+									<td className="w-25">{user.nama}</td>
+									<td className="w-25">
+										{user.role == "unverified" && (
+											<p className="bg-success">Unverified</p>
+										)}
+										{user.role == "verified" && (
+											<p className="bg-primary">Verified</p>
+										)}
+										{user.role == "banned" && (
+											<p className="bg-danger">Banned</p>
+										)}
+									</td>
+									<td className="w-100">
+										<button
+											className="mx-1 border-0 bg-primary rounded"
+											onClick={() => ActiveAccount(index)}
+										>
+											<img src={Accept} style={{ width: "30px" }} />
+										</button>
+										<button
+											className="mx-1 border-0 bg-primary rounded"
+											onClick={() => EditAccount(user)}
+										>
+											<img src={Edit} style={{ width: "30px" }} />
+										</button>
+										<button
+											className="mx-1 border-0 bg-primary rounded"
+											onClick={() => BanAccount(index)}
+										>
+											<img src={Ban} style={{ width: "30px" }} />
+										</button>
+									</td>
+								</tr>
+							);
+						})}
+					</tbody>
+				</table>
+			)}
+			{Editing && (
+				<form onSubmit={handleSubmit(EditUser)}>
+					<label className="me-3">Nama : </label>
+					<input type="text" {...register("nama")} style={{ width: "250px" }} />
+					<br />
+					<label className="me-3">Email : </label>
+					<input
+						type="text"
+						{...register("email")}
+						style={{ width: "250px" }}
+					/>
+					<br />
+					<label className="me-3">Phone Number : </label>
+					<input
+						type="text"
+						{...register("phone")}
+						style={{ width: "250px" }}
+					/>
+					<br />
+					<label className="me-3">Kota :</label>
+					<input type="text" {...register("city")} />
+					<br />
+
+					<input type="hidden" {...register("profile_picture")} />
+					<button
+						type="submit"
+						className="bg-success rounded my-3"
+						{...register("_id")}
+					>
+						Edit
+					</button>
+
+					<button onClick={() => setEditing(false)} className="bg-primary rounded mx-2">
+						Cancel
+					</button>
+				</form>
+			)}
 		</>
 	);
 }
