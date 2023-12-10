@@ -4,8 +4,7 @@ import location from "./assets/loc.png";
 export default function PurchasePageSeller() {
 
     const data = useLoaderData();
-
-    
+    console.log(data);
 
     return (
         <>
