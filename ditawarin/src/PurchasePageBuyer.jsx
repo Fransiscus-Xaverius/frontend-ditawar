@@ -1,7 +1,7 @@
 import plus from "./assets/plus.png"
 import location from "./assets/loc.png";
 import { useLoaderData } from "react-router-dom";
-import PurchasePageItem from "./PurchasePageItem";
+import PurchasePageItem from "./PurchasePageItemBuyer";
 import DataHandler from "./data/DataHandler";
 import { useEffect, useState } from "react";
 
