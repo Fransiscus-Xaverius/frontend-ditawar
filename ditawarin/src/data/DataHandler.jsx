@@ -48,6 +48,18 @@ const getAuctionData = async (data) => {
 const getAllPurchaseAsBuyer = async () => {
     const token = localStorage.getItem("token");
     const result = await client.get(`/allPurchaseAsBuyer?token=${token}`);
+    for(let i = 0; i < result.data.result.length; i++){
+        console.log("aaa")
+        console.log(result.data.result[i].item)
+        const item = ((await getItem(result.data.result[i].item)).data.result);
+        const user = (await getUserById(result.data.result[i].seller));
+        const auction_data = (await getAuctionData({params: {id: result.data.result[i].auction}}));
+        // console.log(auction_data);
+        result.data.result[i].auctiondata = auction_data.auctiondata;
+        result.data.result[i].seller = user;
+        result.data.result[i].item = item;
+        
+    }
     console.log(result);
     return result;
 }
@@ -55,6 +67,14 @@ const getAllPurchaseAsBuyer = async () => {
 const getAllPurchaseAsSeller = async () => {
     const token = localStorage.getItem("token");
     const result = await client.get(`/allPurchaseAsSeller?token=${token}`);
+    for(let i = 0; i < result.data.result.length; i++){
+      console.log("aaa")
+      console.log(result.data.result[i].item)
+      const item = ((await getItem(result.data.result[i].item)).data.result);
+      const user = (await getUserById(result.data.result[i].buyer));
+      result.data.result[i].buyer = user;
+      result.data.result[i].item = item;
+    }
     console.log(result);
     return result;
 } 
