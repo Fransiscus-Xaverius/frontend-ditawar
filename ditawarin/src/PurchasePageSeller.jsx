@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
-import PurchasePageItem from "./PurchasePageItemBuyer";
+import PurchasePageItemSeller from "./PurchasePageItemSeller";
 export default function PurchasePageSeller() {
 
     const data = useLoaderData();
@@ -19,6 +19,8 @@ export default function PurchasePageSeller() {
         setMode(mode);
     }
 
+
+    
     return (
         <>
         <h1>Purchase Page Seller</h1>
@@ -40,7 +42,16 @@ export default function PurchasePageSeller() {
                 </div>
             </div>
             <div className="row">
-                
+                {mode == "pending" && filter.pendingData.map((item,index) => {
+                    return (
+                        <PurchasePageItemSeller key={index} {...item} status={false}/>
+                    )
+                })}
+                {mode == "finished" && filter.finishedData.map((item,index) => {
+                    return (
+                        <PurchasePageItemSeller key={index} {...item} status={true}/>
+                    )
+                })}
             </div>
         </div>
         </>
