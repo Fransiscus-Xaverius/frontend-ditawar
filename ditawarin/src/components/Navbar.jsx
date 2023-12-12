@@ -1,4 +1,4 @@
-import { Outlet, useNavigate } from "react-router-dom";
+import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import Logo from "../assets/logo.png";
 import { Link, NavLink } from "react-router-dom";
 import client from "../client";
@@ -35,6 +35,7 @@ export default function Navbar() {
 
   return (
     <>
+    {!userToken && <Navigate to={"/login"}/>}
       <nav className="p-0" style={{ borderBottom: "1px solid gray" }}>
         <div className="container-fluid" style={{ backgroundColor: "#06083D" }}>
           <div className="d-flex align-items-center">
