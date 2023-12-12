@@ -15,7 +15,7 @@ const PurchasePageItemSeller = (props) => {
 
     const markAsFinished = async () => {
         const token = localStorage.getItem("token");
-        const result = await client.post(`/purchase/finish?id=${props._id}`, {
+        const result = await client.post(`/purchase/mark?id=${props._id}`, {
             token: token,
         });
         console.log(result.data);
