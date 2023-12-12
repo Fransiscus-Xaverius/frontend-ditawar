@@ -71,10 +71,7 @@ const router = createBrowserRouter([
           },
         ],
       },
-      {
-        path: "/logout",
-        element: <Logout />,
-      },
+      
       {
         path: "/profile",
         loader: getUserData,
@@ -154,6 +151,10 @@ const router = createBrowserRouter([
   {
     path: "/error",
     element: <ErrorPage />,
+  },
+  {
+    path: "/logout",
+    element: <Logout />,
   },
 ]);
 

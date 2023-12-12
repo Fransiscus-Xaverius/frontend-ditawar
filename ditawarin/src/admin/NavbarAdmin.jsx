@@ -1,4 +1,4 @@
-import { Link, NavLink, Outlet, useLoaderData } from "react-router-dom";
+import { Link, NavLink, Navigate, Outlet, useLoaderData } from "react-router-dom";
 
 import Users from "../assets/users.png";
 import Auction from "../assets/auction.png";
@@ -9,13 +9,14 @@ import { useEffect, useState } from "react";
 import client from "../client";
 
 function NavbarAdmin() {
+	let userToken = localStorage.getItem("token");
 	const [hours, setHours] = useState(0);
 	const [minutes, setMinutes] = useState(0);
 	const [seconds, setSeconds] = useState(0);
 
 	const [useraktif, setuseraktif] = useState(0);
 	const [usernonaktif, setusernonaktif] = useState(0);
-	const [trans,settrans] = useState(0);
+	const [trans, settrans] = useState(0);
 
 	const getTime = () => {
 		setSeconds((time) => time + 1);
@@ -59,6 +60,8 @@ function NavbarAdmin() {
 			className="container-fluid p-0 d-flex"
 			style={{ display: "block", minHeight: "100vh" }}
 		>
+			{!userToken && <Navigate to={"/login"} />}
+			{userToken != "admin" && <Navigate to={"/login"}/>}
 			<div
 				className="container-fluid p-0 d-flex flex-column flex-grow-1"
 				style={{ display: "block", minHeight: "100vh" }}
@@ -83,7 +86,7 @@ function NavbarAdmin() {
 								style={{ width: "100px", height: "40px" }}
 							>
 								<NavLink
-									to={"/"}
+									to={"/logout"}
 									className="text-decoration-none text-black fw-bolder"
 								>
 									KELUAR
@@ -143,9 +146,7 @@ function NavbarAdmin() {
 									}}
 								>
 									<div className="card-body text-success align-items-center text-light">
-										<h1 className="card-title text-center">
-											{trans}
-										</h1>
+										<h1 className="card-title text-center">{trans}</h1>
 									</div>
 									<div className="footer text-light">TRANSACTION</div>
 								</div>
