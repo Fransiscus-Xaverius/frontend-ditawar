@@ -23,6 +23,7 @@ export default function PurchasePageBuyer() {
 
     return (
         <>
+        
         <h1>Purchase Page Buyer</h1>
         <div className="container-fluid">
             <div className="row">

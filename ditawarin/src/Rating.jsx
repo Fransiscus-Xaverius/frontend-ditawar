@@ -1,6 +1,7 @@
-import { Form } from "react-router-dom";
+import { Form, Navigate } from "react-router-dom";
 import { useState } from "react";
 function Rating() {
+	let userToken = localStorage.getItem("token");
 	const [rating, setRating] = useState(1);
 	const [text, setText] = useState("");
 	const handleRatingChange = (value) => {
@@ -19,6 +20,8 @@ function Rating() {
 	};
 	return (
 		<div className="text-center">
+			{!userToken && <Navigate to={"/login"}/>}
+            {userToken == "admin" && <Navigate to={"/login"}/>}
 			<h1>Beri Penilaian</h1>
 			<div>
 				<Form onSubmit={handleSubmit}>

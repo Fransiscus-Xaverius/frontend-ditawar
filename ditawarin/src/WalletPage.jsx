@@ -1,23 +1,28 @@
-import { useLoaderData } from "react-router-dom"
-import {useForm} from "react-hook-form"
+import { Navigate, useLoaderData } from "react-router-dom";
+import { useForm } from "react-hook-form";
 import axios from 'axios';
 import uang from './assets/money.png'
 import { useState } from "react";
 
 export default function WalletPage(){
     
+	let userToken = localStorage.getItem("token");
     const wallet_data = useLoaderData();
     const [tarik, setTarik] = useState(false)
 
-    const {register, handleSubmit, reset, formState:{errors}} = useForm();
+	const {
+		register,
+		handleSubmit,
+		reset,
+		formState: { errors },
+	} = useForm();
 
-    console.log(wallet_data);
+	console.log(wallet_data);
 
-    const Rupiah = new Intl.NumberFormat("id-ID", {
-        style: "currency",
-        currency: "IDR"
-    });
-
+	const Rupiah = new Intl.NumberFormat("id-ID", {
+		style: "currency",
+		currency: "IDR",
+	});
     // const top_up = async (data) => {
     //     const options = {
     //         method: "POST",
@@ -54,62 +59,66 @@ export default function WalletPage(){
 
     return (
         <>
-        <div className="container">
-            <div className="row mt-5 justify-content-between">
-                <h1 className="mb-4" style={{color: "#06083D"}}><b>Detail Saldo</b></h1>
-                {!tarik && (
-                <div className="col-5 border border-secondary-subtle p-4" style={{borderRadius: "45px"}}>
-                    <div className="d-flex mb-4 pb-3 align-items-center border-bottom">
-                        <img src={uang} alt="" style={{width: "40px", height: "40px"}}/>
-                        <div className="ketSaldo ms-3">
-                            <p className="mb-0">Total Saldo Aktif</p>
-                            <p className="mb-0" style={{fontWeight:"bold", color: "#06083D", fontSize:"22px"}}>{Rupiah.format(wallet_data.wallet.result.saldo)}</p>
+        {!userToken && <Navigate to={"/login"} />}
+		{userToken == "admin" && <Navigate to={"/login"} />}
+        {userToken && (
+            <div className="container">
+                <div className="row mt-5 justify-content-between">
+                    <h1 className="mb-4" style={{color: "#06083D"}}><b>Detail Saldo</b></h1>
+                    {!tarik && (
+                    <div className="col-5 border border-secondary-subtle p-4" style={{borderRadius: "45px"}}>
+                        <div className="d-flex mb-4 pb-3 align-items-center border-bottom">
+                            <img src={uang} alt="" style={{width: "40px", height: "40px"}}/>
+                            <div className="ketSaldo ms-3">
+                                <p className="mb-0">Total Saldo Aktif</p>
+                                <p className="mb-0" style={{fontWeight:"bold", color: "#06083D", fontSize:"22px"}}>{Rupiah.format(wallet_data.wallet.result.saldo)}</p>
+                            </div>
+                            <button type="button" className="btn btn-success ms-auto" onClick={()=> {tarikClick()}}><b>Tarik Saldo</b></button>
                         </div>
-                        <button type="button" className="btn btn-success ms-auto" onClick={()=> {tarikClick()}}><b>Tarik Saldo</b></button>
-                    </div>
-                    <div className="d-flex">
-                        <p className="mb-0">Saldo Refund :</p>
-                        <p className="ms-auto mb-0">{Rupiah.format(wallet_data.wallet.result.saldo_tertahan)}</p>
-                    </div>
-                    <div className="d-flex">
-                        <p className="mb-0">Saldo Tertahan :</p>
-                        <p className="ms-auto mb-0">Rp 0</p>
-                    </div>
-                </div>
-                )}
-                {tarik && (
-                <div className="col-5 border border-secondary-subtle p-4" style={{borderRadius: "45px"}}>
-                    <div className="d-flex mb-4 pb-3 align-items-center border-bottom">
-                        <img src={uang} alt="" style={{width: "40px", height: "40px"}}/>
-                        <div className="ketSaldo ms-3">
-                            <p className="mb-0">Total Saldo Aktif</p>
-                            <p className="mb-0" style={{fontWeight:"bold", color: "#06083D", fontSize:"22px"}}>{Rupiah.format(wallet_data.wallet.result.saldo)}</p>
+                        <div className="d-flex">
+                            <p className="mb-0">Saldo Refund :</p>
+                            <p className="ms-auto mb-0">{Rupiah.format(wallet_data.wallet.result.saldo_tertahan)}</p>
                         </div>
-                        <div className="tarikSaldo ms-auto text-end">
-                            <input type="text"placeholder="Jumlah yang ingin ditarik" className=" ms-auto ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "13rem", height: "3rem"}}/> <br />
-                            <button type="button" className="btn btn-success mt-2"><b>Tarik Saldo</b></button>
+                        <div className="d-flex">
+                            <p className="mb-0">Saldo Tertahan :</p>
+                            <p className="ms-auto mb-0">Rp 0</p>
                         </div>
                     </div>
-                    <div className="d-flex">
-                        <p className="mb-0">Saldo Refund :</p>
-                        <p className="ms-auto mb-0">{Rupiah.format(wallet_data.wallet.result.saldo_tertahan)}</p>
+                    )}
+                    {tarik && (
+                    <div className="col-5 border border-secondary-subtle p-4" style={{borderRadius: "45px"}}>
+                        <div className="d-flex mb-4 pb-3 align-items-center border-bottom">
+                            <img src={uang} alt="" style={{width: "40px", height: "40px"}}/>
+                            <div className="ketSaldo ms-3">
+                                <p className="mb-0">Total Saldo Aktif</p>
+                                <p className="mb-0" style={{fontWeight:"bold", color: "#06083D", fontSize:"22px"}}>{Rupiah.format(wallet_data.wallet.result.saldo)}</p>
+                            </div>
+                            <div className="tarikSaldo ms-auto text-end">
+                                <input type="text"placeholder="Jumlah yang ingin ditarik" className=" ms-auto ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "13rem", height: "3rem"}}/> <br />
+                                <button type="button" className="btn btn-success mt-2"><b>Tarik Saldo</b></button>
+                            </div>
+                        </div>
+                        <div className="d-flex">
+                            <p className="mb-0">Saldo Refund :</p>
+                            <p className="ms-auto mb-0">{Rupiah.format(wallet_data.wallet.result.saldo_tertahan)}</p>
+                        </div>
+                        <div className="d-flex">
+                            <p className="mb-0">Saldo Tertahan :</p>
+                            <p className="ms-auto mb-0">Rp 0</p>
+                        </div>
                     </div>
-                    <div className="d-flex">
-                        <p className="mb-0">Saldo Tertahan :</p>
-                        <p className="ms-auto mb-0">Rp 0</p>
-                    </div>
-                </div>
-                )}
+                    )}
 
-                <div className="col-6 border border-secondary-subtle p-4" style={{borderRadius: "45px"}}>
-                    <h2 className="mb-0" style={{color: "#06083D"}}><b>Riwayat Saldo</b></h2>
-                    <div className="d-flex mt-4 border-bottom">
-                        <p>Semua Transaksi</p>
-                        <p className="ms-3">Penjualan</p>
+                    <div className="col-6 border border-secondary-subtle p-4" style={{borderRadius: "45px"}}>
+                        <h2 className="mb-0" style={{color: "#06083D"}}><b>Riwayat Saldo</b></h2>
+                        <div className="d-flex mt-4 border-bottom">
+                            <p>Semua Transaksi</p>
+                            <p className="ms-3">Penjualan</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        )}
             {/* <h1>Detail Saldo</h1>
             <div className="container-fluid">
                 <div className="row">

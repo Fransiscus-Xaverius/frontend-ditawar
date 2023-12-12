@@ -35,8 +35,7 @@ export default function Navbar() {
 
   return (
     <>
-    {!userToken && <Navigate to={"/login"}/>}
-    {userToken == "admin" && <Navigate to={"/login"}/>}
+    
       <nav className="p-0" style={{ borderBottom: "1px solid gray" }}>
         <div className="container-fluid" style={{ backgroundColor: "#06083D" }}>
           <div className="d-flex align-items-center">
@@ -71,6 +70,8 @@ export default function Navbar() {
               )}
               {userToken && (
                 <>
+                  {!userToken && <Navigate to={"/login"}/>}
+                  {userToken == "admin" && <Navigate to={"/login"}/>}
                   <img
                     style={{ height: "48px" }}
                     className="nav-item rounded-circle me-2"

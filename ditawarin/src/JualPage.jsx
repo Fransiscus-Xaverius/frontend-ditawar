@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form'
-import { Link, redirect } from 'react-router-dom'
+import { Link, Navigate, redirect } from 'react-router-dom'
 import simbolPlus from './assets/plus.png'
 import client from './client.jsx'
 import { useNavigate } from 'react-router-dom'
 
 export default function JualPage() {
-
+    let userToken = localStorage.getItem("token");
     const {register, handleSubmit, reset, formState:{errors}} = useForm();
     const navigate = useNavigate();
     const [gambar, setGambar] = useState(0);
@@ -114,6 +114,8 @@ export default function JualPage() {
     }, [files])
     return (
         <>
+            {!userToken && <Navigate to={"/login"}/>}   
+            {userToken == "admin" && <Navigate to={"/login"}/>}
             <div className='container'>
                 <h1 className='mt-4'>Upload Produk</h1>
                 <hr />

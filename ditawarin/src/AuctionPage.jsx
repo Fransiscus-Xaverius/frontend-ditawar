@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { Navigate, useLoaderData } from "react-router-dom";
 import client from "./client";
 import { React, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { buyNowHandler } from "./Handler/AuctionRelatedHandler";
 
 export default function AuctionPage() {
+  let userToken = localStorage.getItem("token");
   const navigate = useNavigate();
   const data = useLoaderData();
   const { register, handleSubmit, reset } = useForm();
@@ -126,6 +127,8 @@ export default function AuctionPage() {
     <>
       {console.log(auction)}
       <div className="container-fluid">
+      {!userToken && <Navigate to={"/login"} />}
+			{userToken == "admin" && <Navigate to={"/login"} />}
         <div className="row mt-4 mx-auto">
           <div className="col-md-4 text-center">
             <img

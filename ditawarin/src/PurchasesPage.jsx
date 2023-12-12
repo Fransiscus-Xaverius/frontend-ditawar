@@ -1,10 +1,13 @@
-import { Outlet, useNavigate } from "react-router-dom";
+import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
 export default function PurchasesPage(){
+    let userToken = localStorage.getItem("token");
     return(
         <>
+        {!userToken && <Navigate to={"/login"}/>}
+        {userToken == "admin" && <Navigate to={"/login"}/>}
         <h1>Purchases Page</h1>
 
         <div className="container-fluid">

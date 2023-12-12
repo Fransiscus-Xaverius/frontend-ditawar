@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, redirect, useFetcher, useLoaderData } from "react-router-dom";
+import { Link, Navigate, redirect, useFetcher, useLoaderData } from "react-router-dom";
 import client from "./client.jsx";
 import { useNavigate } from "react-router-dom";
 import plus from "./assets/plus.png";
@@ -8,6 +8,7 @@ import Joi from "joi";
 import { joiResolver } from "@hookform/resolvers/joi";
 
 export default function ProfilePage() {
+	let userToken = localStorage.getItem("token");
 	const data = useLoaderData();
 	const navigate = useNavigate();
 	const fetcher = useFetcher();
@@ -138,6 +139,8 @@ export default function ProfilePage() {
 
 	return (
 		<>
+			{!userToken && <Navigate to={"/login"}/>}
+            {userToken == "admin" && <Navigate to={"/login"}/>}
 			{!editing && (
 				<div className="container">
 					<div className="d-flex" style={{ marginTop: "5rem" }}>

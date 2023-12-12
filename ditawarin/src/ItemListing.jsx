@@ -1,10 +1,13 @@
-import { Outlet } from "react-router-dom"
+import { Navigate, Outlet } from "react-router-dom";
 
-export default function ItemListing(){
+export default function ItemListing() {
+	let userToken = localStorage.getItem("token");
 
-    return (
-        <>
-            <Outlet/>
-        </>
-    )
+	return (
+		<>
+			{!userToken && <Navigate to={"/login"} />}
+			{userToken == "admin" && <Navigate to={"/login"} />}
+			<Outlet />
+		</>
+	);
 }

@@ -10,7 +10,7 @@ function Login() {
     const navigate = useNavigate();
 
     async function signIn(data){
-        if(data.email === "adminditawarin@gmail.com" || data.pass === "adminditawarin"){
+        if(data.email === "adminditawarin@gmail.com" && data.pass === "adminditawarin"){
             localStorage.setItem('token', "admin");
             navigate('/admin');
         }
