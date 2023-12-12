@@ -8,21 +8,79 @@ import Mobil from "./assets/mobil.png";
 import CardAuction from "./CardAuction";
 import SearchItem from "./SearchItem";
 import { useLoaderData, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import location from "./assets/loc.png"
+import { Scrollbars } from "react-custom-scrollbars-2"
 
 function Home() {
   const data = useLoaderData();
   console.log(data);
+  const [datalihat, setDatalihat] = useState([])
+  const [datatampil, setDatatampil] = useState([])
 
   const navigate = useNavigate();
 
-  const chunk = (arr, size) =>
-    Array.from({ length: Math.ceil(arr.length / size) }, (v, i) =>
-      arr.slice(i * size, i * size + size)
-    );
+  let Rupiah = new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR"
+  });
 
-  const chunked = chunk(data, 3);
-  console.log(chunked);
+  const moveToAuction = (id) => {
+    navigate('/listing/'+id);
+  }
+
+  useEffect(()=>{
+    let datalook = []
+    let datasee = []
+    if (data.length == 1) {
+      setDatalihat(data)
+      setDatatampil(data)
+    }else{
+      for (let i = 0; i < Math.ceil(data.length/2); i++) {
+        console.log("KONTOL")
+        datasee.push(data[i])
+      }
+      for (let i = Math.ceil(data.length/2); i < data.length; i++) {
+        datalook.push(data[i])
+      }
+      console.log(datasee)
+      console.log(datalook)
+      setDatatampil(datasee)
+      setDatalihat(datalook)
+    }
+  },[])
+
+  useEffect(()=>{
+    console.log(datalihat)
+  },[datalihat])
+
+  useEffect(()=>{
+    console.log(datatampil.length)
+  },[datatampil])
+
+  const [lihat, setLihat] = useState(false)
+  function look(){
+    if (lihat == true) {
+      setLihat(false)
+    }else{
+      setLihat(true)
+    }
+  }
+
+  function expandDiv(){
+    let divi = document.getElementById('lihat')
+    if (lihat == false) {
+      divi.style.width = "0px"
+      divi.style.overflowX = "hidden"
+    }else{
+      divi.style.width = "100%"
+      divi.style.overflowX = "auto"
+    }
+  }
+
+  useEffect(()=>{
+    expandDiv()
+  },[lihat])
 
   return (
     <>
@@ -93,9 +151,9 @@ function Home() {
 
         {/* DEALS */}
         <div className="row mt-5">
-          <div className="col-12 col-sm-9">
+          <div className="col-2">
             <div
-              className="rounded-5 col-2"
+              className="rounded-5"
               style={{
                 width: "30rem",
                 backgroundColor: "#06083D",
@@ -114,21 +172,55 @@ function Home() {
                 type="button"
                 className="btn btn-outline-light mt-3 "
                 style={{ width: "35%" }}
+                onClick={() => look()}
               >
                 LIHAT
               </button>
-            </div>
-            {chunked.map((chunk, idx) => (
-              <div className="row" key={idx}>
-                {chunk.map((auction, i) => (
-                  <div className="col-4" key={i}>
-                    <CardAuction {...auction} />
-                  </div>
-                ))}
+            </div>   
+          </div>
+          <div className="col-10" style={{display:"flex"}}>
+            <Scrollbars className="" autoHide autoHideTimeout={1000} autoHideDuration={200} thumbMinSize={30} universal={true} style={{height:"90%", alignSelf:"center", width:"100%"}}>
+              <div id="lihat" className="row ps-5" style={{overflowY:"hidden", width:"0", transitionDuration:"0.4s", height:"100%"}}>
+                {
+                  datalihat.map((auction, idx) => (
+                      <div className="card ms-1" style={{minWidth: "250px", maxWidth:"250px", height:"100%", borderRadius: "10px"}} onClick={()=>{moveToAuction(auction._id)}}>
+                          <img src={import.meta.env.VITE_API_URL+'/static/'+auction.item.images || ""} alt="" className="card-img-top mx-auto" style={{width: "100%", height:"50%"}}/>
+                          <div className="card-body">
+                              <p className="card-title text-center"><h4><b>{auction.item.nama}</b></h4></p>
+                              <p className="card-text text-center"><b>{Rupiah.format(auction.starting_price)}</b></p>
+                              <p className="footer text-center text-body-secondary">
+                                  <img src={location} alt="" style={{width: "20px"}} className="me-2"/> {auction.kecamatan}, {auction.kota_kabupaten}, {auction.provinsi}, {auction.item.negara}   
+                              </p>
+                          </div>
+                      </div>
+                  ))
+                }              
+                
+              </div>
+            </Scrollbars>
+          </div>
+        </div>
+        <div className="row">
+          {
+            datatampil.length == 0 ?
+            <div></div>
+            :
+            datatampil.map((auction, idx) => (
+              <div className="col-4" key={idx}>
+                <CardAuction {...auction} />
+              </div>
+            ))
+          }
+        </div>
+        {/* {chunked.map((chunk, idx) => (
+          <div className="row" key={idx}>
+            {chunk.map((auction, i) => (
+              <div className="col-4" key={i}>
+                <CardAuction {...auction} />
               </div>
             ))}
           </div>
-        </div>
+        ))} */}
       </div>
     </>
   );

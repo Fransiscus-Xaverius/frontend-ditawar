@@ -111,6 +111,7 @@ const getSampleAuction = async () => {
   // alert('sample called')
   const temp = await client.get("/sampleAuction");
   const allAuctions = temp.data.result;
+  console.log(allAuctions)
   for (let i = 0; i < allAuctions.length; i++) {
     try {
       const item_id = allAuctions[i].id_barang;
@@ -120,6 +121,7 @@ const getSampleAuction = async () => {
       console.log(error);
     }
   }
+  console.log(allAuctions)
   return allAuctions;
 };
 
