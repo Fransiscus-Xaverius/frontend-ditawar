@@ -198,8 +198,9 @@ export default function AuctionPage() {
               {auction.nama_penjual == user.nama ? (
                 <div className="col-sm-6 text-md-start pt-4">
                   <button
-                    className="btn rounded-pill text-white pt-3 pb-3"
-                    style={{ width: "200px" ,backgroundColor: "#06083D", float: "right"}}
+                    className="btn bg-primary rounded-pill text-white pt-3 pb-3"
+                    style={{ width: "200px" }}
+                    onClick={() => navigate("/edit/"+auction._id)}
                   >
                     Ubah
                   </button>

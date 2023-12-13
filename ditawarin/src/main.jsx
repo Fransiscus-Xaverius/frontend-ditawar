@@ -26,6 +26,7 @@ import PurchasesPage from "./PurchasesPage.jsx";
 import ErrorPage from "./ErrorPage.jsx";
 import PurchasePageBuyer from "./PurchasePageBuyer.jsx";
 import PurchasePageSeller from "./PurchasePageSeller.jsx";
+import UpdatePage from "./UpdatePage.jsx";
 
 const {
   getAuction,
@@ -101,6 +102,11 @@ const router = createBrowserRouter([
       {
         path: "/sell",
         element: <JualPage />,
+      },
+      {
+        path: "/edit/:id",
+        loader: getAuctionData,
+        element: <UpdatePage />,
       },
       {
         path: "/listing",

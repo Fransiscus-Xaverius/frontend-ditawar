@@ -152,7 +152,7 @@ export default function JualPage() {
                             </div>
                             <div className="col-md-6">
                                 <input type="checkbox" style={{width:"17px", height:"17px"}} {...register("kategori")} value={"Logam Mulia"} id="" /><label htmlFor="" className="ms-4 h4">Logam Mulia</label><br />
-                                <input type="checkbox" style={{width:"17px", height:"17px"}} {...register("kategori")} value={"Mainan & Hobi"} id="" /><label htmlFor="" className="ms-4 h4">Mainan & Hobi</label><br />
+                                <input type="checkbox" style={{width:"17px", height:"17px"}} {...register("kategori")} value={"Mainan dan Hobi"} id="" /><label htmlFor="" className="ms-4 h4">Mainan & Hobi</label><br />
                                 <input type="checkbox" style={{width:"17px", height:"17px"}} {...register("kategori")} value={"Peralatan Olahraga"} id="" /><label htmlFor="" className="ms-4 h4">Peralatan Olahraga</label> <br />
                                 <input type="checkbox" style={{width:"17px", height:"17px"}} {...register("kategori")} value={"Otomotif"} id="" /><label htmlFor="" className="ms-4 h4">Otomotif</label> <br />
                                 <input type="checkbox" style={{width:"17px", height:"17px"}} {...register("kategori")} value={"Properti"} id="" /><label htmlFor="" className="ms-4 h4">Properti</label> <br />
