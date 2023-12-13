@@ -47,6 +47,7 @@ function Auctions() {
 					</tr>
 				</thead>
 				<tbody>
+					
 					{Auction.map((act) => {
 						let url =
 							import.meta.env.VITE_API_URL + "/static/" + act.item.images;
@@ -56,7 +57,7 @@ function Auctions() {
 									<img src={`${url}`} style={{ width: "100px" }} />
 									{act.item.nama}
 								</td>
-								<td className="w-25">Rp {act.asking_price}</td>
+								<td className="w-25">Rp {act.highest_bid.bid}</td>
 								<td className="w-25">
 									{!act.ended && <div className="bg-success">PROGRESS</div>}
 									{act.ended && <div className="bg-success px-1">DONE</div>}
