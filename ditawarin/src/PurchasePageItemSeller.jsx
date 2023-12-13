@@ -57,7 +57,6 @@ const PurchasePageItemSeller = (props) => {
             isMarkable = false;
         }
     }
-    console.log(lastHistory.status)
     console.log(isUpdateable);
     console.log(isMarkable);
 
@@ -87,8 +86,8 @@ const PurchasePageItemSeller = (props) => {
                             </div>
                             <div className="row">
                                 <div className="col d-flex">
-                                    {lastHistory.type=="finished" && <p>Transaction Complete</p>}
-                                    {lastHistory.type=="marked" && <p>Purchase marked as Finished, waiting for Buyer to Confirm</p>}
+                                    {lastHistory && lastHistory.type=="finished" && <p>Transaction Complete</p>}
+                                    {lastHistory && lastHistory.type=="marked" && <p>Purchase marked as Finished, waiting for Buyer to Confirm</p>}
                                     {isUpdateable && <button className="btn btn-success me-2" style={{ width: "100px" }} onClick={()=>{goToDetails()}}>Update</button>}
                                     {isMarkable && <button className="btn btn-primary" style={{ width: "100px" }} onClick={markAsFinished}>Mark as Finished</button>}
                                 </div>
