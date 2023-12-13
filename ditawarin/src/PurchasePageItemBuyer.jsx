@@ -25,14 +25,16 @@ export default function PurchasePageItem(props) {
     let isFinished = false;
     let date = new Date();
 
-    if(lastHistory.type == "marked"){
-        isMarked = true;
-        isFinished = false;
-    }
-    else if(lastHistory.type == "finished"){
-        isFinished = true;
-        isMarked = false;
-        date = new Date(lastHistory.date);
+    if(lastHistory){
+        if(lastHistory.type == "marked"){
+            isMarked = true;
+            isFinished = false;
+        }
+        else if(lastHistory.type == "finished"){
+            isFinished = true;
+            isMarked = false;
+            date = new Date(lastHistory.date);
+        }
     }
 
     const finishPurchase = async () => {

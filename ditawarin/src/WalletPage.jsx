@@ -98,12 +98,8 @@ export default function WalletPage(){
                             </form>
                         )}
                         <div className="d-flex">
-                            <p className="mb-0">Saldo Refund :</p>
-                            <p className="ms-auto mb-0">{Rupiah.format(wallet_data.wallet.result.saldo_tertahan)}</p>
-                        </div>
-                        <div className="d-flex">
                             <p className="mb-0">Saldo Tertahan :</p>
-                            <p className="ms-auto mb-0">Rp 0</p>
+                            <p className="ms-auto mb-0">{Rupiah.format(wallet_data.wallet.result.saldo_tertahan)}</p>
                         </div>
                         {!tarik && (
                             <button type="button" className="btn btn-success mt-2" style={{float: "right"}} onClick={()=> {tarikClick()}}><b>Tarik Saldo</b></button>
