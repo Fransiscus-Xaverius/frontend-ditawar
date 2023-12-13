@@ -27,8 +27,10 @@ const getBid = async (id) => {
 const getAuctionData = async (data) => {
   const auction = await getAuction(data);
   const user = await getUserData();
-  let highest_bid = null;
-  if (auction.auctiondata.highest_bid!="null") {
+  let highest_bid = auction.auctiondata.highest_bid;
+  console.log(highest_bid)
+  
+  if (highest_bid) {
     highest_bid = await getBid(auction.auctiondata.highest_bid);
   }
 
