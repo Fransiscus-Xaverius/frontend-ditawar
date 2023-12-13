@@ -28,6 +28,7 @@ import PurchasePageBuyer from "./PurchasePageBuyer.jsx";
 import PurchasePageSeller from "./PurchasePageSeller.jsx";
 import UpdatePage from "./UpdatePage.jsx";
 import DetailsPage from "./DetailsPage.jsx";
+import Report from "./admin/Report.jsx";
 
 const {
   getAuction,
@@ -166,6 +167,10 @@ const router = createBrowserRouter([
         path: "support",
         element: <Support />,
       },
+      {
+        path : "report",
+        element : <Report />
+      }
     ],
   },
   {

@@ -9,30 +9,13 @@ import { useEffect, useState } from "react";
 function Payment() {
 	const data = useLoaderData();
 	const data2 = useLoaderData();
-
 	const [Look, setLook] = useState(false);
 	const [ListPurchase, setListPurchase] = useState(null);
-
-	const sortPurchase = () => {
-		data.sort((a, b) => {
-			return b.transaction - a.transaction;
-		});
-	};
-	const sortPurchaseTime = () => {
-		data2.sort((a, b) => {
-			return a.date - b.date;
-		});
-	};
 
 	const Looking = async (params) => {
 		setLook(true);
 		setListPurchase(params);
 	};
-
-	useEffect(() => {
-		sortPurchase();
-		sortPurchaseTime();
-	}, []);
 
 	return (
 		<>
@@ -90,7 +73,12 @@ function Payment() {
 					<h2>Buyer {ListPurchase.buyer.nama}</h2>
 					{console.log(ListPurchase)}
 
-					<button onClick={() => setLook(false)} className="bg-primary rounded fs-5 text-black">BACK</button>
+					<button
+						onClick={() => setLook(false)}
+						className="bg-primary rounded fs-5 text-black"
+					>
+						BACK
+					</button>
 				</div>
 			)}
 		</>

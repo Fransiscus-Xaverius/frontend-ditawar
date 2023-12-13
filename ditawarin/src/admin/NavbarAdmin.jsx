@@ -1,10 +1,17 @@
-import { Link, NavLink, Navigate, Outlet, useLoaderData } from "react-router-dom";
+import {
+	Link,
+	NavLink,
+	Navigate,
+	Outlet,
+	useLoaderData,
+} from "react-router-dom";
 
 import Users from "../assets/users.png";
 import Auction from "../assets/auction.png";
 import Payment from "../assets/payment.png";
 import Security from "../assets/security.png";
 import Support from "../assets/support.png";
+import Report from "../assets/report.png";
 import { useEffect, useState } from "react";
 import client from "../client";
 
@@ -61,7 +68,7 @@ function NavbarAdmin() {
 			style={{ display: "block", minHeight: "100vh" }}
 		>
 			{!userToken && <Navigate to={"/login"} />}
-			{userToken != "admin" && <Navigate to={"/login"}/>}
+			{userToken != "admin" && <Navigate to={"/login"} />}
 			<div
 				className="container-fluid p-0 d-flex flex-column flex-grow-1"
 				style={{ display: "block", minHeight: "100vh" }}
@@ -133,6 +140,11 @@ function NavbarAdmin() {
 								<b className="px-3">SUPPORT</b>
 							</NavLink>
 							<br />
+							<NavLink to="report" className="text-decoration-none text-white">
+								<img src={Report} style={{ width: "35px" }} className="py-2" />
+								<b className="px-3">REPORT</b>
+							</NavLink>
+							<br />
 						</div>
 
 						<div className="col-9 p-5">
@@ -177,8 +189,6 @@ function NavbarAdmin() {
 									<div className="footer text-light">USER NONAKTIF</div>
 								</div>
 							</div>
-
-							<p className="mt-4">PENJUALAN TERTINGGI</p>
 							<Outlet />
 						</div>
 					</div>

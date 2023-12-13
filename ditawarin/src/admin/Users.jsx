@@ -3,7 +3,7 @@ import Ban from "../assets/ban.png";
 import Edit from "../assets/edit.png";
 import Accept from "../assets/accepted.png";
 import client from "../client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 function Users() {
@@ -169,6 +169,8 @@ function Users() {
 					</button>
 				</form>
 			)}
+
+			
 		</>
 	);
 }
