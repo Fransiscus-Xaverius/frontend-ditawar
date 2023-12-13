@@ -69,11 +69,14 @@ export default function DetailsPage(){
                         <div className="scrollable-div" style={{ minHeight: "400px", maxHeight: "400px", overflowY: "scroll" }}>
                             {!purchase_data.history.length > 0 && <h1><p>Belum ada riwayat transaksi</p></h1>}
                             {purchase_data.history.length > 0 && purchase_data.history.map((item,index) => {
+                                let type = item.type;
+                                type = type.toString().toUpperCase();
                                 return (
                                     <div className="card">
                                         <div className="card-body">
-                                            <h5 className="card-title">Test</h5>
-                                            <p className="card-text">Test Deskripsi</p>
+                                            <h5 className="card-title">{type}</h5>
+                                            <p className="card-text">{new Date(item.date).toString()}</p>
+                                            <p className="card-text">{item.message}</p>
                                         </div>
                                     </div>
                                 )
