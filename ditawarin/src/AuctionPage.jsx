@@ -155,10 +155,8 @@ export default function AuctionPage() {
                 className="col-12 col-md-8"
                 style={{ marginTop: "auto", marginBottom: "auto" }}
               >
-                <div className="d-flex align-items-center">
-                  <div className="h3 p-2" style={{textTransform: "uppercase", backgroundColor: "#CEF9D3", color: "#0C560B", borderRadius: "12px"}}>{auction.kategori_barang}</div>
-                  <div className="h3 ms-2">{item.nama}</div>
-                </div>
+                <h6 className="p-2" style={{textTransform: "uppercase", backgroundColor: "#CEF9D3", color: "#0C560B", borderRadius: "12px", width: "fit-content"}}>{auction.kategori_barang}</h6>
+                <div className="h3 ms-2">{item.nama}</div>
                 <p className="text-secondary mb-4">
                   <img src={location} alt="" style={{width: "25px", height: "25px"}}/>
                   {auction.kecamatan}, {auction.kota_kabupaten},{" "}
@@ -209,8 +207,8 @@ export default function AuctionPage() {
               {auction.nama_penjual == user.nama ? (
                 <div className="col-sm-6 text-md-start pt-4">
                   <button
-                    className="btn bg-primary rounded-pill text-white pt-3 pb-3"
-                    style={{ width: "200px" }}
+                    className="btn rounded-pill text-white p-3"
+                    style={{ width: "200px" , backgroundColor: "#06083D", textTransform: "uppercase", float: "right"}}
                     onClick={() => {ubahAuctionHandler()}}
                   >
                     Ubah
