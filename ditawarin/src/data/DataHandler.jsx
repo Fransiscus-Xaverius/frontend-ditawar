@@ -113,7 +113,7 @@ const getAuctionByQuery = async (data) => {
   const { query } = params;
   const result = await client.get(`/search?query=${query}`);
   console.log(result.data.result);
-  return { data: result.data.result, query: query };
+  return { data: result.data.result, query: query};
 };
 
 const getSampleAuction = async () => {

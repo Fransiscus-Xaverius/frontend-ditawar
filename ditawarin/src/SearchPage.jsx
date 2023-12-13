@@ -1,24 +1,68 @@
 import { useLoaderData } from "react-router-dom";
 import SearchItem from "./SearchItem";
+import { useEffect, useState } from "react";
 
 export default function SearchPage(props) {
   const loader_data = useLoaderData();
   const result = loader_data.data;
   const query = loader_data.query;
+  const [kategori, setKategori] = useState([])
+  const [hasil, setHasil] = useState([])
 
   const filter = [
-    "mobil",
-    "tanah",
-    "pabrik",
-    "ruko",
-    "rumah",
-    "apart",
-    "villa",
-    "elektronik",
-    "motor",
-    "gudang",
-    "lainnya",
+    "Rumah Tangga",
+    "Elektronik",
+    "Buku",
+    "Dapur",
+    "Fashion",
+    "Perhiasan",
+    "Logam Mulia",
+    "Mainan dan Hobi",
+    "Peralatan Olahraga",
+    "Otomotif",
+    "Properti",
   ];
+
+  function filtering(filter){
+    let has = [];
+    if (kategori.length == 0) {
+      has.push(filter)
+    }else{
+      let kembar = false
+      for (let i = 0; i < kategori.length; i++) {
+        if (kategori[i] != filter) {
+          has.push(kategori[i])
+        }else{
+          kembar = true
+        }
+      }
+      if (kembar == false) {
+        has.push(filter)
+      }
+    }
+    setKategori(has)
+  }
+
+  useEffect(() => {
+    let has = []
+    if (kategori.length == 0) {
+      has = result
+    }
+    for (let i = 0; i < result.length; i++) {
+      if (result[i].auction.kategori_barang.includes(kategori[0])) {
+        has.push(result[i])
+      }
+    }
+    for (let i = 0; i < has.length; i++) {
+      for (let j = 1; j < kategori.length; j++) {
+        if (!has[i].auction.kategori_barang.includes(kategori[j])) {
+          console.log("k")
+          has.splice(i, 1)
+        }
+      }
+    }
+    setHasil(has)
+  }, [kategori]);
 
   return (
     <div className="container">
@@ -37,8 +81,9 @@ export default function SearchPage(props) {
                       <input
                         className="form-check-input"
                         type="checkbox"
-                        value=""
+                        value={i}
                         id={i}
+                        onChange={() => filtering(i.toLowerCase())}
                       />
                       <label
                         className="form-check-label text-capitalize"
@@ -57,7 +102,7 @@ export default function SearchPage(props) {
           <div className="container-fluid d-flex flex-column">
             <div className="row d-flex flex-column">
               <div className="col-4">
-                {result.map((item, index) => {
+                {hasil.map((item, index) => {
                   return <SearchItem {...item} key={item._id} />;
                 })}
               </div>
