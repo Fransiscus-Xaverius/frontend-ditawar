@@ -120,6 +120,17 @@ export default function AuctionPage() {
 
   const date = new Date(auction.tanggal_mulai);
 
+  const ubahAuctionHandler = async (data) => {
+    const auction_status = await client.get('/auction?id=' + auction._id);
+    if (auction_status.data.result.ended) {
+      alert("Auction telah selesai!");
+      return;
+    }
+    else{
+      navigate("/edit/"+auction._id)
+    }
+  }
+
   const buyNowClick = () => {
     buyNowHandler(auction._id);
   };
@@ -200,7 +211,7 @@ export default function AuctionPage() {
                   <button
                     className="btn bg-primary rounded-pill text-white pt-3 pb-3"
                     style={{ width: "200px" }}
-                    onClick={() => navigate("/edit/"+auction._id)}
+                    onClick={() => {ubahAuctionHandler()}}
                   >
                     Ubah
                   </button>

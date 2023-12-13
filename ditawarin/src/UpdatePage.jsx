@@ -22,7 +22,15 @@ export default function UpdatePage() {
     let url = import.meta.env.VITE_API_URL + "/static/" + item.images;
     let katego = auction.kategori;
 
+    if(auction.ended){
+        alert("Auction tidak dapat di-edit karena telah berakhir");
+    }
+
     async function updateItem(data){
+
+        let auction_status = await client.get('/auction?id='+auction._id);
+        console.log(auction_status.data.result.status);
+
         let kate = "";
         for (let i = 0; i < data.kategori.length; i++) {
             if (i == data.kategori.length - 1) {
@@ -117,6 +125,7 @@ export default function UpdatePage() {
         <>
             {!userToken && <Navigate to={"/login"}/>}   
             {userToken == "admin" && <Navigate to={"/login"}/>}
+            {auction.ended && <Navigate to={"/listing/"+auction._id}/>}
             <div className='container'>
                 <h1 className='mt-4'>Upload Produk</h1>
                 <hr />

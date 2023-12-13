@@ -24,34 +24,35 @@ export default function WalletPage(){
 		style: "currency",
 		currency: "IDR",
 	});
-    // const top_up = async (data) => {
-    //     const options = {
-    //         method: "POST",
-    //     }
 
-    //     const body_data = {
-    //         nama: wallet_data.user.nama,
-    //         email: wallet_data.user.email,
-    //         phone: wallet_data.user.phone,
-    //         desc: `Top Up Saldo sebesar ${Rupiah.format(data.amount)}`,
-    //         amount: parseInt(data.amount),
-    //         city: wallet_data.user.city,
-    //         kode_pos: 12345, //needs fixing, additional data needed in register
-    //         provinsi: wallet_data.user.province,
-    //         alamat: wallet_data.user.address,
-    //         wallet_id: wallet_data.wallet.result._id
-    //     }
+    const top_up = async (data) => {
+        const options = {
+            method: "POST",
+        }
 
-    //     console.log(body_data);
+        const body_data = {
+            nama: wallet_data.user.nama,
+            email: wallet_data.user.email,
+            phone: wallet_data.user.phone,
+            desc: `Top Up Saldo sebesar ${Rupiah.format(data.amount)}`,
+            amount: parseInt(data.amount),
+            city: wallet_data.user.city,
+            kode_pos: 12345, //needs fixing, additional data needed in register
+            provinsi: wallet_data.user.province,
+            alamat: wallet_data.user.address,
+            wallet_id: wallet_data.wallet.result._id
+        }
 
-    //     try {
-    //         const res = await axios.post(import.meta.env.VITE_API_URL + "/createInvoice", body_data);
-    //         const json = res.data;
-    //         console.log(json);
-    //     } catch (error) {
-    //         console.error(error);
-    //     }
-    // }
+        console.log(body_data);
+
+        try {
+            const res = await axios.post(import.meta.env.VITE_API_URL + "/createInvoice", body_data);
+            const json = res.data;
+            console.log(json);
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
     const tarikClick = () => {
 		setTarik(true);
@@ -60,7 +61,6 @@ export default function WalletPage(){
     const topClick = () => {
         setTop(true)
     }
-
 
     return (
         <>
@@ -82,17 +82,20 @@ export default function WalletPage(){
                             </div>
                         )}
                         {top && (
-                            <div className="d-flex mb-4 pb-3 align-items-center border-bottom">
-                                <img src={uang} alt="" style={{width: "40px", height: "40px"}}/>
-                                <div className="ketSaldo ms-3">
-                                    <p className="mb-0">Total Saldo Aktif</p>
-                                    <p className="mb-0" style={{fontWeight:"bold", color: "#06083D", fontSize:"22px"}}>{Rupiah.format(wallet_data.wallet.result.saldo)}</p>
+                            <form onSubmit={handleSubmit(top_up)}>
+                                <div className="d-flex mb-4 pb-3 align-items-center border-bottom">
+                                    <img src={uang} alt="" style={{width: "40px", height: "40px"}}/>
+                                    <div className="ketSaldo ms-3">
+                                        <p className="mb-0">Total Saldo Aktif</p>
+                                        <p className="mb-0" style={{fontWeight:"bold", color: "#06083D", fontSize:"22px"}}>{Rupiah.format(wallet_data.wallet.result.saldo)}</p>
+                                    </div>
+                                    <div className="topup ms-auto text-end">
+                                        <input type="number"placeholder="0" {...register("amount", {required:{value:true, message:"Jumlah top up wajib diisi!"}})} className=" ms-auto ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "13rem", height: "3rem"}}/> <br />
+                                        {errors.amount && <p style={{color: "red"}}>{errors.amount.message}</p>}
+                                        <button type="submit" className="btn btn-success ms-auto mt-2"><b>Topup Saldo</b></button>
+                                    </div>
                                 </div>
-                                <div className="topup ms-auto text-end">
-                                    <input type="text"placeholder="Jumlah topup" className=" ms-auto ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "13rem", height: "3rem"}}/> <br />
-                                    <button type="button" className="btn btn-success ms-auto mt-2"><b>Topup Saldo</b></button>
-                                </div>
-                            </div>
+                            </form>
                         )}
                         <div className="d-flex">
                             <p className="mb-0">Saldo Refund :</p>
