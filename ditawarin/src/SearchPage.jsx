@@ -23,6 +23,15 @@ export default function SearchPage(props) {
     "Properti",
   ];
 
+  function resetting(){
+    for (let i = 0; i < filter.length; i++) {
+      let check = document.getElementById(filter[i])
+      check.checked = false
+    }
+    setKategori([])
+    setHasil(result)
+  }
+
   function filtering(filter){
     let has = [];
     if (kategori.length == 0) {
@@ -74,7 +83,7 @@ export default function SearchPage(props) {
           <div className="p-3">
             <div className="d-flex align-items-center mb-2">
               <h4 className="mb-0">Filter</h4>
-              <button className="btn text-white p-1 ms-auto" style={{ width: "70px" , backgroundColor: "#06083D", textTransform: "uppercase", borderRadius: "10px"}}> RESET </button>
+              <button className="btn text-white p-1 ms-auto" onClick={resetting} style={{ width: "70px" , backgroundColor: "#06083D", textTransform: "uppercase", borderRadius: "10px"}}> RESET </button>
             </div>
             
             <ul className="list-unstyled">
