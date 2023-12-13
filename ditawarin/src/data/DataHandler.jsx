@@ -4,8 +4,25 @@ import client from "../client";
 const getPurchaseDetails = async (data) => {
   const { params } = data;
   const { id } = params;
+  const user = await getUserData();
+  // console.log(user);
   const result = await client.get(`/purchase-detail?id=${id}`);
-  return result;
+  let role = "buyer";
+  if(user._id != result.data.result.buyer._id){
+    role = "seller";
+  }
+  const item = (await getItem(result.data.result.item._id)).data.result;
+  // console.log(item)
+  const p = {
+    auction: result.data.result.auction,
+    buyer: result.data.result.buyer,
+    seller: result.data.result.seller,
+    purchase: result.data.result.purchase,
+    item: item,
+    role: role,
+  }
+
+  return p;
 };
 
 const getAuction = async (data) => {
