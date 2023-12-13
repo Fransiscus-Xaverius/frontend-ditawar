@@ -129,7 +129,7 @@ export default function AuctionPage() {
       <div className="container-fluid">
       {!userToken && <Navigate to={"/login"} />}
 			{userToken == "admin" && <Navigate to={"/login"} />}
-        <div className="row mt-4 mx-auto">
+        <div className="row mt-5 mx-auto">
           <div className="col-md-4 text-center">
             <img
               src={url}
@@ -144,43 +144,32 @@ export default function AuctionPage() {
                 className="col-12 col-md-8"
                 style={{ marginTop: "auto", marginBottom: "auto" }}
               >
-                <div className="h3">{item.nama}</div>
-                <div className="h5">{auction.kategori_barang}</div>
-                <div className="container-fluid d-flex">
-                  <p className="text-secondary">
-                    Dijual oleh : {auction.nama_penjual}
-                  </p>
-                  <p className="ms-auto text-secondary">
-                    <img src={location} alt="" />
-                    {auction.kecamatan}, {auction.kota_kabupaten},{" "}
-                    {auction.provinsi}
-                  </p>
+                <div className="d-flex align-items-center">
+                  <div className="h3 p-2" style={{textTransform: "uppercase", backgroundColor: "#CEF9D3", color: "#0C560B", borderRadius: "12px"}}>{auction.kategori_barang}</div>
+                  <div className="h3 ms-2">{item.nama}</div>
                 </div>
-                <div className="container-fluid d-flex">
-                  <div className="text-secondary">
-                    Mulai dari: {Rupiah.format(auction.starting_price)}
-                  </div>
-                </div>
-                <div className="container-fluid d-flex">
-                  <h2>
-                    Penawaran Tertinggi:{" "}
-                    {highest_bid ? Rupiah.format(highest_bid.bid) : 0}
-                  </h2>
-                </div>
-                <div className="container-fluid d-flex">
-                  <div className="text-secondary">
-                    Beli Sekarang: {Rupiah.format(auction.asking_price)}
-                  </div>
-                </div>
-                <hr />
-                <div className="h3 ms-4">Detail</div>
-                <br />
-                <div className="ms-4 w-100">{item.deskripsi}</div>
+                <p className="text-secondary mb-4">
+                  <img src={location} alt="" style={{width: "25px", height: "25px"}}/>
+                  {auction.kecamatan}, {auction.kota_kabupaten},{" "}
+                  {auction.provinsi}
+                </p>
+                <p className="text-secondary mb-0">
+                    Mulai dari : {Rupiah.format(auction.starting_price)}
+                </p>
+                <h2>
+                  Penawaran Tertinggi :{" "}
+                  {highest_bid ? Rupiah.format(highest_bid.bid) : 0}
+                </h2>
+                <p className="text-secondary mb-0">
+                    Beli Sekarang : {Rupiah.format(auction.asking_price)}
+                </p>
+                <div className="h3 mt-4 border-bottom pb-3"><b>DESCRIPTION</b></div>
+                <div className="w-100 mt-3">{item.deskripsi}</div>
               </div>
 
               <div className="col-md-4">
                 <div className="border rounded-4 text-center mx-auto mt-4 mt-md-0">
-                  <div className="bg-primary text-white rounded-top-4 p-3">
+                  <div className="text-white rounded-top-4 p-3" style={{backgroundColor: "#06083D"}}>
                     Waktu Server
                   </div>
                   <div className="mb-4 mt-4">
@@ -207,10 +196,10 @@ export default function AuctionPage() {
               </div>
 
               {auction.nama_penjual == user.nama ? (
-                <div className="col-sm-6 text-center text-md-start pt-4">
+                <div className="col-sm-6 text-md-start pt-4">
                   <button
-                    className="btn bg-primary rounded-pill text-white pt-3 pb-3"
-                    style={{ width: "200px" }}
+                    className="btn rounded-pill text-white pt-3 pb-3"
+                    style={{ width: "200px" ,backgroundColor: "#06083D", float: "right"}}
                   >
                     Ubah
                   </button>
