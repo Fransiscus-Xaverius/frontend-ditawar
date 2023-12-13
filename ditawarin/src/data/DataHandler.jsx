@@ -130,8 +130,13 @@ const getAllPurchase = async () => {
       const transaction = await client.get(
         `/transaction-id?id=${result[i].transaction}`
       );
+      const buyer = await client.get(`/user?id=${result[i].buyer}`);
+      const seller = await client.get(`/user?id=${result[i].seller}`);
       Purchase.push({
         _id : result[i]._id,
+        date : result[i].history[1].time,
+        buyer : buyer.data.result,
+        seller : seller.data.result,
         item: item.data.result.images,
         auction: auction.data.result,
         transaction: transaction.data.result.invoice.amount,
