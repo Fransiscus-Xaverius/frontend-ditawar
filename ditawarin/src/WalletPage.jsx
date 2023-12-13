@@ -71,32 +71,16 @@ export default function WalletPage(){
                 <div className="row mt-5 justify-content-between">
                     <h1 className="mb-4" style={{color: "#06083D"}}><b>Detail Saldo</b></h1>
                     <div className="col-5 border border-secondary-subtle p-4" style={{borderRadius: "45px"}}>
-                        {!top && (
+                        
                             <div className="d-flex mb-4 pb-3 align-items-center border-bottom">
                                 <img src={uang} alt="" style={{width: "40px", height: "40px"}}/>
                                 <div className="ketSaldo ms-3">
                                     <p className="mb-0">Total Saldo Aktif</p>
                                     <p className="mb-0" style={{fontWeight:"bold", color: "#06083D", fontSize:"22px"}}>{Rupiah.format(wallet_data.wallet.result.saldo)}</p>
                                 </div>
-                                <button type="button" className="btn btn-success ms-auto" onClick={()=> {topClick()}}><b>Topup Saldo</b></button>  
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" className="btn btn-success ms-auto" onClick={()=> {topClick()}}><b>Topup Saldo</b></button>  
                             </div>
-                        )}
-                        {top && (
-                            <form onSubmit={handleSubmit(top_up)}>
-                                <div className="d-flex mb-4 pb-3 align-items-center border-bottom">
-                                    <img src={uang} alt="" style={{width: "40px", height: "40px"}}/>
-                                    <div className="ketSaldo ms-3">
-                                        <p className="mb-0">Total Saldo Aktif</p>
-                                        <p className="mb-0" style={{fontWeight:"bold", color: "#06083D", fontSize:"22px"}}>{Rupiah.format(wallet_data.wallet.result.saldo)}</p>
-                                    </div>
-                                    <div className="topup ms-auto text-end">
-                                        <input type="number"placeholder="0" {...register("amount", {required:{value:true, message:"Jumlah top up wajib diisi!"}})} className=" ms-auto ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "13rem", height: "3rem"}}/> <br />
-                                        {errors.amount && <p style={{color: "red"}}>{errors.amount.message}</p>}
-                                        <button type="submit" className="btn btn-success ms-auto mt-2"><b>Topup Saldo</b></button>
-                                    </div>
-                                </div>
-                            </form>
-                        )}
+                        
                         <div className="d-flex">
                             <p className="mb-0">Saldo Tertahan :</p>
                             <p className="ms-auto mb-0">{Rupiah.format(wallet_data.wallet.result.saldo_tertahan)}</p>
@@ -119,6 +103,37 @@ export default function WalletPage(){
                             <p>Semua Transaksi</p>
                             <p className="ms-3">Penjualan</p>
                         </div>
+                    </div>
+                </div>
+                <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div className="modal-dialog modal-dialog-centered">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="staticBackdropLabel">
+                            Modal title
+                            </h5>
+                            <button
+                            type="button"
+                            className="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                            ></button>
+                        </div>
+                        <form onSubmit={handleSubmit(top_up)}>
+                            <div className="d-flex ps-4 pt-4 pe-4 mb-4 pb-3 align-items-center border-bottom">
+                                <img src={uang} alt="" style={{width: "40px", height: "40px"}}/>
+                                <div className="ketSaldo ms-3">
+                                    <p className="mb-0">Total Saldo Aktif</p>
+                                    <p className="mb-0" style={{fontWeight:"bold", color: "#06083D", fontSize:"22px"}}>{Rupiah.format(wallet_data.wallet.result.saldo)}</p>
+                                </div>
+                                <div className="topup ms-auto text-end">
+                                    <input type="number"placeholder="0" {...register("amount", {required:{value:true, message:"Jumlah top up wajib diisi!"}})} className=" ms-auto ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "13rem", height: "3rem"}}/> <br />
+                                    {errors.amount && <p style={{color: "red"}}>{errors.amount.message}</p>}
+                                    <button type="submit" className="btn btn-success ms-auto mt-2"><b>Topup Saldo</b></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                     </div>
                 </div>
             </div>
