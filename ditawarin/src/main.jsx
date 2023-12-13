@@ -27,6 +27,7 @@ import ErrorPage from "./ErrorPage.jsx";
 import PurchasePageBuyer from "./PurchasePageBuyer.jsx";
 import PurchasePageSeller from "./PurchasePageSeller.jsx";
 import UpdatePage from "./UpdatePage.jsx";
+import DetailsPage from "./DetailsPage.jsx";
 
 const {
   getAuction,
@@ -41,6 +42,7 @@ const {
   getAllPurchaseAsBuyer,
   getAllPurchaseAsSeller,
   getAllUser,
+  getPurchaseDetails
 } = DataHandler;
 
 const router = createBrowserRouter([
@@ -84,6 +86,16 @@ const router = createBrowserRouter([
         element: <WalletPage />,
       },
       {
+        path:"/details",
+        children: [
+          {
+            path: ":id",
+            loader: getPurchaseDetails,
+            element: <DetailsPage />,
+          }
+        ]
+      },
+      {
         path: "/purchases",
         element: <PurchasesPage />,
         children: [
@@ -96,7 +108,7 @@ const router = createBrowserRouter([
             path: "seller",
             loader: getAllPurchaseAsSeller,
             element: <PurchasePageSeller />,
-          },
+          }
         ],
       },
       {

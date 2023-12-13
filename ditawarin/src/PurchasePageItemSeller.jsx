@@ -28,6 +28,10 @@ const PurchasePageItemSeller = (props) => {
         }
     }
 
+    const goToDetails = () => {
+        navigate(`/details/${props._id}`)
+    }
+
     console.log(props)
 
     let isUpdateable = false;
@@ -81,7 +85,7 @@ const PurchasePageItemSeller = (props) => {
                             <div className="row">
                                 <div className="col d-flex">
                                     {!isUpdateable && !isMarkable && <p>Purchase marked as Finished, waiting for Buyer to Confirm</p>}
-                                    {isUpdateable && <button className="btn btn-success me-2" style={{ width: "100px" }}>Update</button>}
+                                    {isUpdateable && <button className="btn btn-success me-2" style={{ width: "100px" }} onClick={()=>{goToDetails()}}>Update</button>}
                                     {isMarkable && <button className="btn btn-primary" style={{ width: "100px" }} onClick={markAsFinished}>Mark as Finished</button>}
                                 </div>
                             </div>

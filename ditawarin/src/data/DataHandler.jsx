@@ -1,6 +1,13 @@
 import { redirect } from "react-router-dom";
 import client from "../client";
 
+const getPurchaseDetails = async (data) => {
+  const { params } = data;
+  const { id } = params;
+  const result = await client.get(`/purchase-detail?id=${id}`);
+  return result;
+};
+
 const getAuction = async (data) => {
   const { params } = data;
   const { id } = params;
@@ -256,4 +263,5 @@ export default {
   getAllPurchaseAsBuyer,
   getAllPurchaseAsSeller,
   getAllUser,
+  getPurchaseDetails
 };
