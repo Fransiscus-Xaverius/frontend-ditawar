@@ -1,11 +1,29 @@
 import { redirect } from "react-router-dom";
 import client from "../client";
+import axios from "axios";
 
 const getPurchaseDetails = async (data) => {
   const { params } = data;
   const { id } = params;
+  const user = await getUserData();
+  // console.log(user);
   const result = await client.get(`/purchase-detail?id=${id}`);
-  return result;
+  let role = "buyer";
+  if(user._id != result.data.result.buyer._id){
+    role = "seller";
+  }
+  const item = (await getItem(result.data.result.item._id)).data.result;
+  // console.log(item)
+  const p = {
+    auction: result.data.result.auction,
+    buyer: result.data.result.buyer,
+    seller: result.data.result.seller,
+    purchase: result.data.result.purchase,
+    item: item,
+    role: role,
+  }
+
+  return p;
 };
 
 const getAuction = async (data) => {
@@ -101,6 +119,28 @@ const getAllPurchaseAsSeller = async () => {
   console.log(result);
   return result;
 };
+
+const getAllPurchase = async () => {
+  let Purchase = [];
+  const result = (await client.get("/allPurchase")).data.result;
+  for (let i = 0; i < result.length; i++) {
+    if(result[i].history[1].type == "finished") {
+      const item = await client.get(`/item?id=${result[i].item}`);
+      const auction = await client.get(`/auction?id=${result[i].auction}`);
+      const transaction = await client.get(
+        `/transaction-id?id=${result[i].transaction}`
+      );
+      Purchase.push({
+        _id : result[i]._id,
+        item: item.data.result.images,
+        auction: auction.data.result,
+        transaction: transaction.data.result.invoice.amount,
+      })
+    }
+  }
+  console.log(Purchase);
+  return Purchase
+}
 
 const getAllAuction = async () => {
   const result = await client.get("/allAuction");
@@ -263,5 +303,6 @@ export default {
   getAllPurchaseAsBuyer,
   getAllPurchaseAsSeller,
   getAllUser,
-  getPurchaseDetails
+  getPurchaseDetails,
+  getAllPurchase
 };

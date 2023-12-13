@@ -101,7 +101,7 @@ function Home() {
         
 
         {/* KATEGORI */}
-        <h1 className="mt-5 mb-3">KATEGORI PILIHAN</h1>
+        <h1 className="mt-5 mb-3"><b>Popular Categories</b></h1>
         <div className="d-flex justify-content-between">
           <div
             className="kategori_1 text-center pe-5 ps-5 pt-3 pb-3 me-5 mt-3 align-items-center"

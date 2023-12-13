@@ -34,35 +34,32 @@ export default function SearchItem(props) {
               <img
                 src={url}
                 className="img-fluid rounded-start"
-                style={{ height: "30vh" }}
+                style={{ height: "30vh"}}
               />
             </div>
             <div className="col-md-8">
               <div className="card-body">
-                <p className="card-title" style={{ fontSize: "35px" }}>
+                <div className="d-flex align-items-center justify-content-between">
+                  <p className="card-title" style={{ fontSize: "35px" }}>
                   {props.item.nama}
-                </p>
-                <div className="row mb-3">
-                  <div className="col-6">
-                    <p className="card-text" style={{ fontSize: "20px" }}>
-                      Starting at :{" "}
-                      {Rupiah.format(props.auction.starting_price)}
-                    </p>
-                    <p className="card-text" style={{ fontSize: "20px" }}>
-                      Buy it now : {Rupiah.format(props.auction.asking_price)}
-                    </p>
-                  </div>
-                  <div className="col-6">
+                  </p>
+                  <div className="d-flex align-items-center">
                     <img
                       src={location}
                       alt=""
-                      style={{ width: "20px" }}
-                      className="ms-2"
+                      style={{ width: "20px" , height: '20px'}}
+                      className="me-2"
                     />
-                    {props.auction.kecamatan},{props.auction.kota_kabupaten},
-                    {props.auction.provinsi}
-                  </div>
+                    <p className="text-secondary mb-0">{props.auction.kecamatan}, {props.auction.kota_kabupaten}, {props.auction.provinsi}</p>
+                  </div>                  
                 </div>
+                <p className="card-text mb-0" style={{ fontSize: "20px" }}>
+                  Start :{" "}
+                  {Rupiah.format(props.auction.starting_price)}
+                </p>
+                <p className="card-text" style={{ fontSize: "20px" }}>
+                  Buy Now : {Rupiah.format(props.auction.asking_price)}
+                </p>
                 <p
                   className="card-text overflow-y-auto"
                   style={{ fontSize: "15px", maxHeight: "80px" }}
