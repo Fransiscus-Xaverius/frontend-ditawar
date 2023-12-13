@@ -21,26 +21,20 @@ export default function SearchItem(props) {
     <>
       <div
         className="container"
-        onClick={() => {
-          moveToAuction();
-        }}
       >
-        <div
-          className="card mb-3 mt-4"
-          style={{ minHeight: "30vh", width: "60vw" }}
-        >
+        <div className="card mb-3 mt-4" style={{ minHeight: "30vh", width: "60vw"}}>
           <div className="row g-0">
             <div className="col-md-4 text-center">
               <img
                 src={url}
                 className="img-fluid rounded-start"
-                style={{ height: "30vh"}}
+                style={{ height: "40vh"}}
               />
             </div>
             <div className="col-md-8">
-              <div className="card-body">
+              <div className="card-body" >
                 <div className="d-flex align-items-center justify-content-between">
-                  <p className="card-title" style={{ fontSize: "35px" }}>
+                  <p className="card-title mb-0" style={{ fontSize: "25px" }}>
                   {props.item.nama}
                   </p>
                   <div className="d-flex align-items-center">
@@ -53,19 +47,21 @@ export default function SearchItem(props) {
                     <p className="text-secondary mb-0">{props.auction.kecamatan}, {props.auction.kota_kabupaten}, {props.auction.provinsi}</p>
                   </div>                  
                 </div>
-                <p className="card-text mb-0" style={{ fontSize: "20px" }}>
-                  Start :{" "}
-                  {Rupiah.format(props.auction.starting_price)}
+                <p className="card-text mb-0" style={{ fontSize: "30px" }}>
+                  <b>{" "}
+                  {Rupiah.format(props.auction.starting_price)}</b>
                 </p>
-                <p className="card-text" style={{ fontSize: "20px" }}>
-                  Buy Now : {Rupiah.format(props.auction.asking_price)}
+                <p className="card-text text-secondary" style={{ fontSize: "15px" }}>
+                  Buy Now : <br /> {Rupiah.format(props.auction.asking_price)}
                 </p>
+                <p className="mb-2"><b>DESCRIPTION :</b></p>
                 <p
-                  className="card-text overflow-y-auto"
+                  className="card-text overflow-y-auto mb-0"
                   style={{ fontSize: "15px", maxHeight: "80px" }}
                 >
                   {props.item.deskripsi}
                 </p>
+                <button className="btn text-white p-2" style={{ width: "150px" , backgroundColor: "#06083D", textTransform: "uppercase", float: "right", borderRadius: "15px"}} onClick={() => {moveToAuction()}} > Selengkapnya </button>
               </div>
             </div>
           </div>

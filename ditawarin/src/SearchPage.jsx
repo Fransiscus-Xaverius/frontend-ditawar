@@ -72,7 +72,11 @@ export default function SearchPage(props) {
       <div className="row mt-5">
         <div className="col-sm-2">
           <div className="p-3">
-            <h4>Filter</h4>
+            <div className="d-flex align-items-center mb-2">
+              <h4 className="mb-0">Filter</h4>
+              <button className="btn text-white p-1 ms-auto" style={{ width: "70px" , backgroundColor: "#06083D", textTransform: "uppercase", borderRadius: "10px"}}> RESET </button>
+            </div>
+            
             <ul className="list-unstyled">
               {filter.map((i) => {
                 return (
