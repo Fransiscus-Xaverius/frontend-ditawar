@@ -45,26 +45,29 @@ export default function DetailsPage(){
 
     return (
         <>
-            <h1>Purchase Details Page</h1>
+            <h1 className="text-center">Purchase Details Page</h1>
             <div className="container-fluid">
                 <div className="row">
-                    <div className="col-4 m-3">
+                    <div className="col-2">
+
+                    </div>
+                    <div className="col-4">
                         <div className="card mb-3 mt-4" style={{ minHeight: "75vh"}}>
                             <div className="row g-0">
-                                <div className="col-md-10">
-                                    <img src={url} className="img-fluid rounded-start" style={{ width: "75%" }} />
-                                    <div className="card-body">
-                                        <h5 className="card-title">Item Data</h5>
-                                        <p className="card-text" style={{fontSize:"30px"}}>{item_data.nama}</p>
-                                        <p className="card-text">{item_data.deskripsi}</p>
-                                        <p className="card-text"><small className="text-muted">{item_data.category}</small></p>
-                                        
+                                <div className="col-md-12">
+                                    <div className="text-center"><img src={url} className="img-fluid rounded" style={{ width: "55%" }} /></div>
+                                    <div className="card-body text-center">
+                                        <h4 className="card-title">Item Data</h4>
+                                        <p className="card-text display-4">{item_data.nama}</p>
+                                        <p className="card-text"><small className="text-muted">{auction_data.kategori_barang}</small></p>
+                                        <p className="card-text">{item_data.deskripsi}</p>                                        
+                                        {console.log(auction_data)}
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className="col-6">
+                    <div className="col-4">
                         <h1>Transaction Details</h1>
                         <div className="scrollable-div" style={{ minHeight: "400px", maxHeight: "400px", overflowY: "scroll" }}>
                             {!purchase_data.history.length > 0 && <h1><p>Belum ada riwayat transaksi</p></h1>}
