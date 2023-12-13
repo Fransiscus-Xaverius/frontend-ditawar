@@ -1,5 +1,6 @@
 import { redirect } from "react-router-dom";
 import client from "../client";
+import axios from "axios";
 
 const getPurchaseDetails = async (data) => {
   const { params } = data;
@@ -118,6 +119,28 @@ const getAllPurchaseAsSeller = async () => {
   console.log(result);
   return result;
 };
+
+const getAllPurchase = async () => {
+  let Purchase = [];
+  const result = (await client.get("/allPurchase")).data.result;
+  for (let i = 0; i < result.length; i++) {
+    if(result[i].history[1].type == "finished") {
+      const item = await client.get(`/item?id=${result[i].item}`);
+      const auction = await client.get(`/auction?id=${result[i].auction}`);
+      const transaction = await client.get(
+        `/transaction-id?id=${result[i].transaction}`
+      );
+      Purchase.push({
+        _id : result[i]._id,
+        item: item.data.result.images,
+        auction: auction.data.result,
+        transaction: transaction.data.result.invoice.amount,
+      })
+    }
+  }
+  console.log(Purchase);
+  return Purchase
+}
 
 const getAllAuction = async () => {
   const result = await client.get("/allAuction");
@@ -280,5 +303,6 @@ export default {
   getAllPurchaseAsBuyer,
   getAllPurchaseAsSeller,
   getAllUser,
-  getPurchaseDetails
+  getPurchaseDetails,
+  getAllPurchase
 };

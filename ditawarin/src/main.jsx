@@ -42,7 +42,8 @@ const {
   getAllPurchaseAsBuyer,
   getAllPurchaseAsSeller,
   getAllUser,
-  getPurchaseDetails
+  getPurchaseDetails,
+  getAllPurchase
 } = DataHandler;
 
 const router = createBrowserRouter([
@@ -153,6 +154,7 @@ const router = createBrowserRouter([
         element: <Auctions />,
       },
       {
+        loader: getAllPurchase,
         path: "payment",
         element: <Payment />,
       },
