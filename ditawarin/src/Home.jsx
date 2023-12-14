@@ -70,10 +70,10 @@ function Home() {
     let divi = document.getElementById('lihat')
     if (lihat == false) {
       divi.style.width = "0px"
-      divi.style.overflowX = "hidden"
+      // divi.style.overflowX = "hidden"
     }else{
       divi.style.width = "100%"
-      divi.style.overflowX = "auto"
+      // divi.style.overflowX = "auto"
     }
   }
 
@@ -178,7 +178,7 @@ function Home() {
             </div>   
           </div>
           <div className="col-10 container-fluid" style={{display:"flex"}}>
-            <Scrollbars id="lihat" className="" autoHide autoHideTimeout={1000} autoHideDuration={200} thumbMinSize={30} universal={true} style={{overflow:"hidden", height:"90%", width:"0", transitionDuration:"0.4s", alignSelf:"center", width:"100%"}}>
+            <Scrollbars id="lihat" className="" autoHide autoHideTimeout={1000} autoHideDuration={200} thumbMinSize={30} universal={true} style={{ height:"90%", transitionDuration:"0.4s", alignSelf:"center"}}>
               <div className="d-flex flex-nowrap ps-5" style={{height: "100%"}}>
                 {
                   datalihat.map((auction, idx) => (
