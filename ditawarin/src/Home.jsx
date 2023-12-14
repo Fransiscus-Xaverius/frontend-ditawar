@@ -37,7 +37,6 @@ function Home() {
       setDatatampil(data)
     }else{
       for (let i = 0; i < Math.ceil(data.length/2); i++) {
-        console.log("KONTOL")
         datasee.push(data[i])
       }
       for (let i = Math.ceil(data.length/2); i < data.length; i++) {
@@ -178,12 +177,12 @@ function Home() {
               </button>
             </div>   
           </div>
-          <div className="col-10" style={{display:"flex"}}>
-            <Scrollbars className="" autoHide autoHideTimeout={1000} autoHideDuration={200} thumbMinSize={30} universal={true} style={{height:"90%", alignSelf:"center", width:"100%"}}>
-              <div id="lihat" className="row ps-5" style={{overflowY:"hidden", width:"0", transitionDuration:"0.4s", height:"100%"}}>
+          <div className="col-10 container-fluid" style={{display:"flex"}}>
+            <Scrollbars id="lihat" className="" autoHide autoHideTimeout={1000} autoHideDuration={200} thumbMinSize={30} universal={true} style={{overflow:"hidden", height:"90%", width:"0", transitionDuration:"0.4s", alignSelf:"center", width:"100%"}}>
+              <div className="d-flex flex-nowrap ps-5" style={{height: "100%"}}>
                 {
                   datalihat.map((auction, idx) => (
-                      <div className="card ms-1" style={{minWidth: "250px", maxWidth:"250px", height:"100%", borderRadius: "10px"}} onClick={()=>{moveToAuction(auction._id)}}>
+                      <div className="card me-3" style={{minWidth: "250px", maxWidth:"250px", height:"100%", borderRadius: "10px"}} onClick={()=>{moveToAuction(auction._id)}}>
                           <img src={import.meta.env.VITE_API_URL+'/static/'+auction.item.images || ""} alt="" className="card-img-top mx-auto" style={{width: "100%", height:"50%"}}/>
                           <div className="card-body">
                               <p className="card-title text-center"><h4><b>{auction.item.nama}</b></h4></p>
@@ -194,9 +193,8 @@ function Home() {
                           </div>
                       </div>
                   ))
-                }              
-                
-              </div>
+                }        
+              </div>      
             </Scrollbars>
           </div>
         </div>
