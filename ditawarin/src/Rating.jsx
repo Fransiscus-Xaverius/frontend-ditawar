@@ -22,7 +22,7 @@ function Rating() {
 		<div className="text-center">
 			{!userToken && <Navigate to={"/login"}/>}
             {userToken == "admin" && <Navigate to={"/login"}/>}
-			<h1>Beri Penilaian</h1>
+			<h1 className="mt-4">Beri Penilaian</h1>
 			<div>
 				<Form onSubmit={handleSubmit}>
 					{[1, 2, 3, 4, 5].map((value) => (
@@ -34,7 +34,7 @@ function Rating() {
 								onChange={() => handleRatingChange(value)}
 								hidden
 							/>
-							<div className="fs-1" style={{ color: "#ffcc00" }}>
+							<div className="fs-1 me-2" style={{ color: "#ffcc00" }}>
 								{value <= (rating || 0) ? <p>★</p> : <p>☆</p>}
 							</div>
 						</label>
@@ -49,17 +49,7 @@ function Rating() {
 					></textarea>
 					<br />
 					<p> {getWordCount()}/400</p>
-					<button
-						type="submit"
-						className="rounded-2"
-						style={{
-							width: "100px",
-							backgroundColor: "darkblue",
-							color: "white",
-						}}
-					>
-						Kirim
-					</button>
+					<button type="submit" className="btn text-white p-2" style={{ width: "130px" , backgroundColor: "#06083D", textTransform: "uppercase", borderRadius: "10px"}}><b>Submit</b></button>
 				</Form>
 			</div>
 		</div>

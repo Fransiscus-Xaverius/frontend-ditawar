@@ -208,41 +208,41 @@ export default function AuctionPage() {
                 <div className="col-sm-6 text-md-start pt-4">
                   <button
                     className="btn rounded-pill text-white p-3"
-                    style={{ width: "200px" , backgroundColor: "#06083D", textTransform: "uppercase", float: "right"}}
+                    style={{ width: "170px" , backgroundColor: "#06083D", textTransform: "uppercase", float: "right"}}
                     onClick={() => {ubahAuctionHandler()}}
-                  >
+                  ><b>
                     Ubah
-                  </button>
+                  </b></button>
                 </div>
               ) : (
-                <div className="col-sm-12 mt-5">
+                <div className="col-sm-12 mt-4">
                   <div className="row">
-                    <div className="col-4 text-center">
+                    <div className="col-3 text-center">
                       <button
-                        className="btn bg-danger rounded-pill text-white pt-3 pb-3"
-                        style={{ width: "200px" }}
-                      >
+                        className="btn bg-danger rounded-pill text-white p-3"
+                        style={{ width: "170px", textTransform: "uppercase" }}
+                      ><b>
                         Laporkan
-                      </button>
+                      </b></button>
                     </div>
-                    <div className="col-4 text-center">
+                    <div className="col-3 text-center">
                       <button
                         data-bs-toggle="modal"
                         data-bs-target="#staticBackdrop"
                         className="btn bg-primary rounded-pill text-white pt-3 pb-3"
-                        style={{ width: "200px" }}
-                      >
+                        style={{ width: "180px", textTransform: "uppercase" }}
+                      ><b>
                         Masukkan Harga
-                      </button>
+                      </b></button>
                     </div>
-                    <div className="col-4 text-center">
+                    <div className="col-3 text-center">
                       <button
                         className="btn bg-success rounded-pill text-white pt-3 pb-3"
-                        style={{ width: "200px" }}
+                        style={{  width: "170px", textTransform: "uppercase" }}
                         onClick={buyNowClick}
-                      >
+                      ><b>
                         Beli Sekarang
-                      </button>
+                      </b></button>
                     </div>
                   </div>
                 </div>
