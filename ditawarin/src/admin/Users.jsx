@@ -6,11 +6,19 @@ import client from "../client";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import DoughnutChart from "../components/DoughnutChart";
+import ArrowLeft from "../assets/arrowLeft.png";
+import ArrowRight from "../assets/arrowRight.png";
 
 function Users() {
 	const User = useLoaderData();
 	const [ListUser, setListUser] = useState(null);
 	const [Editing, setEditing] = useState(false);
+	const [useraktif, setuseraktif] = useState(0);
+	const [usernonaktif, setusernonaktif] = useState(0);
+	const [trans, settrans] = useState(0);
+	const [search, setSearch] = useState("");
+	const [currentPage, setCurrentPage] = useState(1);
+	const [itemsPerPage, setItemsPerPage] = useState(10);
 
 	function ActiveAccount(params) {
 		try {
@@ -62,10 +70,6 @@ function Users() {
 		window.location.reload(true);
 	}
 
-	const [useraktif, setuseraktif] = useState(0);
-	const [usernonaktif, setusernonaktif] = useState(0);
-	const [trans, settrans] = useState(0);
-
 	const AllUser = async () => {
 		const result = (await client.get("/allUser")).data.result;
 		setuseraktif(result.filter((user) => user.role == "verified").length);
@@ -86,22 +90,34 @@ function Users() {
 		AllTrans();
 	}, []);
 
+	const filteredData = User.filter((usr) =>
+		usr.nama.toLowerCase().includes(search.toLowerCase()),
+	);
+
+	const handleSearch = (event) => {
+		event.preventDefault();
+		setSearch(event.target.value);
+	};
+
+	const indexOfLastItem = currentPage * itemsPerPage;
+	const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+	const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
+	const paginate = (pageNumber) => setCurrentPage(pageNumber);
 	return (
 		<>
-			<div style={{width : "40%"}}>
+			<div style={{ width: "40%" }}>
 				<DoughnutChart Trans={trans} UserA={useraktif} UserN={usernonaktif} />
 			</div>
 			<p className="fw-bold">USERS</p>
+			<input
+				type="text"
+				value={search}
+				onChange={handleSearch}
+				placeholder="Search..."
+				className="form-control my-3"
+			/>
 			{!Editing && (
-				<table
-					className="table"
-					style={{
-						overflowY: "scroll",
-						overflowX: "hidden",
-						height: "50vh",
-						display: "block",
-					}}
-				>
+				<table className="table">
 					<thead>
 						<tr className="table-success">
 							<th scope="col">PROFILE</th>
@@ -111,7 +127,7 @@ function Users() {
 						</tr>
 					</thead>
 					<tbody>
-						{User.map((user, index) => {
+						{currentItems.map((user, index) => {
 							let url =
 								import.meta.env.VITE_API_URL +
 								"/static/" +
@@ -160,6 +176,41 @@ function Users() {
 					</tbody>
 				</table>
 			)}
+			<div style={{ display: "flex", justifyContent: "center" }}>
+				<button
+					onClick={() => paginate(currentPage - 1)}
+					disabled={currentPage === 1}
+					className="border-0 bg-transparent"
+				>
+					<img style={{ width: "40px", height: "40px" }} src={ArrowLeft} />
+				</button>
+				{currentPage > 1 && (
+					<span style={{ margin: "0 10px", fontSize: "25px" }}>
+						{currentPage - 1}
+					</span>
+				)}
+				<span
+					style={{ margin: "0 10px", fontSize: "25px" }}
+					className="fw-bold"
+				>
+					{currentPage}
+				</span>
+				<span style={{ margin: "0 10px", fontSize: "25px" }}>
+					{currentPage + 1}
+				</span>
+				{currentPage == 1 && (
+					<span style={{ margin: "0 10px", fontSize: "25px" }}>
+						{currentPage + 2}
+					</span>
+				)}
+
+				<button
+					onClick={() => paginate(currentPage + 1)}
+					className="border-0 bg-transparent"
+				>
+					<img style={{ width: "40px", height: "40px" }} src={ArrowRight} />
+				</button>
+			</div>
 			{Editing && (
 				<form onSubmit={handleSubmit(EditUser)}>
 					<label className="me-3">Nama : </label>

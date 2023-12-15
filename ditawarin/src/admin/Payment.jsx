@@ -93,24 +93,33 @@ function Payment() {
 							disabled={currentPage === 1}
 							className="border-0 bg-transparent"
 						>
-							<img style={{width : "40px",height : "40px"}} src={ArrowLeft} />
+							<img style={{ width: "40px", height: "40px" }} src={ArrowLeft} />
 						</button>
 						{currentPage > 1 && (
-							<span style={{ margin: "0 10px" }}>{currentPage - 1}</span>
+							<span style={{ margin: "0 10px", fontSize: "25px" }}>
+								{currentPage - 1}
+							</span>
 						)}
-						<span style={{ margin: "0 10px" }} className="fw-bold">
+						<span
+							style={{ margin: "0 10px", fontSize: "25px" }}
+							className="fw-bold"
+						>
 							{currentPage}
 						</span>
-						<span style={{ margin: "0 10px" }}>{currentPage + 1}</span>
+						<span style={{ margin: "0 10px", fontSize: "25px" }}>
+							{currentPage + 1}
+						</span>
 						{currentPage == 1 && (
-							<span style={{ margin: "0 10px" }}>{currentPage + 2}</span>
+							<span style={{ margin: "0 10px", fontSize: "25px" }}>
+								{currentPage + 2}
+							</span>
 						)}
 
 						<button
 							onClick={() => paginate(currentPage + 1)}
 							className="border-0 bg-transparent"
 						>
-							<img style={{width : "40px",height : "40px"}} src={ArrowRight} />
+							<img style={{ width: "40px", height: "40px" }} src={ArrowRight} />
 						</button>
 					</div>
 					<BarChart Data={data2} />
