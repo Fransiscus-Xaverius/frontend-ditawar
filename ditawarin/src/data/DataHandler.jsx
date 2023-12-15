@@ -124,7 +124,7 @@ const getAllPurchase = async () => {
 	let Purchase = [];
 	const result = (await client.get("/allPurchase")).data.result;
 	for (let i = 0; i < result.length; i++) {
-		if (result[i].history[1].type == "finished") {
+		if (result[i].history.length > 1 &&result[i].history[1].type == "finished") {
 			const item = await client.get(`/item?id=${result[i].item}`);
 			const auction = await client.get(`/auction?id=${result[i].auction}`);
 			const transaction = await client.get(
@@ -137,7 +137,8 @@ const getAllPurchase = async () => {
 				date: result[i].history[1].time,
 				buyer: buyer.data.result,
 				seller: seller.data.result,
-				item: item.data.result.images,
+				item : item.data.result.nama,
+				image: item.data.result.images,
 				auction: auction.data.result,
 				transaction: transaction.data.result.invoice.amount,
 			});
