@@ -56,6 +56,7 @@ function Auctions() {
 
 	return (
 		<>
+			{console.log(Auction)}
 			<p className="fw-bold">AUCTION</p>
 			<table
 				className="table"
@@ -78,36 +79,41 @@ function Auctions() {
 					{Auction.map((act) => {
 						let url =
 							import.meta.env.VITE_API_URL + "/static/" + act.item.images;
+						console.log(act.highest_bid)
 						return (
 							<tr>
 								<td className="w-50">
-									<img src={`${url}`} style={{ width: "100px" }} />
-									{act.item.nama}
+									<div className="d-flex">
+										<img src={`${url}`} style={{ width: "100px"}} />
+										<div className="ms-5" style={{alignSelf: "center"}}>{act.item.nama}</div>
+									</div>
 								</td>
-								<td className="w-25">Rp {act.highest_bid ? act.highest_bid.bid : act.asking_price}</td>
-								<td className="w-25">
+								<td className="w-25 align-middle">Rp {act.highest_bid ? act.highest_bid.bid : act.asking_price}</td>
+								<td className="w-25 align-middle">
 									{!act.ended && <div className="bg-success">PROGRESS</div>}
 									{act.ended && <div className="bg-success px-1">DONE</div>}
 								</td>
-								<td className="d-flex w-25">
-									<button
-										className="bg-primary mx-1"
-										onClick={() => LookAuction(act._id)}
-									>
-										<img src={Eye} style={{ width: "35px" }} />
-									</button>
-									<button
-										className="bg-warning mx-1"
-										onClick={() => WarningAuction(act.id_user)}
-									>
-										WARNING
-									</button>
-									<button
-										className="bg-danger mx-1"
-										onClick={() => StopAuction(act._id)}
-									>
-										STOP
-									</button>
+								<td className="w-25 align-middle">
+									<div className="d-flex">
+										<button
+											className="bg-primary mx-1"
+											onClick={() => LookAuction(act._id)}
+										>
+											<img src={Eye} style={{ width: "35px" }} />
+										</button>
+										<button
+											className="bg-warning mx-1"
+											onClick={() => WarningAuction(act.id_user)}
+										>
+											WARNING
+										</button>
+										<button
+											className="bg-danger mx-1"
+											onClick={() => StopAuction(act._id)}
+										>
+											STOP
+										</button>
+									</div>
 								</td>
 							</tr>
 						);

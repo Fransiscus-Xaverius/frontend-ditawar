@@ -73,8 +73,7 @@ function NavbarAdmin() {
 				className="container-fluid p-0 d-flex flex-column flex-grow-1"
 				style={{ display: "block", minHeight: "100vh" }}
 			>
-				<nav style={{ backgroundColor: "#06083D" }}>
-					<div className="container-fluid">
+				<nav className="container-fluid" style={{ backgroundColor: "#06083D", position: "fixed" }}>
 						<div className="d-flex justify-content-between align-items-center px-3">
 							<NavLink
 								to="/admin"
@@ -100,13 +99,12 @@ function NavbarAdmin() {
 								</NavLink>
 							</button>
 						</div>
-					</div>
 				</nav>
 				<div className="container-fluid">
 					<div className="row" style={{ width: "100%", height: "95vh" }}>
 						<div
 							className="col-3 p-5 align-items-center"
-							style={{ backgroundColor: "#06083D", height: "100%" }}
+							style={{ backgroundColor: "#06083D", height: "100%", position: "fixed", marginTop:"60px" }}
 						>
 							<NavLink to="users" className="text-decoration-none text-white">
 								<img src={Users} style={{ width: "35px" }} className="py-2" />
@@ -146,50 +144,60 @@ function NavbarAdmin() {
 							</NavLink>
 							<br />
 						</div>
+						<div className="col-3">
 
+						</div>
 						<div className="col-9 p-5">
-							<div className="d-flex justify-content-between text">
-								<div
-									className="card mb-3 p-3 opacity-50"
-									style={{
-										width: "300px",
-										height: "150px",
-										backgroundColor: "#0976C4",
-									}}
-								>
-									<div className="card-body text-success align-items-center text-light">
-										<h1 className="card-title text-center">{trans}</h1>
+							<div className="row bg-white pt-3" style={{position: "fixed", width: "80%", marginTop: "12px" }}>
+								<div className="col-4">
+									<div
+										className="card mb-3 p-3 opacity-50"
+										style={{
+											width: "300px",
+											height: "150px",
+											backgroundColor: "#0976C4",
+										}}
+									>
+										<div className="card-body text-success align-items-center text-light">
+											<h1 className="card-title text-center">{trans}</h1>
+										</div>
+										<div className="footer text-light">TRANSACTION</div>
 									</div>
-									<div className="footer text-light">TRANSACTION</div>
 								</div>
-								<div
-									className="card mb-3 p-3 opacity-50"
-									style={{
-										width: "300px",
-										height: "150px",
-										backgroundColor: "#50C409",
-									}}
-								>
-									<div className="card-body text-success align-items-center text-light">
-										<h1 className="card-title text-center">{useraktif}</h1>
+								<div className="col-4">
+									<div
+										className="card mb-3 p-3 opacity-50"
+										style={{
+											width: "300px",
+											height: "150px",
+											backgroundColor: "#50C409",
+										}}
+									>
+										<div className="card-body text-success align-items-center text-light">
+											<h1 className="card-title text-center">{useraktif}</h1>
+										</div>
+										<div className="footer text-light">USER AKTIF</div>
 									</div>
-									<div className="footer text-light">USER AKTIF</div>
 								</div>
-								<div
-									className="card mb-3 p-3 opacity-50"
-									style={{
-										width: "300px",
-										height: "150px",
-										backgroundColor: "#C40909",
-									}}
-								>
-									<div className="card-body text-success align-items-center text-light">
-										<h1 className="card-title text-center">{usernonaktif}</h1>
+								<div className="col-4">
+									<div
+										className="card mb-3 p-3 opacity-50"
+										style={{
+											width: "300px",
+											height: "150px",
+											backgroundColor: "#C40909",
+										}}
+									>
+										<div className="card-body text-success align-items-center text-light">
+											<h1 className="card-title text-center">{usernonaktif}</h1>
+										</div>
+										<div className="footer text-light">USER NONAKTIF</div>
 									</div>
-									<div className="footer text-light">USER NONAKTIF</div>
 								</div>
 							</div>
-							<Outlet />
+							<div style={{marginTop:"220px"}}>
+								<Outlet />
+							</div>
 						</div>
 					</div>
 				</div>
