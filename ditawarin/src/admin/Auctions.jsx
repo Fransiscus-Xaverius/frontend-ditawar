@@ -71,7 +71,7 @@ function Auctions() {
 	const indexOfLastItem = currentPage * itemsPerPage;
 	const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 	const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
-	const limitPage = Auction.length / itemsPerPage;
+	const limitPage = Math.ceil(Auction.length / itemsPerPage);
 
 	const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -144,6 +144,7 @@ function Auctions() {
 					})}
 				</tbody>
 			</table>
+			{console.log(limitPage)}
 			<div style={{ display: "flex", justifyContent: "center" }}>
 				<button
 					onClick={() => paginate(currentPage - 1)}
@@ -153,7 +154,18 @@ function Auctions() {
 					<img style={{ width: "40px", height: "40px" }} src={ArrowLeft} />
 				</button>
 				<span>
-					{limitPage > 1 && limitPage < 2 && (
+					{limitPage == 1 && (
+						<>
+							<button
+								onClick={() => paginate(1)}
+								disabled={currentPage === 1}
+								className="border-0 fs-3 px-3 bg-transparent"
+							>
+								1
+							</button>
+						</>
+					)}
+					{limitPage == 2 && (
 						<>
 							<button
 								onClick={() => paginate(1)}
@@ -171,7 +183,7 @@ function Auctions() {
 							</button>
 						</>
 					)}
-					{limitPage >= 2 && (
+					{limitPage > 2 && (
 						<>
 							{currentPage === 1 && (
 								<>

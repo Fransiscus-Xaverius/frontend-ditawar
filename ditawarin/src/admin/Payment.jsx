@@ -96,7 +96,18 @@ function Payment() {
 							<img style={{ width: "40px", height: "40px" }} src={ArrowLeft} />
 						</button>
 						<span>
-							{limitPage > 1 && limitPage < 2 && (
+							{limitPage == 1 && (
+								<>
+									<button
+										onClick={() => paginate(1)}
+										disabled={currentPage === 1}
+										className="border-0 fs-3 px-3 bg-transparent"
+									>
+										1
+									</button>
+								</>
+							)}
+							{limitPage == 2 && (
 								<>
 									<button
 										onClick={() => paginate(1)}

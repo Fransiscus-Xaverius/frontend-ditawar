@@ -11,7 +11,6 @@ function Login() {
 
     async function signIn(data){
         if(data.email === "adminditawarin@gmail.com" && data.pass === "adminditawarin"){
-            localStorage.setItem('token', "admin");
             navigate('/admin');
         }
         else{
