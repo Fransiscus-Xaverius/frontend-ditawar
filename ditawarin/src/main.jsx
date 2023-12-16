@@ -30,6 +30,7 @@ import UpdatePage from "./UpdatePage.jsx";
 import DetailsPage from "./DetailsPage.jsx";
 import Report from "./admin/Report.jsx";
 import Laporan from "./Report.jsx";
+import { get } from "react-hook-form";
 
 const {
   getAuction,
@@ -45,7 +46,8 @@ const {
   getAllPurchaseAsSeller,
   getAllUser,
   getPurchaseDetails,
-  getAllPurchase
+  getAllPurchase,
+  getAllSupport
 } = DataHandler;
 
 const router = createBrowserRouter([
@@ -172,6 +174,7 @@ const router = createBrowserRouter([
         element: <Security />,
       },
       {
+        loader : getAllSupport,
         path: "support",
         element: <Support />,
       },

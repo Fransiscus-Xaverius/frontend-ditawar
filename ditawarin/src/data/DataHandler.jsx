@@ -302,6 +302,22 @@ const getAllUser = async () => {
 	}
 };
 
+const getAllSupport = async () => {
+	try {
+		const feedback = await client.get("/allfeedback");
+		const service = await client.get("/allservice");
+		const result = {
+			feedback: feedback.data.result,
+			service: service.data.result,
+		}
+		return result;
+	} catch (error) {
+		console.log(error);
+		alert("Gagal Mendapatkan data user");
+		return null;
+	}
+}
+
 export default {
 	getAuction,
 	getItem,
@@ -319,4 +335,5 @@ export default {
 	getAllUser,
 	getPurchaseDetails,
 	getAllPurchase,
+	getAllSupport
 };
