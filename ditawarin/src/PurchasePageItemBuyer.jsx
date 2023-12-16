@@ -1,5 +1,5 @@
 import location from "./assets/loc.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import client from './client';
 import { useNavigate } from 'react-router';
 export default function PurchasePageItem(props) {
@@ -51,6 +51,26 @@ export default function PurchasePageItem(props) {
             alert("Terjadi kesalahan!")
         }
     }
+
+    const sendFeedback = async () => {
+        localStorage.setItem("auction", props.auction);
+        navigate("/feedback");
+    };
+
+    const [Feedback, setFeedback] = useState(true);
+
+    const cekUlasan = async() => {
+        const result = await client.get(`/feedback?&id=${props.auction}`);
+        if(result.data.result){
+            setFeedback(false);
+        }
+        
+    }
+
+    useEffect(() => {
+        cekUlasan();
+    },[])
+
 
     if(!props.status){
         return (
@@ -116,7 +136,8 @@ export default function PurchasePageItem(props) {
                                 </div>
                                 <div className="row">
                                     <div className="col d-flex">
-                                        <button className="btn btn-success me-2" style={{ width: "100px" }}>Ulas</button>
+                                        {Feedback  && <button onClick={sendFeedback} className="btn btn-success me-2" style={{ width: "100px" }}>Ulas</button>}
+                                        
                                         <button className="btn btn-warning" style={{ width: "100px" }}>Laporkan</button>
                                     </div>
                                 </div>

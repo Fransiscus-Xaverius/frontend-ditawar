@@ -134,9 +134,11 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: "/rating",
+        loader: getUserData,
+        path: "/feedback",
         element: <Rating />,
       },
+
     ],
   },
   {

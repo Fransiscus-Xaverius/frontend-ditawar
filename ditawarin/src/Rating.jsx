@@ -1,14 +1,25 @@
-import { Form, Navigate } from "react-router-dom";
+import { Form, Navigate, useLoaderData } from "react-router-dom";
 import { useState } from "react";
+import client from "./client";
 function Rating() {
 	let userToken = localStorage.getItem("token");
+	let user = useLoaderData();
 	const [rating, setRating] = useState(1);
 	const [text, setText] = useState("");
 	const handleRatingChange = (value) => {
 		setRating(value);
 	};
-	const handleSubmit = (event) => {
-		
+	const handleSubmit = async (event) => {
+		try{
+
+			await client.post(`feedback?id_user=${user._id}&id_auction=${localStorage.getItem("auction")}`, {
+				rating: rating,
+				review: text,
+			});
+		}
+		catch(error){
+			alert(error);
+		}
 	};
 	const handleTextChange = (event) => {
 		const newText = event.target.value;
@@ -20,8 +31,8 @@ function Rating() {
 	};
 	return (
 		<div className="text-center">
-			{!userToken && <Navigate to={"/login"}/>}
-            {userToken == "admin" && <Navigate to={"/login"}/>}
+			{!userToken && <Navigate to={"/login"} />}
+			{userToken == "admin" && <Navigate to={"/login"} />}
 			<h1 className="mt-4">Beri Penilaian</h1>
 			<div>
 				<Form onSubmit={handleSubmit}>
@@ -45,11 +56,22 @@ function Rating() {
 						rows="10"
 						value={text}
 						onChange={handleTextChange}
-                        placeholder="Tulis Review"
+						placeholder="Tulis Review"
 					></textarea>
 					<br />
-					<p> {getWordCount()}/400</p>
-					<button type="submit" className="btn text-white p-2" style={{ width: "130px" , backgroundColor: "#06083D", textTransform: "uppercase", borderRadius: "10px"}}><b>Submit</b></button>
+					<p> {getWordCount()}/400 Word</p>
+					<button
+						type="submit"
+						className="btn text-white p-2"
+						style={{
+							width: "130px",
+							backgroundColor: "#06083D",
+							textTransform: "uppercase",
+							borderRadius: "10px",
+						}}
+					>
+						<b>Submit</b>
+					</button>
 				</Form>
 			</div>
 		</div>
