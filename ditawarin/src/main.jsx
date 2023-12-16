@@ -179,6 +179,7 @@ const router = createBrowserRouter([
         element: <Support />,
       },
       {
+        loader : getAllPurchase,
         path : "report",
         element : <Report />
       }

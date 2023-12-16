@@ -2,12 +2,13 @@ import React from "react";
 import { Bar } from "react-chartjs-2";
 import { Chart } from "chart.js/auto";
 
-const BarChart = ({ Data }) => {
-	const values = Data.map((a) => {
+const HistoryChart = ({data}) => {
+
+	const values = data.map((a) => {
 		return a.transaction;
 	});
 
-	const dates = Data.map((a) => {
+	const dates = data.map((a) => {
 		const date = new Date(a.date);
 		const formattedDate = date.toLocaleDateString("en-GB", {
 			day: "2-digit",
@@ -20,7 +21,7 @@ const BarChart = ({ Data }) => {
 		return formattedDate;
 	});
 
-	const data = {
+	const data2 = {
 		labels: dates,
 		datasets: [
 			{
@@ -31,10 +32,9 @@ const BarChart = ({ Data }) => {
 				borderWidth: 1,
 			},
 		],
-		
 	};
 
-	const options = {
+    const options = {
 		scales: {
 			y: {
 				beginAtZero: true,
@@ -63,9 +63,9 @@ const BarChart = ({ Data }) => {
 	return (
 		<div>
 			<h2>Bar Chart</h2>
-			<Bar data={data} options={options}/>
+			<Bar data={data2} options={options}/>
 		</div>
 	);
 };
 
-export default BarChart;
+export default HistoryChart;

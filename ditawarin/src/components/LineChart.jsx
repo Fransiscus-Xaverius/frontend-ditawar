@@ -28,7 +28,32 @@ function LineChart({ BidList, countBid }) {
 		],
 	};
 
-	return <>{<Line data={databid} />}</>;
+	let options = {
+		scales: {
+			y: {
+				beginAtZero: true,
+				title: {
+					display: true,
+					text: "Harga",
+					font: {
+						size: 20,
+					},
+				},
+			},
+			x : {
+				beginAtZero: true,
+				title: {
+					display: true,
+					text: "Jumlah Bid",
+					font: {
+						size: 20,
+					},
+				},
+			}
+		},
+	};
+
+	return <>{<Line data={databid} options={options} />}</>;
 }
 
 export default LineChart;

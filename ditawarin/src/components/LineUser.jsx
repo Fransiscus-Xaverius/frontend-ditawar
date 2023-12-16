@@ -1,10 +1,11 @@
+import { options } from "joi";
 import React, { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 
 export default function LineUser({ name, data }) {
 	let count = [];
 	data.forEach((element, index) => {
-		count.push(index+1);
+		count.push(index + 1);
 	});
 
 	let dataList = {
@@ -33,5 +34,32 @@ export default function LineUser({ name, data }) {
 		],
 	};
 
-	return <>{<Line data={dataList} />}</>;
+	let options = {
+		scales: {
+			x: {
+				display: true,
+				title: {
+					display: true,
+					text: "Jumlah",
+					font : {
+						size : 20,
+					}
+				},
+			},
+			y: {
+				display: true,
+				title: {
+					display: true,
+					text: "Harga",
+					font : {
+						size : 20,
+					}
+				},
+			},
+		},
+	};
+
+
+	return <>{<Line data={dataList} options={options}/>}</>;
+
 }

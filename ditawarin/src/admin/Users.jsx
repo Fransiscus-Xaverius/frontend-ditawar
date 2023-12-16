@@ -386,7 +386,9 @@ function Users() {
 			{Look && <>
 				<h1>Topup</h1>
 				<LineUser name={'topup'} data={topup}/>
+				<h1>Sale</h1>
 				<LineUser name={"sale"} data={sale} />
+				<h1>Purchase</h1>
 				<LineUser name={"purchase"} data={purchase} />
 			</>
 			}
