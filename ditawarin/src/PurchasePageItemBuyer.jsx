@@ -57,18 +57,32 @@ export default function PurchasePageItem(props) {
         navigate("/feedback");
     };
 
+    const sendReport = async () => {
+        localStorage.setItem("auction", props.auction);
+        navigate("/service");
+    }
+
     const [Feedback, setFeedback] = useState(true);
+    const [Report, setReport] = useState(true);
 
     const cekUlasan = async() => {
-        const result = await client.get(`/feedback?&id=${props.auction}`);
+        const result = await client.get(`/feedback?id=${props.auction}`);
         if(result.data.result){
             setFeedback(false);
         }
         
     }
 
+    const cekLaporan = async() => {
+        const result = await client.get(`/service?id=${props.auction}`);
+        if(result.data.result){
+            setReport(false);
+        }
+    }
+
     useEffect(() => {
         cekUlasan();
+        cekLaporan()
     },[])
 
 
@@ -137,8 +151,8 @@ export default function PurchasePageItem(props) {
                                 <div className="row">
                                     <div className="col d-flex">
                                         {Feedback  && <button onClick={sendFeedback} className="btn btn-success me-2" style={{ width: "100px" }}>Ulas</button>}
+                                        {Report && <button onClick={sendReport} className="btn btn-warning" style={{ width: "100px" }}>Laporkan</button>}
                                         
-                                        <button className="btn btn-warning" style={{ width: "100px" }}>Laporkan</button>
                                     </div>
                                 </div>
                             </div>
