@@ -46,6 +46,9 @@ function Users() {
 
 	async function LookAccount(params) {
 		try{
+			setTopup([]);
+			setSale([]);
+			setPurchase([]);
 			const wallet = await client.get(`/wallet?id=${User[params]._id}`);
 			const topup2 = await client.get(`/transaction-topup?id=${wallet.data.result._id}`);
 			const sale2 = await client.get(`/transaction-sale?id=${wallet.data.result._id}`);
@@ -63,6 +66,7 @@ function Users() {
 			setLook(true);
 		}catch(error){
 			console.log(error);
+			setLook(false);
 		}
 	}
 
