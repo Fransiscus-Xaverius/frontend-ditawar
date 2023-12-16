@@ -102,6 +102,7 @@ function Users() {
 	const indexOfLastItem = currentPage * itemsPerPage;
 	const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 	const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
+	const limitPage = User.length / itemsPerPage;
 	const paginate = (pageNumber) => setCurrentPage(pageNumber);
 	return (
 		<>
@@ -184,29 +185,107 @@ function Users() {
 				>
 					<img style={{ width: "40px", height: "40px" }} src={ArrowLeft} />
 				</button>
-				{currentPage > 1 && (
-					<span style={{ margin: "0 10px", fontSize: "25px" }}>
-						{currentPage - 1}
-					</span>
-				)}
-				<span
-					style={{ margin: "0 10px", fontSize: "25px" }}
-					className="fw-bold"
-				>
-					{currentPage}
+				<span>
+					{limitPage > 1 && limitPage < 2 && (
+						<>
+							<button
+								onClick={() => paginate(1)}
+								disabled={currentPage === 1}
+								className="border-0 fs-3 px-3 bg-transparent"
+							>
+								1
+							</button>
+							<button
+								onClick={() => paginate(2)}
+								disabled={currentPage === 2}
+								className="border-0 fs-3 px-3 bg-transparent"
+							>
+								2
+							</button>
+						</>
+					)}
+					{limitPage >= 2 && (
+						<>
+							{currentPage === 1 && (
+								<>
+									<button
+										onClick={() => paginate(currentPage)}
+										disabled
+										className="border-0 fs-3 px-3 bg-transparent"
+									>
+										{currentPage}
+									</button>
+									<button
+										onClick={() => paginate(currentPage + 1)}
+										className="border-0 fs-3 px-3 bg-transparent"
+									>
+										{currentPage + 1}
+									</button>
+									<button
+										onClick={() => paginate(currentPage + 2)}
+										className="border-0 fs-3 px-3 bg-transparent"
+									>
+										{currentPage + 2}
+									</button>
+								</>
+							)}
+							{currentPage > 1 && currentPage < limitPage && (
+								<>
+									<button
+										onClick={() => paginate(currentPage - 1)}
+										className="border-0 fs-3 px-3 bg-transparent"
+									>
+										{" "}
+										{currentPage - 1}
+									</button>
+									<button
+										onClick={() => paginate(currentPage)}
+										disabled
+										className="border-0 fs-3 px-3 bg-transparent"
+									>
+										{currentPage}
+									</button>
+									<button
+										onClick={() => paginate(currentPage + 1)}
+										className="border-0 fs-3 px-3 bg-transparent"
+									>
+										{currentPage + 1}
+									</button>
+								</>
+							)}
+							{currentPage > 1 && currentPage == limitPage && (
+								<>
+									<button
+										onClick={() => paginate(currentPage - 2)}
+										className="border-0 fs-3 px-3 bg-transparent"
+									>
+										{" "}
+										{currentPage - 2}
+									</button>
+									<button
+										onClick={() => paginate(currentPage - 1)}
+										className="border-0 fs-3 px-3 bg-transparent"
+									>
+										{currentPage - 1}
+									</button>
+									<button
+										onClick={() => paginate(currentPage)}
+										disabled
+										className="border-0 fs-3 px-3 bg-transparent"
+									>
+										{currentPage}
+									</button>
+								</>
+							)}
+						</>
+					)}
 				</span>
-				<span style={{ margin: "0 10px", fontSize: "25px" }}>
-					{currentPage + 1}
-				</span>
-				{currentPage == 1 && (
-					<span style={{ margin: "0 10px", fontSize: "25px" }}>
-						{currentPage + 2}
-					</span>
-				)}
-
 				<button
-					onClick={() => paginate(currentPage + 1)}
+					onClick={() => {
+						paginate(currentPage + 1);
+					}}
 					className="border-0 bg-transparent"
+					disabled={limitPage <= currentPage}
 				>
 					<img style={{ width: "40px", height: "40px" }} src={ArrowRight} />
 				</button>
