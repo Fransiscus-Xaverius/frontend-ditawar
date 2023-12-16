@@ -2,12 +2,14 @@ import { useLoaderData } from "react-router-dom";
 import Ban from "../assets/ban.png";
 import Edit from "../assets/edit.png";
 import Accept from "../assets/accepted.png";
+import Eye from "../assets/eye.png";
 import client from "../client";
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import DoughnutChart from "../components/DoughnutChart";
 import ArrowLeft from "../assets/arrowLeft.png";
 import ArrowRight from "../assets/arrowRight.png";
+import LineUser from "../components/LineUser";
 
 function Users() {
 	const User = useLoaderData();
@@ -19,6 +21,10 @@ function Users() {
 	const [search, setSearch] = useState("");
 	const [currentPage, setCurrentPage] = useState(1);
 	const [itemsPerPage, setItemsPerPage] = useState(10);
+	const [Look, setLook] = useState(false);
+	const [topup, setTopup] = useState([]);
+	const [sale, setSale] = useState([]);
+	const [purchase, setPurchase] = useState([]);
 
 	function ActiveAccount(params) {
 		try {
@@ -36,6 +42,28 @@ function Users() {
 			console.log(error);
 		}
 		window.location.reload(true);
+	}
+
+	async function LookAccount(params) {
+		try{
+			const wallet = await client.get(`/wallet?id=${User[params]._id}`);
+			const topup2 = await client.get(`/transaction-topup?id=${wallet.data.result._id}`);
+			const sale2 = await client.get(`/transaction-sale?id=${wallet.data.result._id}`);
+			const purchase2 = await client.get(`/transaction-purchase?id=${wallet.data.result._id}`);
+			topup2.data.result.forEach(element => {
+				setTopup([...topup,element.invoice.amount]);
+			});
+			console.log(sale2.data.result)
+			sale2.data.result.forEach(element => {
+				setSale([...sale,element.amount]);
+			})
+			purchase2.data.result.forEach(element => {
+				setPurchase([...purchase,element.amount]);
+			})
+			setLook(true);
+		}catch(error){
+			console.log(error);
+		}
 	}
 
 	function EditAccount(params) {
@@ -124,6 +152,7 @@ function Users() {
 						<tr className="table-success">
 							<th scope="col">PROFILE</th>
 							<th scope="col">NAMA</th>
+							<th scope="col">EMAIL</th>
 							<th scope="col">STATUS</th>
 							<th scope="col">ACTION</th>
 						</tr>
@@ -141,6 +170,7 @@ function Users() {
 										<img src={`${url}`} style={{ width: "100px" }} />
 									</td>
 									<td className="w-25">{user.nama}</td>
+									<td className="w-25">{user.email}</td>
 									<td className="w-25">
 										{user.role == "unverified" && (
 											<p className="bg-success">Unverified</p>
@@ -153,6 +183,12 @@ function Users() {
 										)}
 									</td>
 									<td className="w-100">
+										<button
+											className="mx-1 border-0 bg-primary rounded"
+											onClick={() => LookAccount(index)}
+										>
+											<img src={Eye} style={{ width: "30px" }} />
+										</button>
 										<button
 											className="mx-1 border-0 bg-primary rounded"
 											onClick={() => ActiveAccount(index)}
@@ -342,6 +378,14 @@ function Users() {
 					</button>
 				</form>
 			)}
+
+			{Look && <>
+				<h1>Topup</h1>
+				<LineUser name={'topup'} data={topup}/>
+				<LineUser name={"sale"} data={sale} />
+				<LineUser name={"purchase"} data={purchase} />
+			</>
+			}
 		</>
 	);
 }

@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 
-function LineChart({ BidList, countBid }) {
-	let databid = {
-		labels: countBid,
+export default function LineUser({ name, data }) {
+	let count = [];
+	data.forEach((element, index) => {
+		count.push(index+1);
+	});
+
+	let dataList = {
+		labels: count,
 		datasets: [
 			{
-				label: "Bidder",
-				data: BidList,
+				label: name,
+				data: data,
 				fill: false,
 				lineTension: 0.2,
 				backgroundColor: "rgba(75,192,192,0.4)",
@@ -28,7 +33,5 @@ function LineChart({ BidList, countBid }) {
 		],
 	};
 
-	return <>{<Line data={databid} />}</>;
+	return <>{<Line data={dataList} />}</>;
 }
-
-export default LineChart;
