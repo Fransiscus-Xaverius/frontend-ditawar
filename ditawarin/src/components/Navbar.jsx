@@ -69,22 +69,7 @@ export default function Navbar() {
                 </>
               )}
               {userToken == 'admin' && (
-                <>
-                  <NavLink
-                    type="button"
-                    className="btn btn-outline-light me-3"
-                    to="/login"
-                  >
-                    Masuk
-                  </NavLink>
-                  <NavLink
-                    type="button"
-                    className="btn btn-outline-light"
-                    to="/register"
-                  >
-                    Daftar
-                  </NavLink>
-                </>
+                <Navigate to={'/admin'} />
               )}
               {userToken != null && userToken != 'admin' && (
                 <>
