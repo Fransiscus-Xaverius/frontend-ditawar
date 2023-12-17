@@ -1,6 +1,6 @@
 function Footer() {
 	return (
-		<div className="container-fluid p-0 mt-5 row justify-content-center">
+		<div className="container-fluid p-0 mt-5 row justify-content-center fontcustom">
 			<hr />
 			<div className="col-3 m-3">
 				<p className="fw-bold text-uppercase">kategori Populer</p>

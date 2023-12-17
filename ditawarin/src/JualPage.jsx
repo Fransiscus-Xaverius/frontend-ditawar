@@ -116,7 +116,7 @@ export default function JualPage() {
         <>
             {!userToken && <Navigate to={"/login"}/>}   
             {userToken == "admin" && <Navigate to={"/login"}/>}
-            <div className='container'>
+            <div className='container fontcustom'>
                 <h1 className='mt-4'>Upload Produk</h1>
                 <hr />
                 <form className='row' onSubmit={handleSubmit(addItem)}>
@@ -140,25 +140,25 @@ export default function JualPage() {
                         <input type="text" {...register("provinsi", {required:{value:true, message:"Lokasi Provinsi wajib diisi"}})} placeholder="Pronvinsi*" className="mt-1 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "90%", height: "3rem"}}/>
                         {errors.provinsi && <p style={{color: "red"}}>{errors.provinsi.message}</p>}
                         <br />
-                        Kategori <br />
-                        <div className="row">
+                        <p className="mb-0" style={{fontSize: '25px'}}>Kategori :</p><br />
+                        <div className="row mb-3">
                             <div className="col-md-6">
-                                <input type="checkbox" style={{width:"17px", height:"17px"}} {...register("kategori")} value={"Rumah Tangga"} id="" /><label htmlFor="" className="ms-4 h4">Rumah Tangga</label><br />
-                                <input type="checkbox" style={{width:"17px", height:"17px"}} {...register("kategori")} value={"Elektronik"} id="" /><label htmlFor="" className="ms-4 h4">Elektronik</label><br />
-                                <input type="checkbox" style={{width:"17px", height:"17px"}} {...register("kategori")} value={"Buku"} id="" /><label htmlFor="" className="ms-4 h4">Buku</label><br />
-                                <input type="checkbox" style={{width:"17px", height:"17px"}} {...register("kategori")} value={"Dapur"} id="" /><label htmlFor="" className="ms-4 h4">Dapur</label> <br />
-                                <input type="checkbox" style={{width:"17px", height:"17px"}} {...register("kategori")} value={"Fashion"} id="" /><label htmlFor="" className="ms-4 h4">Fashion</label> <br />
-                                <input type="checkbox" style={{width:"17px", height:"17px"}} {...register("kategori")} value={"Perhiasan"} id="" /><label htmlFor="" className="ms-4 h4">Perhiasan</label> <br />
+                                <input type="checkbox" style={{width:"15px", height:"15px"}} {...register("kategori")} value={"Rumah Tangga"} id="" /><label htmlFor="" className="ms-4 h6">Rumah Tangga</label><br />
+                                <input type="checkbox" style={{width:"15px", height:"15px"}} {...register("kategori")} value={"Elektronik"} id="" /><label htmlFor="" className="ms-4 h6">Elektronik</label><br />
+                                <input type="checkbox" style={{width:"15px", height:"15px"}} {...register("kategori")} value={"Buku"} id="" /><label htmlFor="" className="ms-4 h6">Buku</label><br />
+                                <input type="checkbox" style={{width:"15px", height:"15px"}} {...register("kategori")} value={"Dapur"} id="" /><label htmlFor="" className="ms-4 h6">Dapur</label> <br />
+                                <input type="checkbox" style={{width:"15px", height:"15px"}} {...register("kategori")} value={"Fashion"} id="" /><label htmlFor="" className="ms-4 h6">Fashion</label> <br />
+                                <input type="checkbox" style={{width:"15px", height:"15px"}} {...register("kategori")} value={"Perhiasan"} id="" /><label htmlFor="" className="ms-4 h6">Perhiasan</label> <br />
                             </div>
                             <div className="col-md-6">
-                                <input type="checkbox" style={{width:"17px", height:"17px"}} {...register("kategori")} value={"Logam Mulia"} id="" /><label htmlFor="" className="ms-4 h4">Logam Mulia</label><br />
-                                <input type="checkbox" style={{width:"17px", height:"17px"}} {...register("kategori")} value={"Mainan dan Hobi"} id="" /><label htmlFor="" className="ms-4 h4">Mainan & Hobi</label><br />
-                                <input type="checkbox" style={{width:"17px", height:"17px"}} {...register("kategori")} value={"Peralatan Olahraga"} id="" /><label htmlFor="" className="ms-4 h4">Peralatan Olahraga</label> <br />
-                                <input type="checkbox" style={{width:"17px", height:"17px"}} {...register("kategori")} value={"Otomotif"} id="" /><label htmlFor="" className="ms-4 h4">Otomotif</label> <br />
-                                <input type="checkbox" style={{width:"17px", height:"17px"}} {...register("kategori")} value={"Properti"} id="" /><label htmlFor="" className="ms-4 h4">Properti</label> <br />
+                                <input type="checkbox" style={{width:"15px", height:"15px"}} {...register("kategori")} value={"Logam Mulia"} id="" /><label htmlFor="" className="ms-4 h6">Logam Mulia</label><br />
+                                <input type="checkbox" style={{width:"15px", height:"15px"}} {...register("kategori")} value={"Mainan dan Hobi"} id="" /><label htmlFor="" className="ms-4 h6">Mainan & Hobi</label><br />
+                                <input type="checkbox" style={{width:"15px", height:"15px"}} {...register("kategori")} value={"Peralatan Olahraga"} id="" /><label htmlFor="" className="ms-4 h6">Peralatan Olahraga</label> <br />
+                                <input type="checkbox" style={{width:"15px", height:"15px"}} {...register("kategori")} value={"Otomotif"} id="" /><label htmlFor="" className="ms-4 h6">Otomotif</label> <br />
+                                <input type="checkbox" style={{width:"15px", height:"15px"}} {...register("kategori")} value={"Properti"} id="" /><label htmlFor="" className="ms-4 h6">Properti</label> <br />
                             </div>
                         </div>
-                        Ending Date <br /> <input {...register('tanggal_selesai', {required:"Wajib memberikan tanggal auction selesai"})} className='p-2 me-3' style={{width:"35%"}} type="date" name="tanggal_selesai" id="tanggal_selesai" /> <input {...register('jam_selesai', {required:"wajib memberikan jam auction selesai"})} className='p-2' style={{width:"35%"}} type="time" name="jam_selesai" id="jam_selesai" />
+                        <p className="mb-0" style={{fontSize: '25px'}}>Ending Date :</p><br /> <input {...register('tanggal_selesai', {required:"Wajib memberikan tanggal auction selesai"})} className='p-2 me-3' style={{width:"35%"}} type="date" name="tanggal_selesai" id="tanggal_selesai" /> <input {...register('jam_selesai', {required:"wajib memberikan jam auction selesai"})} className='p-2' style={{width:"35%"}} type="time" name="jam_selesai" id="jam_selesai" />
                         {errors.tanggal_selesai && <p style={{color: "red"}}>{errors.tanggal_selesai.message}</p>} {errors.jam_selesai && <p style={{color: "red"}}>{errors.jam_selesai.message}</p>}
                     </div>
                     <div className='col-md-6 text-center'>

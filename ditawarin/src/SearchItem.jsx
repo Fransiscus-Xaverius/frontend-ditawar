@@ -20,7 +20,7 @@ export default function SearchItem(props) {
   return (
     <>
       <div
-        className="container"
+        className="container fontcustom"
       >
         <div className="card mb-3 mt-4" style={{ minHeight: "30vh", width: "60vw"}}>
           <div className="row g-0">
@@ -51,10 +51,10 @@ export default function SearchItem(props) {
                   <b>{" "}
                   {Rupiah.format(props.auction.starting_price)}</b>
                 </p>
-                <p className="card-text text-secondary" style={{ fontSize: "15px" }}>
+                <p className="card-text text-secondary mt-2" style={{ fontSize: "15px" }}>
                   Buy Now : <br /> {Rupiah.format(props.auction.asking_price)}
                 </p>
-                <p className="mb-2"><b>DESCRIPTION :</b></p>
+                <p className="mb-2 mt-4"><b>DESCRIPTION :</b></p>
                 <p
                   className="card-text overflow-y-auto mb-0"
                   style={{ fontSize: "15px", maxHeight: "80px" }}

@@ -126,7 +126,7 @@ export default function UpdatePage() {
             {!userToken && <Navigate to={"/login"}/>}   
             {userToken == "admin" && <Navigate to={"/login"}/>}
             {auction.ended && <Navigate to={"/listing/"+auction._id}/>}
-            <div className='container'>
+            <div className='container fontcustom'>
                 <h1 className='mt-4'>Edit Produk</h1>
                 <hr />
                 <form className='row' onSubmit={handleSubmit(updateItem)}>

@@ -67,35 +67,24 @@ export default function WalletPage(){
         {!userToken && <Navigate to={"/login"} />}
 		{userToken == "admin" && <Navigate to={"/login"} />}
         {userToken && (
-            <div className="container">
+            <div className="container fontcustom">
                 <div className="row mt-5 justify-content-between">
                     <h1 className="mb-4" style={{color: "#06083D"}}><b>Detail Saldo</b></h1>
                     <div className="col-5 border border-secondary-subtle p-4" style={{borderRadius: "45px"}}>
-                        
-                            <div className="d-flex mb-4 pb-3 align-items-center border-bottom">
-                                <img src={uang} alt="" style={{width: "40px", height: "40px"}}/>
-                                <div className="ketSaldo ms-3">
-                                    <p className="mb-0">Total Saldo Aktif</p>
-                                    <p className="mb-0" style={{fontWeight:"bold", color: "#06083D", fontSize:"22px"}}>{Rupiah.format(wallet_data.wallet.result.saldo)}</p>
-                                </div>
-                                <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" className="btn btn-success ms-auto" onClick={()=> {topClick()}}><b>Topup Saldo</b></button>  
+                        <div className="d-flex mb-4 pb-3 align-items-center border-bottom">
+                            <img src={uang} alt="" style={{width: "40px", height: "40px"}}/>
+                            <div className="ketSaldo ms-3">
+                                <p className="mb-0">Total Saldo Aktif</p>
+                                <p className="mb-0" style={{fontWeight:"bold", color: "#06083D", fontSize:"22px"}}>{Rupiah.format(wallet_data.wallet.result.saldo)}</p>
                             </div>
-                        
+                            <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" className="btn btn-success ms-auto" onClick={()=> {topClick()}}><b>Topup Saldo</b></button>  
+                        </div>
                         <div className="d-flex">
                             <p className="mb-0">Saldo Tertahan :</p>
                             <p className="ms-auto mb-0">{Rupiah.format(wallet_data.wallet.result.saldo_tertahan)}</p>
                         </div>
-                        {!tarik && (
-                            <button type="button" className="btn btn-success mt-2" style={{float: "right"}} onClick={()=> {tarikClick()}}><b>Tarik Saldo</b></button>
-                        )}
-                        {tarik && (
-                            <div className="d-flex mt-2" style={{float: "right"}}>
-                                <input type="text"placeholder="Jumlah yang ingin ditarik" className="me-2 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "13rem", height: "3rem"}}/> <br />
-                                <button type="button" className="btn btn-success"><b>Tarik Saldo</b></button>
-                            </div>
-                        )}
-                        
                     </div>
+                    
 
                     <div className="col-6 border border-secondary-subtle p-4" style={{borderRadius: "45px"}}>
                         <h2 className="mb-0" style={{color: "#06083D"}}><b>Riwayat Saldo</b></h2>
@@ -105,6 +94,22 @@ export default function WalletPage(){
                         </div>
                     </div>
                 </div>
+
+                <div className="col-5 text-center">
+                    {!tarik && (
+                        <button type="button" className="btn btn-success mt-2" style={{width: "100%"}} onClick={()=> {tarikClick()}}><b>Tarik Saldo</b></button>
+                    )}
+                    {tarik && (
+                        <div className="mt-3">
+                            <div className="d-flex align-items-center">
+                                <p className="mb-0 me-5" style={{fontSize: "20px"}}><b>Rp</b></p>
+                                <input type="text"placeholder="Jumlah yang ingin ditarik" className="me-2 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "100%", height: "3rem"}}/> <br />
+                            </div>
+                            <button type="button" className="btn btn-success mt-3" style={{width: "100%"}}><b>Tarik Saldo</b></button>
+                        </div>
+                    )}
+                </div>
+
                 <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div className="modal-dialog modal-dialog-centered">
                     <div className="modal-content">

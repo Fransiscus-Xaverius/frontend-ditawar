@@ -1,10 +1,9 @@
 import Logo from "./assets/logo.png";
 import Jumbotron from "./assets/jumbo.jpg";
-import Tanah from "./assets/tanah.png";
-import Rumah from "./assets/rumah.png";
-import Ruko from "./assets/ruko.png";
-import Pabrik from "./assets/pabrik.png";
-import Mobil from "./assets/mobil.png";
+import Deal from "./assets/deal.png"
+import New from "./assets/new.png";
+import Disc from "./assets/discount.png";
+import Popular from "./assets/popular.png";
 import CardAuction from "./CardAuction";
 import SearchItem from "./SearchItem";
 import { useLoaderData, useNavigate } from "react-router-dom";
@@ -84,81 +83,71 @@ function Home() {
   return (
     <>
       {/* NAVBAR */}
-
+      <div className="fontcustom">
       <div className="container">
         {/* JUMBO */}
-        <div className="row justify-content-center">
-          <div className="col-12 mt-5">
-              <div className="card" style={{ width: "100%", height: "35rem",backgroundImage: `url(${Jumbotron})`, backgroundRepeat: "no-repeat", backgroundSize: "cover", filter: `brightness(60%)`}}>
-                <div className="card-img-overlay" style={{padding: "28rem 5rem"}}>
-                  <h1 className="card-title text-light"><b>SELAMAT DATANG,</b></h1>
-                  <p className="card-text text-light"><b>Ditawarin fokus pada lelang berbasis online dimana siapapun bisa mengikuti lelang yang ada.</b></p>
-                </div>
-              </div>
+        <div className="row mt-5 align-items-center">
+          <div className="col-6 ">
+            <h3><b>SELAMAT DATANG <br /> </b></h3>
+            <p style={{fontSize: "25px"}}>Ditawarin fokus pada lelang berbasis online dimana siapapun bisa mengikuti lelang yang ada.</p>
+            <button className="btn text-white p-2" style={{ width: "170px" , backgroundColor: "#06083D", textTransform: "uppercase"}} ><b> SHOP NOW </b></button>
+          </div>
+          <div className="col-6 text-center">
+            <img src={Jumbotron} alt="" />
           </div>
         </div>
         
 
         {/* KATEGORI */}
-        <h1 className="mt-5 mb-3"><b>Popular Categories</b></h1>
+        <h1 className="mb-4" style={{marginTop: "100px"}}><b>Categories</b></h1>
         <div className="d-flex justify-content-between">
           <div
-            className="kategori_1 text-center pe-5 ps-5 pt-3 pb-3 me-5 mt-3 align-items-center"
-            style={{ border: "1px solid gray", borderRadius: "12px" }}
+            className="kategori_2 text-center pe-5 ps-5 pt-3 pb-3 me-5 align-items-center"
           >
-            <img src={Tanah} alt="" style={{ width: "5rem", height: "5rem" }} />{" "}
+            <img src={Deal} alt="" style={{ width: "5rem", height: "5rem" }} />{" "}
             <br />
-            <h5 className="mt-3 mb-0">TANAH</h5>
+            <h5 className="mt-3 mb-0">DEALS</h5>
           </div>
           <div
             className="kategori_2 text-center pe-5 ps-5 pt-3 pb-3 me-5 align-items-center"
-            style={{ border: "1px solid gray", borderRadius: "12px" }}
           >
-            <img src={Rumah} alt="" style={{ width: "5rem", height: "5rem" }} />{" "}
+            <img src={New} alt="" style={{ width: "5rem", height: "5rem" }} />{" "}
             <br />
-            <h5 className="mt-3 mb-0">RUMAH</h5>
+            <h5 className="mt-3 mb-0">NEW COLLECTIONS</h5>
           </div>
           <div
             className="kategori_3 text-center pe-5 ps-5 pt-3 pb-3 me-5 align-items-center"
-            style={{ border: "1px solid gray", borderRadius: "12px" }}
           >
             <img
-              src={Pabrik}
+              src={Disc}
               alt=""
               style={{ width: "5rem", height: "5rem" }}
             />{" "}
             <br />
-            <h5 className="mt-3 mb-0">PABRIK</h5>
+            <h5 className="mt-3 mb-0">PROMO</h5>
           </div>
           <div
-            className="kategori_4 text-center pe-5 ps-5 pt-3 pb-3 me-5 align-items-center"
-            style={{ border: "1px solid gray", borderRadius: "12px" }}
+            className="kategori_2 text-center pe-5 ps-5 pt-3 pb-3 me-5 align-items-center"
           >
-            <img src={Ruko} alt="" style={{ width: "5rem", height: "5rem" }} />{" "}
+            <img src={Popular} alt="" style={{ width: "5rem", height: "5rem" }} />{" "}
             <br />
-            <h5 className="mt-3 mb-0">RUKO</h5>
-          </div>
-          <div
-            className="kategori_5 text-center pe-5 ps-5 pt-3 pb-3 align-items-center"
-            style={{ border: "1px solid gray", borderRadius: "12px" }}
-          >
-            <img src={Mobil} alt="" style={{ width: "5rem", height: "5rem" }} />{" "}
-            <br />
-            <h5 className="mt-3 mb-0">MOBIL</h5>
+            <h5 className="mt-3 mb-0">POPULAR COLLECTIONS</h5>
           </div>
         </div>
+      </div>
 
         {/* DEALS */}
-        <div className="row mt-5">
-          <div className="col-2">
-            <div
+      <div className="container-fluid">
+        <div className="row mt-5" style={{backgroundColor: "#06083D"}}>
+          <div className="col-2 m-5">
+            {/* <div
               className="rounded-5"
               style={{
                 width: "30rem",
                 backgroundColor: "#06083D",
                 padding: "4rem 2rem",
               }}
-            >
+            > */}
               <h1
                 className="mb-2 text-light"
                 style={{ letterSpacing: "8px", lineHeight: "150%" }}
@@ -175,9 +164,10 @@ function Home() {
               >
                 LIHAT
               </button>
-            </div>   
+            {/* </div>    */}
           </div>
-          <div className="col-10 container-fluid" style={{display:"flex"}}>
+
+          <div className="col-10" style={{display:"flex"}}>
             <Scrollbars id="lihat" className="" autoHide autoHideTimeout={1000} autoHideDuration={200} thumbMinSize={30} universal={true} style={{ height:"90%", transitionDuration:"0.4s", alignSelf:"center"}}>
               <div className="d-flex flex-nowrap ps-5" style={{height: "100%"}}>
                 {
@@ -197,16 +187,22 @@ function Home() {
               </div>      
             </Scrollbars>
           </div>
+
         </div>
+      </div>
+      <div className="container">
         <div className="row">
           {
             datatampil.length == 0 ?
             <div></div>
             :
             datatampil.map((auction, idx) => (
-              <div className="col-4" key={idx}>
-                <CardAuction {...auction} />
-              </div>
+              <>
+                <h2 className="text-center mb-4"  style={{marginTop: "100px"}}>SHOP OUR COLLECTION</h2>
+                <div className="col-4" key={idx}>
+                  <CardAuction {...auction} />
+                </div>
+              </>
             ))
           }
         </div>
@@ -220,6 +216,7 @@ function Home() {
           </div>
         ))} */}
       </div>
+    </div>
     </>
   );
 }

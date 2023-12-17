@@ -74,7 +74,7 @@ export default function SearchPage(props) {
   }, [kategori]);
 
   return (
-    <div className="container">
+    <div className="container fontcustom">
       <div className="text-center pt-4">
         <h1>Search Result for "{query}"</h1>
       </div>

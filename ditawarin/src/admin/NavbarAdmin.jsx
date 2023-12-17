@@ -64,7 +64,7 @@ function NavbarAdmin() {
 
 	return (
 		<div
-			className="container-fluid p-0 d-flex"
+			className="container-fluid p-0 d-flex fontcustom"
 			style={{ display: "block", minHeight: "100vh" }}
 		>
 			{!userToken && <Navigate to={"/login"} />}

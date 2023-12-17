@@ -44,7 +44,7 @@ function Register() {
 
     return(
         <>
-            <nav className="p-0" style={{borderBottom: "1px solid gray"}}>
+            <nav className="p-0 fontcustom" style={{borderBottom: "1px solid gray"}}>
                 <div className="container-fluid"  style={{ backgroundColor: "#06083D" }}>
                     <div className="d-flex justify-content-between align-items-center">
                         <Link to="/"><img src={Logo} alt="" style={{width: "15%", height: "15%"}}/></Link>
@@ -55,7 +55,7 @@ function Register() {
                  </div>
                 </div>
             </nav>
-            <div className="container-sm">
+            <div className="container-sm fontcustom">
                 <div className="row justify-content-center">
                     <h1 className="mt-4 mb-4 text-center" style={{color: "#06083D"}}><b>Registration</b></h1>
                     <form onSubmit={handleSubmit(signUp)}>

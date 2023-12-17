@@ -36,7 +36,7 @@ export default function Navbar() {
   return (
     <>
     
-      <nav className="p-0" style={{ borderBottom: "1px solid gray" }}>
+      <nav className="p-0 fontcustom" style={{ borderBottom: "1px solid gray" }}>
         <div className="container-fluid" style={{ backgroundColor: "#06083D" }}>
           <div className="d-flex align-items-center">
             <Link to="/" style={{ width: "80px" }}>

@@ -8,9 +8,9 @@ export default function PurchasesPage(){
         <>
         {!userToken && <Navigate to={"/login"}/>}
         {userToken == "admin" && <Navigate to={"/login"}/>}
-        <h1>Purchases Page</h1>
-
-        <div className="container-fluid">
+        
+        <div className="container-fluid fontcustom">
+            <h1>Purchases Page</h1>
             <div className="row">
                 <div className="col-4">
                     <div className="row d-flex">

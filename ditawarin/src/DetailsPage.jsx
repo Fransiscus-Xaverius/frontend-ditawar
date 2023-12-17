@@ -46,7 +46,7 @@ export default function DetailsPage(){
     return (
         <>
             <h1 className="text-center">Purchase Details Page</h1>
-            <div className="container-fluid">
+            <div className="container-fluid fontcustom">
                 <div className="row">
                     <div className="col-2">
 

@@ -33,8 +33,8 @@ function Rating() {
 		<div className="text-center">
 			{!userToken && <Navigate to={"/login"} />}
 			{userToken == "admin" && <Navigate to={"/login"} />}
-			<h1 className="mt-4">Beri Penilaian</h1>
-			<div>
+			<div className="fontcustom">
+				<h1 className="mt-4">Beri Penilaian</h1>
 				<Form onSubmit={handleSubmit}>
 					{[1, 2, 3, 4, 5].map((value) => (
 						<label key={value}>

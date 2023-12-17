@@ -22,8 +22,8 @@ export default function Report() {
     }
 
 	return (
-		<div>
-			<h1 className="text-center fs-1">Laporkan</h1>
+		<div className="fontcustom">
+			<h1 className="text-center fs-1 mt-5">Laporkan</h1>
 			<form onSubmit={handleSubmit(onSubmit)} className="text-center">
 				<label className="fs-2">Masalah</label>
 				<br />

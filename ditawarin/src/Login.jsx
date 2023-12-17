@@ -38,7 +38,7 @@ function Login() {
 
     return(
         <>
-            <nav className="p-0" style={{borderBottom: "1px solid gray"}}>
+            <nav className="p-0 fontcustom" style={{borderBottom: "1px solid gray"}}>
                 <div className="container-fluid"  style={{ backgroundColor: "#06083D" }}>
                     <div className="d-flex justify-content-between align-items-center">
                         <Link to="/"><img src={Logo} alt="" style={{width: "15%", height: "15%"}}/></Link>
@@ -49,7 +49,7 @@ function Login() {
                  </div>
                 </div>
             </nav>
-            <div className="container">
+            <div className="container fontcustom">
                     <form onSubmit={handleSubmit(signIn)}>
                         <div className="row justify-content-center">
                             <div className="col-6 p-0">

@@ -25,7 +25,7 @@ export default function PurchasePageBuyer() {
         <>
         
         <h1>Purchase Page Buyer</h1>
-        <div className="container-fluid">
+        <div className="container-fluid fontcustom">
             <div className="row">
                 <div className="d-flex">
                     <button className="btn text-light mt-3 mb-3 me-3 pt-3 pb-3" type="submit" style={{backgroundColor: "#06083D"}}>

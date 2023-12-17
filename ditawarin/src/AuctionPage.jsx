@@ -140,15 +140,35 @@ export default function AuctionPage() {
       <div className="container-fluid">
       {!userToken && <Navigate to={"/login"} />}
 			{userToken == "admin" && <Navigate to={"/login"} />}
-        <div className="row mt-5 mx-auto">
-          <div className="col-md-4 text-center">
-            <img
-              src={url}
-              alt="Item Image"
-              className="border border-5 rounded-5 img-fluid"
-              style={{ maxHeight: "300px" }}
-            />
+        <div className="row mt-5 mx-auto fontcustom">
+          <div className="col-md-3 me-4">
+            <div className="border rounded-4 text-center mx-auto mt-4 mt-md-0">
+              <div className="text-white rounded-top-4 p-3" style={{backgroundColor: "#06083D"}}>
+                <b>WAKTU SERVER</b>
+              </div>
+              <div className="mb-4 mt-4">
+                <b> DIBUKA PADA </b>
+                <br />
+                {date.toLocaleString("default", { month: "long" }) +
+                ", " +
+                date.getDate() +
+                " " +
+                date.getFullYear() +
+                " " +
+                ("" + date.getHours()).padStart(2, "0") +
+                ":" +
+                ("" + date.getMinutes()).padStart(2, "0") +
+                ":" +
+                ("" + date.getSeconds()).padStart(2, "0")}{" "}
+                <br />
+                <br />
+                <b> WAKTU BERAKHIR </b>
+                <br />
+                {timer}
+              </div>
+            </div>
           </div>
+
           <div className="col-12 col-md-8">
             <div className="row">
               <div
@@ -175,34 +195,16 @@ export default function AuctionPage() {
                 <div className="h3 mt-4 border-bottom pb-3"><b>DESCRIPTION</b></div>
                 <div className="w-100 mt-3">{item.deskripsi}</div>
               </div>
-
-              <div className="col-md-4">
-                <div className="border rounded-4 text-center mx-auto mt-4 mt-md-0">
-                  <div className="text-white rounded-top-4 p-3" style={{backgroundColor: "#06083D"}}>
-                    Waktu Server
-                  </div>
-                  <div className="mb-4 mt-4">
-                    <b> DIBUKA PADA </b>
-                    <br />
-                    {date.toLocaleString("default", { month: "long" }) +
-                      ", " +
-                      date.getDate() +
-                      " " +
-                      date.getFullYear() +
-                      " " +
-                      ("" + date.getHours()).padStart(2, "0") +
-                      ":" +
-                      ("" + date.getMinutes()).padStart(2, "0") +
-                      ":" +
-                      ("" + date.getSeconds()).padStart(2, "0")}{" "}
-                    <br />
-                    <br />
-                    <b> WAKTU BERAKHIR </b>
-                    <br />
-                    {timer}
-                  </div>
-                </div>
+              <div className="col-md-4 text-center">
+                <img
+                  src={url}
+                  alt="Item Image"
+                  className="border border-5 rounded-5 img-fluid"
+                  style={{ maxHeight: "300px" }}
+                />
               </div>
+          
+              
 
               {auction.nama_penjual == user.nama ? (
                 <div className="col-sm-6 text-md-start pt-4">
@@ -251,7 +253,7 @@ export default function AuctionPage() {
           </div>
         </div>
         <div
-          className="modal fade"
+          className="modal fade fontcustom"
           id="staticBackdrop"
           data-bs-backdrop="static"
           data-bs-keyboard="false"

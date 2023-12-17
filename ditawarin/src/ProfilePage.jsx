@@ -142,7 +142,7 @@ export default function ProfilePage() {
 			{!userToken && <Navigate to={"/login"}/>}
             {userToken == "admin" && <Navigate to={"/login"}/>}
 			{!editing && (
-				<div className="container">
+				<div className="container fontcustom">
 					<div className="d-flex" style={{ marginTop: "5rem" }}>
 						<h2>Profile Diri</h2>
 						<br />
@@ -286,7 +286,7 @@ export default function ProfilePage() {
 			{
 				editing && (
 					<form onSubmit={handleSubmit(UpdateSubmit)}>
-						<div className="container">
+						<div className="container fontcustom">
 							<div className="d-flex" style={{ marginTop: "5rem" }}>
 								<h2>Profile Diri</h2>
 								<br />
