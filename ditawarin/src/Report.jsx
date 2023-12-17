@@ -11,9 +11,12 @@ export default function Report() {
 
     const onSubmit = async (data) => {
         try{
-			await client.post(`service?id_user=${user._id}&id_auction=${localStorage.getItem("auction")}`, {
-				msg : data.msg,
-			});
+			// await client.post(`service?id_user=${user._id}&id_auction=${localStorage.getItem("auction")}`, {
+			// 	msg : data.msg,
+			// });
+
+			const auction = localStorage.getItem("auction");
+			await client.post('/laporan?user_id='+user._id+'&auction_id='+auction+'&reason='+data.msg);
 		}
 		catch(error){
 			alert(error);

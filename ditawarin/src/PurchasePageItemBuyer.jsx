@@ -54,6 +54,8 @@ export default function PurchasePageItem(props) {
 
     const sendFeedback = async () => {
         localStorage.setItem("auction", props.auction);
+        localStorage.setItem("buyer", props.buyer);
+        localStorage.setItem("seller", props.seller._id);
         navigate("/feedback");
     };
 
@@ -62,26 +64,26 @@ export default function PurchasePageItem(props) {
         navigate("/service");
     }
 
-    const [Feedback, setFeedback] = useState(true);
-    const [Report, setReport] = useState(true);
+    const [Rating, setRating] = useState(true);
+    const [Laporan, setLaporan] = useState(true);
 
-    const cekUlasan = async() => {
-        const result = await client.get(`/feedback?id=${props.auction}`);
-        if(result.data.result){
-            setFeedback(false);
+    const cekRating = async() => {
+        const result = await client.get(`/rating-auction?id=${props.auction}`);
+        if(result.data.result != null){
+            setRating(false);
         }
         
     }
 
     const cekLaporan = async() => {
-        const result = await client.get(`/service?id=${props.auction}`);
-        if(result.data.result){
-            setReport(false);
+        const result = await client.get(`/laporan-auction?id=${props.auction}`);
+        if(result.data.result != null){
+            setLaporan(false);
         }
     }
 
     useEffect(() => {
-        cekUlasan();
+        cekRating();
         cekLaporan()
     },[])
 
@@ -150,8 +152,8 @@ export default function PurchasePageItem(props) {
                                 </div>
                                 <div className="row">
                                     <div className="col d-flex">
-                                        {Feedback  && <button onClick={sendFeedback} className="btn btn-success me-2" style={{ width: "100px" }}>Ulas</button>}
-                                        {Report && <button onClick={sendReport} className="btn btn-warning" style={{ width: "100px" }}>Laporkan</button>}
+                                        {Rating  && <button onClick={sendFeedback} className="btn btn-success me-2" style={{ width: "100px" }}>Ulas</button>}
+                                        {Laporan && <button onClick={sendReport} className="btn btn-warning" style={{ width: "100px" }}>Laporkan</button>}
                                         
                                     </div>
                                 </div>

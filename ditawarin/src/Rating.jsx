@@ -1,4 +1,4 @@
-import { Form, Navigate, useLoaderData } from "react-router-dom";
+import { Form, Navigate, useLoaderData, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import client from "./client";
 function Rating() {
@@ -9,17 +9,22 @@ function Rating() {
 	const handleRatingChange = (value) => {
 		setRating(value);
 	};
+	const navigate = useNavigate();
 	const handleSubmit = async (event) => {
 		try{
-
-			await client.post(`feedback?id_user=${user._id}&id_auction=${localStorage.getItem("auction")}`, {
-				rating: rating,
-				review: text,
-			});
+			// await client.post(`feedback?id_user=${user._id}&id_auction=${localStorage.getItem("auction")}`, {
+				// 	rating: rating,
+				// 	review: text,
+				// });
+			const auction = localStorage.getItem("auction");
+			const buyer = localStorage.getItem("buyer");
+			const seller = localStorage.getItem("seller");
+			await client.post('/rating?buyer='+buyer+'&seller='+seller+'&auction='+auction+'&rating='+rating+'&comment='+text);
 		}
 		catch(error){
 			alert(error);
 		}
+		navigate(-1);
 	};
 	const handleTextChange = (event) => {
 		const newText = event.target.value;
