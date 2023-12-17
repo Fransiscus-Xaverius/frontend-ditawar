@@ -57,6 +57,7 @@ function Home() {
   },[datatampil])
 
   const [lihat, setLihat] = useState(false)
+
   function look(){
     if (lihat == true) {
       setLihat(false)
@@ -69,10 +70,8 @@ function Home() {
     let divi = document.getElementById('lihat')
     if (lihat == false) {
       divi.style.width = "0px"
-      // divi.style.overflowX = "hidden"
     }else{
       divi.style.width = "100%"
-      // divi.style.overflowX = "auto"
     }
   }
 
@@ -138,16 +137,18 @@ function Home() {
 
         {/* DEALS */}
       <div className="container-fluid">
-        <div className="row mt-5" style={{backgroundColor: "#06083D"}}>
-          <div className="col-2 m-5">
-            {/* <div
+        <div className="row mt-5" style={{
+                backgroundColor: "#06083D",              
+              }}>
+          <div className="col-2 ps-5">
+            <div
               className="rounded-5"
               style={{
                 width: "30rem",
                 backgroundColor: "#06083D",
                 padding: "4rem 2rem",
               }}
-            > */}
+            >
               <h1
                 className="mb-2 text-light"
                 style={{ letterSpacing: "8px", lineHeight: "150%" }}
@@ -164,11 +165,10 @@ function Home() {
               >
                 LIHAT
               </button>
-            {/* </div>    */}
+            </div>   
           </div>
-
-          <div className="col-10" style={{display:"flex"}}>
-            <Scrollbars id="lihat" className="" autoHide autoHideTimeout={1000} autoHideDuration={200} thumbMinSize={30} universal={true} style={{ height:"90%", transitionDuration:"0.4s", alignSelf:"center"}}>
+          <div className="col-10 pe-5" style={{display:"flex"}}>
+            <Scrollbars id="lihat" autoHide autoHideTimeout={1000} autoHideDuration={200} thumbMinSize={30} universal={true} style={{ height:"85%", transitionDuration:"0.4s", alignSelf:"center"}}>
               <div className="d-flex flex-nowrap ps-5" style={{height: "100%"}}>
                 {
                   datalihat.map((auction, idx) => (
@@ -191,6 +191,7 @@ function Home() {
         </div>
       </div>
       <div className="container">
+        <h2 className="text-center mb-4"  style={{marginTop: "100px"}}>SHOP OUR COLLECTION</h2>
         <div className="row">
           {
             datatampil.length == 0 ?
@@ -198,8 +199,8 @@ function Home() {
             :
             datatampil.map((auction, idx) => (
               <>
-                <h2 className="text-center mb-4"  style={{marginTop: "100px"}}>SHOP OUR COLLECTION</h2>
-                <div className="col-4" key={idx}>
+                
+                <div className="col-4 px-4" key={idx}>
                   <CardAuction {...auction} />
                 </div>
               </>
