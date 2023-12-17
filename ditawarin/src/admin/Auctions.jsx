@@ -75,6 +75,11 @@ function Auctions() {
 
 	const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+	let Rupiah = new Intl.NumberFormat("id-ID", {
+		style: "currency",
+		currency: "IDR",
+	});
+
 	return (
 		<>
 			{console.log(Auction)}
@@ -111,7 +116,7 @@ function Auctions() {
 									</div>
 								</td>
 								<td className="w-25 align-middle">
-									Rp {act.highest_bid ? act.highest_bid.bid : act.asking_price}
+									{act.highest_bid ? Rupiah.format(parseInt(act.highest_bid.bid)) : Rupiah.format(parseInt(act.asking_price))}
 								</td>
 								<td className="w-25 align-middle">
 									{!act.ended && <div className="bg-success">PROGRESS</div>}

@@ -256,7 +256,7 @@ function Users() {
 							</button>
 						</>
 					)}
-					{limitPage >= 2 && (
+					{limitPage > 2 && (
 						<>
 							{currentPage === 1 && (
 								<>

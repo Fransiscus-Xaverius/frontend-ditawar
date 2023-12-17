@@ -38,7 +38,10 @@ function Payment() {
 	const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
 	const limitPage = data.length / itemsPerPage;
 	const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
+	let Rupiah = new Intl.NumberFormat("id-ID", {
+		style: "currency",
+		currency: "IDR",
+	});
 	return (
 		<>
 			{!Look && (
@@ -68,7 +71,7 @@ function Payment() {
 											<img src={url} style={{ width: "100px" }} />
 											<p>{a.item}</p>
 										</td>
-										<td>Rp. {a.transaction}</td>
+										<td>{Rupiah.format(parseInt(a.transaction))}</td>
 										<td style={{ width: "100px" }}>
 											<div className="bg-success rounded text-center p-1">
 												DONE
@@ -125,7 +128,7 @@ function Payment() {
 									</button>
 								</>
 							)}
-							{limitPage >= 2 && (
+							{limitPage > 2 && (
 								<>
 									{currentPage === 1 && (
 										<>
