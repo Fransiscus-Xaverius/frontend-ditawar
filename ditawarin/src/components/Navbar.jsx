@@ -50,7 +50,7 @@ export default function Navbar() {
               style={{ borderRadius: "8px", width: "40%", height: "2rem" }}
             />
             <div className="d-flex align-items-center">
-              {!userToken && (
+              {userToken === null && (
                 <>
                   <NavLink
                     type="button"
@@ -68,7 +68,25 @@ export default function Navbar() {
                   </NavLink>
                 </>
               )}
-              {userToken && (
+              {userToken == 'admin' && (
+                <>
+                  <NavLink
+                    type="button"
+                    className="btn btn-outline-light me-3"
+                    to="/login"
+                  >
+                    Masuk
+                  </NavLink>
+                  <NavLink
+                    type="button"
+                    className="btn btn-outline-light"
+                    to="/register"
+                  >
+                    Daftar
+                  </NavLink>
+                </>
+              )}
+              {userToken != null && userToken != 'admin' && (
                 <>
                   {!userToken && <Navigate to={"/login"}/>}
                   {userToken == "admin" && <Navigate to={"/login"}/>}
