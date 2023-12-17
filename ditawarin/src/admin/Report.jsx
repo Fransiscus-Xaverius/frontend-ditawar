@@ -31,6 +31,11 @@ function Report() {
 
 	const payment = useLoaderData();
 
+	let Rupiah = new Intl.NumberFormat("id-ID", {
+		style: "currency",
+		currency: "IDR",
+	});
+
 	return (
 		<>
 			<div style={{ width: "50%" }}>
@@ -39,6 +44,32 @@ function Report() {
 			<div style={{width : "90%"}}>
 				<HistoryChart data={payment} />
 			</div>
+
+			<table className="table">
+				<thead className="table-success">
+					<tr>
+						<th className="text-center">Seller</th>
+						<th className="text-center">Buyer</th>
+						<th className="text-center">Auction</th>
+						<th className="text-center">Price</th>
+						<th className="text-center">Status</th>
+					</tr>
+				</thead>
+				<tbody>
+					{payment.map((pay) => {
+						console.log(pay);
+						return (
+							<tr className="table-light">
+								<td className="text-center">{pay.seller.nama}</td>
+								<td className="text-center">{pay.buyer.nama}</td>
+								<td className="text-center">{pay.item}</td>
+								<td className="text-center">{Rupiah.format(parseInt(pay.transaction))}</td>
+								<td className="text-center bg-success fw-bold">{pay.status}</td>
+							</tr>
+						);
+					})}
+				</tbody>
+			</table>
 		</>
 	);
 }

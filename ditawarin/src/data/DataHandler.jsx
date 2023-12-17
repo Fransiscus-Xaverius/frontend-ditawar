@@ -141,6 +141,7 @@ const getAllPurchase = async () => {
 				image: item.data.result.images,
 				auction: auction.data.result,
 				transaction: transaction.data.result.invoice.amount,
+				status : result[i].status
 			});
 		}
 	}
