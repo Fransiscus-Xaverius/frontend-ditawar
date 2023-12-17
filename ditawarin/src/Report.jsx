@@ -23,17 +23,22 @@ export default function Report() {
 
 	return (
 		<div className="fontcustom">
-			<h1 className="text-center fs-1 mt-5">Laporkan</h1>
+			<h1 className="text-center fs-1 mt-5">Apa yang terjadi?</h1>
 			<form onSubmit={handleSubmit(onSubmit)} className="text-center">
-				<label className="fs-2">Masalah</label>
 				<br />
-				<textarea cols={100} rows={10} className="my-3" {...register("msg")} />
+				<textarea cols={100} rows={10} className="my-3 p-4" {...register("msg")} placeholder="Beritahu apa yang menjadi masalahmu"/>
 				<br />
 				<button
-					type="submit"
-					className="bg-primary rounded-1 border-0 fs-4 px-3"
-				>
-					SEND
+						type="submit"
+						className="btn text-white p-2"
+						style={{
+							width: "130px",
+							backgroundColor: "#06083D",
+							textTransform: "uppercase",
+							borderRadius: "10px",
+						}}
+					>
+						<b>SEND</b>
 				</button>
 			</form>
 		</div>

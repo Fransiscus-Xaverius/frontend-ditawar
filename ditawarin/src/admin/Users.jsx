@@ -148,7 +148,7 @@ function Users() {
 				value={search}
 				onChange={handleSearch}
 				placeholder="Search..."
-				className="form-control my-3"
+				npmclassName="form-control my-3"
 			/>
 			{!Editing && (
 				<table className="table">

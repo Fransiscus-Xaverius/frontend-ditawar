@@ -35,6 +35,7 @@ function Rating() {
 			{userToken == "admin" && <Navigate to={"/login"} />}
 			<div className="fontcustom">
 				<h1 className="mt-4">Beri Penilaian</h1>
+				<p><b>Apakah anda puas dengan pelayanan kami?</b></p>
 				<Form onSubmit={handleSubmit}>
 					{[1, 2, 3, 4, 5].map((value) => (
 						<label key={value}>
@@ -57,6 +58,8 @@ function Rating() {
 						value={text}
 						onChange={handleTextChange}
 						placeholder="Tulis Review"
+						className="p-4"
+						style={{borderRadius: "10px"}}
 					></textarea>
 					<br />
 					<p> {getWordCount()}/400 Word</p>

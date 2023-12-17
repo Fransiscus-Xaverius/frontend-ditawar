@@ -175,7 +175,12 @@ export default function AuctionPage() {
                 className="col-12 col-md-8"
                 style={{ marginTop: "auto", marginBottom: "auto" }}
               >
-                <h6 className="p-2" style={{textTransform: "uppercase", backgroundColor: "#CEF9D3", color: "#0C560B", borderRadius: "12px", width: "fit-content"}}>{auction.kategori_barang}</h6>
+                <div className="d-flex align-items-center">
+                  {auction.kategori_barang.split(",").map(kategori=>
+                    (
+                      <h6 className="p-2 ms-2" style={{textTransform: "uppercase", backgroundColor: "#CEF9D3", color: "#0C560B", borderRadius: "12px", width: "fit-content"}} key={kategori}>{kategori}</h6>
+                  ))}
+                </div>
                 <div className="h3 ms-2">{item.nama}</div>
                 <p className="text-secondary mb-4">
                   <img src={location} alt="" style={{width: "25px", height: "25px"}}/>
