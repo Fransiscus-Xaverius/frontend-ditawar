@@ -56,10 +56,10 @@ function Payment() {
 					<table className="table">
 						<thead>
 							<tr className="table-success">
-								<th>PRODUCT</th>
-								<th>PRICE</th>
-								<th>STATUS</th>
-								<th>ACTION</th>
+								<th scope="col" className="text-center">PRODUCT</th>
+								<th scope="col" className="text-center">PRICE</th>
+								<th scope="col" className="text-center">STATUS</th>
+								<th scope="col" className="text-center">ACTION</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -67,17 +67,17 @@ function Payment() {
 								let url = import.meta.env.VITE_API_URL + "/static/" + a.image;
 								return (
 									<tr>
-										<td>
+										<td className="text-center">
 											<img src={url} style={{ width: "100px" }} />
 											<p>{a.item}</p>
 										</td>
-										<td>{Rupiah.format(parseInt(a.transaction))}</td>
-										<td style={{ width: "100px" }}>
+										<td className="text-center">{Rupiah.format(parseInt(a.transaction))}</td>
+										<td style={{ width: "100px" }} className="text-center">
 											<div className="bg-success rounded text-center p-1">
 												DONE
 											</div>
 										</td>
-										<td className="w-20">
+										<td className="w-20 text-center">
 											<button
 												className="bg-secondary rounded border-0"
 												onClick={() => Looking(a)}

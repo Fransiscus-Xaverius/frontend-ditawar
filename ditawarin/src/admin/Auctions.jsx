@@ -94,10 +94,10 @@ function Auctions() {
 			<table className="table">
 				<thead>
 					<tr className="table-success">
-						<th scope="col">PRODUCT</th>
-						<th scope="col">PRICE</th>
-						<th scope="col">STATUS</th>
-						<th scope="col">ACTION</th>
+						<th scope="col" className="text-center">PRODUCT</th>
+						<th scope="col" className="text-center">PRICE</th>
+						<th scope="col" className="text-center">STATUS</th>
+						<th scope="col" className="text-center">ACTION</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -107,7 +107,7 @@ function Auctions() {
 						console.log(act.highest_bid);
 						return (
 							<tr>
-								<td className="w-50">
+								<td className="w-50 text-center">
 									<div className="d-flex">
 										<img src={`${url}`} style={{ width: "100px" }} />
 										<div className="ms-5" style={{ alignSelf: "center" }}>
@@ -115,14 +115,14 @@ function Auctions() {
 										</div>
 									</div>
 								</td>
-								<td className="w-25 align-middle">
+								<td className="w-25 align-middle text-center">
 									{act.highest_bid ? Rupiah.format(parseInt(act.highest_bid.bid)) : Rupiah.format(parseInt(act.asking_price))}
 								</td>
-								<td className="w-25 align-middle">
+								<td className="w-25 align-middle text-center">
 									{!act.ended && <div className="bg-success">PROGRESS</div>}
 									{act.ended && <div className="bg-success px-1">DONE</div>}
 								</td>
-								<td className="w-25 align-middle">
+								<td className="w-25 align-middle text-center">
 									<div className="d-flex">
 										<button
 											className="bg-primary mx-1"

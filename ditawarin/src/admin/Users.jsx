@@ -154,11 +154,11 @@ function Users() {
 				<table className="table">
 					<thead>
 						<tr className="table-success">
-							<th scope="col">PROFILE</th>
-							<th scope="col">NAMA</th>
-							<th scope="col">EMAIL</th>
-							<th scope="col">STATUS</th>
-							<th scope="col">ACTION</th>
+							<th scope="col" className="text-center">PROFILE</th>
+							<th scope="col" className="text-center">NAMA</th>
+							<th scope="col" className="text-center">EMAIL</th>
+							<th scope="col" className="text-center">STATUS</th>
+							<th scope="col" className="text-center">ACTION</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -173,9 +173,9 @@ function Users() {
 									<td className="w-20">
 										<img src={`${url}`} style={{ width: "100px" }} />
 									</td>
-									<td className="w-25">{user.nama}</td>
-									<td className="w-25">{user.email}</td>
-									<td className="w-25">
+									<td className="w-25 text-center">{user.nama}</td>
+									<td className="w-25 text-center">{user.email}</td>
+									<td className="w-25 text-center">
 										{user.role == "unverified" && (
 											<p className="bg-success">Unverified</p>
 										)}
@@ -186,7 +186,7 @@ function Users() {
 											<p className="bg-danger">Banned</p>
 										)}
 									</td>
-									<td className="w-100">
+									<td className="w-100 text-center">
 										<button
 											className="mx-1 border-0 bg-primary rounded"
 											onClick={() => LookAccount(index)}

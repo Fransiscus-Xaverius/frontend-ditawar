@@ -106,9 +106,9 @@ function Support() {
 			<table className="table">
 				<thead>
 					<tr className="table-success">
-						<th scope="col">NAMA</th>
-						<th scope="col">MESSAGE</th>
-						<th scope="col">RATING</th>
+						<th scope="col" className="text-center">NAMA</th>
+						<th scope="col" className="text-center">MESSAGE</th>
+						<th scope="col" className="text-center">RATING</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -116,9 +116,9 @@ function Support() {
 						let url = import.meta.env.VITE_API_URL + "/static/" + item.profile;
 						return (
 							<tr>
-								<td>{item.user}</td>
-								<td>{item.message}</td>
-								<td>
+								<td className="text-center">{item.user}</td>
+								<td className="text-center">{item.message}</td>
+								<td className="text-center">
 									{[...Array(item.rating)].map((item) => {
 										return <span>⭐</span>;
 									})}
@@ -263,10 +263,10 @@ function Support() {
 			<table className="table">
 				<thead>
 					<tr className="table-success">
-						<th scope="col">NAMA</th>
-						<th scope="col">AUCTION</th>
-						<th scope="col">MESSAGE</th>
-						<th scope="col">ACTION</th>
+						<th scope="col" className="text-center">NAMA</th>
+						<th scope="col" className="text-center">AUCTION</th>
+						<th scope="col" className="text-center">MESSAGE</th>
+						<th scope="col" className="text-center">ACTION</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -274,14 +274,14 @@ function Support() {
 						const url = import.meta.env.VITE_API_URL + "/static/" + item.img;
 						return (
 							<tr>
-								<td>{item.user}</td>
-								<td>
+								<td className="text-center">{item.user}</td>
+								<td className="text-center">
 									<img src={url} style={{ width: "200px" }} />
 									<br />
 									<h3>{item.item}</h3>
 								</td>
-								<td>{item.message}</td>
-								<td>
+								<td className="text-center">{item.message}</td>
+								<td className="text-center">
 									<button
 										onClick={() => sendEmail(item.email)}
 										className="bg-transparent border-0"
