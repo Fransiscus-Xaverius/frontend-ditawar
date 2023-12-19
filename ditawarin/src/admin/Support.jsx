@@ -4,11 +4,13 @@ import { useLoaderData } from "react-router-dom";
 import client from "../client";
 import ArrowLeft from "../assets/arrowLeft.png";
 import ArrowRight from "../assets/arrowRight.png";
+import { set } from "react-hook-form";
 
 function Support() {
 	const support = useLoaderData();
-	const [Feedback, setFeedback] = useState([]);
-	const [Service, setService] = useState([]);
+	const [Feedback, setFeedback] = useState(support.rating);
+	const [Service, setService] = useState(support.laporan);
+	const [Load, setLoad] = useState(false);
 	const [search, setSearch] = useState("");
 	const [currentPage, setCurrentPage] = useState(1);
 	const [itemsPerPage, setItemsPerPage] = useState(10);
@@ -17,22 +19,9 @@ function Support() {
 	const [currentPage2, setCurrentPage2] = useState(1);
 	const [itemsPerPage2, setItemsPerPage2] = useState(10);
 
-	function handleFeedback() {
-		support.feedback.map(async (item) => {
-			const result = await client.get(`/user?id=${item.id_user}`);
-			console.log(result.data.result);
-			setFeedback([
-				...Feedback,
-				{
-					user: result.data.result.nama,
-					message: item.review,
-					rating: item.rating,
-				},
-			]);
-		});
-	}
+	function handleFeedback() {}
 	function handleService() {
-		support.service.map(async (item) => {
+		support.laporan.data.map(async (item) => {
 			const result = await client.get(`/user?id=${item.id_user}`);
 			const result2 = await client.get(`/auction?id=${item.id_auction}`);
 			const result3 = await client.get(
@@ -51,8 +40,16 @@ function Support() {
 		});
 	}
 
-	const filteredData = Feedback.filter((fb) =>
-		fb.user.toLowerCase().includes(search.toLowerCase()),
+	useEffect(() => {
+		setTimeout(() => {
+			setLoad(true);
+		}, 1000);
+	}, []);
+
+	const filteredData = Feedback.filter(
+		(fb) =>
+			fb.seller.nama.toLowerCase().includes(search.toLowerCase()) ||
+			fb.buyer.nama.toLowerCase().includes(search.toLowerCase()),
 	);
 
 	const handleSearch = (event) => {
@@ -61,18 +58,13 @@ function Support() {
 	};
 
 	const filteredData2 = Service.filter((sv) =>
-		sv.user.toLowerCase().includes(search.toLowerCase()),
+		sv.user.nama.toLowerCase().includes(search2.toLowerCase()),
 	);
 
 	const handleSearch2 = (event) => {
 		event.preventDefault();
-		setSearch(event.target.value);
+		setSearch2(event.target.value);
 	};
-
-	useEffect(() => {
-		handleFeedback();
-		handleService();
-	}, []);
 
 	async function sendEmail(email) {
 		await client.post("/sendmail?email=" + email, {
@@ -88,9 +80,12 @@ function Support() {
 
 	const indexOfLastItem2 = currentPage2 * itemsPerPage2;
 	const indexOfFirstItem2 = indexOfLastItem2 - itemsPerPage2;
-	const currentItems2 = filteredData2.slice(indexOfFirstItem2, indexOfLastItem2);
+	const currentItems2 = filteredData2.slice(
+		indexOfFirstItem2,
+		indexOfLastItem2,
+	);
 	const limitPage2 = Math.ceil(Service.length / itemsPerPage2);
-	const paginate2 = (pageNumber) => setCurrentPage(pageNumber);
+	const paginate2 = (pageNumber) => setCurrentPage2(pageNumber);
 
 	return (
 		<>
@@ -103,31 +98,47 @@ function Support() {
 				placeholder="Search..."
 				className="form-control my-3"
 			/>
-			<table className="table">
-				<thead>
-					<tr className="table-success">
-						<th scope="col" className="text-center">NAMA</th>
-						<th scope="col" className="text-center">MESSAGE</th>
-						<th scope="col" className="text-center">RATING</th>
-					</tr>
-				</thead>
-				<tbody>
-					{currentItems.map((item) => {
-						let url = import.meta.env.VITE_API_URL + "/static/" + item.profile;
-						return (
-							<tr>
-								<td className="text-center">{item.user}</td>
-								<td className="text-center">{item.message}</td>
-								<td className="text-center">
-									{[...Array(item.rating)].map((item) => {
-										return <span>⭐</span>;
-									})}
-								</td>
-							</tr>
-						);
-					})}
-				</tbody>
-			</table>
+
+			{!Load && <h4>Loading...</h4>}
+			{Load && (
+				<table className="table">
+					<thead>
+						<tr className="table-success">
+							<th scope="col" className="text-center">
+								SELLER
+							</th>
+							<th scope="col" className="text-center">
+								BUYER
+							</th>
+							<th scope="col" className="text-center">
+								MESSAGE
+							</th>
+							<th scope="col" className="text-center">
+								RATING
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						{console.log(currentItems)}
+						{currentItems.map((item) => {
+							return (
+								<tr>
+									<td className="text-center">{item.seller.nama}</td>
+									<td className="text-center">{item.buyer.nama}</td>
+
+									<td className="text-center">{item.comment}</td>
+									<td className="text-center">
+										{[...Array(parseInt(item.rating))].map((item) => {
+											return <span>⭐</span>;
+										})}
+									</td>
+								</tr>
+							);
+						})}
+					</tbody>
+				</table>
+			)}
+
 			<div style={{ display: "flex", justifyContent: "center" }}>
 				<button
 					onClick={() => paginate(currentPage - 1)}
@@ -252,48 +263,52 @@ function Support() {
 					<img style={{ width: "40px", height: "40px" }} src={ArrowRight} />
 				</button>
 			</div>
+			{console.log(Service)}
 			<p className="fw-bold">CUSTOMER SERVICE</p>
 			<input
 				type="text"
-				value={search}
+				value={search2}
 				onChange={handleSearch2}
 				placeholder="Search..."
 				className="form-control my-3"
 			/>
-			<table className="table">
-				<thead>
-					<tr className="table-success">
-						<th scope="col" className="text-center">NAMA</th>
-						<th scope="col" className="text-center">AUCTION</th>
-						<th scope="col" className="text-center">MESSAGE</th>
-						<th scope="col" className="text-center">ACTION</th>
-					</tr>
-				</thead>
-				<tbody>
-					{currentItems2.map((item) => {
-						const url = import.meta.env.VITE_API_URL + "/static/" + item.img;
-						return (
-							<tr>
-								<td className="text-center">{item.user}</td>
-								<td className="text-center">
-									<img src={url} style={{ width: "200px" }} />
-									<br />
-									<h3>{item.item}</h3>
-								</td>
-								<td className="text-center">{item.message}</td>
-								<td className="text-center">
-									<button
-										onClick={() => sendEmail(item.email)}
-										className="bg-transparent border-0"
-									>
-										<img src={Accept} style={{ width: "40px" }} />
-									</button>
-								</td>
-							</tr>
-						);
-					})}
-				</tbody>
-			</table>
+			{!Load && <h4>Loading...</h4>}
+			{Load && (
+				<table className="table">
+					<thead>
+						<tr className="table-success">
+							<th scope="col" className="text-center">
+								NAMA
+							</th>
+							<th scope="col" className="text-center">
+								MESSAGE
+							</th>
+							<th scope="col" className="text-center">
+								ACTION
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						{currentItems2.map((item) => {
+							return (
+								<tr>
+									<td className="text-center">{item.user.nama}</td>
+
+									<td className="text-center">{item.reason}</td>
+									<td className="text-center">
+										<button
+											onClick={() => sendEmail(item.user.email)}
+											className="bg-transparent border-0"
+										>
+											<img src={Accept} style={{ width: "40px" }} />
+										</button>
+									</td>
+								</tr>
+							);
+						})}
+					</tbody>
+				</table>
+			)}
 			<div style={{ display: "flex", justifyContent: "center" }}>
 				<button
 					onClick={() => paginate2(currentPage2 - 1)}
@@ -341,7 +356,7 @@ function Support() {
 										disabled
 										className="border-0 fs-3 px-3 bg-transparent"
 									>
-										{currentPage}
+										{currentPage2}
 									</button>
 									<button
 										onClick={() => paginate2(currentPage2 + 1)}
@@ -418,7 +433,6 @@ function Support() {
 					<img style={{ width: "40px", height: "40px" }} src={ArrowRight} />
 				</button>
 			</div>
-
 		</>
 	);
 }

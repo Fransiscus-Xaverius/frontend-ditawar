@@ -124,7 +124,10 @@ const getAllPurchase = async () => {
 	let Purchase = [];
 	const result = (await client.get("/allPurchase")).data.result;
 	for (let i = 0; i < result.length; i++) {
-		if (result[i].history.length > 1 &&result[i].history[1].type == "finished") {
+		if (
+			result[i].history.length > 1 &&
+			result[i].history[1].type == "finished"
+		) {
 			const item = await client.get(`/item?id=${result[i].item}`);
 			const auction = await client.get(`/auction?id=${result[i].auction}`);
 			const transaction = await client.get(
@@ -137,11 +140,11 @@ const getAllPurchase = async () => {
 				date: result[i].history[1].time,
 				buyer: buyer.data.result,
 				seller: seller.data.result,
-				item : item.data.result.nama,
+				item: item.data.result.nama,
 				image: item.data.result.images,
 				auction: auction.data.result,
 				transaction: transaction.data.result.invoice.amount,
-				status : result[i].status
+				status: result[i].status,
 			});
 		}
 	}
@@ -190,9 +193,9 @@ const getAllAuctionDetail = async () => {
 			const item_id = allAuctions[i].id_barang;
 			const result = await getItem(item_id);
 			const result2 = await getHighBid(allAuctions[i]._id);
-      console.log(result2);
+			console.log(result2);
 			allAuctions[i].item = result.data.result;
-      allAuctions[i].highest_bid = result2.data.result;
+			allAuctions[i].highest_bid = result2.data.result;
 		} catch (error) {
 			console.log(error);
 		}
@@ -202,7 +205,7 @@ const getAllAuctionDetail = async () => {
 
 const getHighBid = async (id) => {
 	const result = await client.get("/highBid?id=" + id);
-  return result;
+	return result;
 };
 
 const getItem = async (item_id) => {
@@ -308,19 +311,50 @@ const getAllUser = async () => {
 
 const getAllSupport = async () => {
 	try {
-		const feedback = await client.get("/allfeedback");
-		const service = await client.get("/allservice");
+		const rating = await client.get("/allrating");
+		const laporan = await client.get("/all-laporan");
+
+		let temp = [];
+		let temp2 = [];
+
+		
+		await rating.data.map(async (element,i) => {
+			
+			const buyer = await client.get("/user?id=" + element.buyer);
+			const seller = await client.get("/user?id=" + element.seller);
+			
+			console.log(buyer);
+			temp.push({
+				buyer: buyer.data.result,
+				seller: seller.data.result,
+				rating: element.rating,
+				comment: element.comment,
+			});
+		});
+		
+		await laporan.data.map(async (element) => {
+			const user = await client.get("/user?id=" + element.user_id);
+			const auction = await client.get("/auction?id=" + element.auction_id);
+			temp2.push({
+				user: user.data.result,
+				auction: auction.data.result,
+				reason: element.reason,
+			});
+		});
+
+		console.log(laporan);
+
 		const result = {
-			feedback: feedback.data.result,
-			service: service.data.result,
-		}
+			rating: temp,
+			laporan: temp2,
+		};
+		console.log(result);
 		return result;
 	} catch (error) {
 		console.log(error);
-		alert("Gagal Mendapatkan data user");
 		return null;
 	}
-}
+};
 
 export default {
 	getAuction,
@@ -339,5 +373,5 @@ export default {
 	getAllUser,
 	getPurchaseDetails,
 	getAllPurchase,
-	getAllSupport
+	getAllSupport,
 };
