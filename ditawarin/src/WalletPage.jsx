@@ -12,7 +12,7 @@ export default function WalletPage(){
     const [top, setTop] = useState(false);
     const [historyType, setHistoryType] = useState("all");
 
-    const history = wallet_data.wallet.result.history;
+    const history = wallet_data.wallet.result.history.reverse();
     console.log(history);
 
 	const {
@@ -105,18 +105,48 @@ export default function WalletPage(){
                         <div className="div" style={{ overflowY: "auto", maxHeight:"300px"}}>
                             {historyType == "all" && (
                                 history.map((item, index) => {
-                                    console.log(item.date)
-                                    let date = new Date(item.date)
-                                    return (
-                                        <>
-                                        <div className="mt-3 border-bottom">
-                                            <p className="mb-0">Transaction ID: {item.transaction_id}</p>
-                                            <p className="ms-auto mb-0">Amount: {Rupiah.format(item.amount)}</p>
-                                            <p>{date.toString()}</p>
-                                            <p className="mb-0">{item.type}</p>
-                                        </div>
-                                        </>
-                                    )
+                                    //bid type
+                                    if(item.type == "bid"){
+                                        let date = new Date(item.invoice.date)
+                                        return (
+                                            <>
+                                                <div className="mt-3 border-bottom">
+                                                    <p className="mb-0">Bid ID: {item.invoice.bid_id}</p>
+                                                    <p className="mb-0">Auction ID: {item.invoice.bid_id}</p>
+                                                    <p className="ms-auto mb-0">Amount: {Rupiah.format(item.invoice.amount)}</p>
+                                                    <p>{date.toString()}</p>
+                                                    <p className="mb-0">Bid</p>
+                                                </div>
+                                            </>
+                                        )
+                                    }
+                                    //topup type
+                                    if(item.type == "topup"){
+                                        let date = new Date(item.date)
+                                        return (
+                                            <>
+                                            <div className="mt-3 border-bottom">
+                                                <p className="mb-0">Transaction ID: {item.transaction_id}</p>
+                                                <p className="ms-auto mb-0">Amount: {Rupiah.format(item.amount)}</p>
+                                                <p>{date.toString()}</p>
+                                                <p className="mb-0">{item.type}</p>
+                                            </div>
+                                            </>
+                                        )
+                                    }
+                                    if(item.type == "sale"){
+                                        return(
+                                            <>
+                                            <div className="mt-3 border-bottom">
+                                                <p className="mb-0">Transaction ID: {item._id}</p>
+                                                <p className="ms-auto mb-0">Amount: {Rupiah.format(item.amount)}</p>
+                                                <p className="ms-auto mb-0">Status: COMPLETED TRANSACTION</p>
+                                                <p className="ms-auto mb-0">{item.type}</p>
+                                            </div>
+                                            </>
+                                        )
+                                    }
+                                    
                                 })
                             )}
                             {historyType == "topup" && (
@@ -133,6 +163,43 @@ export default function WalletPage(){
                                             </div>
                                             </>
                                         )
+                                    }
+                                })
+                            )}
+                            {historyType == "sell" && (
+                                history.map((item, index) => {
+                                    if(item.type == "sell"){
+                                        let date = new Date(item.date)
+                                        return (
+                                            <>
+                                            <div className="mt-3 border-bottom">
+                                                <p className="mb-0">Transaction ID: {item.transaction_id}</p>
+                                                <p className="ms-auto mb-0">Amount: {Rupiah.format(item.amount)}</p>
+                                                <p>{date.toString()}</p>
+                                                <p className="mb-0">{item.type}</p>
+                                            </div>
+                                            </>
+                                        )
+                                    }
+                                })
+                            )}
+                            {historyType == "purchase" && (
+                                history.map((item, index) => {
+                                    if(item.type == "purchase"|| item.type == "bid"){
+                                        if(item.type == "bid"){
+                                            let date = new Date(item.invoice.date)
+                                            return (
+                                                <>
+                                                    <div className="mt-3 border-bottom">
+                                                        <p className="mb-0">Bid ID: {item.invoice.bid_id}</p>
+                                                        <p className="mb-0">Auction ID: {item.invoice.bid_id}</p>
+                                                        <p className="ms-auto mb-0">Amount: {Rupiah.format(item.invoice.amount)}</p>
+                                                        <p>{date.toString()}</p>
+                                                        <p className="mb-0">Bid</p>
+                                                    </div>
+                                                </>
+                                            )
+                                        }
                                     }
                                 })
                             )}
