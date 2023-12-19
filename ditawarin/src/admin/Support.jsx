@@ -1,10 +1,10 @@
 import Accept from "../assets/accepted.png";
+import Notification from "../assets/notification.png";
 import { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import client from "../client";
 import ArrowLeft from "../assets/arrowLeft.png";
 import ArrowRight from "../assets/arrowRight.png";
-import { set } from "react-hook-form";
 
 function Support() {
 	const support = useLoaderData();
@@ -66,9 +66,9 @@ function Support() {
 		setSearch2(event.target.value);
 	};
 
-	async function sendEmail(email) {
+	async function sendEmail(email, msg) {
 		await client.post("/sendmail?email=" + email, {
-			msg: "Terima kasih telah menghubungi kami, kami akan segera memproses laporan anda",
+			msg: msg,
 		});
 	}
 
@@ -281,7 +281,7 @@ function Support() {
 								NAMA
 							</th>
 							<th scope="col" className="text-center">
-								MESSAGE
+								PROBLEM
 							</th>
 							<th scope="col" className="text-center">
 								ACTION
@@ -297,10 +297,16 @@ function Support() {
 									<td className="text-center">{item.reason}</td>
 									<td className="text-center">
 										<button
-											onClick={() => sendEmail(item.user.email)}
+											onClick={() => sendEmail(item.user.email,"Terima kasih telah menghubungi kami, kami akan segera memproses laporan anda")}
 											className="bg-transparent border-0"
 										>
-											<img src={Accept} style={{ width: "40px" }} />
+											<img src={Notification} style={{ width: "40px" }} />
+										</button>
+										<button
+											onClick={() => sendEmail(item.user.email,"Semua laporan anda telah kami proses, terima kasih telah menghubungi kami")}
+											className="bg-transparent border-0"
+										>
+											<img src={Accept} style={{ width: "45px" }} />
 										</button>
 									</td>
 								</tr>
