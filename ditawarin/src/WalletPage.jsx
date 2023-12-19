@@ -10,6 +10,10 @@ export default function WalletPage(){
     const wallet_data = useLoaderData();
     const [tarik, setTarik] = useState(false)
     const [top, setTop] = useState(false);
+    const [historyType, setHistoryType] = useState("all");
+
+    const history = wallet_data.wallet.result.history;
+    console.log(history);
 
 	const {
 		register,
@@ -62,6 +66,10 @@ export default function WalletPage(){
         setTop(true)
     }
 
+    const changemode=(data)=>{
+        setHistoryType(data)
+    }
+
     return (
         <>
         {!userToken && <Navigate to={"/login"} />}
@@ -70,7 +78,7 @@ export default function WalletPage(){
             <div className="container fontcustom">
                 <div className="row mt-5 justify-content-between">
                     <h1 className="mb-4" style={{color: "#06083D"}}><b>Detail Saldo</b></h1>
-                    <div className="col-5 border border-secondary-subtle p-4" style={{borderRadius: "45px"}}>
+                    <div className="col-5 border border-secondary-subtle p-4" style={{borderRadius: "45px", maxHeight:"200px"}}>
                         <div className="d-flex mb-4 pb-3 align-items-center border-bottom">
                             <img src={uang} alt="" style={{width: "40px", height: "40px"}}/>
                             <div className="ketSaldo ms-3">
@@ -89,8 +97,45 @@ export default function WalletPage(){
                     <div className="col-6 border border-secondary-subtle p-4" style={{borderRadius: "45px"}}>
                         <h2 className="mb-0" style={{color: "#06083D"}}><b>Riwayat Saldo</b></h2>
                         <div className="d-flex mt-4 border-bottom">
-                            <p>Semua Transaksi</p>
-                            <p className="ms-3">Penjualan</p>
+                            <button type="button" onClick={()=>{changemode("all")}} className="btn btn-success mt-3" style={{width: "100%", backgroundColor: "rgba(0, 123, 255, 0.5)"}}><b>Semua Transaksi</b></button>
+                            <button type="button" onClick={()=>{changemode("topup")}} className="btn btn-success mt-3" style={{width: "100%", backgroundColor: "rgba(0, 123, 255, 0.5)"}}><b>Top Up</b></button>
+                            <button type="button" onClick={()=>{changemode("sell")}} className="btn btn-success mt-3" style={{width: "100%", backgroundColor: "rgba(0, 123, 255, 0.5)"}}><b>Penjualan</b></button>
+                            <button type="button" onClick={()=>{changemode("purchase")}} className="btn btn-success mt-3" style={{width: "100%", backgroundColor: "rgba(0, 123, 255, 0.5)"}}><b>Pembelian/Bid</b></button>
+                        </div>
+                        <div className="div" style={{ overflowY: "auto", maxHeight:"300px"}}>
+                            {historyType == "all" && (
+                                history.map((item, index) => {
+                                    console.log(item.date)
+                                    let date = new Date(item.date)
+                                    return (
+                                        <>
+                                        <div className="mt-3 border-bottom">
+                                            <p className="mb-0">Transaction ID: {item.transaction_id}</p>
+                                            <p className="ms-auto mb-0">Amount: {Rupiah.format(item.amount)}</p>
+                                            <p>{date.toString()}</p>
+                                            <p className="mb-0">{item.type}</p>
+                                        </div>
+                                        </>
+                                    )
+                                })
+                            )}
+                            {historyType == "topup" && (
+                                history.map((item, index) => {
+                                    if(item.type == "topup"){
+                                        let date = new Date(item.date)
+                                        return (
+                                            <>
+                                            <div className="mt-3 border-bottom">
+                                                <p className="mb-0">Transaction ID: {item.transaction_id}</p>
+                                                <p className="ms-auto mb-0">Amount: {Rupiah.format(item.amount)}</p>
+                                                <p>{date.toString()}</p>
+                                                <p className="mb-0">{item.type}</p>
+                                            </div>
+                                            </>
+                                        )
+                                    }
+                                })
+                            )}
                         </div>
                     </div>
                 </div>

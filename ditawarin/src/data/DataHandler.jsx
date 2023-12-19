@@ -249,6 +249,9 @@ const getWallet = async () => {
 
 		const user = userData.data.payload.user;
 		const wallet = await client.get("/wallet?id=" + user._id);
+		// console.log(wallet)
+		const history = wallet.data.result.history;
+		console.log(history)
 		const result = {
 			user: user || null,
 			wallet: wallet.data || null,
