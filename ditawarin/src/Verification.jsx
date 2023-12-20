@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import client from "./client";
 import dotenv from "dotenv";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 export default function Verification() {
 	const [Loading, setLoading] = useState(false);
 	const [Timer, setTimer] = useState(
@@ -52,6 +52,9 @@ export default function Verification() {
 				const result = await client.put(
 					`/verification?id=${localStorage.getItem("id_user")}`,
 				);
+                localStorage.removeItem("timer")
+                localStorage.removeItem("email");
+                localStorage.removeItem("id_user")
 				navigate("/login");
 			} catch (error) {
 				console.log(error);
@@ -64,6 +67,10 @@ export default function Verification() {
 
 	return (
 		<>
+        {
+            localStorage.getItem("user") &&
+            <Navigate to="/" />
+        }
 			<div className="container-fluid d-flex justify-content-center align-items-center">
 				<h1 className="fw-bolder">VERIFIKASI</h1>
 			</div>
