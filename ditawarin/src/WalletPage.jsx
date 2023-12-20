@@ -58,6 +58,41 @@ export default function WalletPage(){
         }
     }
 
+    const payout = async (data) => {
+        const options = {
+            method: "POST",
+        }
+        alert("Penarikan saldo sedang diproses, mohon tunggu sebentar!")
+        
+
+        const body_data = {
+            nama: wallet_data.user.nama,
+            email: wallet_data.user.email,
+            phone: wallet_data.user.phone,
+            desc: `Penarikan Saldo sebesar ${Rupiah.format(data.amount)}`,
+            amount: parseInt(data.amount),
+            rekening: data.rekening,
+            nama_rekening: data.nama_rekening,
+            city: wallet_data.user.city,
+            kode_pos: 12345, //needs fixing, additional data needed in register
+            provinsi: wallet_data.user.province,
+            alamat: wallet_data.user.address,
+            wallet_id: wallet_data.wallet.result._id
+        }
+
+        const res = await axios.post(import.meta.env.VITE_API_URL + "/payout", body_data);
+        if(res.status == 201){
+            alert("Penarikan saldo berhasil!")
+            window.location.reload();
+        }
+        else if(res.status == 400){
+            alert("Saldo tidak cukup!")
+        }
+        else{
+            alert("Gagal menarik saldo!")
+        }
+    }
+
     const tarikClick = () => {
 		setTarik(true);
 	};
@@ -294,18 +329,27 @@ export default function WalletPage(){
                                 ></button>
                             </div>
                             <div className="content ps-4 pt-4 pe-4 mb-4 pb-3 ">
-                                <div className="d-flex align-items-center mb-3">
-                                        <p className="mb-0">Nama Pengguna :</p>
-                                        <p className="ms-auto"></p>
-                                </div>
-                                <form>
+                                <form onSubmit={handleSubmit(payout)}>
+                                    <div className="d-flex align-items-center mb-3">
+                                            <p className="mb-0">Nama Pemilik Rekening :</p>
+                                            <input type="text" {...register("nama_rekening", {required:{value:true, message:"Nama Pemilik Rekening wajib diisi"}})} className=" ms-auto ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "13rem", height: "3rem"}}/>
+                                    </div>
+                                    <div className="d-flex align-items-center mb-3">
+                                        {errors.nama_rekening && <p style={{color: "red"}}>{errors.nama_rekening.message}</p>}
+                                    </div>
                                     <div className="d-flex align-items-center mb-3">
                                         <p className="mb-0">Nomor Rekening :</p>
-                                        <input type="text" className=" ms-auto ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "13rem", height: "3rem"}}/>
+                                        <input type="text" {...register("rekening", {required:{value:true, message:"Nomor rekening wajib diisi"}})} className=" ms-auto ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "13rem", height: "3rem"}}/>
+                                    </div>
+                                    <div className="d-flex align-items-center mb-3">
+                                        {errors.rekening && <p style={{color: "red"}}>{errors.rekening.message}</p>}
                                     </div>
                                     <div className="d-flex align-items-center mb-3">
                                         <p className="mb-0">Jumlah Uang :</p>
-                                        <input type="number" className=" ms-auto ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "13rem", height: "3rem"}}/>
+                                        <input type="number" {...register("amount", {required:{value:true, message:"Jumlah uang tidak boleh kosong!"}})} className=" ms-auto ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "13rem", height: "3rem"}}/>
+                                    </div>
+                                    <div className="d-flex align-items-center mb-3">
+                                        {errors.amount && <p style={{color: "red"}}>{errors.amount.message}</p>}
                                     </div>
                                     <button type="submit" className="btn btn-success ms-auto mt-2" style={{width: "100%"}}><b>Tarik Saldo</b></button>
                                 </form>
