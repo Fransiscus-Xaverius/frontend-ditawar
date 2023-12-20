@@ -17,6 +17,10 @@ export default function AuctionPage() {
   let user = data.userdata;
   let highest_bid = data.highest_bid;
 
+  if(highest_bid&&parseInt(highest_bid.bid) >= parseInt(auction.asking_price)){
+    alert('highest bid lebih besar dari asking price')
+  }
+
   let url = import.meta.env.VITE_API_URL + "/static/" + item.images;
   let berakhir = new Date(data.auctiondata.tanggal_selesai);
 
@@ -66,7 +70,7 @@ export default function AuctionPage() {
       const newBid = await client.post("/bid", data);
       console.log(newBid);
       alert("Bid berhasil!");
-      navigate(0);
+      window.location.reload();
     } catch (err) {
       if (
         err.response &&
@@ -267,7 +271,7 @@ export default function AuctionPage() {
                       </b></button>
                     </div>
                     {
-                      highest_bid && auction.asking_price <= highest_bid.bid ?
+                      highest_bid && parseInt(auction.asking_price) <= parseInt(highest_bid.bid) ?
                       <div className="col-3 text-center">
                         <button
                           disabled

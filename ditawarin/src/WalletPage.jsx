@@ -120,6 +120,21 @@ export default function WalletPage(){
                                             </>
                                         )
                                     }
+                                    //purchase type
+                                    if(item.type == "purchase"){
+                                        // let date = new Date(item.invoice.date)
+                                        return (
+                                            <>
+                                                <div className="mt-3 border-bottom">
+                                                    <p className="mb-0">Transaction ID: </p>
+                                                    <p className="mb-0">Auction ID: </p>
+                                                    <p className="ms-auto mb-0">Amount: {Rupiah.format(item.amount)}</p>
+                                                    {/* <p>{date.toString()}</p>     */}
+                                                    <p className="mb-0">Purchase</p>
+                                                </div>
+                                            </>
+                                        )
+                                    }
                                     //topup type
                                     if(item.type == "topup"){
                                         let date = new Date(item.date)
