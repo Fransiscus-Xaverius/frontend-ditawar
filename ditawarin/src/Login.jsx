@@ -27,6 +27,10 @@ function Login() {
                         localStorage.setItem("email", data.email);
                         localStorage.setItem("id_user", response.data.user._id)
                         navigate('/verification');
+
+                    }else if(response.data.user.role == "banned"){
+                        alert("Akun anda telah dibanned!")
+                        
                     }else{
 
                         localStorage.setItem('token', response.data.token);
