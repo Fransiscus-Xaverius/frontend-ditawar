@@ -13,7 +13,7 @@ import NavbarAdmin from "./admin/NavbarAdmin.jsx";
 import Users from "./admin/Users.jsx";
 import Auctions from "./admin/Auctions.jsx";
 import Payment from "./admin/Payment.jsx";
-import Security from "./admin/Security.jsx";
+
 import Support from "./admin/Support.jsx";
 import ItemListing from "./ItemListing.jsx";
 import AuctionPage from "./AuctionPage.jsx";
@@ -168,10 +168,6 @@ const router = createBrowserRouter([
         loader: getAllPurchase,
         path: "payment",
         element: <Payment />,
-      },
-      {
-        path: "security",
-        element: <Security />,
       },
       {
         loader : getAllSupport,

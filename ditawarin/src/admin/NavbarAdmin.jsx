@@ -9,7 +9,6 @@ import {
 import Users from "../assets/users.png";
 import Auction from "../assets/auction.png";
 import Payment from "../assets/payment.png";
-import Security from "../assets/security.png";
 import Support from "../assets/support.png";
 import Report from "../assets/report.png";
 import { useEffect, useState } from "react";
@@ -120,18 +119,7 @@ function NavbarAdmin() {
 								<img src={Payment} style={{ width: "35px" }} className="py-2" />
 								<b className="px-3">PAYMENT</b>
 							</NavLink>
-							<br />
-							<NavLink
-								to="security"
-								className="text-decoration-none text-white"
-							>
-								<img
-									src={Security}
-									style={{ width: "35px" }}
-									className="py-2"
-								/>
-								<b className="px-3">SECURITY</b>
-							</NavLink>
+							
 							<br />
 							<NavLink to="support" className="text-decoration-none text-white">
 								<img src={Support} style={{ width: "35px" }} className="py-2" />
