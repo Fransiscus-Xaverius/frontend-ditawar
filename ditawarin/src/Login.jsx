@@ -20,12 +20,21 @@ function Login() {
                 const response = await client.post(url);
     
                 if(response.status === 200){
-                    console.log(response.data);   
-                    localStorage.setItem('token', response.data.token);
-                    localStorage.setItem('user', response.data.user);
-                    alert(`Selamat datang, ${response.data.user.nama}`)
+                    console.log(response.data);  
                     
-                    navigate('/');
+                    if(response.data.user.role == "unverified"){
+                        localStorage.setItem("timer", 30)
+                        localStorage.setItem("email", data.email);
+                        localStorage.setItem("id_user", response.data.user._id)
+                        navigate('/verification');
+                    }else{
+
+                        localStorage.setItem('token', response.data.token);
+                        localStorage.setItem('user', response.data.user);
+                        alert(`Selamat datang, ${response.data.user.nama}`)
+                        navigate('/');
+                    }
+
                     return
                 }
             } catch (error) {
