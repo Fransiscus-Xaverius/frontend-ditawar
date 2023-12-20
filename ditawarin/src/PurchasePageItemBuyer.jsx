@@ -25,6 +25,10 @@ export default function PurchasePageItem(props) {
     let isFinished = false;
     let date = new Date();
 
+    const goToDetails = () => {
+        navigate(`/details/${props._id}`)
+    }
+
     if(lastHistory){
         if(lastHistory.type == "marked"){
             isMarked = true;
@@ -115,7 +119,7 @@ export default function PurchasePageItem(props) {
                             </div>
                             <div className="row">
                                 <div className="col d-flex">
-                                    <button className="btn btn-success me-2" style={{ width: "100px" }}>Detail</button>
+                                    <button className="btn btn-success me-2" style={{ width: "100px" }} onClick={()=>{goToDetails()}}>Detail</button>
                                     {isMarked && <button className="btn btn-primary" style={{ width: "100px" }} onClick={()=>{finishPurchase()}}>Confirm</button>}
                                 </div>
                             </div>

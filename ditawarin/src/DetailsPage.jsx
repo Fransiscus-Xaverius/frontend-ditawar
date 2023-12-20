@@ -25,6 +25,14 @@ export default function DetailsPage(){
 
     const userToken = localStorage.getItem("token");
 
+    const goBackBuyer = () =>{
+        navigate(`/purchases/buyer`);
+    }
+
+    const goBackSeller = () =>{
+        navigate(`/purchases/seller`);
+    }
+
     let url = import.meta.env.VITE_API_URL + "/static/" + item_data.images;
 
     const updatePurchase = async (data) => {
@@ -86,15 +94,24 @@ export default function DetailsPage(){
                             })}
                         </div>
                         {role == "seller" && 
-                            <form onSubmit={handleSubmit(updatePurchase)}>
-                                Update: <br />
-                                <textarea {...register("update", {required:{value:true, message:"Section Update wajib diisi"}})} placeholder="Update Transaksi*" className="mt-1 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "90%", height: "10rem"}}></textarea>
-                                {errors.update && <p style={{color: "red"}}>{errors.update.message}</p>}
-                                <br />
-                                <input type="submit" className="btn btn-success" value="Update" />
-                            </form>
+                            <>
+                                <form onSubmit={handleSubmit(updatePurchase)}>
+                                    Update: <br />
+                                    <textarea {...register("update", {required:{value:true, message:"Section Update wajib diisi"}})} placeholder="Update Transaksi*" className="mt-1 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "90%", height: "10rem"}}></textarea>
+                                    {errors.update && <p style={{color: "red"}}>{errors.update.message}</p>}
+                                    <br />
+                                    <input type="submit" className="btn btn-success" value="Update" />
+                                </form>
+                                <button className="btn btn-success" onClick={()=>{goBackSeller()}}>Go Back</button>
+                            </>
                         }
-
+                        {
+                            role == "buyer" &&
+                            <div className="text-center">
+                                <button className="btn btn-success" onClick={()=>{goBackBuyer()}}>Go Back</button>
+                            </div>
+                            
+                        }
                     </div>
                 </div>
             </div>
