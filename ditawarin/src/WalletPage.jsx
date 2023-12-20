@@ -2,7 +2,7 @@ import { Navigate, useLoaderData } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from 'axios';
 import uang from './assets/money.png'
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 export default function WalletPage(){
     
@@ -70,6 +70,13 @@ export default function WalletPage(){
         setHistoryType(data)
     }
 
+    const tabStyle = useCallback((name) => {
+        return {
+            width: "100%",
+            color: historyType === name ? "green" : "black",
+        };
+    }, [historyType]);
+
     return (
         <>
         {!userToken && <Navigate to={"/login"} />}
@@ -96,12 +103,20 @@ export default function WalletPage(){
 
                     <div className="col-6 border border-secondary-subtle p-4" style={{borderRadius: "45px"}}>
                         <h2 className="mb-0" style={{color: "#06083D"}}><b>Riwayat Saldo</b></h2>
-                        <div className="d-flex mt-4 border-bottom">
-                            <button type="button" onClick={()=>{changemode("all")}} className="btn btn-success mt-3" style={{width: "100%", backgroundColor: "rgba(0, 123, 255, 0.5)"}}><b>Semua Transaksi</b></button>
-                            <button type="button" onClick={()=>{changemode("topup")}} className="btn btn-success mt-3" style={{width: "100%", backgroundColor: "rgba(0, 123, 255, 0.5)"}}><b>Top Up</b></button>
-                            <button type="button" onClick={()=>{changemode("sell")}} className="btn btn-success mt-3" style={{width: "100%", backgroundColor: "rgba(0, 123, 255, 0.5)"}}><b>Penjualan</b></button>
-                            <button type="button" onClick={()=>{changemode("purchase")}} className="btn btn-success mt-3" style={{width: "100%", backgroundColor: "rgba(0, 123, 255, 0.5)"}}><b>Pembelian/Bid</b></button>
-                        </div>
+                        <ul className="nav nav-underline">
+                            <li className="nav-item">
+                                <button type="button text-light" onClick={()=>{changemode("all")}} className="nav-link mt-3" style={tabStyle("all")}><b>Semua Transaksi</b></button>
+                            </li>
+                            <li className="nav-item">
+                                <button type="button" onClick={()=>{changemode("topup")}} className="nav-link mt-3" style={tabStyle("topup")}><b>Top Up</b></button>
+                            </li>
+                            <li>
+                                <button type="button" onClick={()=>{changemode("sell")}} className="nav-link mt-3" style={tabStyle("sell")}><b>Penjualan</b></button>
+                            </li>
+                            <li>
+                                <button type="button" onClick={()=>{changemode("purchase")}} className="nav-link  mt-3" style={tabStyle("purchase")}><b>Pembelian/Bid</b></button>
+                            </li>
+                        </ul>
                         <div className="div" style={{ overflowY: "auto", maxHeight:"300px"}}>
                             {historyType == "all" && (
                                 history.map((item, index) => {
@@ -235,49 +250,67 @@ export default function WalletPage(){
                 </div>
 
                 <div className="col-5 text-center">
-                    {!tarik && (
-                        <button type="button" className="btn btn-success mt-2" style={{width: "100%"}} onClick={()=> {tarikClick()}}><b>Tarik Saldo</b></button>
-                    )}
-                    {tarik && (
-                        <div className="mt-3">
-                            <div className="d-flex align-items-center">
-                                <p className="mb-0 me-5" style={{fontSize: "20px"}}><b>Rp</b></p>
-                                <input type="text"placeholder="Jumlah yang ingin ditarik" className="me-2 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "100%", height: "3rem"}}/> <br />
-                            </div>
-                            <button type="button" className="btn btn-success mt-3" style={{width: "100%"}}><b>Tarik Saldo</b></button>
-                        </div>
-                    )}
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#staticBack" className="btn btn-success mt-2" style={{width: "100%"}} onClick={()=> {tarikClick()}}><b>Tarik Saldo</b></button>
                 </div>
 
                 <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div className="modal-dialog modal-dialog-centered">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h5 className="modal-title" id="staticBackdropLabel">
-                            Modal title
-                            </h5>
-                            <button
-                            type="button"
-                            className="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                            ></button>
-                        </div>
-                        <form onSubmit={handleSubmit(top_up)}>
-                            <div className="d-flex ps-4 pt-4 pe-4 mb-4 pb-3 align-items-center border-bottom">
-                                <img src={uang} alt="" style={{width: "40px", height: "40px"}}/>
-                                <div className="ketSaldo ms-3">
-                                    <p className="mb-0">Total Saldo Aktif</p>
-                                    <p className="mb-0" style={{fontWeight:"bold", color: "#06083D", fontSize:"22px"}}>{Rupiah.format(wallet_data.wallet.result.saldo)}</p>
-                                </div>
-                                <div className="topup ms-auto text-end">
-                                    <input type="number"placeholder="0" {...register("amount", {required:{value:true, message:"Jumlah top up wajib diisi!"}})} className=" ms-auto ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "13rem", height: "3rem"}}/> <br />
-                                    {errors.amount && <p style={{color: "red"}}>{errors.amount.message}</p>}
-                                    <button type="submit" className="btn btn-success ms-auto mt-2"><b>Topup Saldo</b></button>
-                                </div>
+                    <div className="modal-dialog modal-dialog-centered">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <button
+                                type="button"
+                                className="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                                ></button>
                             </div>
-                        </form>
+                            <form onSubmit={handleSubmit(top_up)}>
+                                <div className="d-flex ps-4 pt-4 pe-4 mb-4 pb-3 align-items-center">
+                                    <img src={uang} alt="" style={{width: "40px", height: "40px"}}/>
+                                    <div className="ketSaldo ms-3">
+                                        <p className="mb-0">Total Saldo Aktif</p>
+                                        <p className="mb-0" style={{fontWeight:"bold", color: "#06083D", fontSize:"22px"}}>{Rupiah.format(wallet_data.wallet.result.saldo)}</p>
+                                    </div>
+                                    <div className="topup ms-auto text-end">
+                                        <input type="number"placeholder="0" {...register("amount", {required:{value:true, message:"Jumlah top up wajib diisi!"}})} className=" ms-auto ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "13rem", height: "3rem"}}/> <br />
+                                        {errors.amount && <p style={{color: "red"}}>{errors.amount.message}</p>}
+                                        <button type="submit" className="btn btn-success ms-auto mt-2"><b>Topup Saldo</b></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
+                </div>
+
+                <div className="modal fade" id="staticBack" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div className="modal-dialog modal-dialog-centered">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <button
+                                type="button"
+                                className="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                                ></button>
+                            </div>
+                            <div className="content ps-4 pt-4 pe-4 mb-4 pb-3 ">
+                                <div className="d-flex align-items-center mb-3">
+                                        <p className="mb-0">Nama Pengguna :</p>
+                                        <p className="ms-auto"></p>
+                                </div>
+                                <form>
+                                    <div className="d-flex align-items-center mb-3">
+                                        <p className="mb-0">Nomor Rekening :</p>
+                                        <input type="text" className=" ms-auto ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "13rem", height: "3rem"}}/>
+                                    </div>
+                                    <div className="d-flex align-items-center mb-3">
+                                        <p className="mb-0">Jumlah Uang :</p>
+                                        <input type="number" className=" ms-auto ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "13rem", height: "3rem"}}/>
+                                    </div>
+                                    <button type="submit" className="btn btn-success ms-auto mt-2" style={{width: "100%"}}><b>Tarik Saldo</b></button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
