@@ -113,7 +113,7 @@ export default function WalletPage(){
                                                 <div className="mt-3 border-bottom">
                                                     <p className="mb-0">Bid ID: {item.invoice.bid_id}</p>
                                                     <p className="mb-0">Auction ID: {item.invoice.bid_id}</p>
-                                                    <p className="ms-auto mb-0">Amount: {Rupiah.format(item.invoice.amount)}</p>
+                                                    <p className="ms-auto mb-0">Amount: {Rupiah.format(item.invoice.amount)} (Pending)</p>
                                                     <p>{date.toString()}</p>
                                                     <p className="mb-0">Bid</p>
                                                 </div>
@@ -122,14 +122,13 @@ export default function WalletPage(){
                                     }
                                     //purchase type
                                     if(item.type == "purchase"){
-                                        // let date = new Date(item.invoice.date)
+                                        let date = new Date(item.date)
                                         return (
                                             <>
                                                 <div className="mt-3 border-bottom">
-                                                    <p className="mb-0">Transaction ID: </p>
-                                                    <p className="mb-0">Auction ID: </p>
+                                                    <p className="mb-0">Receiver ID: {item.to}</p>
                                                     <p className="ms-auto mb-0">Amount: {Rupiah.format(item.amount)}</p>
-                                                    {/* <p>{date.toString()}</p>     */}
+                                                    <p>{date.toString()}</p>    
                                                     <p className="mb-0">Purchase</p>
                                                 </div>
                                             </>
@@ -183,12 +182,12 @@ export default function WalletPage(){
                             )}
                             {historyType == "sell" && (
                                 history.map((item, index) => {
-                                    if(item.type == "sell"){
+                                    if(item.type == "sale"){
                                         let date = new Date(item.date)
                                         return (
                                             <>
                                             <div className="mt-3 border-bottom">
-                                                <p className="mb-0">Transaction ID: {item.transaction_id}</p>
+                                                <p className="mb-0">Transaction ID: {item._id}</p>
                                                 <p className="ms-auto mb-0">Amount: {Rupiah.format(item.amount)}</p>
                                                 <p>{date.toString()}</p>
                                                 <p className="mb-0">{item.type}</p>
@@ -208,9 +207,22 @@ export default function WalletPage(){
                                                     <div className="mt-3 border-bottom">
                                                         <p className="mb-0">Bid ID: {item.invoice.bid_id}</p>
                                                         <p className="mb-0">Auction ID: {item.invoice.bid_id}</p>
-                                                        <p className="ms-auto mb-0">Amount: {Rupiah.format(item.invoice.amount)}</p>
+                                                        <p className="ms-auto mb-0">Amount: {Rupiah.format(item.invoice.amount)}(Pending)</p>
                                                         <p>{date.toString()}</p>
                                                         <p className="mb-0">Bid</p>
+                                                    </div>
+                                                </>
+                                            )
+                                        }
+                                        if(item.type == "purchase"){
+                                            let date = new Date(item.date)
+                                            return (
+                                                <>
+                                                    <div className="mt-3 border-bottom">
+                                                        <p className="mb-0">Receiver ID: {item.to}</p>
+                                                        <p className="ms-auto mb-0">Amount: {Rupiah.format(item.amount)}</p>
+                                                        <p>{date.toString()}</p>    
+                                                        <p className="mb-0">Purchase</p>
                                                     </div>
                                                 </>
                                             )
