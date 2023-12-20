@@ -17,9 +17,9 @@ export default function AuctionPage() {
   let user = data.userdata;
   let highest_bid = data.highest_bid;
 
-  if(highest_bid&&parseInt(highest_bid.bid) >= parseInt(auction.asking_price)){
-    alert('highest bid lebih besar dari asking price')
-  }
+  // if(highest_bid&&parseInt(highest_bid.bid) >= parseInt(auction.asking_price)){
+  //   alert('highest bid lebih besar dari asking price')
+  // }
 
   let url = import.meta.env.VITE_API_URL + "/static/" + item.images;
   let berakhir = new Date(data.auctiondata.tanggal_selesai);
@@ -162,6 +162,11 @@ export default function AuctionPage() {
     }
   };
 
+  const sendReport = async () => {
+    localStorage.setItem("auction", auction._id);
+    navigate("/service");
+}
+
   return (
     <>
       {console.log(auction)}
@@ -254,6 +259,7 @@ export default function AuctionPage() {
                   <div className="row">
                     <div className="col-3 text-center">
                       <button
+                        onClick={sendReport}
                         className="btn bg-danger rounded-pill text-white p-3"
                         style={{ width: "170px", textTransform: "uppercase" }}
                       ><b>
