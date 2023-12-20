@@ -22,8 +22,11 @@ function Register() {
             const response = await client.post(url);
             if(response.status === 200){
                 alert("Berhasil mendaftar!")
+                localStorage.setItem("timer", 30)
+                localStorage.setItem("email", data.email);
+                localStorage.setItem("id_user", response.data.result.insertedId)
                 //todo: buat redirect ke login
-                navigate('/login');
+                navigate('/verification');
                 return
             }
         } catch (error) {

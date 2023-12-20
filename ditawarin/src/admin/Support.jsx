@@ -69,6 +69,7 @@ function Support() {
 	async function sendEmail(email, msg) {
 		await client.post("/sendmail?email=" + email, {
 			msg: msg,
+			subject : "Customer Service"
 		});
 	}
 

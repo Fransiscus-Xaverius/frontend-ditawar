@@ -31,6 +31,7 @@ import DetailsPage from "./DetailsPage.jsx";
 import Report from "./admin/Report.jsx";
 import Laporan from "./Report.jsx";
 import { get } from "react-hook-form";
+import Verification from "./Verification.jsx";
 
 const {
   getAuction,
@@ -68,6 +69,10 @@ const router = createBrowserRouter([
         index: true,
         loader: getSampleAuction,
         element: <Home />,
+      },
+      {
+        path: "/verification",
+        element: <Verification />,
       },
       {
         path: "/search",
@@ -185,6 +190,7 @@ const router = createBrowserRouter([
     path: "/error",
     element: <ErrorPage />,
   },
+  
   {
     path: "/logout",
     element: <Logout />,

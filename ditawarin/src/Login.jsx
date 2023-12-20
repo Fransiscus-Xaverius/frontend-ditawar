@@ -31,7 +31,7 @@ function Login() {
             } catch (error) {
                 
                 console.log(error);
-                alert('Username atau password salah!');
+                alert('User belum terdaftar!');
             }
         }
     } 
