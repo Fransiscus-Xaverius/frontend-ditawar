@@ -76,7 +76,7 @@ export default function UpdatePage() {
             console.log(res2);
             console.log(data.tanggal_selesai)
             try {
-                const url3 = '/auction?token='+localStorage.getItem('token')+'&id_auction='+auction._id+'&starting_price='+data.starting_price+'&asking_price='+data.starting_price+'&tanggal_selesai='+data.tanggal_selesai+'&jam_selesai='+data.jam_selesai+'&kategori='+kategori.toLowerCase()+'&kecamatan='+data.kecamatan+'&kota_kabupaten='+data.kota_kabupaten+'&provinsi='+data.provinsi+'&highest_bid='+auction.highest_bid;
+                const url3 = '/auction?token='+localStorage.getItem('token')+'&id_auction='+auction._id+'&starting_price='+data.starting_price+'&asking_price='+data.starting_price+'&tanggal_selesai='+data.tanggal_selesai+'&jam_selesai='+data.jam_selesai+'&kategori='+kategori.toLowerCase()+'&kecamatan='+data.kecamatan+'&kota_kabupaten='+data.kota_kabupaten+'&provinsi='+data.provinsi;
                 const res3 = await client.put(url3);
                 console.log("respond 3");
                 console.log(res3);

@@ -168,11 +168,12 @@ function Home() {
             </div>   
           </div>
           <div className="col-10 pe-5" style={{display:"flex"}}>
-            <Scrollbars id="lihat" autoHide autoHideTimeout={1000} autoHideDuration={200} thumbMinSize={30} universal={true} style={{ height:"85%", transitionDuration:"0.4s", alignSelf:"center"}}>
-              <div className="d-flex flex-nowrap ps-5" style={{height: "100%"}}>
+            
+            <Scrollbars id="lihat" className="" color="white" autoHide autoHideTimeout={1000} autoHideDuration={200} thumbMinSize={30} universal={true} renderThumbHorizontal={({style, ...props}) =><div {...props} style={{...style, width: '3px', borderRadius: '4px', boxShadow: '0 2px 4px 0 rgba(0, 0, 0, 0.16)', backgroundColor: '#ffffff'}}/>} style={{ overflowY:"hidden", height:"90%", transitionDuration:"0.4s", alignSelf:"center"}}>
+              <div className="d-flex flex-nowrap mb-0" style={{height: "99%"}}>
                 {
                   datalihat.map((auction, idx) => (
-                      <div className="card me-3" style={{minWidth: "250px", maxWidth:"250px", height:"100%", borderRadius: "10px"}} onClick={()=>{moveToAuction(auction._id)}}>
+                      <div className="card me-3" style={{minWidth: "250px", maxWidth:"250px", height:"98%", borderRadius: "10px"}} onClick={()=>{moveToAuction(auction._id)}}>
                           <img src={import.meta.env.VITE_API_URL+'/static/'+auction.item.images || ""} alt="" className="card-img-top mx-auto" style={{width: "100%", height:"50%"}}/>
                           <div className="card-body">
                               <p className="card-title text-center"><h4><b>{auction.item.nama}</b></h4></p>
@@ -187,7 +188,7 @@ function Home() {
               </div>      
             </Scrollbars>
           </div>
-
+                        
         </div>
       </div>
       <div className="container">

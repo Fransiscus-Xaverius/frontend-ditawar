@@ -131,9 +131,33 @@ export default function AuctionPage() {
     }
   }
 
-  const buyNowClick = () => {
-    buyNowHandler(auction._id);
+  const buyNowClick = async() => {
+    const data = {
+      token: localStorage.getItem("token"),
+      idAuction: auction._id,
+    };
+    try {
+      const newBid = await client.post("/buynow", data);
+      console.log(newBid);
+      alert("Buy Now berhasil!");
+      navigate("/");
+    } catch (err) {
+      if (
+        err.response &&
+        (err.response.status === 400 || err.response.status === 500)
+      ) {
+        const errorMessage = err.response.data.msg;
+        console.log("----------------");
+        console.log(errorMessage);
+        alert(errorMessage);
+      } else {
+        console.log(err);
+        alert(err.message);
+      }
+      return;
+    }
   };
+
   return (
     <>
       {console.log(auction)}
@@ -235,22 +259,37 @@ export default function AuctionPage() {
                     <div className="col-3 text-center">
                       <button
                         data-bs-toggle="modal"
-                        data-bs-target="#staticBackdrop"
+                        data-bs-target="#staticBackdrop1"
                         className="btn bg-primary rounded-pill text-white pt-3 pb-3"
                         style={{ width: "180px", textTransform: "uppercase" }}
                       ><b>
                         Masukkan Harga
                       </b></button>
                     </div>
-                    <div className="col-3 text-center">
-                      <button
-                        className="btn bg-success rounded-pill text-white pt-3 pb-3"
-                        style={{  width: "170px", textTransform: "uppercase" }}
-                        onClick={buyNowClick}
-                      ><b>
-                        Beli Sekarang
-                      </b></button>
-                    </div>
+                    {
+                      highest_bid && auction.asking_price <= highest_bid.bid ?
+                      <div className="col-3 text-center">
+                        <button
+                          disabled
+                          className="btn bg-success rounded-pill text-white pt-3 pb-3"
+                          style={{  width: "170px", textTransform: "uppercase" }}
+                        ><b>
+                          Beli Sekarang
+                        </b></button>
+                      </div>
+                      :
+                      <div className="col-3 text-center">
+                        <button
+                          data-bs-toggle="modal"
+                          data-bs-target="#staticBackdrop2"
+                          className="btn bg-success rounded-pill text-white pt-3 pb-3"
+                          style={{  width: "170px", textTransform: "uppercase" }}
+                        ><b>
+                          Beli Sekarang
+                        </b></button>
+                      </div>
+                    }
+                    
                   </div>
                 </div>
               )}
@@ -259,7 +298,7 @@ export default function AuctionPage() {
         </div>
         <div
           className="modal fade fontcustom"
-          id="staticBackdrop"
+          id="staticBackdrop1"
           data-bs-backdrop="static"
           data-bs-keyboard="false"
           tabIndex="-1"
@@ -270,7 +309,7 @@ export default function AuctionPage() {
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title" id="staticBackdropLabel">
-                  Modal title
+                  Masukkan Bid
                 </h5>
                 <button
                   type="button"
@@ -290,7 +329,7 @@ export default function AuctionPage() {
                       style={{ maxHeight: "300px", maxWidth: "300px" }}
                     />{" "}
                     <br />
-                    <h5>{Rupiah.format(auction.asking_price)}</h5>
+                    <h5>Highest Bid: {Rupiah.format(auction.highest_bid)}</h5>
                   </div>
                   <input
                     type="text"
@@ -306,6 +345,63 @@ export default function AuctionPage() {
                   </button>
                 </div>
               </form>
+            </div>
+          </div>
+        </div>
+
+        <div
+          className="modal fade fontcustom"
+          id="staticBackdrop2"
+          data-bs-backdrop="static"
+          data-bs-keyboard="false"
+          tabIndex="-1"
+          aria-labelledby="staticBackdropLabel"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="staticBackdropLabel">
+                  Beli Sekarang
+                </h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+                <div className="modal-body row">
+                  <div className="text-center h2">{item.nama}</div>
+                  <div className="text-center mb-5">
+                    <img
+                      src={url}
+                      alt="Item Image"
+                      className="border border-5 rounded-5"
+                      style={{ maxHeight: "300px", maxWidth: "300px" }}
+                    />{" "}
+                    <br />
+                    <h5>Asking Price: {Rupiah.format(auction.asking_price)}</h5>
+                    <h3>BUY NOW?</h3>
+                  </div>
+                  <button
+                    className="btn bg-primary text-white col-md-3 mx-auto"
+                    type="button"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                    onClick={buyNowClick}
+                  >
+                    Yes
+                  </button>
+                  <button
+                    className="btn bg-danger text-white col-md-3 mx-auto"
+                    type="button"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    Cancel
+                  </button>
+                </div>
             </div>
           </div>
         </div>
