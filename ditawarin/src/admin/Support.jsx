@@ -1,4 +1,5 @@
 import Accept from "../assets/accepted.png";
+import Help from "../assets/help.png";
 import Notification from "../assets/notification.png";
 import { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
@@ -7,6 +8,8 @@ import ArrowLeft from "../assets/arrowLeft.png";
 import ArrowRight from "../assets/arrowRight.png";
 
 function Support() {
+	const [showModal, setShowModal] = useState(false);
+	const [textareaValue, setTextareaValue] = useState("");
 	const support = useLoaderData();
 	const [Feedback, setFeedback] = useState(support.rating);
 	const [Service, setService] = useState(support.laporan);
@@ -18,6 +21,7 @@ function Support() {
 	const [search2, setSearch2] = useState("");
 	const [currentPage2, setCurrentPage2] = useState(1);
 	const [itemsPerPage2, setItemsPerPage2] = useState(10);
+	const [seller, setSeller] = useState(null);
 
 	function handleFeedback() {}
 	function handleService() {
@@ -38,6 +42,11 @@ function Support() {
 				},
 			]);
 		});
+	}
+
+	function handleSeller(email) {
+		setShowModal(true);
+		setSeller(email);
 	}
 
 	useEffect(() => {
@@ -69,7 +78,7 @@ function Support() {
 	async function sendEmail(email, msg) {
 		await client.post("/sendmail?email=" + email, {
 			msg: msg,
-			subject : "Customer Service"
+			subject: "Customer Service",
 		});
 	}
 
@@ -87,6 +96,15 @@ function Support() {
 	);
 	const limitPage2 = Math.ceil(Service.length / itemsPerPage2);
 	const paginate2 = (pageNumber) => setCurrentPage2(pageNumber);
+
+	const handleTextareaChange = (event) => {
+		setTextareaValue(event.target.value);
+	};
+
+	const handlePopup = () => {
+		setShowModal(false);
+		sendEmail(seller, textareaValue);
+	};
 
 	return (
 		<>
@@ -274,12 +292,15 @@ function Support() {
 				className="form-control my-3"
 			/>
 			{!Load && <h4>Loading...</h4>}
-			{Load && (
+			{Load && !showModal && (
 				<table className="table">
 					<thead>
 						<tr className="table-success">
 							<th scope="col" className="text-center">
-								NAMA
+								CUSTOMER
+							</th>
+							<th scope="col" className="text-center">
+								SELLER
 							</th>
 							<th scope="col" className="text-center">
 								PROBLEM
@@ -294,20 +315,37 @@ function Support() {
 							return (
 								<tr>
 									<td className="text-center">{item.user.nama}</td>
+									<td className="text-center">{item.seller.nama}</td>
 
 									<td className="text-center">{item.reason}</td>
 									<td className="text-center">
 										<button
-											onClick={() => sendEmail(item.user.email,"Terima kasih telah menghubungi kami, kami akan segera memproses laporan anda")}
+											onClick={() =>
+												sendEmail(
+													item.user.email,
+													"Terima kasih telah menghubungi kami, Kami akan segera memproses laporan anda. Dan bila ada yang kuran jelas silahkan hubungi kami kembali di email ini.",
+												)
+											}
 											className="bg-transparent border-0"
 										>
-											<img src={Notification} style={{ width: "40px" }} />
+											<img src={Help} style={{ width: "40px" }} />
 										</button>
 										<button
-											onClick={() => sendEmail(item.user.email,"Semua laporan anda telah kami proses, terima kasih telah menghubungi kami")}
+											onClick={() =>
+												sendEmail(
+													item.user.email,
+													"Semua laporan anda telah kami proses, terima kasih telah menggunkan jasa layanan kami. Bila ada yang kurang jelas silahkan hubungi kami kembali di email ini.",
+												)
+											}
 											className="bg-transparent border-0"
 										>
 											<img src={Accept} style={{ width: "45px" }} />
+										</button>
+										<button
+											onClick={() => handleSeller(item.seller.email)}
+											className="bg-transparent border-0"
+										>
+											<img src={Notification} style={{ width: "45px" }} />
 										</button>
 									</td>
 								</tr>
@@ -316,6 +354,20 @@ function Support() {
 					</tbody>
 				</table>
 			)}
+			{showModal && (
+				<div>
+					<form className="text-center" onSubmit={handlePopup}>
+						<textarea
+							cols="160"
+							rows="10"
+							placeholder="NOTIFIKASI"
+							onChange={handleTextareaChange}
+						></textarea>
+						<button type="submit">KIRIM</button>
+					</form>
+				</div>
+			)}
+
 			<div style={{ display: "flex", justifyContent: "center" }}>
 				<button
 					onClick={() => paginate2(currentPage2 - 1)}
