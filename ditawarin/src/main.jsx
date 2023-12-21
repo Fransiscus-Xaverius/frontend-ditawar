@@ -32,6 +32,7 @@ import Report from "./admin/Report.jsx";
 import Laporan from "./Report.jsx";
 import { get } from "react-hook-form";
 import Verification from "./Verification.jsx";
+import PayoutPage from "./PayoutPage.jsx";
 
 const {
   getAuction,
@@ -64,6 +65,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <Navbar />,
     loader: NavBarData,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
@@ -94,6 +96,11 @@ const router = createBrowserRouter([
         path: "/wallet",
         loader: getWallet,
         element: <WalletPage />,
+      },
+      {
+        path:"/payout",
+        loader: getWallet,
+        element: <PayoutPage />
       },
       {
         path:"/details",

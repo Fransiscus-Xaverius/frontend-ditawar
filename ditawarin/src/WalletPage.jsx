@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import axios from 'axios';
 import uang from './assets/money.png'
 import { useCallback, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function WalletPage(){
     
@@ -14,6 +15,8 @@ export default function WalletPage(){
 
     const history = wallet_data.wallet.result.history.reverse();
     console.log(history);
+
+    const navigate = useNavigate();
 
 	const {
 		register,
@@ -34,6 +37,9 @@ export default function WalletPage(){
             method: "POST",
         }
 
+        alert("topup")
+        console.log("Berhasil")
+
         const body_data = {
             nama: wallet_data.user.nama,
             email: wallet_data.user.email,
@@ -52,46 +58,16 @@ export default function WalletPage(){
         try {
             const res = await axios.post(import.meta.env.VITE_API_URL + "/createInvoice", body_data);
             const json = res.data;
+            if(res){
+                alert("Request Top up sedang di proses, mohon segera proses pembayaran dan refresh halamaan ini setelah pembayaran berhasil!")
+            }
             console.log(json);
         } catch (error) {
             console.error(error);
         }
     }
 
-    const payout = async (data) => {
-        const options = {
-            method: "POST",
-        }
-        alert("Penarikan saldo sedang diproses, mohon tunggu sebentar!")
-        
-
-        const body_data = {
-            nama: wallet_data.user.nama,
-            email: wallet_data.user.email,
-            phone: wallet_data.user.phone,
-            desc: `Penarikan Saldo sebesar ${Rupiah.format(data.amount)}`,
-            amount: parseInt(data.amount),
-            rekening: data.rekening,
-            nama_rekening: data.nama_rekening,
-            city: wallet_data.user.city,
-            kode_pos: 12345, //needs fixing, additional data needed in register
-            provinsi: wallet_data.user.province,
-            alamat: wallet_data.user.address,
-            wallet_id: wallet_data.wallet.result._id
-        }
-
-        const res = await axios.post(import.meta.env.VITE_API_URL + "/payout", body_data);
-        if(res.status == 201){
-            alert("Penarikan saldo berhasil!")
-            window.location.reload();
-        }
-        else if(res.status == 400){
-            alert("Saldo tidak cukup!")
-        }
-        else{
-            alert("Gagal menarik saldo!")
-        }
-    }
+    
 
     const tarikClick = () => {
 		setTarik(true);
@@ -285,9 +261,9 @@ export default function WalletPage(){
                 </div>
 
                 <div className="col-5 text-center">
-                    <button type="button" data-bs-toggle="modal" data-bs-target="#staticBack" className="btn btn-success mt-2" style={{width: "100%"}} onClick={()=> {tarikClick()}}><b>Tarik Saldo</b></button>
+                    <button type="button" onClick={()=>{navigate('/payout')}} className="btn btn-success mt-2" style={{width: "100%"}} ><b>Tarik Saldo</b></button>
                 </div>
-
+                {/* modal top up */}
                 <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div className="modal-dialog modal-dialog-centered">
                         <div className="modal-content">
@@ -316,7 +292,7 @@ export default function WalletPage(){
                         </div>
                     </div>
                 </div>
-
+                {/* modal payout */}
                 <div className="modal fade" id="staticBack" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div className="modal-dialog modal-dialog-centered">
                         <div className="modal-content">
@@ -329,30 +305,7 @@ export default function WalletPage(){
                                 ></button>
                             </div>
                             <div className="content ps-4 pt-4 pe-4 mb-4 pb-3 ">
-                                <form onSubmit={handleSubmit(payout)}>
-                                    <div className="d-flex align-items-center mb-3">
-                                            <p className="mb-0">Nama Pemilik Rekening :</p>
-                                            <input type="text" {...register("nama_rekening", {required:{value:true, message:"Nama Pemilik Rekening wajib diisi"}})} className=" ms-auto ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "13rem", height: "3rem"}}/>
-                                    </div>
-                                    <div className="d-flex align-items-center mb-3">
-                                        {errors.nama_rekening && <p style={{color: "red"}}>{errors.nama_rekening.message}</p>}
-                                    </div>
-                                    <div className="d-flex align-items-center mb-3">
-                                        <p className="mb-0">Nomor Rekening :</p>
-                                        <input type="text" {...register("rekening", {required:{value:true, message:"Nomor rekening wajib diisi"}})} className=" ms-auto ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "13rem", height: "3rem"}}/>
-                                    </div>
-                                    <div className="d-flex align-items-center mb-3">
-                                        {errors.rekening && <p style={{color: "red"}}>{errors.rekening.message}</p>}
-                                    </div>
-                                    <div className="d-flex align-items-center mb-3">
-                                        <p className="mb-0">Jumlah Uang :</p>
-                                        <input type="number" {...register("amount", {required:{value:true, message:"Jumlah uang tidak boleh kosong!"}})} className=" ms-auto ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "13rem", height: "3rem"}}/>
-                                    </div>
-                                    <div className="d-flex align-items-center mb-3">
-                                        {errors.amount && <p style={{color: "red"}}>{errors.amount.message}</p>}
-                                    </div>
-                                    <button type="submit" className="btn btn-success ms-auto mt-2" style={{width: "100%"}}><b>Tarik Saldo</b></button>
-                                </form>
+                               
                             </div>
                         </div>
                     </div>
