@@ -33,7 +33,7 @@ function CardAuction (props) {
                             <img src={location} alt="" style={{width: "20px"}} className="me-2"/>{props.kota_kabupaten}
                         </p>
                     </div>
-                    <p className="card-title text-center p-2" style={{textTransform: "uppercase", backgroundColor: "#CEF9D3", color: "#0C560B", borderRadius: "5px", width: "fit-content", fontSize: "20px"}}><b>Kategori : </b></p>
+                    <p className="card-title text-center p-2" style={{textTransform: "uppercase", backgroundColor: "#CEF9D3", color: "#0C560B", borderRadius: "5px", width: "fit-content", fontSize: "20px"}}><b>Kategori : {props.kategori_barang}</b></p>
             {/* <div className="img border rounded-3" style={{height: "300px", display:"flex"}}>
                 <img src={url} alt="" className="card-img-top rounded-3 border" style={{width: "100%", maxHeight:"300px", zIndex: -1, alignSelf:"center"}}/>
             </div>

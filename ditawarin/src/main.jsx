@@ -105,22 +105,22 @@ const router = createBrowserRouter([
           }
         ]
       },
-      {
-        path: "/purchases",
-        element: <PurchasesPage />,
-        children: [
-          {
-            path: "buyer",
-            loader: getAllPurchaseAsBuyer,
-            element: <PurchasePageBuyer />,
-          },
-          {
-            path: "seller",
-            loader: getAllPurchaseAsSeller,
-            element: <PurchasePageSeller />,
-          }
-        ],
-      },
+      // {
+      //   path: "/purchases",
+      //   element: <PurchasesPage />,
+      //   children: [
+      //     {
+      //       path: "buyer",
+      //       loader: getAllPurchaseAsBuyer,
+      //       element: <PurchasePageBuyer />,
+      //     },
+      //     {
+      //       path: "seller",
+      //       loader: getAllPurchaseAsSeller,
+      //       element: <PurchasePageSeller />,
+      //     }
+      //   ],
+      // },
       {
         path: "/sell",
         element: <JualPage />,
