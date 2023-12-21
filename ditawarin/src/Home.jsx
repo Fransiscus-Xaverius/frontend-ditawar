@@ -89,7 +89,6 @@ function Home() {
           <div className="col-6 ">
             <h3><b>SELAMAT DATANG <br /> </b></h3>
             <p style={{fontSize: "25px"}}>Ditawarin fokus pada lelang berbasis online dimana siapapun bisa mengikuti lelang yang ada.</p>
-            <button className="btn text-white p-2" style={{ width: "170px" , backgroundColor: "#06083D", textTransform: "uppercase"}} ><b> SHOP NOW </b></button>
           </div>
           <div className="col-6 text-center">
             <img src={Jumbotron} alt="" />

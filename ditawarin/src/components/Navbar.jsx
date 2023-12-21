@@ -18,7 +18,7 @@ export default function Navbar() {
 
   const data = useLoaderData();
 
-  console.log(data);
+  console.log("data=",data);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -76,7 +76,7 @@ export default function Navbar() {
                   {!userToken && <Navigate to={"/login"}/>}
                   {userToken == "admin" && <Navigate to={"/login"}/>}
                   <img
-                    style={{ height: "48px" }}
+                    style={{ height: "48px", width: "48px", objectFit: "cover" }}
                     className="nav-item rounded-circle me-2"
                     alt="avatar_user"
                     src={import.meta.env.VITE_API_URL + "/static/" + data.profile_picture || ""
@@ -102,14 +102,7 @@ export default function Navbar() {
                       </p>
                     </NavLink>
                   </div>
-                  <NavLink
-                    type="button"
-                    className="btn btn-outline-light ms-3 me-3"
-                    to="/purchases"
-                    style={{ minWidth: "80px" }}
-                  >
-                    My Items
-                  </NavLink>
+                  
                   <NavLink
                     type="button"
                     className="btn btn-outline-light ms-3 me-3"
