@@ -45,26 +45,34 @@ function Users() {
 	}
 
 	async function LookAccount(params) {
-		try{
-			setTopup([]);
-			setSale([]);
-			setPurchase([]);
+		try {
+			// setTopup(null);
+			// setSale(null);
+			// setPurchase(null);
 			const wallet = await client.get(`/wallet?id=${User[params]._id}`);
-			const topup2 = await client.get(`/transaction-topup?id=${wallet.data.result._id}`);
-			const sale2 = await client.get(`/transaction-sale?id=${wallet.data.result._id}`);
-			const purchase2 = await client.get(`/transaction-purchase?id=${wallet.data.result._id}`);
-			topup2.data.result.forEach(element => {
-				setTopup([...topup,element.invoice.amount]);
-			});
-			console.log(sale2.data.result)
-			sale2.data.result.forEach(element => {
-				setSale([...sale,element.amount]);
-			})
-			purchase2.data.result.forEach(element => {
-				setPurchase([...purchase,element.amount]);
-			})
+			const topup2 = await client.get(
+				`/transaction-topup?id=${wallet.data.result._id}`,
+			);
+			const sale2 = await client.get(
+				`/transaction-sale?id=${wallet.data.result._id}`,
+			);
+			const purchase2 = await client.get(
+				`/transaction-purchase?id=${wallet.data.result._id}`,
+			);
+			const listTopup = await topup2.data.result.map(
+				(element) => element.invoice.amount,
+			);
+			const listSale = await sale2.data.result.map((element) => element.amount);
+			const listPurchase = await purchase2.data.result.map(
+				(element) => element.amount,
+			);
+			console.log(listTopup);
+			setTopup(listTopup);
+			setSale(listSale);
+			setPurchase(listPurchase);
+
 			setLook(true);
-		}catch(error){
+		} catch (error) {
 			console.log(error);
 			setLook(false);
 		}
@@ -135,7 +143,7 @@ function Users() {
 	const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 	const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
 	const limitPage = Math.ceil(User.length / itemsPerPage);
-	console.log(limitPage)
+	console.log(limitPage);
 	const paginate = (pageNumber) => setCurrentPage(pageNumber);
 	return (
 		<>
@@ -154,11 +162,21 @@ function Users() {
 				<table className="table">
 					<thead>
 						<tr className="table-success">
-							<th scope="col" className="text-center">PROFILE</th>
-							<th scope="col" className="text-center">NAMA</th>
-							<th scope="col" className="text-center">EMAIL</th>
-							<th scope="col" className="text-center">STATUS</th>
-							<th scope="col" className="text-center">ACTION</th>
+							<th scope="col" className="text-center">
+								PROFILE
+							</th>
+							<th scope="col" className="text-center">
+								NAMA
+							</th>
+							<th scope="col" className="text-center">
+								EMAIL
+							</th>
+							<th scope="col" className="text-center">
+								STATUS
+							</th>
+							<th scope="col" className="text-center">
+								ACTION
+							</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -383,15 +401,16 @@ function Users() {
 				</form>
 			)}
 
-			{Look && <>
-				<h1>Topup</h1>
-				<LineUser name={'topup'} data={topup}/>
-				<h1>Sale</h1>
-				<LineUser name={"sale"} data={sale} />
-				<h1>Purchase</h1>
-				<LineUser name={"purchase"} data={purchase} />
-			</>
-			}
+			{Look && (
+				<>
+					<h1>Topup</h1>
+					<LineUser name={"topup"} data={topup} />
+					<h1>Sale</h1>
+					<LineUser name={"sale"} data={sale} />
+					<h1>Purchase</h1>
+					<LineUser name={"purchase"} data={purchase} />
+				</>
+			)}
 		</>
 	);
 }
