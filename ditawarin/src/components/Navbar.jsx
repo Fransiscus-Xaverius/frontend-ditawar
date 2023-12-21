@@ -102,7 +102,14 @@ export default function Navbar() {
                       </p>
                     </NavLink>
                   </div>
-                  
+                  <NavLink
+                    type="button"
+                    className="btn btn-outline-light ms-3 me-3"
+                    to="/purchases"
+                    style={{ minWidth: "80px" }}
+                  >
+                    MY ITEMS
+                  </NavLink>
                   <NavLink
                     type="button"
                     className="btn btn-outline-light ms-3 me-3"

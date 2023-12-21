@@ -56,47 +56,84 @@ export default function PayoutPage(){
 
     return (
         <>
-            <form onSubmit={handleSubmit(payout)}>
-                <div className="d-flex align-items-center mb-3">
-                    <p className="mb-0">Nama Pemilik Rekening :</p>
-                    <input
-                        type="text"
-                        {...register("nama_rekening", { required: { value: true, message: "Nama Pemilik Rekening wajib diisi" } })}
-                        className="ms-auto ps-3 border border-secondary-subtle"
-                        style={{ borderRadius: "10px", width: "13rem", height: "3rem" }}
-                    />
-                </div>
-                <div className="d-flex align-items-center mb-3">
-                    {errors.nama_rekening && <p style={{ color: "red" }}>{errors.nama_rekening.message}</p>}
-                </div>
-                <div className="d-flex align-items-center mb-3">
-                    <p className="mb-0">Nomor Rekening :</p>
-                    <input
-                        type="text"
-                        {...register("rekening", { required: { value: true, message: "Nomor rekening wajib diisi" } })}
-                        className="ms-auto ps-3 border border-secondary-subtle"
-                        style={{ borderRadius: "10px", width: "13rem", height: "3rem" }}
-                    />
-                </div>
-                <div className="d-flex align-items-center mb-3">
-                    {errors.rekening && <p style={{ color: "red" }}>{errors.rekening.message}</p>}
-                </div>
-                <div className="d-flex align-items-center mb-3">
-                    <p className="mb-0">Jumlah Uang :</p>
-                    <input
-                        type="number"
-                        {...register("payout_amount", { required: { value: true, message: "Jumlah uang tidak boleh kosong!" } })}
-                        className="ms-auto ps-3 border border-secondary-subtle"
-                        style={{ borderRadius: "10px", width: "13rem", height: "3rem" }}
-                    />
-                </div>
-                <div className="d-flex align-items-center mb-3">
-                    {errors.payout_amount && <p style={{ color: "red" }}>{errors.payout_amount.message}</p>}
-                </div>
-                <button type="submit" className="btn btn-success ms-auto mt-2" style={{ width: "100%" }}>
-                    <b>Tarik Saldo</b>
-                </button>
-            </form>
+            <div className="container fontcustom mt-5">
+                <h1 className="text-center">PAYOUT DETAILS</h1>
+                <form onSubmit={handleSubmit(payout)}>
+                    <div className="row justify-content-center">
+                            <div className="col-6 p-0 mb-4 mt-4">
+                                <p>Nama Pemilik Rekening :</p>                                
+                                <input
+                                    type="text"
+                                    {...register("nama_rekening", { required: { value: true, message: "Nama Pemilik Rekening wajib diisi" } })}
+                                    className="ps-3 border border-secondary-subtle mb-4"
+                                    style={{ borderRadius: "10px", width: "100%", height: "3rem" }}
+                                /> <br />
+                                {errors.nama_rekening && <p style={{ color: "red" }}>{errors.nama_rekening.message}</p>}
+
+                                <p>Nomor Rekening :</p>
+                                <input
+                                    type="text"
+                                    {...register("rekening", { required: { value: true, message: "Nomor rekening wajib diisi" } })}
+                                    className="ms-auto ps-3 border border-secondary-subtle mb-4"
+                                    style={{ borderRadius: "10px", width: "100%", height: "3rem" }}
+                                /> <br />
+                                {errors.rekening && <p style={{ color: "red" }}>{errors.rekening.message}</p>}     
+
+                                <p>Jumlah Uang :</p>
+                                <input
+                                    type="number"
+                                    {...register("payout_amount", { required: { value: true, message: "Jumlah uang tidak boleh kosong!" } })}
+                                    className="ms-auto ps-3 border border-secondary-subtle mb-4"
+                                    style={{ borderRadius: "10px", width: "100%", height: "3rem" }}
+                                /> <br />
+                                {errors.payout_amount && <p style={{ color: "red" }}>{errors.payout_amount.message}</p>}
+
+                                <button className="btn btn-success text-light mt-3 mb-3" type="submit" style={{width: '100%'}}><b>TARIK SALDO</b></button>
+                            </div>
+                        </div> 
+
+
+                    {/* <div className="d-flex align-items-center mb-3">
+                        <p className="mb-0">Nama Pemilik Rekening :</p>
+                        <input
+                            type="text"
+                            {...register("nama_rekening", { required: { value: true, message: "Nama Pemilik Rekening wajib diisi" } })}
+                            className="ms-auto ps-3 border border-secondary-subtle"
+                            style={{ borderRadius: "10px", width: "13rem", height: "3rem" }}
+                        />
+                    </div>
+                    <div className="d-flex align-items-center mb-3">
+                        {errors.nama_rekening && <p style={{ color: "red" }}>{errors.nama_rekening.message}</p>}
+                    </div> */}
+                    {/* <div className="d-flex align-items-center mb-3">
+                        <p className="mb-0">Nomor Rekening :</p>
+                        <input
+                            type="text"
+                            {...register("rekening", { required: { value: true, message: "Nomor rekening wajib diisi" } })}
+                            className="ms-auto ps-3 border border-secondary-subtle"
+                            style={{ borderRadius: "10px", width: "13rem", height: "3rem" }}
+                        />
+                    </div>
+                    <div className="d-flex align-items-center mb-3">
+                        {errors.rekening && <p style={{ color: "red" }}>{errors.rekening.message}</p>}
+                    </div> */}
+                    {/* <div className="d-flex align-items-center mb-3">
+                        <p className="mb-0">Jumlah Uang :</p>
+                        <input
+                            type="number"
+                            {...register("payout_amount", { required: { value: true, message: "Jumlah uang tidak boleh kosong!" } })}
+                            className="ms-auto ps-3 border border-secondary-subtle"
+                            style={{ borderRadius: "10px", width: "13rem", height: "3rem" }}
+                        />
+                    </div>
+                    <div className="d-flex align-items-center mb-3">
+                        {errors.payout_amount && <p style={{ color: "red" }}>{errors.payout_amount.message}</p>}
+                    </div> */}
+                    {/* <button type="submit" className="btn btn-success ms-auto mt-2" style={{ width: "100%" }}>
+                        <b>Tarik Saldo</b>
+                    </button> */}
+                </form>
+            </div>
         </>
     )
 }
