@@ -37,7 +37,7 @@ export default function WalletPage(){
             method: "POST",
         }
 
-        alert("topup")
+        // alert("topup")
         console.log("Berhasil")
 
         const body_data = {
