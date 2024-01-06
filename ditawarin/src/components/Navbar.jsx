@@ -56,6 +56,7 @@ export default function Navbar() {
                     type="button"
                     className="btn btn-outline-light me-3"
                     to="/login"
+                    id="login-btn"
                   >
                     Masuk
                   </NavLink>
@@ -63,6 +64,7 @@ export default function Navbar() {
                     type="button"
                     className="btn btn-outline-light"
                     to="/register"
+                    id="register-btn"
                   >
                     Daftar
                   </NavLink>

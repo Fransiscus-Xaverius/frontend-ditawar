@@ -68,12 +68,12 @@ function Login() {
                             <div className="col-6 p-0">
                                 <h1 className="mb-4 mt-4" style={{color: "#06083D"}}><b>Hello,<br /> Welcome Back</b></h1>
                                 <label><b>Email </b></label><br />
-                                <input type="text" {...register("email", {required:{value:true, message:"Email wajib diisi!"}})} placeholder="Email" className="mt-3 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "100%", height: "3rem"}}/> <br />
+                                <input type="text" id="email_inp" {...register("email", {required:{value:true, message:"Email wajib diisi!"}})} placeholder="Email" className="mt-3 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "100%", height: "3rem"}}/> <br />
                                 {errors.email && <p style={{color: "red"}}>{errors.email.message}</p>}
                                 <label><b>Password </b></label><br />
-                                <input type="password" {...register("pass", {required:{value:true, message:"Password wajib diisi!"}})} placeholder="Password" className="mt-3 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "100%", height: "3rem"}}/> <br />
+                                <input type="password" id="pass_inp" {...register("pass", {required:{value:true, message:"Password wajib diisi!"}})} placeholder="Password" className="mt-3 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "100%", height: "3rem"}}/> <br />
                                 {errors.pass && <p style={{color: "red"}}>{errors.pass.message}</p>}
-                                <button className="btn text-light mt-3 mb-3" type="submit" style={{width: '100%', backgroundColor: "#06083D"}}><b>MASUK</b></button>
+                                <button className="btn text-light mt-3 mb-3" id="submit_btn" type="submit" style={{width: '100%', backgroundColor: "#06083D"}}><b>MASUK</b></button>
                                 
                                 <div>Lupa Password?</div>
                                 <div>Belum punya akun?  <Link to={"/register"}>Daftar Sini</Link> </div>

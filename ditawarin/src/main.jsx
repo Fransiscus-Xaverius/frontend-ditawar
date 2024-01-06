@@ -34,6 +34,10 @@ import { get } from "react-hook-form";
 import Verification from "./Verification.jsx";
 import PayoutPage from "./PayoutPage.jsx";
 
+import Dashboard from './mui-admin/homeAdmin.jsx';
+import UsersPage from "./mui-admin/Users.jsx";
+import AuctionsPage from "./mui-admin/Auctions.jsx";
+
 const {
   getAuction,
   getAllAuction,
@@ -161,37 +165,63 @@ const router = createBrowserRouter([
 
     ],
   },
+  // {
+  //   loader: getAllUser,
+  //   path: "/admin",
+  //   element: <NavbarAdmin />,
+  //   children: [
+  //     {
+  //       loader: getAllUser,
+  //       path: "users",
+  //       element: <Users />,
+  //     },
+  //     {
+  //       loader: getAllAuctionDetail,
+  //       path: "auction",
+  //       element: <Auctions />,
+  //     },
+  //     {
+  //       loader: getAllPurchase,
+  //       path: "payment",
+  //       element: <Payment />,
+  //     },
+  //     {
+  //       loader : getAllSupport,
+  //       path: "support",
+  //       element: <Support />,
+  //     },
+  //     {
+  //       loader : getAllPurchase,
+  //       path : "report",
+  //       element : <Report />
+  //     }
+  //   ],
+  // },
   {
     loader: getAllUser,
     path: "/admin",
-    element: <NavbarAdmin />,
-    children: [
+    element: <Dashboard />,
+    children:[
       {
         loader: getAllUser,
         path: "users",
-        element: <Users />,
+        element: <UsersPage />,
       },
       {
         loader: getAllAuctionDetail,
-        path: "auction",
-        element: <Auctions />,
-      },
-      {
+        path: "auctions",
+        element: <AuctionsPage />,
+      },{
         loader: getAllPurchase,
         path: "payment",
-        element: <Payment />,
-      },
-      {
+      },{
         loader : getAllSupport,
         path: "support",
-        element: <Support />,
-      },
-      {
+      },{
         loader : getAllPurchase,
         path : "report",
-        element : <Report />
       }
-    ],
+    ]
   },
   {
     path: "/error",
