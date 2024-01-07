@@ -37,6 +37,8 @@ import { PieChart } from '@mui/x-charts/PieChart';
 import { useLoaderData } from 'react-router-dom';
 import { Pie } from 'react-chartjs-2';
 import InfoIcon from '@mui/icons-material/Info';
+import { Tab } from '@mui/material';
+import Modal from '@mui/material/Modal';
 
 export default function AuctionsPage(){
     const data = useLoaderData();
@@ -70,6 +72,7 @@ export default function AuctionsPage(){
 	}
 
 	async function WarningAuction(params) {
+        alert('Warned Auction!')
 		try {
 			await client.post(`/warningAuction?id_user=${params}`);
 		} catch (error) {
@@ -77,6 +80,9 @@ export default function AuctionsPage(){
 		}
 		window.location.reload(true);
 	}
+
+    // Get the first item from the data array
+    const auctionObject = data[0];
 
     return (
         <Box
@@ -91,10 +97,11 @@ export default function AuctionsPage(){
             overflow: 'auto',
           }}
         >
+            <Toolbar />
             <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-                <Grid>
-                    <Paper>
-                        <Title>Auction Statistics</Title>
+                <Grid align="center">
+                    <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }} align="center">
+                        <Title>Auction Statistic</Title>
                         <PieChart
                         series={[
                         {
@@ -114,7 +121,7 @@ export default function AuctionsPage(){
             <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
                 <React.Fragment>
-                    <Title>User List</Title>
+                    <Title>Auction List</Title>
                     <input
                         type="text"
                         placeholder="Search..."
@@ -124,29 +131,37 @@ export default function AuctionsPage(){
                     <Table size="small">
                         <TableHead>
                         <TableRow>
+                            <TableCell>Gambar</TableCell>
                             <TableCell>Nama Barang</TableCell>
                             <TableCell>Nama Penjual</TableCell>
                             <TableCell>Kategori Barang</TableCell>
                             <TableCell>Dikirim Dari</TableCell>
+                            <TableCell>Ended</TableCell>
+                            <TableCell>Has Bids</TableCell>
                             <TableCell align='center'>Action</TableCell>
                         </TableRow>
                         </TableHead>
                         <TableBody>
                         {filteredData.map((row, index) => (
                             <TableRow key={row._id}>
+                            <TableCell><img src={import.meta.env.VITE_API_URL + "/static/" +row.item.images} style={{ width: "100px" }} /></TableCell>
                             <TableCell>{row.item.nama}</TableCell>
                             <TableCell>{row.nama_penjual}</TableCell>
                             <TableCell>{row.kategori_barang}</TableCell>
                             <TableCell>{row.kecamatan},{row.kota_kabupaten},{row.provinsi}</TableCell>
+                            <TableCell>{row.ended ? "Yes" : "No"}</TableCell>
+                            <TableCell>{row.highest_bid ? "Yes" : "No"}</TableCell>
                             <TableCell align='right'>
-                                <IconButton aria-label="delete" size="small" >
+                                <IconButton aria-label="delete" size="small" onClick={handleOpen}>
                                     <InfoIcon fontSize="inherit" />
                                 </IconButton>
-                                <IconButton aria-label="delete" size="small" >
+                                <IconButton aria-label="delete" size="small" onClick={
+                                    ()=> WarningAuction(row._id)
+                                }>
                                     <WarningIcon fontSize="inherit" />
                                 </IconButton>
                                 <IconButton aria-label="delete" size="small" onClick={
-                                    ()=> BanAccount(index)
+                                    ()=> StopAuction(row._id)
                                 }>
                                     <NotInterestedIcon fontSize="inherit" />
                                 </IconButton>
@@ -159,6 +174,36 @@ export default function AuctionsPage(){
                 </Paper>
               </Grid>
             </Container>
+            <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <Box sx={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    width: 400,
+                    bgcolor: 'background.paper',
+                    border: '2px solid #000',
+                    boxShadow: 24,
+                    p: 4,
+                }}>
+                    <Typography id="modal-modal-title" variant="h6" component="h2">
+                        Auction Details
+                    </Typography>
+                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                        {/* Display the details of the auction object here */}
+                        {/* Replace the placeholders with the actual auction object properties */}
+                        <p>Nama Barang: {auctionObject.nama_barang}</p>
+                        <p>Nama Penjual: {auctionObject.nama_penjual}</p>
+                        <p>Kategori Barang: {auctionObject.kategori_barang}</p>
+                        {/* Add more details as needed */}
+                    </Typography>
+                </Box>
+            </Modal>
         </Box>
     )
 }
