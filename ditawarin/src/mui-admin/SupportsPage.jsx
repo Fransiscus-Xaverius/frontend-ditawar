@@ -116,8 +116,8 @@ export default function SupportPage() {
                         <Table size="small">
                             <TableHead>
                             <TableRow>
-                                <TableCell>Seller</TableCell>
                                 <TableCell>Buyer</TableCell>
+                                <TableCell>Seller</TableCell>
                                 <TableCell>Message</TableCell>
                                 <TableCell>Rating</TableCell>
                             </TableRow>
@@ -156,8 +156,8 @@ export default function SupportPage() {
                         <Table size="small">
                             <TableHead>
                             <TableRow>
-                                <TableCell>Customer</TableCell>
                                 <TableCell>Buyer</TableCell>
+                                <TableCell>Seller</TableCell>
                                 <TableCell>Problem</TableCell>
                                 <TableCell>Action</TableCell>
                             </TableRow>

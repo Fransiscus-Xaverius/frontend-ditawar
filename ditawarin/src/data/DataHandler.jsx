@@ -333,7 +333,7 @@ const getAllSupport = async () => {
 		});
 		
 		await laporan.data.map(async (element) => {
-			const user = await client.get("/user?id=" + element.user_id);
+			const user = await client.get("/user?id=" + element.buyer_id);
 			const seller = await client.get("/user?id=" + element.seller_id);
 			const auction = await client.get("/auction?id=" + element.auction_id);
 			temp2.push({

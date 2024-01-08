@@ -16,7 +16,10 @@ export default function Report() {
 			// });
 
 			const auction = localStorage.getItem("auction");
-			await client.post('/laporan?user_id='+user._id+'&auction_id='+auction+'&reason='+data.msg);
+			const getAuction = await client.get("/auction?id=" + auction);
+			console.log(getAuction)
+			const seller_id = getAuction.data.result.id_user
+			await client.post('/laporan?cust_id='+user._id+'&seller_id='+seller_id+'&auction_id='+auction+'&reason='+data.msg);
 		}
 		catch(error){
 			alert(error);
