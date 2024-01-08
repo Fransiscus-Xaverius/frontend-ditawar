@@ -33,26 +33,56 @@ import WarningIcon from '@mui/icons-material/Warning';
 import EditIcon from '@mui/icons-material/Edit';
 import client from '../client.jsx';
 import { PieChart } from '@mui/x-charts/PieChart';
+import Accept from "../assets/accepted.png";
+import Help from "../assets/help.png";
+import Notification from "../assets/notification.png";
 
 import { useLoaderData } from 'react-router-dom';
 import { Pie } from 'react-chartjs-2';
 import InfoIcon from '@mui/icons-material/Info';
 import { Tab } from '@mui/material';
 import Modal from '@mui/material/Modal';
+import { useForm } from 'react-hook-form';
 
 export default function SupportPage() {
     const data = useLoaderData();
     console.log(data);
+    const [seller, setSeller] = React.useState(null);
+    const { register, handleSubmit, reset } = useForm();
 
-    const [searchTerm, setSearchTerm] = React.useState('');
+    async function sendEmail(email, msg) {
+		await client.post("/sendmail?email=" + email, {
+			msg: msg,
+			subject: "Customer Service",
+		});
+	}
 
-    const handleSearch = (event) => {
-        setSearchTerm(event.target.value);
+    const handlePopup = (data) => {
+		sendEmail(seller, data.pesan);
+        reset()
+	};
+
+    const [searchTermRating, setSearchTermRating] = React.useState('');
+
+    const handleSearchRating = (event) => {
+        setSearchTermRating(event.target.value);
     };
 
-    const filteredData = data.rating.filter((row) => {
+    const filteredDataRating = data.rating.filter((row) => {
         return (
-            row.buyer.nama.toLowerCase().includes(searchTerm.toLowerCase()) || row.seller.nama.toLowerCase().includes(searchTerm.toLowerCase())
+            row.buyer.nama.toLowerCase().includes(searchTermRating.toLowerCase()) || row.seller.nama.toLowerCase().includes(searchTermRating.toLowerCase())
+        );
+    });
+
+    const [searchTermReport, setSearchTermReport] = React.useState('');
+
+    const handleSearchReport = (event) => {
+        setSearchTermReport(event.target.value);
+    };
+
+    const filteredDataReport = data.laporan.filter((row) => {
+        return (
+            row.user.nama.toLowerCase().includes(searchTermReport.toLowerCase()) || row.seller.nama.toLowerCase().includes(searchTermReport.toLowerCase())
         );
     });
 
@@ -78,11 +108,11 @@ export default function SupportPage() {
                             <input
                                 type="text"
                                 placeholder="Search..."
-                                value={searchTerm}
-                                onChange={handleSearch}
+                                value={searchTermRating}
+                                onChange={handleSearchRating}
                             />
                         </React.Fragment>
-                        {filteredData && filteredData.length > 0 &&  
+                        {filteredDataRating && filteredDataRating.length > 0 &&  
                         <Table size="small">
                             <TableHead>
                             <TableRow>
@@ -93,7 +123,7 @@ export default function SupportPage() {
                             </TableRow>
                             </TableHead>
                             <TableBody>
-                            {filteredData.map((row, index) => (
+                            {filteredDataRating.map((row, index) => (
                                 <TableRow key={row._id}>
                                     <TableCell>{row.buyer.nama}</TableCell>
                                     <TableCell>{row.seller.nama}</TableCell>
@@ -107,6 +137,115 @@ export default function SupportPage() {
                             ))}
                             </TableBody>
                         </Table>}
+                    </Paper>
+                </Grid>
+            </Container>
+            <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+                <Grid item xs={12}>
+                    <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+                        <React.Fragment>
+                            <Title>Customer Service</Title>
+                            <input
+                                type="text"
+                                placeholder="Search..."
+                                value={searchTermReport}
+                                onChange={handleSearchReport}
+                            />
+                        </React.Fragment>
+                        {filteredDataReport && filteredDataReport.length > 0 &&  
+                        <Table size="small">
+                            <TableHead>
+                            <TableRow>
+                                <TableCell>Customer</TableCell>
+                                <TableCell>Buyer</TableCell>
+                                <TableCell>Problem</TableCell>
+                                <TableCell>Action</TableCell>
+                            </TableRow>
+                            </TableHead>
+                            <TableBody>
+                            {filteredDataReport.map((row, index) => (
+                                <TableRow key={row._id}>
+                                    <TableCell>{row.user.nama}</TableCell>
+                                    <TableCell>{row.seller.nama}</TableCell>
+                                    <TableCell>{row.reason}</TableCell>
+                                    <TableCell>
+                                        <button
+											onClick={() =>
+												sendEmail(
+													row.user.email,
+													"Terima kasih telah menghubungi kami, Kami akan segera memproses laporan anda. Dan bila ada yang kuran jelas silahkan hubungi kami kembali di email ini.",
+												)
+											}
+											className="bg-transparent border-0"
+										>
+											<img src={Help} style={{ width: "40px" }} />
+										</button>
+										<button
+											onClick={() =>
+												sendEmail(
+													row.user.email,
+													"Semua laporan anda telah kami proses, terima kasih telah menggunkan jasa layanan kami. Bila ada yang kurang jelas silahkan hubungi kami kembali di email ini.",
+												)
+											}
+											className="bg-transparent border-0"
+										>
+											<img src={Accept} style={{ width: "45px" }} />
+										</button>
+										<button
+											onClick={() => setSeller(row.seller.email)}
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop2"
+											className="bg-transparent border-0"
+										>
+											<img src={Notification} style={{ width: "45px" }} />
+										</button>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                            </TableBody>
+                        </Table>}
+                        <div
+                        className="modal fade fontcustom"
+                        id="staticBackdrop2"
+                        data-bs-backdrop="static"
+                        data-bs-keyboard="false"
+                        tabIndex="-1"
+                        aria-labelledby="staticBackdropLabel"
+                        aria-hidden="true"
+                        >
+                            <div className="modal-dialog modal-dialog-centered">
+                                <div className="modal-content">
+                                    <div className="modal-header">
+                                        <h5 className="modal-title" id="staticBackdropLabel">
+                                        Beli Sekarang
+                                        </h5>
+                                        <button
+                                        type="button"
+                                        className="btn-close"
+                                        data-bs-dismiss="modal"
+                                        aria-label="Close"
+                                        onClick={() => reset()}
+                                        ></button>
+                                    </div>
+                                    <div className="modal-body row">
+                                        <form className="text-center" onSubmit={handleSubmit(handlePopup)}>
+                                            <textarea
+                                                style={{width:"100%"}}
+                                                rows="10"
+                                                placeholder="NOTIFIKASI"
+                                                {...register("pesan")}
+                                            ></textarea>
+                                            <button
+                                                className="btn bg-danger text-white col-md-3 mx-auto"
+                                                data-bs-dismiss="modal"
+                                                aria-label="Close"
+                                                type="submit">KIRIM
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </Paper>
                 </Grid>
             </Container>
