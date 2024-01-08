@@ -44,16 +44,72 @@ export default function SupportPage() {
     const data = useLoaderData();
     console.log(data);
 
+    const [searchTerm, setSearchTerm] = React.useState('');
+
+    const handleSearch = (event) => {
+        setSearchTerm(event.target.value);
+    };
+
+    const filteredData = data.rating.filter((row) => {
+        return (
+            row.buyer.nama.toLowerCase().includes(searchTerm.toLowerCase()) || row.seller.nama.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+    });
+
     return (
-        <Table>
-            <TableHead>
-                <TableRow>
-                    <TableCell>Column 1</TableCell>
-                    <TableCell>Column 2</TableCell>
-                    <TableCell>Column 3</TableCell>
-                </TableRow>
-            </TableHead>
-            
-        </Table>
+        <Box
+          component="main"
+          sx={{
+            backgroundColor: (theme) =>
+              theme.palette.mode === 'light'
+                ? theme.palette.grey[100]
+                : theme.palette.grey[900],
+            flexGrow: 1,
+            height: '100vh',
+            overflow: 'auto',
+          }}
+        >
+            <Toolbar />
+            <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+                <Grid item xs={12}>
+                    <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+                        <React.Fragment>
+                            <Title>User Feedback</Title>
+                            <input
+                                type="text"
+                                placeholder="Search..."
+                                value={searchTerm}
+                                onChange={handleSearch}
+                            />
+                        </React.Fragment>
+                        {filteredData && filteredData.length > 0 &&  
+                        <Table size="small">
+                            <TableHead>
+                            <TableRow>
+                                <TableCell>Seller</TableCell>
+                                <TableCell>Buyer</TableCell>
+                                <TableCell>Message</TableCell>
+                                <TableCell>Rating</TableCell>
+                            </TableRow>
+                            </TableHead>
+                            <TableBody>
+                            {filteredData.map((row, index) => (
+                                <TableRow key={row._id}>
+                                    <TableCell>{row.buyer.nama}</TableCell>
+                                    <TableCell>{row.seller.nama}</TableCell>
+                                    <TableCell>{row.comment}</TableCell>
+                                    <TableCell>
+                                        {[...Array(parseInt(row.rating))].map((item) => {
+                                            return <span>⭐</span>;
+                                        })}
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                            </TableBody>
+                        </Table>}
+                    </Paper>
+                </Grid>
+            </Container>
+        </Box>
     );
 }
