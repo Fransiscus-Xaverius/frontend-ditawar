@@ -46,6 +46,14 @@ export const mainListItems = (
             <ListItemText primary="Reports" />
         </ListItemButton>
     </NavLink>
+    <NavLink to="/admin/support" style={{ textDecoration: 'none', color: 'inherit' }}>
+        <ListItemButton>
+            <ListItemIcon>
+                <LayersIcon />
+            </ListItemIcon>
+            <ListItemText primary="Support" />
+        </ListItemButton>
+    </NavLink>
     <NavLink to="/logout" style={{ textDecoration: 'none', color: 'inherit' }}>
         <ListItemButton>
             <ListItemIcon>

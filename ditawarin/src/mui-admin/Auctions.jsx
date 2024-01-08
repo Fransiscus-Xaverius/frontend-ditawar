@@ -128,7 +128,8 @@ export default function AuctionsPage(){
                         value={searchTerm}
                         onChange={handleSearch}
                     />
-                    <Table size="small">
+                   {filteredData && filteredData.length > 0 &&  
+                   <Table size="small">
                         <TableHead>
                         <TableRow>
                             <TableCell>Gambar</TableCell>
@@ -169,12 +170,12 @@ export default function AuctionsPage(){
                             </TableRow>
                         ))}
                         </TableBody>
-                    </Table>
+                    </Table>}
                 </React.Fragment>
                 </Paper>
               </Grid>
             </Container>
-            <Modal
+           {auctionObject &&  <Modal
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="modal-modal-title"
@@ -203,7 +204,7 @@ export default function AuctionsPage(){
                         {/* Add more details as needed */}
                     </Typography>
                 </Box>
-            </Modal>
+            </Modal>}
         </Box>
     )
 }

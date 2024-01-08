@@ -38,6 +38,7 @@ import Dashboard from './mui-admin/homeAdmin.jsx';
 import UsersPage from "./mui-admin/Users.jsx";
 import AuctionsPage from "./mui-admin/Auctions.jsx";
 import ReportsPage from "./mui-admin/ReportsPage.jsx";
+import SupportPage from "./mui-admin/SupportsPage.jsx";
 
 const {
   getAuction,
@@ -218,6 +219,7 @@ const router = createBrowserRouter([
       },{
         loader : getAllSupport,
         path: "support",
+        element:<SupportPage />
       },{
         loader : getAllPurchase,
         path : "reports",
