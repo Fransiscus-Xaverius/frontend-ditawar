@@ -42,10 +42,14 @@ import Modal from '@mui/material/Modal';
 
 export default function AuctionsPage(){
     const data = useLoaderData();
-
     const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
+    const handleOpen = (i) => {
+        setAuctionObject(data[i]);
+        setOpen(true);
+    };
     const handleClose = () => setOpen(false);
+
+    const [auctionObject, setAuctionObject] = React.useState(null);
 
     const [searchTerm, setSearchTerm] = React.useState('');
 
@@ -82,7 +86,6 @@ export default function AuctionsPage(){
 	}
 
     // Get the first item from the data array
-    const auctionObject = data[0];
 
     return (
         <Box
@@ -132,7 +135,6 @@ export default function AuctionsPage(){
                    <Table size="small">
                         <TableHead>
                         <TableRow>
-                            <TableCell>Gambar</TableCell>
                             <TableCell>Nama Barang</TableCell>
                             <TableCell>Nama Penjual</TableCell>
                             <TableCell>Kategori Barang</TableCell>
@@ -145,7 +147,6 @@ export default function AuctionsPage(){
                         <TableBody>
                         {filteredData.map((row, index) => (
                             <TableRow key={row._id}>
-                            <TableCell><img src={import.meta.env.VITE_API_URL + "/static/" +row.item.images} style={{ width: "100px" }} /></TableCell>
                             <TableCell>{row.item.nama}</TableCell>
                             <TableCell>{row.nama_penjual}</TableCell>
                             <TableCell>{row.kategori_barang}</TableCell>
@@ -153,7 +154,7 @@ export default function AuctionsPage(){
                             <TableCell>{row.ended ? "Yes" : "No"}</TableCell>
                             <TableCell>{row.highest_bid ? "Yes" : "No"}</TableCell>
                             <TableCell align='right'>
-                                <IconButton aria-label="delete" size="small" onClick={handleOpen}>
+                                <IconButton aria-label="delete" size="small" onClick={()=>handleOpen(index)}>
                                     <InfoIcon fontSize="inherit" />
                                 </IconButton>
                                 <IconButton aria-label="delete" size="small" onClick={
@@ -195,10 +196,14 @@ export default function AuctionsPage(){
                     <Typography id="modal-modal-title" variant="h6" component="h2">
                         Auction Details
                     </Typography>
+                    
                     <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                         {/* Display the details of the auction object here */}
                         {/* Replace the placeholders with the actual auction object properties */}
-                        <p>Nama Barang: {auctionObject.nama_barang}</p>
+                        {auctionObject.item.images && (
+                            <img src={import.meta.env.VITE_API_URL + "/static/" +auctionObject.item.images} style={{ maxWidth: "300px" }} />
+                        )}
+                        <p>Nama Barang: {auctionObject.item.nama}</p>
                         <p>Nama Penjual: {auctionObject.nama_penjual}</p>
                         <p>Kategori Barang: {auctionObject.kategori_barang}</p>
                         {/* Add more details as needed */}
