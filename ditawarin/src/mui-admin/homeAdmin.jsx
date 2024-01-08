@@ -13,6 +13,7 @@ import Badge from '@mui/material/Badge';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
@@ -20,15 +21,17 @@ import { mainListItems } from './listItems';
 import Chart from './Chart.jsx';
 import Deposits from './Deposits';
 import Orders from './Orders';
+import Switch from '@mui/material/Switch';
 
 const drawerWidth = 240;
 
+import { useState } from 'react';
 import {
-	Link,
-	NavLink,
-	Navigate,
-	Outlet,
-	useLoaderData,
+  Link,
+  NavLink,
+  Navigate,
+  Outlet,
+  useLoaderData,
 } from "react-router-dom";
 
 const AppBar = styled(MuiAppBar, {
@@ -81,76 +84,93 @@ const defaultTheme = createTheme();
 export default function Dashboard() {
   let userToken = localStorage.getItem("token");
   const data = useLoaderData();
-  console.log(data);
-
-
+  // console.log(data);
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
   };
+  const [checked, setChecked] = React.useState(true);
 
-  if(userToken != "admin") return <Navigate to={"/login"} />;
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
+    setDarkMode(!darkMode);
+  };
+  const [darkMode, setDarkMode] = useState(false);
+  if (userToken != "admin") return <Navigate to={"/login"} />;
+  const theme = createTheme({
+    palette: {
+      mode: darkMode ? "dark" : "light"
+    },
+  });
 
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <Box sx={{ display: 'flex' }}>
-        <CssBaseline />
-        <AppBar position="absolute" open={open}>
-          <Toolbar
-            sx={{
-              pr: '24px', // keep right padding when drawer closed
-            }}
-          >
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
-              onClick={toggleDrawer}
+    <ThemeProvider theme={theme}>
+      <Paper>
+        <Box sx={{ display: 'flex' }}>
+          <CssBaseline />
+          <AppBar position="absolute" open={open}>
+            <Toolbar
               sx={{
-                marginRight: '36px',
-                ...(open && { display: 'none' }),
+                pr: '24px', // keep right padding when drawer closed
               }}
             >
-              <MenuIcon />
-            </IconButton>
-            <Typography
-              component="h1"
-              variant="h6"
-              color="inherit"
-              noWrap
-              sx={{ flexGrow: 1 }}
+              <IconButton
+                edge="start"
+                color="inherit"
+                aria-label="open drawer"
+                onClick={toggleDrawer}
+                sx={{
+                  marginRight: '36px',
+                  ...(open && { display: 'none' }),
+                }}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Typography
+                component="h1"
+                variant="h6"
+                color="inherit"
+                noWrap
+                sx={{ flexGrow: 1 }}
+              >
+                Dashboard
+              </Typography>
+              <Switch
+                color="default"
+                checked={checked}
+                onChange={handleChange}
+                inputProps={{ 'aria-label': 'controlled' }}
+              />
+              <Typography variant="h6" sx={{ mr: 2 }}>Welcome, Admin</Typography>
+              <AccountCircleIcon fontSize="large" />
+              {/* kalo ditaruh dalam IconButton, icon seolah2 bisa diklik dan ada shadow hovernya */}
+              {/* <IconButton color="inherit">
+            </IconButton> */}
+            </Toolbar>
+          </AppBar>
+          <Drawer variant="permanent" open={open}>
+            <Toolbar
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'flex-end',
+                px: [1],
+              }}
             >
-              Dashboard
-            </Typography>
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-          </Toolbar>
-        </AppBar>
-        <Drawer variant="permanent" open={open}>
-          <Toolbar
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'flex-end',
-              px: [1],
-            }}
-          >
-            <IconButton onClick={toggleDrawer}>
-              <ChevronLeftIcon />
-            </IconButton>
-          </Toolbar>
-          <Divider />
-          <List component="nav">
-            {mainListItems}
-            <Divider sx={{ my: 1 }} />
-            {/* {secondaryListItems} */}
-          </List>
-        </Drawer>
-        <Outlet />
-      </Box>
+              <IconButton onClick={toggleDrawer}>
+                <ChevronLeftIcon />
+              </IconButton>
+            </Toolbar>
+            <Divider />
+            <List component="nav">
+              {mainListItems}
+              <Divider sx={{ my: 1 }} />
+              {/* {secondaryListItems} */}
+            </List>
+          </Drawer>
+          <Outlet />
+        </Box>
+      </Paper>
     </ThemeProvider>
   );
 }

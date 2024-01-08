@@ -2,7 +2,7 @@ import React from "react";
 import { Bar } from "react-chartjs-2";
 import { Chart } from "chart.js/auto";
 
-const HistoryChart = ({data}) => {
+const HistoryChart = ({ data }) => {
 
 	const values = data.map((a) => {
 		return a.transaction;
@@ -34,7 +34,7 @@ const HistoryChart = ({data}) => {
 		],
 	};
 
-    const options = {
+	const options = {
 		scales: {
 			y: {
 				beginAtZero: true,
@@ -46,7 +46,7 @@ const HistoryChart = ({data}) => {
 					},
 				},
 			},
-			x : {
+			x: {
 				beginAtZero: true,
 				title: {
 					display: true,
@@ -55,7 +55,7 @@ const HistoryChart = ({data}) => {
 						size: 20,
 					},
 				},
-				
+
 			},
 		},
 	};
@@ -63,7 +63,7 @@ const HistoryChart = ({data}) => {
 	return (
 		<div>
 			<h2>Bar Chart</h2>
-			<Bar data={data2} options={options}/>
+			<Bar data={data2} options={options} />
 		</div>
 	);
 };

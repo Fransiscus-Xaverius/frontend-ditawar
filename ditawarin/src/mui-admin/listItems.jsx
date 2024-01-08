@@ -13,54 +13,54 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { NavLink, Link } from 'react-router-dom';
 
 export const mainListItems = (
-  <React.Fragment>
-    <NavLink to="/admin" style={{ textDecoration: 'none', color: 'inherit' }}>
-        <ListItemButton>
-            <ListItemIcon>
-                <DashboardIcon />
-            </ListItemIcon>
-            <ListItemText primary="Dashboard" />
-        </ListItemButton>
-    </NavLink>
-    <NavLink to="/admin/auctions" style={{ textDecoration: 'none', color: 'inherit' }}>
-        <ListItemButton>
-            <ListItemIcon>
-                <ShoppingCartIcon />
-            </ListItemIcon>
-            <ListItemText primary="Auctions" />
-        </ListItemButton>
-    </NavLink>
-    <NavLink to="/admin/users" style={{ textDecoration: 'none', color: 'inherit' }}>
-        <ListItemButton>
-            <ListItemIcon>
-                <PeopleIcon />
-            </ListItemIcon>
-            <ListItemText primary="Users" />
-        </ListItemButton>
-    </NavLink>
-    <NavLink to="/admin/reports" style={{ textDecoration: 'none', color: 'inherit' }}>
-        <ListItemButton>
-            <ListItemIcon>
-                <BarChartIcon />
-            </ListItemIcon>
-            <ListItemText primary="Reports" />
-        </ListItemButton>
-    </NavLink>
-    <NavLink to="/admin/support" style={{ textDecoration: 'none', color: 'inherit' }}>
-        <ListItemButton>
-            <ListItemIcon>
-                <LayersIcon />
-            </ListItemIcon>
-            <ListItemText primary="Support" />
-        </ListItemButton>
-    </NavLink>
-    <NavLink to="/logout" style={{ textDecoration: 'none', color: 'inherit' }}>
-        <ListItemButton>
-            <ListItemIcon>
-                <LogoutIcon />
-            </ListItemIcon>
-            <ListItemText primary="Log Out" />
-        </ListItemButton>
-    </NavLink>
-  </React.Fragment>
+    <React.Fragment>
+        <NavLink to="/admin" style={{ textDecoration: 'none', color: 'inherit' }}>
+            <ListItemButton>
+                <ListItemIcon>
+                    <DashboardIcon />
+                </ListItemIcon>
+                <ListItemText primary="Dashboard" />
+            </ListItemButton>
+        </NavLink>
+        <NavLink to="/admin/auctions" style={{ textDecoration: 'none', color: 'inherit' }}>
+            <ListItemButton>
+                <ListItemIcon>
+                    <ShoppingCartIcon />
+                </ListItemIcon>
+                <ListItemText primary="Auctions" />
+            </ListItemButton>
+        </NavLink>
+        <NavLink to="/admin/users" style={{ textDecoration: 'none', color: 'inherit' }}>
+            <ListItemButton>
+                <ListItemIcon>
+                    <PeopleIcon />
+                </ListItemIcon>
+                <ListItemText primary="Users" />
+            </ListItemButton>
+        </NavLink>
+        <NavLink to="/admin/reports" style={{ textDecoration: 'none', color: 'inherit' }}>
+            <ListItemButton>
+                <ListItemIcon>
+                    <BarChartIcon />
+                </ListItemIcon>
+                <ListItemText primary="Reports" />
+            </ListItemButton>
+        </NavLink>
+        <NavLink to="/admin/support" style={{ textDecoration: 'none', color: 'inherit' }}>
+            <ListItemButton>
+                <ListItemIcon>
+                    <LayersIcon />
+                </ListItemIcon>
+                <ListItemText primary="Support" />
+            </ListItemButton>
+        </NavLink>
+        <NavLink to="/logout" style={{ textDecoration: 'none', color: 'inherit' }}>
+            <ListItemButton>
+                <ListItemIcon>
+                    <LogoutIcon />
+                </ListItemIcon>
+                <ListItemText primary="Log Out" />
+            </ListItemButton>
+        </NavLink>
+    </React.Fragment>
 );

@@ -92,7 +92,7 @@ const router = createBrowserRouter([
           },
         ],
       },
-      
+
       {
         path: "/profile",
         loader: getUserData,
@@ -104,12 +104,12 @@ const router = createBrowserRouter([
         element: <WalletPage />,
       },
       {
-        path:"/payout",
+        path: "/payout",
         loader: getWallet,
         element: <PayoutPage />
       },
       {
-        path:"/details",
+        path: "/details",
         children: [
           {
             path: ":id",
@@ -160,9 +160,9 @@ const router = createBrowserRouter([
         element: <Rating />,
       },
       {
-        loader : getUserData,
-        path : "/service",
-        element : <Laporan />
+        loader: getUserData,
+        path: "/service",
+        element: <Laporan />
       }
 
     ],
@@ -203,7 +203,12 @@ const router = createBrowserRouter([
     loader: getAllUser,
     path: "/admin",
     element: <Dashboard />,
-    children:[
+    children: [
+      {
+        loader: getAllPurchase,
+        path: "/admin",
+        element: <ReportsPage />
+      },
       {
         loader: getAllUser,
         path: "users",
@@ -213,17 +218,17 @@ const router = createBrowserRouter([
         loader: getAllAuctionDetail,
         path: "auctions",
         element: <AuctionsPage />,
-      },{
+      }, {
         loader: getAllPurchase,
         path: "payment",
-      },{
-        loader : getAllSupport,
+      }, {
+        loader: getAllSupport,
         path: "support",
-        element:<SupportPage />
-      },{
-        loader : getAllPurchase,
-        path : "reports",
-        element : <ReportsPage />
+        element: <SupportPage />
+      }
+      , {
+        loader: getAllPurchase,
+        path: "reports",
       }
     ]
   },
@@ -231,7 +236,7 @@ const router = createBrowserRouter([
     path: "/error",
     element: <ErrorPage />,
   },
-  
+
   {
     path: "/logout",
     element: <Logout />,
