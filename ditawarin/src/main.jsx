@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, Router, RouterProvider } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import Home from "./Home.jsx";
 import Login from "./Login.jsx";
@@ -33,7 +34,8 @@ import Laporan from "./Report.jsx";
 import { get } from "react-hook-form";
 import Verification from "./Verification.jsx";
 import PayoutPage from "./PayoutPage.jsx";
-
+import { Provider } from 'react-redux'
+import store from "./app/store.js"
 import Dashboard from './mui-admin/homeAdmin.jsx';
 import UsersPage from "./mui-admin/Users.jsx";
 import AuctionsPage from "./mui-admin/Auctions.jsx";
@@ -167,38 +169,6 @@ const router = createBrowserRouter([
 
     ],
   },
-  // {
-  //   loader: getAllUser,
-  //   path: "/admin",
-  //   element: <NavbarAdmin />,
-  //   children: [
-  //     {
-  //       loader: getAllUser,
-  //       path: "users",
-  //       element: <Users />,
-  //     },
-  //     {
-  //       loader: getAllAuctionDetail,
-  //       path: "auction",
-  //       element: <Auctions />,
-  //     },
-  //     {
-  //       loader: getAllPurchase,
-  //       path: "payment",
-  //       element: <Payment />,
-  //     },
-  //     {
-  //       loader : getAllSupport,
-  //       path: "support",
-  //       element: <Support />,
-  //     },
-  //     {
-  //       loader : getAllPurchase,
-  //       path : "report",
-  //       element : <Report />
-  //     }
-  //   ],
-  // },
   {
     loader: getAllUser,
     path: "/admin",
@@ -246,5 +216,7 @@ const router = createBrowserRouter([
 console.log(router.routes);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <RouterProvider router={router} />
+  <Provider store={store}>
+    <RouterProvider router={router} />
+  </Provider>
 );
