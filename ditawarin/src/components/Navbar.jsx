@@ -18,7 +18,7 @@ export default function Navbar() {
 
   const data = useLoaderData();
 
-  console.log("data=",data);
+  console.log("data=", data);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -35,11 +35,11 @@ export default function Navbar() {
 
   return (
     <>
-    
+
       <nav className="p-0 fontcustom" style={{ borderBottom: "1px solid gray" }}>
         <div className="container-fluid" style={{ backgroundColor: "#06083D" }}>
           <div className="d-flex align-items-center">
-            <Link to="/" style={{ width: "80px" }}>
+            <Link id="logo_btn" to="/" style={{ width: "80px" }}>
               <img src={Logo} alt="" className="img-fluid" />
             </Link>
             <input
@@ -75,19 +75,21 @@ export default function Navbar() {
               )}
               {userToken != null && userToken != 'admin' && (
                 <>
-                  {!userToken && <Navigate to={"/login"}/>}
-                  {userToken == "admin" && <Navigate to={"/login"}/>}
+                  {!userToken && <Navigate to={"/login"} />}
+                  {userToken == "admin" && <Navigate to={"/login"} />}
                   <img
                     style={{ height: "48px", width: "48px", objectFit: "cover" }}
                     className="nav-item rounded-circle me-2"
                     alt="avatar_user"
                     src={import.meta.env.VITE_API_URL + "/static/" + data.profile_picture || ""
-                }
+                    }
                   />
                   <div className="me-3">
                     <NavLink
                       className="nav-item"
+                      tempid="cobaId"
                       to="/profile"
+                      id="profileUser"
                       style={{ textDecoration: "none" }}
                     >
                       <p className="mb-0 text-light">
@@ -97,10 +99,11 @@ export default function Navbar() {
                     <NavLink
                       className="nav-item"
                       to="/wallet"
+                      id="wallet"
                       style={{ textDecoration: "none" }}
                     >
                       <p className="mb-0 text-light">
-                        Saldo: {Rupiah.format(parseInt(data.wallet))}
+                        Balance: {Rupiah.format(parseInt(data.wallet))}
                       </p>
                     </NavLink>
                   </div>
@@ -116,15 +119,17 @@ export default function Navbar() {
                     type="button"
                     className="btn btn-outline-light ms-3 me-3"
                     to="/sell"
+                    id="sell_btn"
                     style={{ minWidth: "80px" }}
                   >
-                    JUAL
+                    SELL
                   </NavLink>
                   {/* <NavLink type="button" className="btn btn-primary" to="/profile">Profile</NavLink> */}
                   <NavLink
                     type="button"
                     className="btn btn-outline-light"
                     to="/logout"
+                    id="logout-btn"
                     style={{ minWidth: "80px" }}
                     onClick={() => handleClick()}
                   >

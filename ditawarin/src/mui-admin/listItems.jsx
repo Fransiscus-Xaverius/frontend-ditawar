@@ -23,7 +23,7 @@ export const mainListItems = (
                 <ListItemText primary="Dashboard" />
             </ListItemButton>
         </NavLink>
-        <NavLink to="/admin/auctions" style={{ textDecoration: 'none', color: 'inherit' }}>
+        <NavLink id="auction_btn" to="/admin/auctions" style={{ textDecoration: 'none', color: 'inherit' }}>
             <ListItemButton>
                 <ListItemIcon>
                     <ShoppingCartIcon />
@@ -31,7 +31,7 @@ export const mainListItems = (
                 <ListItemText primary="Auctions" />
             </ListItemButton>
         </NavLink>
-        <NavLink to="/admin/users" style={{ textDecoration: 'none', color: 'inherit' }}>
+        <NavLink id="users_btn" to="/admin/users" style={{ textDecoration: 'none', color: 'inherit' }}>
             <ListItemButton>
                 <ListItemIcon>
                     <PeopleIcon />
@@ -39,7 +39,7 @@ export const mainListItems = (
                 <ListItemText primary="Users" />
             </ListItemButton>
         </NavLink>
-        <NavLink to="/admin/transactions" style={{ textDecoration: 'none', color: 'inherit' }}>
+        <NavLink id="reports_btn" to="/admin/transactions" style={{ textDecoration: 'none', color: 'inherit' }}>
             <ListItemButton>
                 <ListItemIcon>
                     <ReceiptIcon />
@@ -47,7 +47,7 @@ export const mainListItems = (
                 <ListItemText primary="Transactions" />
             </ListItemButton>
         </NavLink>
-        <NavLink to="/admin/support" style={{ textDecoration: 'none', color: 'inherit' }}>
+        <NavLink id='support_btn' to="/admin/support" style={{ textDecoration: 'none', color: 'inherit' }}>
             <ListItemButton>
                 <ListItemIcon>
                     <LayersIcon />
@@ -55,7 +55,7 @@ export const mainListItems = (
                 <ListItemText primary="Support" />
             </ListItemButton>
         </NavLink>
-        <NavLink to="/logout" style={{ textDecoration: 'none', color: 'inherit' }}>
+        <NavLink id="logout_admin" to="/logout" style={{ textDecoration: 'none', color: 'inherit' }}>
             <ListItemButton>
                 <ListItemIcon>
                     <LogoutIcon />
