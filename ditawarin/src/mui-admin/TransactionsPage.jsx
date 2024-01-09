@@ -40,118 +40,88 @@ import AppBar from '@mui/material/AppBar';
 
 export default function TransactionsPage() {
     const data = useLoaderData();
-    const [open, setOpen] = React.useState(false);
+    
+    // console.log(data);
 
-    const handleDrawerOpen = () => {
-        setOpen(true);
-    };
-
-    const handleDrawerClose = () => {
-        setOpen(false);
+    const getDate = (dateMili) =>{
+        const date = new Date(dateMili);
+        return date.toISOString().substring(0, 10);
     }
 
-
     return (
-        <Box sx={{ display: 'flex' }}>
-            <CssBaseline />
-            <AppBar position="absolute" open={open}>
-                <Toolbar
-                    sx={{
-                        pr: '24px', // keep right padding when drawer closed
-                    }}
-                >
-                    <IconButton
-                        edge="start"
-                        color="inherit"
-                        aria-label="open drawer"
-                        onClick={handleDrawerOpen}
-                        sx={{
-                            marginRight: '36px',
-                            ...(open && { display: 'none' }),
-                        }}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography
-                        component="h1"
-                        variant="h6"
-                        color="inherit"
-                        noWrap
-                        sx={{ flexGrow: 1 }}
-                    >
-                        Dashboard
-                    </Typography>
-                    <IconButton color="inherit">
-                        <Badge badgeContent={4} color="secondary">
-                            <NotificationsIcon />
-                        </Badge>
-                    </IconButton>
-                </Toolbar>
-            </AppBar>
-            <Drawer variant="permanent" open={open}>
-                <Toolbar
-                    sx={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'flex-end',
-                        px: [1],
-                    }}
-                >
-                    <IconButton onClick={handleDrawerClose}>
-                        <ChevronLeftIcon />
-                    </IconButton>
-                </Toolbar>
-                <Divider />
-                {mainListItems}
-                <Divider />
-            </Drawer>
-            import Main from './Main';
-
+        <Box
+          component="main"
+          sx={{
+            backgroundColor: (theme) =>
+              theme.palette.mode === 'light'
+                ? theme.palette.grey[100]
+                : theme.palette.grey[900],
+            flexGrow: 1,
+            height: '100vh',
+            overflow: 'auto',
+          }}
+        >
+            <Toolbar/>
             <Box>
-                <Main open={open}>
-                    <Toolbar />
-                    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-                        <Grid container spacing={3}>
-                            {/* Chart */}
-                            <Grid item xs={12} md={8} lg={9}>
-                                <Paper
-                                    sx={{
-                                        p: 2,
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        height: 240,
-                                    }}
-                                >
-                                    <Title>Transactions</Title>
-                                    <Table size="small">
-                                        <TableHead>
-                                            <TableRow>
-                                                <TableCell>Transaction ID</TableCell>
-                                                <TableCell>Username</TableCell>
-                                                <TableCell>Product Name</TableCell>
-                                                <TableCell>Quantity</TableCell>
-                                                <TableCell>Price</TableCell>
-                                                <TableCell align="right">Total</TableCell>
+
+                <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+                    <Grid container spacing={3}>
+                        <Grid item xs={12} md={8} lg={9}>
+                            <Paper
+                                sx={{
+                                    p: 2,
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    width: 950  
+                                }}
+                            >
+                                <Title>Transactions</Title>
+                                <Table size="large" sx={{ minWidth: 700 }}>
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell sx={{ 
+                                            fontWeight: 'bold', 
+                                            }}>Image</TableCell>
+                                            <TableCell
+                                            sx={{ 
+                                                fontWeight: 'bold' 
+                                            }}>Transaction ID</TableCell>
+                                            <TableCell sx={{ 
+                                            fontWeight: 'bold' 
+                                            }}>Buyer</TableCell>
+                                            <TableCell sx={{ 
+                                            fontWeight: 'bold', 
+                                            }}>Product Name</TableCell>
+                                            <TableCell sx={{ 
+                                            fontWeight: 'bold' 
+                                            }}>Transaction Date</TableCell>
+                                            <TableCell sx={{ 
+                                            fontWeight: 'bold' 
+                                            }}>Status</TableCell>
+                                            <TableCell align="right" sx={{ 
+                                            fontWeight: 'bold' 
+                                            }}>Total</TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        {data.map((row) => (
+                                            <TableRow key={row._id}>
+                                                <TableCell>{<img src={`http://localhost:3000/static/${row.image}`} width={"80%"} height={"auto"} />}</TableCell>
+                                                <TableCell>{row._id}</TableCell>
+                                                <TableCell>{row.buyer.email}</TableCell>
+                                                <TableCell>{row.item}</TableCell>
+                                                <TableCell>{getDate(row.date)}</TableCell>
+                                                <TableCell>{row.status}</TableCell>
+                                                <TableCell align="right">{row.transaction}</TableCell>
                                             </TableRow>
-                                        </TableHead>
-                                        <TableBody>
-                                            {data.map((row) => (
-                                                <TableRow key={row.id}>
-                                                    <TableCell>{row.id}</TableCell>
-                                                    <TableCell>{row.name}</TableCell>
-                                                    <TableCell>{row.shipping}</TableCell>
-                                                    <TableCell>{row.payment}</TableCell>
-                                                    <TableCell>{row.status}</TableCell>
-                                                    <TableCell align="right">{row.amount}</TableCell>
-                                                </TableRow>
-                                            ))}
-                                        </TableBody>
-                                    </Table>
-                                </Paper>
-                            </Grid>
+                                        ))}
+                                    </TableBody>
+                                </Table>
+                            </Paper>
                         </Grid>
-                    </Container>
-                </Main>
+                    </Grid>
+                </Container>
+
             </Box>
         </Box>
     )

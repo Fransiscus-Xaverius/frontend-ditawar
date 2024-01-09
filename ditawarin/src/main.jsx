@@ -58,7 +58,7 @@ const {
   getAllUser,
   getPurchaseDetails,
   getAllPurchase,
-  getAllSupport
+  getAllSupport,
 } = DataHandler;
 
 const router = createBrowserRouter([
