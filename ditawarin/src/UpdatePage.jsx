@@ -39,6 +39,14 @@ export default function UpdatePage() {
                 kate = kate + data.kategori[i] + ", "
             }
         }
+        if(parseInt(data.starting_price) < 0){
+            alert("Starting price tidak boleh negatif")
+            return
+        }
+        if(parseInt(data.asking_price) < 0){
+            alert("Asking price tidak boleh negatif")
+            return
+        }
         if(parseInt(data.starting_price) > parseInt(data.asking_price)){
             alert("Starting price tidak boleh lebih besar dari asking price")
             return
