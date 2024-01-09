@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
+import { useDispatch, useSelector } from "react-redux";
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
@@ -33,6 +34,7 @@ import {
   Outlet,
   useLoaderData,
 } from "react-router-dom";
+import { setMode } from '../app/modeSlice.js';
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
@@ -90,16 +92,17 @@ export default function Dashboard() {
     setOpen(!open);
   };
   const [checked, setChecked] = React.useState(true);
-
+  const dispatch = useDispatch();
+  const modeValue = useSelector((state) => state.mode.value);
   const handleChange = (event) => {
     setChecked(event.target.checked);
-    setDarkMode(!darkMode);
+    if (modeValue == "light") dispatch(setMode("dark"));
+    else dispatch(setMode("light"));
   };
-  const [darkMode, setDarkMode] = useState(false);
   if (userToken != "admin") return <Navigate to={"/login"} />;
   const theme = createTheme({
     palette: {
-      mode: darkMode ? "dark" : "light"
+      mode: modeValue
     },
   });
 
