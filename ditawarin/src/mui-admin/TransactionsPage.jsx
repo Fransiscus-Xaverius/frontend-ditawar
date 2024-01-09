@@ -105,53 +105,52 @@ export default function TransactionsPage() {
                 {mainListItems}
                 <Divider />
             </Drawer>
-            import Main from './Main';
 
             <Box>
-                <Main open={open}>
-                    <Toolbar />
-                    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-                        <Grid container spacing={3}>
-                            {/* Chart */}
-                            <Grid item xs={12} md={8} lg={9}>
-                                <Paper
-                                    sx={{
-                                        p: 2,
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        height: 240,
-                                    }}
-                                >
-                                    <Title>Transactions</Title>
-                                    <Table size="small">
-                                        <TableHead>
-                                            <TableRow>
-                                                <TableCell>Transaction ID</TableCell>
-                                                <TableCell>Username</TableCell>
-                                                <TableCell>Product Name</TableCell>
-                                                <TableCell>Quantity</TableCell>
-                                                <TableCell>Price</TableCell>
-                                                <TableCell align="right">Total</TableCell>
+
+                <Toolbar />
+                <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+                    <Grid container spacing={3}>
+                        {/* Chart */}
+                        <Grid item xs={12} md={8} lg={9}>
+                            <Paper
+                                sx={{
+                                    p: 2,
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    height: 240,
+                                }}
+                            >
+                                <Title>Transactions</Title>
+                                <Table size="small">
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell>Transaction ID</TableCell>
+                                            <TableCell>Username</TableCell>
+                                            <TableCell>Product Name</TableCell>
+                                            <TableCell>Quantity</TableCell>
+                                            <TableCell>Price</TableCell>
+                                            <TableCell align="right">Total</TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        {data.map((row) => (
+                                            <TableRow key={row.id}>
+                                                <TableCell>{row.id}</TableCell>
+                                                <TableCell>{row.name}</TableCell>
+                                                <TableCell>{row.shipping}</TableCell>
+                                                <TableCell>{row.payment}</TableCell>
+                                                <TableCell>{row.status}</TableCell>
+                                                <TableCell align="right">{row.amount}</TableCell>
                                             </TableRow>
-                                        </TableHead>
-                                        <TableBody>
-                                            {data.map((row) => (
-                                                <TableRow key={row.id}>
-                                                    <TableCell>{row.id}</TableCell>
-                                                    <TableCell>{row.name}</TableCell>
-                                                    <TableCell>{row.shipping}</TableCell>
-                                                    <TableCell>{row.payment}</TableCell>
-                                                    <TableCell>{row.status}</TableCell>
-                                                    <TableCell align="right">{row.amount}</TableCell>
-                                                </TableRow>
-                                            ))}
-                                        </TableBody>
-                                    </Table>
-                                </Paper>
-                            </Grid>
+                                        ))}
+                                    </TableBody>
+                                </Table>
+                            </Paper>
                         </Grid>
-                    </Container>
-                </Main>
+                    </Grid>
+                </Container>
+
             </Box>
         </Box>
     )

@@ -97,7 +97,7 @@ export default function ProfilePage() {
 				console.log(response.data.user);
 				localStorage.setItem("token", response.data.token);
 				localStorage.setItem("user", response.data.user);
-				alert("berhasil update");
+				// alert("berhasil update");
 				window.location.reload(true);
 			}
 		}
@@ -139,14 +139,15 @@ export default function ProfilePage() {
 
 	return (
 		<>
-			{!userToken && <Navigate to={"/login"}/>}
-            {userToken == "admin" && <Navigate to={"/login"}/>}
+			{!userToken && <Navigate to={"/login"} />}
+			{userToken == "admin" && <Navigate to={"/login"} />}
 			{!editing && (
 				<div className="container fontcustom">
 					<div className="d-flex" style={{ marginTop: "5rem" }}>
-						<h2>Profile Diri</h2>
+						<h2>Profile User</h2>
 						<br />
 						<button
+							id="edit_btn"
 							type="button"
 							className="btn btn-primary ms-auto"
 							onClick={() => {
@@ -288,15 +289,16 @@ export default function ProfilePage() {
 					<form onSubmit={handleSubmit(UpdateSubmit)}>
 						<div className="container fontcustom">
 							<div className="d-flex" style={{ marginTop: "5rem" }}>
-								<h2>Profile Diri</h2>
+								<h2>Profile User</h2>
 								<br />
 								<button
+									id="save_btn"
 									type="submit"
 									className="btn btn-primary ms-auto"
 									name="_id"
 									{...register("_id")}
 								>
-									Simpan
+									Save
 								</button>
 							</div>
 							<hr />
@@ -353,6 +355,7 @@ export default function ProfilePage() {
 													<b>Nama Lengkap </b>
 												</label>
 												<input
+													id="full_name"
 													type="text"
 													placeholder="Nama Lengkap"
 													className="ps-3 border border-secondary-subtle ms-auto"
@@ -404,6 +407,7 @@ export default function ProfilePage() {
 													<b>Kota </b>
 												</label>
 												<input
+													id="editcity_inp"
 													type="text"
 													placeholder="Kota"
 													className="ps-3 border border-secondary-subtle ms-auto"
@@ -435,6 +439,7 @@ export default function ProfilePage() {
 												<b>Password Baru </b>
 											</label>
 											<input
+												id="newpass_inp"
 												type="text"
 												className="mt-3 mb-3 ps-3 border border-secondary-subtle"
 												style={{
@@ -450,6 +455,7 @@ export default function ProfilePage() {
 											</label>
 											<br />
 											<input
+												id="newconf_inp"
 												type="text"
 												className="mt-3 mb-3 ps-3 border border-secondary-subtle"
 												style={{

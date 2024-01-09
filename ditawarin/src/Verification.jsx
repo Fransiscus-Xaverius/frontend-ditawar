@@ -52,9 +52,9 @@ export default function Verification() {
 				const result = await client.put(
 					`/verification?id=${localStorage.getItem("id_user")}`,
 				);
-                localStorage.removeItem("timer")
-                localStorage.removeItem("email");
-                localStorage.removeItem("id_user")
+				localStorage.removeItem("timer")
+				localStorage.removeItem("email");
+				localStorage.removeItem("id_user")
 				navigate("/login");
 			} catch (error) {
 				console.log(error);
@@ -67,10 +67,10 @@ export default function Verification() {
 
 	return (
 		<>
-        {
-            localStorage.getItem("user") &&
-            <Navigate to="/" />
-        }
+			{
+				localStorage.getItem("user") &&
+				<Navigate to="/" />
+			}
 			<div className="container-fluid d-flex justify-content-center align-items-center">
 				<h1 className="fw-bolder">VERIFIKASI</h1>
 			</div>
@@ -81,6 +81,7 @@ export default function Verification() {
 				<br />
 				<br />
 				<button
+					id="redeem_otp_btn"
 					style={{ backgroundColor: "#06083D" }}
 					className="rounded-1 px-3 py-1 text-light fw-bold fs-4"
 					type="submit"
