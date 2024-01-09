@@ -11,6 +11,7 @@ import LayersIcon from '@mui/icons-material/Layers';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { NavLink, Link } from 'react-router-dom';
+import ReceiptIcon from '@mui/icons-material/Receipt';
 
 export const mainListItems = (
     <React.Fragment>
@@ -38,12 +39,12 @@ export const mainListItems = (
                 <ListItemText primary="Users" />
             </ListItemButton>
         </NavLink>
-        <NavLink to="/admin/reports" style={{ textDecoration: 'none', color: 'inherit' }}>
+        <NavLink to="/admin/transactions" style={{ textDecoration: 'none', color: 'inherit' }}>
             <ListItemButton>
                 <ListItemIcon>
-                    <BarChartIcon />
+                    <ReceiptIcon />
                 </ListItemIcon>
-                <ListItemText primary="Reports" />
+                <ListItemText primary="Transactions" />
             </ListItemButton>
         </NavLink>
         <NavLink to="/admin/support" style={{ textDecoration: 'none', color: 'inherit' }}>
