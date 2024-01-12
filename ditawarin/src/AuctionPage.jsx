@@ -61,37 +61,31 @@ export default function AuctionPage() {
   }, []);
 
   async function bidauction(formdata) {
-    if(parseInt(formdata.nominal_bid) > parseInt(auction.asking_price)){
-      alert("Bid harus lebih kecil dari asking price!")
-      return
-    }
-    else{
-      const data = {
-        token: localStorage.getItem("token"),
-        idAuction: auction._id,
-        bid: formdata.nominal_bid,
-      };
-      try {
-        const newBid = await client.post("/bid", data);
-        console.log(newBid);
-        alert("Bid berhasil!");
-        window.location.reload();
-      } catch (err) {
-        if (
-          err.response &&
-          (err.response.status === 400 || err.response.status === 500)
-        ) {
-          const errorMessage = err.response.data.msg;
-          console.log("----------------");
-          console.log(errorMessage);
-          alert(errorMessage);
-        } else {
-          console.log(err);
-          alert(err.message);
-        }
-        return;
-    }
-    }
+    const data = {
+      token: localStorage.getItem("token"),
+      idAuction: auction._id,
+      bid: formdata.nominal_bid,
+    };
+    try {
+      const newBid = await client.post("/bid", data);
+      console.log(newBid);
+      alert("Bid berhasil!");
+      window.location.reload();
+    } catch (err) {
+      if (
+        err.response &&
+        (err.response.status === 400 || err.response.status === 500)
+      ) {
+        const errorMessage = err.response.data.msg;
+        console.log("----------------");
+        console.log(errorMessage);
+        alert(errorMessage);
+      } else {
+        console.log(err);
+        alert(err.message);
+      }
+      return;
+  }
 
     // if(data.auction.highest_bid == null || data.auction.highest_bid == undefined){
 
