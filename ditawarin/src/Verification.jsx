@@ -77,7 +77,7 @@ export default function Verification() {
 			<form className="text-center" onSubmit={handleSubmit(onSubmit)}>
 				<h2>MASUKKAN KODE OTP</h2>
 				<br />
-				<input type="text" className="text-center py-2" {...register("OTP")} />
+				<input id='otp' type="text" className="text-center py-2" {...register("OTP")} />
 				<br />
 				<br />
 				<button
