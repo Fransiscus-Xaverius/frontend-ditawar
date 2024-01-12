@@ -61,30 +61,36 @@ export default function AuctionPage() {
   }, []);
 
   async function bidauction(formdata) {
-    const data = {
-      token: localStorage.getItem("token"),
-      idAuction: auction._id,
-      bid: formdata.nominal_bid,
-    };
-    try {
-      const newBid = await client.post("/bid", data);
-      console.log(newBid);
-      alert("Bid berhasil!");
-      window.location.reload();
-    } catch (err) {
-      if (
-        err.response &&
-        (err.response.status === 400 || err.response.status === 500)
-      ) {
-        const errorMessage = err.response.data.msg;
-        console.log("----------------");
-        console.log(errorMessage);
-        alert(errorMessage);
-      } else {
-        console.log(err);
-        alert(err.message);
-      }
-      return;
+    if(parseInt(formdata.nominal_bid) > parseInt(auction.asking_price)){
+      alert("Bid harus lebih kecil dari asking price!")
+      return
+    }
+    else{
+      const data = {
+        token: localStorage.getItem("token"),
+        idAuction: auction._id,
+        bid: formdata.nominal_bid,
+      };
+      try {
+        const newBid = await client.post("/bid", data);
+        console.log(newBid);
+        alert("Bid berhasil!");
+        window.location.reload();
+      } catch (err) {
+        if (
+          err.response &&
+          (err.response.status === 400 || err.response.status === 500)
+        ) {
+          const errorMessage = err.response.data.msg;
+          console.log("----------------");
+          console.log(errorMessage);
+          alert(errorMessage);
+        } else {
+          console.log(err);
+          alert(err.message);
+        }
+        return;
+    }
     }
 
     // if(data.auction.highest_bid == null || data.auction.highest_bid == undefined){
@@ -227,7 +233,7 @@ export default function AuctionPage() {
                   Penawaran Tertinggi :{" "}
                   {highest_bid ? Rupiah.format(highest_bid.bid) : 0}
                 </h2>
-                <p className="text-secondary mb-0">
+                <p id='buynow_price' className="text-secondary mb-0">
                     Beli Sekarang : {Rupiah.format(auction.asking_price)}
                 </p>
                 <div className="h3 mt-4 border-bottom pb-3"><b>DESCRIPTION</b></div>
@@ -250,6 +256,7 @@ export default function AuctionPage() {
                     className="btn rounded-pill text-white p-3"
                     style={{ width: "170px" , backgroundColor: "#06083D", textTransform: "uppercase", float: "right"}}
                     onClick={() => {ubahAuctionHandler()}}
+                    id='ubah_btn'
                   ><b>
                     Ubah
                   </b></button>

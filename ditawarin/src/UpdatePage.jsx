@@ -139,23 +139,23 @@ export default function UpdatePage() {
                 <hr />
                 <form className='row' onSubmit={handleSubmit(updateItem)}>
                     <div className='col-md-6'>
-                        <input type="text" defaultValue={item.nama} {...register("namabarang", {required:{value:true, message:"Nama Barang wajib diisi"}})} placeholder="Nama Produk*" className="mt-1 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "90%", height: "3rem"}}/>
+                        <input id='productname_inp' type="text" defaultValue={item.nama} {...register("namabarang", {required:{value:true, message:"Nama Barang wajib diisi"}})} placeholder="Nama Produk*" className="mt-1 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "90%", height: "3rem"}}/>
                         {errors.namabarang && <p style={{color: "red"}}>{errors.namabarang.message}</p>}
                         <br />
-                        <input type="number" defaultValue={auction.starting_price} {...register("starting_price", {required:{value:true, message:"Starting Price wajib diisi"}})} placeholder="Starting Price*" className="mt-1 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "90%", height: "3rem"}}/>
+                        <input id='startprice_inp' type="number" defaultValue={auction.starting_price} {...register("starting_price", {required:{value:true, message:"Starting Price wajib diisi"}})} placeholder="Starting Price*" className="mt-1 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "90%", height: "3rem"}}/>
                         {errors.starting_price && <p style={{color: "red"}}>{errors.starting_price.message}</p>}
                         <br />
-                        <input type="number" defaultValue={auction.asking_price} {...register("asking_price", {required:{value:true, message:"Asking Price wajib diisi"}})} placeholder="Asking Price*" className="mt-1 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "90%", height: "3rem"}}/>
+                        <input id='askprice_inp' type="number" defaultValue={auction.asking_price} {...register("asking_price", {required:{value:true, message:"Asking Price wajib diisi"}})} placeholder="Asking Price*" className="mt-1 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "90%", height: "3rem"}}/>
                         {errors.asking_price && <p style={{color: "red"}}>{errors.asking_price.message}</p>}
 
                         <br />
-                        <input type="text" defaultValue={auction.kecamatan} {...register("kecamatan", {required:{value:true, message:"Lokasi Kecamatan wajib diisi"}})} placeholder="Kecamatan*" className="mt-1 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "90%", height: "3rem"}}/>
+                        <input id='kec_inp' type="text" defaultValue={auction.kecamatan} {...register("kecamatan", {required:{value:true, message:"Lokasi Kecamatan wajib diisi"}})} placeholder="Kecamatan*" className="mt-1 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "90%", height: "3rem"}}/>
                         {errors.kecamatan && <p style={{color: "red"}}>{errors.kecamatan.message}</p>}
                         <br />
-                        <input type="text" defaultValue={auction.kota_kabupaten} {...register("kota_kabupaten", {required:{value:true, message:"Lokasi Kota/Kabupaten wajib diisi"}})} placeholder="Kota/Kabupaten*" className="mt-1 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "90%", height: "3rem"}}/>
+                        <input id='kota_inp' type="text" defaultValue={auction.kota_kabupaten} {...register("kota_kabupaten", {required:{value:true, message:"Lokasi Kota/Kabupaten wajib diisi"}})} placeholder="Kota/Kabupaten*" className="mt-1 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "90%", height: "3rem"}}/>
                         {errors.kota_kabupaten && <p style={{color: "red"}}>{errors.kota_kabupaten.message}</p>}
                         <br />
-                        <input type="text" defaultValue={auction.provinsi} {...register("provinsi", {required:{value:true, message:"Lokasi Provinsi wajib diisi"}})} placeholder="Pronvinsi*" className="mt-1 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "90%", height: "3rem"}}/>
+                        <input id="prov_inp" type="text" defaultValue={auction.provinsi} {...register("provinsi", {required:{value:true, message:"Lokasi Provinsi wajib diisi"}})} placeholder="Pronvinsi*" className="mt-1 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "90%", height: "3rem"}}/>
                         {errors.provinsi && <p style={{color: "red"}}>{errors.provinsi.message}</p>}
                         <br />
                         Kategori <br />
@@ -240,9 +240,9 @@ export default function UpdatePage() {
                         <input type="file" {...register("files")} style={{display:"none"}} onChange={handleChange} name="files" id="files" />                                    
                         {errors.files && <p style={{color: "red"}}>{errors.files.message}</p>}
                         <br />
-                        <textarea defaultValue={item.deskripsi} {...register("deskripsi", {required:{value:true, message:"Deskripsi Barang wajib diisi"}})} placeholder="Deskripsi Barang*" className="mt-1 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "90%", height: "10rem"}}></textarea>
+                        <textarea  defaultValue={item.deskripsi} {...register("deskripsi", {required:{value:true, message:"Deskripsi Barang wajib diisi"}})} placeholder="Deskripsi Barang*" className="mt-1 mb-3 ps-3 border border-secondary-subtle" style={{borderRadius: "10px", width: "90%", height: "10rem"}}></textarea>
                         {errors.namabarang && <p style={{color: "red"}}>{errors.namabarang.message}</p>}
-                        <button type="submit" className='btn bg-dark text-white mx-auto w-25 pt-3 pb-3 mt-4'>Edit Item</button>
+                        <button id="edit_btn" type="submit" className='btn bg-dark text-white mx-auto w-25 pt-3 pb-3 mt-4'>Edit Item</button>
                     </div>
                 </form>
             </div>

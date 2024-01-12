@@ -93,7 +93,6 @@ export default function JualPage() {
             console.log(error);
             return
         }
-
     }
 
     function handleClick() {
